@@ -1,0 +1,8 @@
+.idea/
+node_modules/
+logs/
+config/config.json
+public/stylesheets/css/
+public/images/avatars/
+public/files
+.DS_Store

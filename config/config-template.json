@@ -1,0 +1,34 @@
+{
+  "url": "http://localhost:3000/",
+  "port": "3000",
+  "processesNum": 1,
+  "mongoose": {
+    "dbName": "node_pug_template",
+    "uri": "mongodb://**********:**********@127.0.0.1:27017/**********?authSource=*****"
+  },
+  "logger": {
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "file",
+        "filename": "logs/warns.log",
+        "maxLogSize": "1024000",
+        "category": "warnings-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/errors.log",
+        "category": "errors-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/info.log",
+        "category": "info-logger"
+      }
+    ]
+  }
+}
