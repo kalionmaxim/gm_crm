@@ -28,7 +28,16 @@
         "maxLogSize": "1024000",
         "filename": "logs/info.log",
         "category": "info-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/crm.log",
+        "category": "crm-logger"
       }
     ]
+  },
+  "ZohoCRM": {
+    "authtoken": "***********************"
   }
 }
