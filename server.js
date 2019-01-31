@@ -70,8 +70,10 @@ if (cluster.isMaster) {
 	const app = new Koa();
 	const range = require("koa-range");
 	const serv = app.listen(0, "localhost");
+	const cors = require("koa-cors");
 
 	app.use(range);
+	app.use(cors);
 
 	app.proxy = true;
 
