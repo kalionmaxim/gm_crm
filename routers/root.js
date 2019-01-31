@@ -127,6 +127,10 @@ router.put("/deal", async (ctx) => {
 	}
 });
 
+router.post("/sales_order", async (ctx) => {
+	ctx.body = await zoho.createSalesOrder(ctx.request.body);
+});
+
 /*router.get("/deal/search", async (ctx) => {
 	ctx.body = await zoho.searchDeal(ctx.request.body);
 });*/
