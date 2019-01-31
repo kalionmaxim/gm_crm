@@ -73,7 +73,9 @@ if (cluster.isMaster) {
 	const cors = require("koa-cors");
 
 	app.use(range);
-	app.use(cors);
+	app.use(cors({
+		origin: "*"
+	}));
 
 	app.proxy = true;
 
