@@ -61,6 +61,49 @@ router.put("/contact", async (ctx) => {
 	}
 });
 
+router.get("/deal", async (ctx) => {
+	/**
+	 * Email, Phone, productID, productName, First_Name – required fields
+	 * utm_campaign, utm_medium, utm_source, utm_term, utm_content – optionals fields
+	 */
+
+	if (ctx.request.body) {
+		if (!ctx.request.body.Email) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'Email' is undefined"
+			};
+		} else if (!ctx.request.body.Phone) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'Phone' is undefined"
+			};
+		} else if (!ctx.request.body.productID) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'productID' is undefined"
+			};
+		} else if (!ctx.request.body.productName) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'productName' is undefined"
+			};
+		} else if (!ctx.request.body.First_Name) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'First_Name' is undefined"
+			};
+		} else {
+			ctx.body = await zoho.searchDeal(ctx.request.body);
+		}
+	} else {
+		ctx.body = {
+			result: 0,
+			error : "Bad request. Body is undefined"
+		};
+	}
+});
+
 router.post("/deal", async (ctx) => {
 	/**
 	 * Email, Phone, productID, productName, First_Name – required fields
