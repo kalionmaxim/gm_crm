@@ -61,7 +61,7 @@ router.put("/contact", async (ctx) => {
 	}
 });
 
-router.get("/deal", async (ctx) => {
+router.post("/deal/search", async (ctx) => {
 	/**
 	 * Email, Phone, productID, productName, First_Name – required fields
 	 * utm_campaign, utm_medium, utm_source, utm_term, utm_content – optionals fields

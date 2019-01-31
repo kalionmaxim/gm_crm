@@ -71,11 +71,12 @@ if (cluster.isMaster) {
 	const range = require("koa-range");
 	const serv = app.listen(0, "localhost");
 	const cors = require("koa-cors");
+	const convert = require("koa-convert");
 
 	app.use(range);
-	app.use(cors({
+	app.use(convert(cors({
 		origin: "*"
-	}));
+	})));
 
 	app.proxy = true;
 
@@ -93,7 +94,6 @@ if (cluster.isMaster) {
 		})
 	}));
 
-	const convert = require("koa-convert");
 	const sassMiddleware = function (options) {
 		const mw = require("node-sass-middleware")(options);
 		return convert(function* (next) {
