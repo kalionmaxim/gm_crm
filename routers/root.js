@@ -240,29 +240,4 @@ router.post("/fondy/callback", async (ctx) => {
 	ctx.status = await Fondy.processCallback(ctx.request.body);
 });
 
-/*router.get("/deal/search", async (ctx) => {
-	ctx.body = await zoho.searchDeal(ctx.request.body);
-});*/
-
-/*function isHostValid(ctx) {
-	const availableHosts = ["geniusm.me", "geniusmarketing.me", "localhost:3000"];
-	let valid = false;
-
-	if (ctx.req.headers) {
-		for (let i = 0; i < availableHosts.length; i++) {
-			if (ctx.req.headers.host && ctx.req.headers.host.indexOf(availableHosts[i]) > -1) {
-				valid = true;
-				break;
-			}
-
-			if (ctx.req.headers.origin && ctx.req.headers.origin.indexOf(availableHosts[i]) > -1) {
-				valid = true;
-				break;
-			}
-		}
-	}
-
-	return valid;
-}*/
-
 module.exports = router;
