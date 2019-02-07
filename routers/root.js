@@ -2,8 +2,13 @@ const Router = require("koa-router");
 const router = new Router();
 
 const zoho = require("../lib/zohoCRM");
+const Fondy = require("../lib/fondy");
 
 router.get("/", async (ctx) => {
+	await ctx.render("pages/client/index");
+});
+
+router.post("/", async (ctx) => {
 	await ctx.render("pages/client/index");
 });
 
@@ -171,7 +176,68 @@ router.put("/deal", async (ctx) => {
 });
 
 router.post("/sales_order", async (ctx) => {
-	ctx.body = await zoho.createSalesOrder(ctx.request.body);
+	/**
+	 * Email, Phone, productID, productName, First_Name – required fields
+	 * utm_campaign, utm_medium, utm_source, utm_term, utm_content – optionals fields
+	 */
+
+	if (ctx.request.body) {
+		if (!ctx.request.body.Email) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'Email' is undefined"
+			};
+		} else if (!ctx.request.body.Phone) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'Phone' is undefined"
+			};
+		} else if (!ctx.request.body.productID) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'productID' is undefined"
+			};
+		} else if (!ctx.request.body.productName) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'productName' is undefined"
+			};
+		} else if (!ctx.request.body.dealID) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'dealID' is undefined"
+			};
+		} else if (!ctx.request.body.contactID) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'contactID' is undefined"
+			};
+		} else if (!ctx.request.body.First_Name) {
+			ctx.body = {
+				result: 0,
+				error : "Required field 'First_Name' is undefined"
+			};
+		} else {
+			ctx.body = await zoho.createSalesOrder(ctx.request.body);
+		}
+	} else {
+		ctx.body = {
+			result: 0,
+			error : "Bad request. Body is undefined"
+		};
+	}
+});
+
+router.get("/fondy/form", async (ctx) => {
+	await ctx.render("pages/client/fondy");
+});
+
+router.post("/fondy/payment", async (ctx) => {
+	ctx.body = await Fondy.createPayment(ctx.request.body);
+});
+
+router.post("/fondy/callback", async (ctx) => {
+	ctx.status = await Fondy.processCallback(ctx.request.body);
 });
 
 /*router.get("/deal/search", async (ctx) => {
