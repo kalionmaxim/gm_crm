@@ -3,6 +3,7 @@ const router = new Router();
 
 const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
+const PayPal = require("../lib/paypal");
 
 router.get("/", async (ctx) => {
 	await ctx.render("pages/client/index");
@@ -238,6 +239,15 @@ router.post("/fondy/payment", async (ctx) => {
 
 router.post("/fondy/callback", async (ctx) => {
 	ctx.status = await Fondy.processCallback(ctx.request.body);
+});
+
+router.get("/paypal/form", async (ctx) => {
+	await ctx.render("pages/client/paypal");
+});
+
+router.post("/paypal/payment", async (ctx) => {
+	const data = await PayPal.createPayment(ctx.request.body);
+	ctx.body = data;
 });
 
 module.exports = router;
