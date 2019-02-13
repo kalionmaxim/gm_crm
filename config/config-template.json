@@ -34,10 +34,27 @@
         "maxLogSize": "1024000",
         "filename": "logs/crm.log",
         "category": "crm-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/fondy.log",
+        "category": "fondy-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/paypal.log",
+        "category": "paypal-logger"
       }
     ]
   },
   "ZohoCRM": {
     "authtoken": "***********************"
+  },
+  "paypal": {
+    "mode": "sandbox",
+    "client_id": "***********************",
+    "client_secret": "***********************"
   }
 }
