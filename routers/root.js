@@ -250,7 +250,17 @@ router.post("/paypal/payment", async (ctx) => {
 });
 
 router.get("/paypal/process", async (ctx) => {
-	ctx.status = await PayPal.processCallback(ctx.request.body, ctx.query.paymentId, ctx.query.PayerID);
+	const data = await PayPal.processCallback(ctx.request.body, ctx.query.paymentId, ctx.query.PayerID);
+
+	if (data.result) {
+		if (data.link) {
+			await ctx.redirect(data.link);
+		} else {
+			ctx.status = 400;
+		}
+	} else {
+		ctx.status = 400;
+	}
 });
 
 module.exports = router;
