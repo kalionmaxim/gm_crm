@@ -249,8 +249,8 @@ router.post("/paypal/payment", async (ctx) => {
 	ctx.body = await PayPal.createPayment(ctx.request.body);
 });
 
-router.get("/paypal/callback", async (ctx) => {
-	ctx.status = await PayPal.processCallback(ctx.request.body, ctx.req.query.paymentId, ctx.req.query.PayerID);
+router.get("/paypal/process", async (ctx) => {
+	ctx.status = await PayPal.processCallback(ctx.request.body, ctx.query.paymentId, ctx.query.PayerID);
 });
 
 module.exports = router;
