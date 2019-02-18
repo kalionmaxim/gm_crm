@@ -272,7 +272,7 @@ router.post("/yandex/payment", async (ctx) => {
 	ctx.body = await Yandex.createPayment(ctx.request.body);
 });
 
-router.get("/yandex/callback", async (ctx) => {
+router.post("/yandex/callback", async (ctx) => {
 	/*const data = await Yandex.processCallback(ctx.request.body, ctx.query.paymentId, ctx.query.PayerID);
 
 	if (data.result) {
