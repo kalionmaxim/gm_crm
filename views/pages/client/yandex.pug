@@ -1,0 +1,106 @@
+form#form
+	input#name(name="name" placeholder="Ваше полное имя" type="text")
+	input#email(name="email" placeholder="Ваш основной email" type="email")
+	input#phone(name="phone" placeholder="Ваш телефон" type="text")
+	button(type="button" onclick="createDeal();") Оплатить
+
+script(src="https://zoho.geniusm.me/js/axios.min.js")
+script.
+
+	function getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return undefined;
+	}
+
+	function createDeal() {
+		var contactID = getCookie("contactID") || null;
+
+		// var data = {
+		// 	"First_Name"  : document.getElementById("name").value,
+		// 	"Email"       : document.getElementById("email").value,
+		// 	"Phone"       : document.getElementById("phone").value,
+		// 	"productName" : "10 трендов эффективного интернет-продвижения в 2019",
+		// 	"productID"   : "3678676000000275004",
+		// 	"utm_campaign": getParameterByName("utm_campaign") || "",
+		// 	"utm_medium"  : getParameterByName("utm_medium") || "",
+		// 	"utm_source"  : getParameterByName("utm_source") || "",
+		// 	"utm_term"    : getParameterByName("utm_term") || "",
+		// 	"utm_content" : getParameterByName("utm_content") || "",
+		// 	"contactID"   : contactID,
+		// 	"Stage"       : "1. Заявка"
+		// };
+		//
+		// axios({
+		// 	method: "post",
+		// 	url   : "https://zoho.geniusm.me/deal",
+		// 	data  : data
+		// }).then(function (response) {
+		// 	if (response.data.result) {
+		// 		var dealID = response.data.dealID || null;
+		// 		contactID = response.data.contactID || contactID;
+		//
+		// 		var data2 = {
+		// 			"First_Name"  : document.getElementById("name").value,
+		// 			"Email"       : document.getElementById("email").value,
+		// 			"Phone"       : document.getElementById("phone").value,
+		// 			"productName" : "10 трендов эффективного интернет-продвижения в 2019",
+		// 			"productID"   : "3678676000000275004",
+		// 			"productPrice": 9.99,
+		// 			"currency"    : "USD",
+		// 			"contactID"   : contactID,
+		// 			"dealID"      : dealID
+		// 		};
+		//
+		// 		axios({
+		// 			method: "post",
+		// 			url   : "https://zoho.geniusm.me/sales_order",
+		// 			data  : data2
+		// 		})
+		// 			.then(function (response) {
+		// var salesOrderID = response.data.salesOrderID;
+
+		var data3 = {
+			Email             : document.getElementById("email").value,
+			salesOrderID      : null,
+			productPrice      : 2.99,
+			currency          : "RUB", //RUB only
+			paymentDescription: "Оплата продукта \"10 трендов эффективного интернет-продвижения в 2019\"",
+			// successURL        : "https://syndicate.geniusm.me",
+			// failureURL        : "https://ukr.net"
+		};
+
+		axios({
+			method: "post",
+			// url   : "http://localhost:3001/yandex/payment",
+			url   : "https://zoho.geniusm.me/yandex/payment",
+			data  : data3
+		})
+			.then(function (response) {
+				// console.log(response);
+				if (response.data.confirmation && (response.data.confirmation.type === "redirect") && (response.data.confirmation.confirmation_url)) {
+					window.location = response.data.confirmation.confirmation_url;
+				}
+			});
+		// });
+		//}
+
+
+		//});
+	}
+
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+		var results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}

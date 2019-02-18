@@ -46,6 +46,12 @@
         "maxLogSize": "1024000",
         "filename": "logs/paypal.log",
         "category": "paypal-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/yandex.log",
+        "category": "yandex-logger"
       }
     ]
   },
@@ -56,5 +62,9 @@
     "mode": "sandbox",
     "client_id": "***********************",
     "client_secret": "***********************"
+  },
+  "yandexKassa": {
+    "shopID": "*******",
+    "secretKey": "*******"
   }
 }

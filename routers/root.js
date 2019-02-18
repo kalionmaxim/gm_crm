@@ -4,6 +4,7 @@ const router = new Router();
 const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
+const Yandex = require("../lib/yandexKassa");
 
 router.get("/", async (ctx) => {
 	await ctx.render("pages/client/index");
@@ -261,6 +262,28 @@ router.get("/paypal/process", async (ctx) => {
 	} else {
 		ctx.status = 400;
 	}
+});
+
+router.get("/yandex/form", async (ctx) => {
+	await ctx.render("pages/client/yandex");
+});
+
+router.post("/yandex/payment", async (ctx) => {
+	ctx.body = await Yandex.createPayment(ctx.request.body);
+});
+
+router.get("/yandex/callback", async (ctx) => {
+	/*const data = await Yandex.processCallback(ctx.request.body, ctx.query.paymentId, ctx.query.PayerID);
+
+	if (data.result) {
+		if (data.link) {
+			await ctx.redirect(data.link);
+		} else {
+			ctx.status = 400;
+		}
+	} else {
+		ctx.status = 400;
+	}*/
 });
 
 module.exports = router;
