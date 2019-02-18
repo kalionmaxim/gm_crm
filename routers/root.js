@@ -6,13 +6,13 @@ const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 const Yandex = require("../lib/yandexKassa");
 
-router.get("/", async (ctx) => {
+/*router.get("/", async (ctx) => {
 	await ctx.render("pages/client/index");
 });
 
 router.post("/", async (ctx) => {
 	await ctx.render("pages/client/index");
-});
+});*/
 
 router.post("/contact", async (ctx) => {
 	/**
