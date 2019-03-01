@@ -1,0 +1,201 @@
+#modal-video .modal-content{
+    padding:0px;
+}
+
+.sec2 form input[type='submit']{
+    transition:0.2s linear;
+}
+.sec2 .backlink{
+    line-height: 16px;
+    width:150px;
+    height:20px;
+    margin: 20px auto;
+}
+.sec2 .disable{
+    pointer-events: none;
+    opacity:0.3;
+}
+
+.tostep1:hover{
+    text-decoration:none;
+}
+
+.sec2 .links3 .anycard{
+    font-size:18px;
+    margin-top:40px;
+}
+
+.sec1 .zero .step3 .text, .sec1 .zero .step3 .text1,.sec1 .zero .step2 .text,.sec1 .zero .step2 .text1{
+    opacity: 0.5;
+}
+
+.sec1 .zero .step1 .text .circle,.sec1 .zero .step3 .text .circle,.sec1 .zero .step2 .text .circle{
+    background: url(/img/bird1.svg) 45% 48% no-repeat;
+    border: 1px solid #fff;
+}
+
+.step1text{
+    display: none;
+    font-size: 18px;
+    padding:35px 0px;
+    text-align: center;
+}
+
+.disapear{
+    display: none!important;
+}
+
+.sec2 .product{
+    padding-right:45px;
+}
+.sec2 .text{
+    width:100%;
+}
+
+.sec2 .textmanual{
+    font-size: 18px;
+    line-height: 30px;
+    padding-left: 65px;
+    padding-right: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.sec2 .important{
+    font-size: 14px;
+    color: #ff575d;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.sec2 .manual .namelabel{
+    display:inline-block;
+    vertical-align: top;
+    width:290px;
+    line-height: 40px;
+    text-align: right;
+    padding-right: 20px;
+}
+.sec2 .manual form{
+    width:600px;
+    margin: 0 auto;
+}
+.sec2 .manual form input[type='text']{
+    display:inline-block;
+    vertical-align: top;
+    width: 300px;
+    margin: 0;
+    margin-bottom: 20px;
+}
+.sec2 select{
+    width:300px;
+    height: 45px;
+    border: 1px solid rgba(154,154,154,.85);
+    background-color: #f9f9fe;
+    padding-left:20px;
+    margin-bottom: 20px;
+}
+
+.sec2 textarea{
+    width:300px;
+    height: 90px;
+    border: 1px solid rgba(154,154,154,.85);
+    background-color: #f9f9fe;
+    padding-left:20px;
+    margin-bottom: 20px;
+    resize:none;
+}
+
+.sec2 .intl-tel-input{
+    margin-bottom:20px;
+}
+
+.sec2 .manual .namelabel2{
+    line-height: 20px;
+    margin-top:1px;
+    margin-bottom: 10px;
+}
+
+.sec2 .links1 .link5 {
+    background: url(/img/manual.png) no-repeat;
+}
+
+.sec2 .textcenter{
+    text-align: center;
+}
+.sec2 .success{
+    text-align: center;
+    color: #3acb58;
+    font-size: 28px;
+    line-height: 24px;
+    letter-spacing: 0.7px;
+    font-weight:700;
+    padding: 55px 0px;
+}
+.success{
+    display: none;
+}
+a.disable_link{
+    pointer-events: none!important;
+    cursor:default;
+}
+
+@media (max-width:960px){
+    #modal-video .close-button{
+        top:0px;
+        right:0px;
+    }
+    #modal-video .modal-content{
+        width:90%;
+        margin-top:80px;
+    }
+}
+@media (max-width:720px){
+    #modal-video .modal-content{
+        width:100%;
+    }
+    .sec1 .second .step2{
+        display:block!important;
+    }
+    .sec1 .second .step1{
+        display:none!important;
+    }
+    .sec1 .second .step3{
+        display: none!important;
+    }
+    .sec1 .zero .step2{
+        display:none!important;
+    }
+    .sec1 .zero .step1{
+        display:block!important;
+    }
+    .sec1 .zero .step3{
+        display: none!important;
+    }
+    .sec1 .first .step2{
+        display:block!important;
+    }
+    .sec1 .first .step1{
+        display:none!important;
+    }
+    .sec1 .first .step3{
+        display: none!important;
+    }
+    .sec2 .product{
+        padding-top:45px;
+    }
+    .sec2 .textmanual{
+        padding-right:20px;
+        padding-left:20px;
+    }
+    .sec2 .manual form{
+        width: 300px;
+    }
+    .sec2 .manual .namelabel{
+        text-align: left;
+        display: block;
+    }
+    .sec1 .third .step2{
+        display: none;
+    }
+}

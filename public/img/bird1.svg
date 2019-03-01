@@ -1,0 +1,12 @@
+<svg width="20" height="15" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 20 15">
+    <defs>
+        <path d="M465.832 136.852l-1.895-1.721a.616.616 0 0 0-.812 0l-7.893 7.168-3.357-3.049a.617.617 0 0 0-.812 0l-1.895 1.721a.488.488 0 0 0 0 .737l5.658 5.138c.112.102.259.153.406.153.147 0 .294-.05.406-.153l10.194-9.257a.498.498 0 0 0 .168-.368c0-.14-.06-.271-.168-.369z"
+              id="a"/>
+    </defs>
+    <desc>Generated with Avocode.</desc>
+    <g transform="translate(-447 -133)">
+        <title>Forma 1</title>
+        <use xlink:href="#a" fill="#fff"/>
+    </g>
+</svg>

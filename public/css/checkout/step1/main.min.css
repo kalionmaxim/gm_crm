@@ -1,0 +1,924 @@
+@font-face {
+    font-family: "RobotoBold";
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/RobotoBold/RobotoBold.eot?#iefix) format("embedded-opentype"), url(/fonts/RobotoBold/RobotoBold.woff) format("woff"), url(/fonts/RobotoBold/RobotoBold.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "RobotoLight";
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/RobotoLight/RobotoLight.eot?#iefix) format("embedded-opentype"), url(/fonts/RobotoLight/RobotoLight.woff) format("woff"), url(/fonts/RobotoLight/RobotoLight.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "RobotoMedium";
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/RobotoMedium/RobotoMedium.eot?#iefix) format("embedded-opentype"), url(/fonts/RobotoMedium/RobotoMedium.woff) format("woff"), url(/fonts/RobotoMedium/RobotoMedium.ttf) format("truetype")
+}
+
+@font-face {
+    font-family: "RobotoRegular";
+    font-style: normal;
+    font-weight: 400;
+    src: url(/fonts/RobotoRegular/RobotoRegular.eot?#iefix) format("embedded-opentype"), url(/fonts/RobotoRegular/RobotoRegular.woff) format("woff"), url(/fonts/RobotoRegular/RobotoRegular.ttf) format("truetype")
+}
+
+.preloaderGM {
+    z-index: 999999999;
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    padding-top: 45vh;
+    background: #fff;
+    opacity: 1;
+    animation: preloader_hide 1s 2s linear forwards, decrease 1s 3s linear forwards;
+    -o-animation: preloader_hide 1s 2s linear forwards, decrease 1s 3s linear forwards;
+    -moz-animation: preloader_hide 1s 2s linear forwards, decrease 1s 3s linear forwards;
+    -ms-animation: preloader_hide 1s 2s linear forwards, decrease 1s 3s linear forwards;
+    -webkit-animation: preloader_hide 1s 2s linear forwards, decrease 1s 3s linear forwards
+}
+
+.preloaderGM .pre_circles {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto
+}
+
+.preloaderGM .pre_circles .pre_circle1, .preloaderGM .pre_circles .pre_circle2 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 2px solid #232323;
+    will-change: contents;
+    animation: circle_grow 1s 1s linear infinite;
+    -o-animation: circle_grow 1s 1s linear infinite;
+    -webkit-animation: circle_grow 1s 1s linear infinite;
+    -moz-animation: circle_grow 1s 1s linear infinite;
+    -ms-animation: circle_grow 1s 1s linear infinite;
+    opacity: 0
+}
+
+.preloaderGM .pre_circles .pre_circle2 {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 0;
+    height: 0;
+    animation: circle_grow 1s 2s linear infinite;
+    -o-animation: circle_grow 1s 2s linear infinite;
+    -moz-animation: circle_grow 1s 2s linear infinite;
+    -ms-animation: circle_grow 1s 2s linear infinite;
+    -webkit-animation: circle_grow 1s 2s linear infinite
+}
+
+@keyframes decrease {
+    0% {
+        width: 100%
+    }
+    to {
+        width: 0%
+    }
+}
+
+@keyframes circle_grow {
+    0% {
+        width: 0;
+        height: 0;
+        margin-left: 25px;
+        margin-top: 25px;
+        opacity: 1
+    }
+    to {
+        width: 50px;
+        height: 50px;
+        margin-left: 0;
+        margin-top: 0;
+        opacity: 0
+    }
+}
+
+@keyframes preloader_hide {
+    0% {
+        opacity: 1
+    }
+    to {
+        opacity: 0
+    }
+}
+
+@keyframes loader_vis {
+    0% {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+body {
+    font-family: "RobotoRegular", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    min-width: 320px;
+    color: #333;
+    position: relative;
+    background-color: #fff
+}
+
+.hidden, br.sm, br.xs {
+    display: none
+}
+
+.wrapper {
+    margin: 0 auto
+}
+
+.inl, .sec1 .text .circle {
+    display: inline-block;
+    vertical-align: top
+}
+
+.txt, footer .icon-soc i {
+    text-align: center;
+    margin: 0 auto
+}
+
+.container {
+    width: 960px
+}
+
+p {
+    margin: 0;
+    padding: 0
+}
+
+section {
+    overflow: hidden
+}
+
+form input.error {
+    box-shadow: inset 0 0 20px 1px rgba(255, 0, 0, .3);
+    border: 2px solid red !important
+}
+
+form input.not_error {
+    box-shadow: inset 0 0 20px 1px rgba(100, 255, 100, .3);
+    border: 2px solid #9f9 !important
+}
+
+.sec1 {
+    height: 240px;
+    padding-top: 55px;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-color: #262626
+}
+
+.sec1 .title {
+    color: #fff;
+    font-family: RobotoLight;
+    font-size: 38px;
+    line-height: 24px;
+    margin-bottom: 40px
+}
+
+.sec1 .steps, .sec1 .title {
+    text-align: center
+}
+
+.sec1 .step {
+    width: 190px
+}
+
+.sec1 .arrow {
+    width: 74px;
+    height: 29px;
+    background: url(/img/arrow1.png) no-repeat
+}
+
+.sec1 .text {
+    color: #fff;
+    font-size: 20px;
+    line-height: 32px;
+    margin-bottom: 20px
+}
+
+.sec1 .text .circle {
+    width: 33px;
+    height: 33px;
+    background: #1ac33d url(/img/bird1.svg) 50% 50% no-repeat;
+    border-radius: 50%;
+    margin-right: 5px
+}
+
+.sec1 .text1 {
+    color: #fff;
+    font-size: 15px;
+    line-height: 20px
+}
+
+.sec1 .first .step2 .text .circle {
+    background: url(/img/bird1.svg) 43% 48% no-repeat;
+    border: 1px solid #fff
+}
+
+.sec1 .first .step3 .text, .sec1 .first .step3 .text1 {
+    opacity: .5
+}
+
+.sec1 .first .step3 .text .circle {
+    background: url(/img/bird1.svg) 45% 48% no-repeat;
+    border: 1px solid #fff
+}
+
+.sec1 .second .step3 .text .circle {
+    background: url(/img/bird1.svg) 43% 48% no-repeat;
+    border: 1px solid #fff
+}
+
+.sec2 {
+    background: #e8e9f3;
+    padding: 50px 0
+}
+
+.sec2 .block-header {
+    border-bottom: 1px solid #eaeaea
+}
+
+.sec2 .block {
+    width: 945px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, .1)
+}
+
+.sec2 .product {
+    width: 470px;
+    height: 160px;
+    padding-top: 50px;
+    padding-left: 45px;
+    background-position: 90% 50%;
+    background-repeat: no-repeat
+}
+
+.sec2 .price {
+    width: 470px;
+    height: 160px;
+    background-color: #f8f8f8;
+    float: right;
+    padding-top: 52px;
+    padding-left: 60px
+}
+
+.sec2 .text, .sec2 .text2 {
+    color: #0e0f11;
+    font-size: 18px;
+    letter-spacing: .45px
+}
+
+.sec2 .text {
+    width: 191px;
+    font-family: RobotoBold;
+    font-weight: 700;
+    margin-top: 0;
+    line-height: 25px
+}
+
+.sec2 .text span.product_type {
+    font-family: RobotoLight;
+    background: #eedec0
+}
+
+.sec2 .text2 {
+    line-height: 30px;
+    padding-top: 23px
+}
+
+.sec2 .text3, .sec2 .text4 {
+    color: #0e0f11;
+    font-family: RobotoMedium;
+    font-size: 21px;
+    line-height: 27px;
+    letter-spacing: .53px
+}
+
+.sec2 .text3 span.val {
+    font-size: 18px;
+    letter-spacing: .45px
+}
+
+.sec2 .text4 {
+    text-align: center;
+    font-family: RobotoBold;
+    font-size: 28px;
+    line-height: 32px;
+    letter-spacing: .7px;
+    margin-top: 60px
+}
+
+.sec2 .links1, .sec2 .links2, .sec2 .links3 {
+    text-align: center;
+    border-bottom: 1px solid #eaeaea
+}
+
+.sec2 .links1 {
+    padding: 50px 0
+}
+
+.sec2 .links1 .link {
+    width: 220px;
+    height: 125px;
+    margin: 20px;
+    padding-top: 85px;
+    cursor: pointer
+}
+
+.sec2 .links1 .button2 {
+    width: 100%;
+    height: 36px;
+    box-shadow: 2px 4px 7px rgba(0, 0, 1, .22);
+    background-color: #1ac33d;
+    color: #fff;
+    font-size: 14px;
+    line-height: 32.43px;
+    cursor: pointer
+}
+
+.sec2 .links1 .link1 {
+    background: url(/img/visa.png) no-repeat
+}
+
+.sec2 .links1 .link2 {
+    background: url(/img/yandex.png) no-repeat
+}
+
+.sec2 .links1 .link3 {
+    background: url(/img/webmoney.png) no-repeat
+}
+
+.sec2 .links1 .link4 {
+    background: url(/img/paypal.png) no-repeat
+}
+
+.sec2 .links2, .sec2 .links3 {
+    padding-top: 30px;
+    padding-bottom: 60px
+}
+
+.sec2 .links2 .link {
+    width: 220px;
+    margin: 20px;
+    padding-top: 155px;
+    cursor: pointer
+}
+
+.sec2 .links2 .button2 {
+    width: 100%;
+    height: 36px;
+    box-shadow: 2px 4px 7px rgba(0, 0, 1, .22);
+    background-color: #1ac33d;
+    color: #fff;
+    font-size: 14px;
+    line-height: 32.43px;
+    cursor: pointer
+}
+
+.sec2 .links2 .link1 {
+    background: url(/img/uaflag.png) top no-repeat
+}
+
+.sec2 .links2 .link2 {
+    background: url(/img/ruflag.png) top no-repeat
+}
+
+.sec2 .links2 .link3 {
+    background: url(/img/usflag.png) top no-repeat
+}
+
+.sec2 .links3 .link {
+    width: 220px;
+    margin: 20px;
+    padding-top: 155px;
+    cursor: pointer
+}
+
+.sec2 .links3 .button2, .sec2 .links4 form input[type=submit] {
+    width: 100%;
+    height: 36px;
+    box-shadow: 2px 4px 7px rgba(0, 0, 1, .22);
+    background-color: #1ac33d;
+    color: #fff;
+    font-size: 14px;
+    line-height: 32.43px;
+    cursor: pointer
+}
+
+.sec2 .links3 .link1 {
+    background: url(/img/uasymbol.png) top no-repeat
+}
+
+.sec2 .links3 .link2 {
+    background: url(/img/rusymbol.png) top no-repeat
+}
+
+.sec2 .links4, footer, footer .social {
+    text-align: center
+}
+
+.sec2 .links4 .namelabel {
+    text-align: left;
+    color: #2d3340;
+    font-size: 18px;
+    line-height: 62px
+}
+
+.sec2 .links4 form input[type=submit] {
+    text-align: center;
+    font-family: RobotoBold;
+    font-size: 18px;
+    text-transform: uppercase;
+    width: 488px;
+    height: 54px;
+    box-shadow: -2px 3px 7px rgba(0, 0, 1, .22);
+    background-color: #13b535;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 27px;
+    margin: 50px auto 0
+}
+
+.sec2 .links4 form input[type=text] {
+    color: #0e0f11;
+    font-size: 16px;
+    width: 248px;
+    height: 45px;
+    border: 1px solid rgba(154, 154, 154, .85);
+    background-color: #f9f9fe;
+    padding-left: 20px;
+    margin-right: 20px
+}
+
+.sec2 .links4 form .phone {
+    margin-right: 0
+}
+
+.sec2 .links4 form .intl-tel-input input[type=text] {
+    padding-left: 50px
+}
+
+.sec2 .links4 form input[type=checkbox], footer br.sm, footer br.xs {
+    display: none
+}
+
+.sec2 .links4 form .check {
+    text-align: center;
+    padding-top: 30px
+}
+
+.sec2 .links4 form label {
+    color: #565656;
+    font-size: 15px;
+    line-height: 62px;
+    cursor: pointer
+}
+
+.sec2 .links4 form .oferta {
+    color: #0096ff;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 5px
+}
+
+.sec2 .links4 form label:before {
+    content: '\f096';
+    font-size: 20px;
+    margin-top: 0;
+    margin-right: 20px;
+    font-family: FontAwesome
+}
+
+.sec2 .links4 form label.active:before {
+    content: '\f046';
+    margin-right: 17px
+}
+
+.sec2 .backlink, .sec2 .text5 {
+    text-align: center;
+    font-size: 16px
+}
+
+.sec2 .backlink {
+    text-decoration: underline;
+    cursor: pointer;
+    display: block;
+    color: #0096ff;
+    line-height: 62px
+}
+
+.sec2 .text5 {
+    margin: 25px auto;
+    width: 595px;
+    color: #a0a0a0;
+    font-family: RobotoLight;
+    line-height: 30px;
+    letter-spacing: .4px
+}
+
+.footer3 p.text4, .sec2 .text3 span.val, .sec2 .text5 b {
+    font-family: RobotoRegular
+}
+
+.sec2 .links4 form .oferta, .sec2 .text5 a {
+    text-decoration: underline;
+    cursor: pointer
+}
+
+.sec2 .info {
+    background-color: #f8f8f8;
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 100px;
+    padding-left: 60px
+}
+
+.sec2 .part {
+    padding-top: 120px;
+    width: 370px;
+    padding-left: 20px
+}
+
+.sec2 .part1 {
+    background: url(/img/info1.png) no-repeat
+}
+
+.sec2 .part2 {
+    margin-left: 50px;
+    background: url(/img/info2.png) no-repeat
+}
+
+.sec2 .text7 {
+    color: #000;
+    font-size: 20px;
+    font-family: RobotoBold
+}
+
+.sec2 .text8 {
+    margin-top: 25px;
+    color: #2d3340;
+    font-size: 15px;
+    line-height: 24px
+}
+
+#dollar_price {
+    color: #1ac33d;
+    font-family: RobotoLight;
+    font-size: 60px;
+    line-height: 50px;
+    letter-spacing: 1.5px;
+    margin: 0 15px
+}
+
+#dollar_price .dollar {
+    font-size: 24px;
+    letter-spacing: .6px;
+    margin-left: -13px
+}
+
+.footer1, .footer2, .footer3, .sec2 .links4 form label:before {
+    vertical-align: top;
+    display: inline-block
+}
+
+footer {
+    font-family: RobotoMedium;
+    vertical-align: top;
+    padding-bottom: 35px;
+    width: 100%;
+    min-height: 250px;
+    background-color: #e8e9f3
+}
+
+footer a, footer p {
+    color: #363636;
+    font-size: 13px;
+    text-align: left
+}
+
+footer p {
+    line-height: 20px
+}
+
+footer .social {
+    margin-bottom: 30px
+}
+
+footer a {
+    padding: 0 10px 0 0;
+    transition: all .3s linear
+}
+
+footer a:hover {
+    text-decoration: none
+}
+
+footer a.partners {
+    display: block;
+    margin: 30px auto 0;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    color: #f45c33;
+    border: 1px solid #f45c33
+}
+
+footer a.partners:hover {
+    color: #fff;
+    background-color: #f45c33
+}
+
+footer .contacts {
+    margin-top: 0
+}
+
+footer .copy {
+    margin-top: 44px;
+    margin-bottom: 0
+}
+
+footer .icon-soc {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    vertical-align: top;
+    margin: 0 20px;
+    background: #464646;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    padding: 0
+}
+
+footer .icon-soc i {
+    font-size: 20px;
+    line-height: 35px
+}
+
+footer a.icon-soc:hover {
+    opacity: .8
+}
+
+footer .icon-fb {
+    margin-left: 0
+}
+
+footer .icon-yt {
+    margin-right: 0
+}
+
+footer .modal-btn {
+    padding-left: 20px;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 14px
+}
+
+footer .modal-btn:before {
+    content: '\f00c';
+    font-family: FontAwesome;
+    margin-left: -10px;
+    margin-right: 10px;
+    color: #6895b7
+}
+
+.footer2, .footer3 {
+    padding-top: 60px;
+    margin-left: 30px
+}
+
+.footer3 {
+    padding-top: 58px
+}
+
+.footer3 p.text4 {
+    line-height: 25px;
+    text-align: right
+}
+
+.footer3 p.text4 span {
+    font-size: 16px;
+    padding-right: 70px;
+    float: left;
+    font-family: RobotoBold
+}
+
+.footer-line {
+    display: inline-block;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    width: 90%;
+    height: 1px;
+    background-color: #6c6c6c;
+    opacity: .3
+}
+
+footer .bottom-text {
+    font-size: 13px;
+    line-height: 22px;
+    text-align: center
+}
+
+footer a.mail {
+    background-color: #f8ff44;
+    color: #636475;
+    font-weight: 700
+}
+
+@media only screen and (max-width: 1130px) {
+    footer .footer3 {
+        margin-left: 0
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .footer2, footer .copy {
+        margin: 24px auto;
+        display: block
+    }
+
+    .footer2 {
+        padding-top: 0;
+        margin: 0 auto
+    }
+
+    footer p {
+        color: #979898;
+        font-size: 13px;
+        text-align: center
+    }
+
+    footer a.icon-soc {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        vertical-align: top;
+        margin: 0 10px
+    }
+
+    .footer3 p.text4 span {
+        color: #636475;
+        font-size: 16px;
+        padding-right: 20px
+    }
+
+    .footer-inline {
+        padding-left: 50px;
+        padding-top: 20px
+    }
+
+    .footer3 {
+        padding-top: 38px;
+        margin-left: 0
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .container {
+        width: 720px
+    }
+
+    br.sm {
+        display: block
+    }
+
+    br.xs {
+        display: none
+    }
+
+    .sec1 .step {
+        width: 130px
+    }
+
+    .sec2 .block {
+        width: 100%
+    }
+
+    .sec2 .price, .sec2 .product {
+        width: 100%;
+        display: block
+    }
+
+    .sec2 .price {
+        padding-left: 180px;
+        float: none
+    }
+
+    .sec2 .part {
+        width: 280px
+    }
+
+    .sec2 .links4 form .formpart {
+        display: block;
+        width: 248px;
+        margin: 0 auto
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .container {
+        width: 340px
+    }
+
+    br.sm {
+        display: none
+    }
+
+    br.xs {
+        display: block
+    }
+
+    .sec1 {
+        padding-top: 30px
+    }
+
+    .sec1 .title {
+        font-size: 24px;
+        line-height: 32px;
+        width: 100%;
+        margin-bottom: 30px
+    }
+
+    .sec1 .text1:after {
+        font-family: FontAwesome;
+        content: '\f107';
+        position: absolute;
+        bottom: -30px;
+        left: 150px;
+        font-size: 30px
+    }
+
+    .sec1 .arrow, .sec1 .first .step2, .sec1 .first .step3, .sec1 .second .step1, .sec1 .second .step3, .sec1 .third .step1, .sec1 .third .step2 {
+        display: none
+    }
+
+    .sec1 .step {
+        width: 100%;
+        position: relative
+    }
+
+    .sec1 .text {
+        margin-bottom: 4px
+    }
+
+    .sec2 .product {
+        padding-top: 180px;
+        padding-bottom: 40px;
+        height: auto;
+        background-position: 50% 30px
+    }
+
+    .sec2 .price {
+        padding: 0;
+        text-align: center
+    }
+
+    .sec2 .text2 {
+        text-align: center;
+        display: block;
+        padding-bottom: 15px
+    }
+
+    .sec2 .text5 {
+        width: 100%;
+        padding: 0 10px;
+        font-size: 16px;
+        line-height: 22px
+    }
+
+    .sec2 .info {
+        padding-left: 18px;
+        padding-top: 20px
+    }
+
+    .sec2 .part2 {
+        margin-left: 0;
+        margin-top: 40px
+    }
+
+    .sec2 .links4 form input[type=submit] {
+        width: 248px;
+        font-size: 12px
+    }
+
+    .animated {
+        transition-property: none !important;
+        -ms-transform: none !important;
+        transform: none !important;
+        animation: none !important
+    }
+}

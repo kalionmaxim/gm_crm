@@ -119,8 +119,8 @@ if (cluster.isMaster) {
 		textLimit: "524288000"
 	}));
 
-	// const favicon = require("koa-favicon");
-	// app.use(favicon(path.join(__dirname, "/public/img", "favicon.png")));
+	const favicon = require("koa-favicon");
+	app.use(favicon(path.join(__dirname, "public", "img", "favicon.ico")));
 
 	const serve = require("koa-static");
 	app.use(serve(path.join(__dirname, "public")));

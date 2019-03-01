@@ -7,7 +7,32 @@ const PayPal = require("../lib/paypal");
 const Yandex = require("../lib/yandexKassa");
 
 router.get("/", async (ctx) => {
-	await ctx.render("pages/client/index");
+	await ctx.redirect("/checkout/1");
+});
+
+router.get("/checkout/1", async (ctx) => {
+	await ctx.render("pages/client/checkout/step1", {
+		productName : ctx.request.query["productName"] || "",
+		productID   : ctx.request.query["productID"] || "",
+		planName    : ctx.request.query["planName"] || "",
+		productPrice: ctx.request.query["productPrice"] || "",
+		currency    : ctx.request.query["currency"] || "",
+		responseURL : ctx.request.query["redirectURL"] || "",
+		merchantID  : ctx.request.query["merchantID"] || ""
+	});
+});
+
+router.get("/checkout/2", async (ctx) => {
+	await ctx.render("pages/client/checkout/step2", {
+		productName : ctx.request.query["productName"] || "",
+		email       : ctx.request.query["email"] || "",
+		planName    : ctx.request.query["planName"] || "",
+		productPrice: ctx.request.query["productPrice"] || "",
+		currency    : ctx.request.query["currency"] || "",
+		responseURL : ctx.request.query["redirectURL"] || "",
+		merchantID  : ctx.request.query["merchantID"] || "",
+		salesOrderID: ctx.request.query["salesOrderID"] || ""
+	});
 });
 
 /*router.post("/", async (ctx) => {
