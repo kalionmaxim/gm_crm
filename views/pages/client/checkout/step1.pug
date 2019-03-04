@@ -265,9 +265,10 @@ script.
 					data  : data2
 				})
 					.then(function (response) {
+						console.log("salesOrderID response", response);
 						var salesOrderID = response.data.salesOrderID;
 
-						window.location = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
+						window.location = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&planName=#{planName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
 						// var salesOrderID = response.data.salesOrderID;
 						//
 						// var data3 = {
