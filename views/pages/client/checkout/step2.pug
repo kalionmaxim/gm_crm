@@ -267,7 +267,7 @@ script.
 	var tovar_id = 394979;
 	var token_GR = 'b7qk';
 	var CRM_id = 1203;
-	var success_url = 'https://geniusmarketing.me/syndicate/payment-startup-webinar/step1.php';
+	// var success_url = 'https://geniusmarketing.me/syndicate/payment-startup-webinar/step1.php';
 	if (step == '0') {
 		$('.steps').addClass('zero');
 		$('.step1text').fadeIn(0);
@@ -290,9 +290,9 @@ script.
 		$('.success').html('ВАШ ЗАКАЗ ОПЛАЧЕН');
 	}
 	$('#checktoken').val(token_GR);
-	$('#checkrespo').val(success_url);
-	$('#emailexist').val(success_url);
-	$('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
+	// $('#checkrespo').val(success_url);
+	// $('#emailexist').val(success_url);
+	// $('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
 	// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
 	$('.js_payment_title').html(payment_title);
 	$('.js_product_type').html(product_type);
