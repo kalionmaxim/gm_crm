@@ -17,7 +17,7 @@ router.get("/checkout/1", async (ctx) => {
 		planName    : ctx.request.query["planName"] || "",
 		productPrice: ctx.request.query["productPrice"] || "",
 		currency    : ctx.request.query["currency"] || "",
-		responseURL : ctx.request.query["redirectURL"] || "",
+		redirectURL : ctx.request.query["redirectURL"] || "",
 		merchantID  : ctx.request.query["merchantID"] || ""
 	});
 });
@@ -289,7 +289,7 @@ router.get("/paypal/process", async (ctx) => {
 	}
 });
 
-router.get("/yandex/form", async (ctx) => {
+/*router.get("/yandex/form", async (ctx) => {
 	await ctx.render("pages/client/yandex");
 });
 
@@ -299,6 +299,6 @@ router.post("/yandex/payment", async (ctx) => {
 
 router.post("/yandex/callback", async (ctx) => {
 	ctx.status = await Yandex.processCallback(ctx.request.body);
-});
+});*/
 
 module.exports = router;
