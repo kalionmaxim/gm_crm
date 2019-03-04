@@ -36,27 +36,27 @@ if (cluster.isMaster) {
 	// "real" IP number conversion, this function is on par in terms of
 	// worker index distribution only much faster.
 
-	function getWorker(ip, len) {
-		let _ip = ip.split(/["."|":"]/),
-			arr = [];
+	/*	function getWorker(ip, len) {
+			let _ip = ip.split(/["."|":"]/),
+				arr = [];
 
-		for (let el in _ip) {
-			if (_ip[el] === "") {
-				arr.push(0);
-			} else {
-				arr.push(parseInt(_ip[el], 16));
+			for (let el in _ip) {
+				if (_ip[el] === "") {
+					arr.push(0);
+				} else {
+					arr.push(parseInt(_ip[el], 16));
+				}
 			}
-		}
 
-		return Number(arr.join("")) % len;
-	}
+			return Number(arr.join("")) % len;
+		}*/
 
 	// Create the outside facing server listening on our port.
 	net.createServer({ pauseOnConnect: true }, function (connection) {
 		// We received a connection and need to pass it to the appropriate
 		// worker. Get the worker for this connection"s source IP and pass
 		// it the connection.
-		const worker = workers[getWorker(connection.remoteAddress, numProcesses)];
+		const worker = workers[Math.floor(Math.random() * numProcesses)];
 		// var worker = workers[worker_index(connection.remoteAddress, num_processes)];
 		worker.send("sticky-session:connection", connection);
 	}).listen(config.get("port"));
