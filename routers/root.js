@@ -4,40 +4,40 @@ const router = new Router();
 const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
-const Yandex = require("../lib/yandexKassa");
-
-router.get("/", async (ctx) => {
-	await ctx.redirect("/checkout/1");
-});
+// const Yandex = require("../lib/yandexKassa");
 
 router.get("/checkout/1", async (ctx) => {
-	await ctx.render("pages/client/checkout/step1", {
-		productName : ctx.request.query["productName"] || "",
-		productID   : ctx.request.query["productID"] || "",
-		planName    : ctx.request.query["planName"] || "",
-		productPrice: ctx.request.query["productPrice"] || "",
-		currency    : ctx.request.query["currency"] || "",
-		redirectURL : ctx.request.query["redirectURL"] || "",
-		merchantID  : ctx.request.query["merchantID"] || ""
-	});
+	if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["planName"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["redirectURL"] && ctx.request.query["merchantID"]) {
+		await ctx.render("pages/client/checkout/step1", {
+			productName : ctx.request.query["productName"] || "",
+			productID   : ctx.request.query["productID"] || "",
+			planName    : ctx.request.query["planName"] || "",
+			productPrice: ctx.request.query["productPrice"] || "",
+			currency    : ctx.request.query["currency"] || "",
+			redirectURL : ctx.request.query["redirectURL"] || "",
+			merchantID  : ctx.request.query["merchantID"] || ""
+		});
+	} else {
+		ctx.body = "Some of required fields are undefined";
+	}
 });
 
 router.get("/checkout/2", async (ctx) => {
-	await ctx.render("pages/client/checkout/step2", {
-		productName : ctx.request.query["productName"] || "",
-		email       : ctx.request.query["email"] || "",
-		planName    : ctx.request.query["planName"] || "",
-		productPrice: ctx.request.query["productPrice"] || "",
-		currency    : ctx.request.query["currency"] || "",
-		redirectURL : ctx.request.query["redirectURL"] || "",
-		merchantID  : ctx.request.query["merchantID"] || "",
-		salesOrderID: ctx.request.query["salesOrderID"] || ""
-	});
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["planName"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["redirectURL"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+		await ctx.render("pages/client/checkout/step2", {
+			productName : ctx.request.query["productName"] || "",
+			email       : ctx.request.query["email"] || "",
+			planName    : ctx.request.query["planName"] || "",
+			productPrice: ctx.request.query["productPrice"] || "",
+			currency    : ctx.request.query["currency"] || "",
+			redirectURL : ctx.request.query["redirectURL"] || "",
+			merchantID  : ctx.request.query["merchantID"] || "",
+			salesOrderID: ctx.request.query["salesOrderID"] || ""
+		});
+	} else {
+		ctx.body = "Some of required fields are undefined";
+	}
 });
-
-/*router.post("/", async (ctx) => {
-	await ctx.render("pages/client/index");
-});*/
 
 router.post("/contact", async (ctx) => {
 	/**

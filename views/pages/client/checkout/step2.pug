@@ -186,9 +186,13 @@ html(lang='ru-RU')
 					preferredCountries: ['ua', 'ru', 'by', 'kz']
 				});
 
+		include ../../../partials/client/preloader.pug
+
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
 	function payFondy() {
+		$("#preloader").show();
+
 		var data = {
 			Email             : "#{email}",
 			salesOrderID      : "#{salesOrderID}",
@@ -205,6 +209,8 @@ script.
 			data  : data
 		})
 			.then(function (response) {
+				$("#preloader").hide();
+
 				if (response.data.result && response.data.link) {
 					window.location = response.data.link;
 				} else if (response.data.error) {
@@ -214,6 +220,8 @@ script.
 	}
 
 	function payPayPal() {
+		$("#preloader").show();
+
 		var data = {
 			Email             : "#{email}",
 			salesOrderID      : "#{salesOrderID}",
@@ -231,6 +239,8 @@ script.
 			data  : data
 		})
 			.then(function (response) {
+				$("#preloader").hide();
+
 				if (response.data.result && response.data.link) {
 					// console.log(response.data.link);
 					window.location = response.data.link;
