@@ -29,7 +29,7 @@ router.get("/checkout/2", async (ctx) => {
 		planName    : ctx.request.query["planName"] || "",
 		productPrice: ctx.request.query["productPrice"] || "",
 		currency    : ctx.request.query["currency"] || "",
-		responseURL : ctx.request.query["redirectURL"] || "",
+		redirectURL : ctx.request.query["redirectURL"] || "",
 		merchantID  : ctx.request.query["merchantID"] || "",
 		salesOrderID: ctx.request.query["salesOrderID"] || ""
 	});
