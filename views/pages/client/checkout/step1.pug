@@ -65,9 +65,6 @@ html(lang='ru-RU')
 							| Чтобы забронировать участие в "
 							span.js_payment_title
 							| ",&nbsp;
-							b
-								span.js_product_type
-							| ,
 							br
 							| введите свои данные в форму ниже и нажмите "Забронировать".
 						p.success
@@ -274,7 +271,7 @@ script.
 
 						$("#preloader").hide();
 
-						window.location = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&planName=#{planName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
+						window.location = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
 						// var salesOrderID = response.data.salesOrderID;
 						//
 						// var data3 = {
@@ -314,7 +311,7 @@ script.
 script.
 	var header_image = 'bg1.jpg';
 	var payment_title = "#{productName}";
-	var product_type = '#{planName}';
+	// var product_type = '#{planName}';
 	var dollar_price = "#{productPrice}";
 	if (Math.ceil(dollar_price * uah_cur) < 1000) {
 		var hrn_price = Math.ceil(dollar_price * uah_cur);
@@ -365,7 +362,7 @@ script.
 	// $('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
 	// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
 	$('.js_payment_title').html(payment_title);
-	$('.js_product_type').html(product_type);
+	// $('.js_product_type').html(product_type);
 	$('.js_dollar_price').html(dollar_price);
 	$('.js_hrn_price').html(hrn_price);
 	$('.js_rub_price').html(rub_price);

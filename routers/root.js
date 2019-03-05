@@ -7,14 +7,13 @@ const PayPal = require("../lib/paypal");
 // const Yandex = require("../lib/yandexKassa");
 
 router.get("/checkout/1", async (ctx) => {
-	if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["planName"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["redirectURL"] && ctx.request.query["merchantID"]) {
+	if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 		await ctx.render("pages/client/checkout/step1", {
 			productName : ctx.request.query["productName"] || "",
 			productID   : ctx.request.query["productID"] || "",
-			planName    : ctx.request.query["planName"] || "",
 			productPrice: ctx.request.query["productPrice"] || "",
 			currency    : ctx.request.query["currency"] || "",
-			redirectURL : ctx.request.query["redirectURL"] || "",
+			// redirectURL : ctx.request.query["redirectURL"] || "",
 			merchantID  : ctx.request.query["merchantID"] || ""
 		});
 	} else {
@@ -23,16 +22,17 @@ router.get("/checkout/1", async (ctx) => {
 });
 
 router.get("/checkout/2", async (ctx) => {
-	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["planName"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["redirectURL"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
 		await ctx.render("pages/client/checkout/step2", {
 			productName : ctx.request.query["productName"] || "",
 			email       : ctx.request.query["email"] || "",
-			planName    : ctx.request.query["planName"] || "",
 			productPrice: ctx.request.query["productPrice"] || "",
 			currency    : ctx.request.query["currency"] || "",
-			redirectURL : ctx.request.query["redirectURL"] || "",
+			// redirectURL : ctx.request.query["redirectURL"] || "",
 			merchantID  : ctx.request.query["merchantID"] || "",
-			salesOrderID: ctx.request.query["salesOrderID"] || ""
+			salesOrderID: ctx.request.query["salesOrderID"] || "",
+			firstName   : ctx.request.query["firstName"] || "",
+			lastName    : ctx.request.query["lastName"] || ""
 		});
 	} else {
 		ctx.body = "Some of required fields are undefined";

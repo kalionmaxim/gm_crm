@@ -253,7 +253,7 @@ script.
 script.
 	var header_image = 'bg1.jpg';
 	var payment_title = '#{productName}';
-	var product_type = 'пакет #{planName}';
+	// var product_type = '';
 	var dollar_price = "#{productPrice}";
 	if (Math.ceil(dollar_price * uah_cur) < 1000) {
 		var hrn_price = Math.ceil(dollar_price * uah_cur);
@@ -304,7 +304,7 @@ script.
 	// $('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
 	// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
 	$('.js_payment_title').html(payment_title);
-	$('.js_product_type').html(product_type);
+	// $('.js_product_type').html(product_type);
 	$('.js_dollar_price').html(dollar_price);
 	$('.js_hrn_price').html(hrn_price);
 	$('.js_rub_price').html(rub_price);
