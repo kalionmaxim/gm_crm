@@ -39,6 +39,20 @@ router.get("/checkout/2", async (ctx) => {
 	}
 });
 
+router.get("/checkout/3", async (ctx) => {
+	await renderSuccess(ctx);
+});
+
+router.post("/checkout/3", async (ctx) => {
+	await renderSuccess(ctx);
+});
+
+async function renderSuccess(ctx) {
+	await ctx.render("pages/client/checkout/step3", {
+		productName: ctx.request.query["productName"] || ""
+	});
+}
+
 router.post("/contact", async (ctx) => {
 	/**
 	 * Email, Phone – required fields

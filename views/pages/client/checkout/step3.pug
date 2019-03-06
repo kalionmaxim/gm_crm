@@ -12,11 +12,30 @@ html(lang='ru-RU')
 		meta(property='fb:admins', content='1510615147')
 		meta(property='fb:app_id', content='473200492729081')
 		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
-		link(rel='stylesheet', href='/css/checkout/step2/libs.min.css')
-		link(rel='stylesheet', href='/css/checkout/step2/main.min.css')
-		link(rel='stylesheet', href='/css/checkout/step2/edit.css')
+		link(rel='stylesheet', href='/css/checkout/step3/libs.min.css')
+		link(rel='stylesheet', href='/css/checkout/step3/main.min.css')
+		link(rel='stylesheet', href='/css/checkout/step3/edit.css')
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
 	body
+		// Google Tag Manager
+		noscript
+			iframe(src='//www.googletagmanager.com/ns.html?id=GTM-TRNP8W', height='0', width='0', style='display:none;visibility:hidden')
+		script.
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push(
+					{
+						'gtm.start': new Date().getTime(),
+						event      : 'gtm.js'
+					});
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-TRNP8W');
+		// End Google Tag Manager
 		// SECTION 1
 		a.tostep1(href='step1.php')
 			section.sec1
@@ -71,24 +90,22 @@ html(lang='ru-RU')
 							br
 							| введите свои данные в форму ниже и нажмите "Забронировать".
 						p.success
-					p.text4 ВЫБЕРИТЕ СПОСОБ ОПЛАТЫ:
-					.links.links1
-						a.link.link1.inl(onclick="payFondy();")
-							span.button2.hvr-grow Оплатить
-						//
-							<a href='yandex.php' class="link link2 inl">
-							<span class="button2 hvr-grow">Оплатить</span>
-							</a>
-						//
-							<a href='webmoney.php' class="link link3 inl">
-							<span class="button2 hvr-grow">Оплатить</span>
-							</a>
-						a.link.link4.inl(onclick="payPayPal();")
-							span.button2.hvr-grow Оплатить
-						a.link.link5.inl(href='manual.php')
-							span.button2.hvr-grow Оплатить
+					p.textmanual.textcenter
+						b Спасибо! Вы успешно произвели попытку оплаты.
+						br
+						|  Все данные были отправлены на Ваш E-Mail.
+						br
+						br
+						|  Если по каким-то причинам Вы не получили от нас письмо, обратитесь на наш
+						br
+						|  E-Mail клиент-сервиса:&nbsp;
+						a(target='_blank', href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+						| , либо звоните:
+						br
+						|  +7 495 241 07 87 (Россия), +38 044 237 13 18 (Украина)
+					.links.links4
 					script.
-						var step = '1';
+						var step = '4';
 					p.text5
 						| Есть вопросы по оплате? Посмотрите
 						a(href='#modal-video', data-video='youtube', data-srcvideo='Ldo-oggnt5c') видеоинструкцию
@@ -162,9 +179,9 @@ html(lang='ru-RU')
 		// END FOOTER
 		script.
 			// Курс рубля к доллару
-			var rub_cur = 68;
+			var rub_cur = 66;
 			// Курс гривны к доллару
-			var uah_cur = 28;
+			var uah_cur = 27;
 			console.log('success');
 		// HIDDEN ELEMENTS (MODALS)
 		#modal-video.modal-overlay
@@ -186,131 +203,64 @@ html(lang='ru-RU')
 					preferredCountries: ['ua', 'ru', 'by', 'kz']
 				});
 
-		include ../../../partials/client/preloader.pug
-
-script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
-script.
-	function payFondy() {
-		$("#preloader").show();
-
-		var data = {
-			Email             : "#{email}",
-			salesOrderID      : "#{salesOrderID}",
-			productName       : "#{productName}",
-			productPrice      : "#{productPrice}",
-			currency          : "#{currency.toUpperCase()}",
-			redirectURL       : "#{redirectURL}",
-			paymentDescription: "Оплата продукта \"#{productName}\"",
-			merchantID        : "#{merchantID}" || null
-		};
-
-		axios({
-			method: "post",
-			url   : "/fondy/payment",
-			data  : data
-		})
-			.then(function (response) {
-				$("#preloader").hide();
-
-				if (response.data.result && response.data.link) {
-					window.location = response.data.link;
-				} else if (response.data.error) {
-					console.error(response.data.error);
-				}
-			});
-	}
-
-	function payPayPal() {
-		$("#preloader").show();
-
-		var data = {
-			Email             : "#{email}",
-			salesOrderID      : "#{salesOrderID}",
-			productName       : "#{productName}",
-			productPrice      : "#{productPrice}",
-			currency          : "#{currency.toUpperCase()}",
-			paymentDescription: "Оплата продукта \"#{productName}\"",
-			redirectURL       : "#{redirectURL}" || null
-		};
-
-		axios({
-			method: "post",
-			// url   : "http://localhost:3001/paypal/payment",
-			url   : "/paypal/payment",
-			data  : data
-		})
-			.then(function (response) {
-				$("#preloader").hide();
-
-				if (response.data.result && response.data.link) {
-					// console.log(response.data.link);
-					window.location = response.data.link;
-				} else if (response.data.error) {
-					console.error(response.data.error);
-				}
-			});
-	}
-
-script.
-	var header_image = 'bg1.jpg';
-	var payment_title = '#{productName}';
-	// var product_type = '';
-	var dollar_price = "#{productPrice}";
-	if (Math.ceil(dollar_price * uah_cur) < 1000) {
-		var hrn_price = Math.ceil(dollar_price * uah_cur);
-	} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
-		var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
-	} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
-		var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
-	} else {
-		var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
-	}
-	if (Math.ceil(dollar_price * rub_cur) < 1000) {
-		var rub_price = Math.ceil(dollar_price * rub_cur);
-	} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
-		var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
-	} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
-		var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
-	} else {
-		var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
-	}
-	var tovar_id = 394979;
-	var token_GR = 'b7qk';
-	var CRM_id = 1203;
-	// var success_url = 'https://geniusmarketing.me/syndicate/payment-startup-webinar/step1.php';
-	if (step == '0') {
-		$('.steps').addClass('zero');
-		$('.step1text').fadeIn(0);
-		$('.tostep1').addClass('disable_link');
-	} else if (step == '1') {
-		$('.steps').addClass('first');
-		$('.price').removeClass('disapear');
-		$('.product').removeClass('disapear');
-	} else if (step == '2') {
-		$('.steps').addClass('second');
-		$('.price').removeClass('disapear');
-		$('.product').removeClass('disapear');
-	} else if (step == '3') {
-		$('.steps').addClass('third');
-		$('.success').fadeIn(0);
-		$('.success').html('СПАСИБО!');
-	} else if (step == '4') {
-		$('.steps').addClass('third');
-		$('.success').fadeIn(0);
-		$('.success').html('ВАШ ЗАКАЗ ОПЛАЧЕН');
-	}
-	$('#checktoken').val(token_GR);
-	// $('#checkrespo').val(success_url);
-	// $('#emailexist').val(success_url);
-	// $('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
-	// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
-	$('.js_payment_title').html(payment_title);
-	// $('.js_product_type').html(product_type);
-	$('.js_dollar_price').html(dollar_price);
-	$('.js_hrn_price').html(hrn_price);
-	$('.js_rub_price').html(rub_price);
-	// if(rub_price > 15000){
-	//   $('.links1 .link3').fadeOut(0);
-	// }
-	$('.js_tovar_id').val(tovar_id);
-	$('.sec1').css('background-image', 'url(/img/' + header_image + ')');
+		script.
+			var header_image = 'bg1.jpg';
+			var payment_title = '#{productName}';
+			var dollar_price = 990;
+			if (Math.ceil(dollar_price * uah_cur) < 1000) {
+				var hrn_price = Math.ceil(dollar_price * uah_cur);
+			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
+			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
+			} else {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
+			}
+			if (Math.ceil(dollar_price * rub_cur) < 1000) {
+				var rub_price = Math.ceil(dollar_price * rub_cur);
+			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
+			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
+			} else {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
+			}
+			var tovar_id = 391746;
+			var token_GR = 'b7QW';
+			var CRM_id = 1185;
+			var success_url = 'https://geniusmarketing.me/syndicate/2payments-entrepreneur-webinar/step1.php';
+			if (step == '0') {
+				$('.steps').addClass('zero');
+				$('.step1text').fadeIn(0);
+				$('.tostep1').addClass('disable_link');
+			} else if (step == '1') {
+				$('.steps').addClass('first');
+				$('.price').removeClass('disapear');
+				$('.product').removeClass('disapear');
+			} else if (step == '2') {
+				$('.steps').addClass('second');
+				$('.price').removeClass('disapear');
+				$('.product').removeClass('disapear');
+			} else if (step == '3') {
+				$('.steps').addClass('third');
+				$('.success').fadeIn(0);
+				$('.success').html('СПАСИБО!');
+			} else if (step == '4') {
+				$('.steps').addClass('third');
+				$('.success').fadeIn(0);
+				$('.success').html('ЗАПРОС НА ОПЛАТУ ЗАКАЗА УСПЕШНО ОТПРАВЛЕН');
+			}
+			$('#checktoken').val(token_GR);
+			$('#checkrespo').val(success_url);
+			$('#emailexist').val(success_url);
+			$('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
+			// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
+			$('.js_payment_title').html(payment_title);
+			$('.js_dollar_price').html(dollar_price);
+			$('.js_hrn_price').html(hrn_price);
+			$('.js_rub_price').html(rub_price);
+			// if(rub_price > 15000){
+			//   $('.links1 .link3').fadeOut(0);
+			// }
+			$('.js_tovar_id').val(tovar_id);
+			$('.sec1').css('background-image', 'url(/img/' + header_image + ')');
