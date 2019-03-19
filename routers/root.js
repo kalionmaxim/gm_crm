@@ -14,7 +14,8 @@ router.get("/checkout/1", async (ctx) => {
 			productPrice: ctx.request.query["productPrice"] || "",
 			currency    : ctx.request.query["currency"] || "",
 			// redirectURL : ctx.request.query["redirectURL"] || "",
-			merchantID  : ctx.request.query["merchantID"] || ""
+			merchantID  : ctx.request.query["merchantID"] || "",
+			landing     : ctx.request.query["landing"] || "false"
 		});
 	} else {
 		ctx.body = "Some of required fields are undefined";

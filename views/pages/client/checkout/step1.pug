@@ -277,7 +277,12 @@ script.
 
 						$("#preloader").hide();
 
-						window.location = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
+						var url = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
+						if("#{landing}" === "true") {
+							url += "&landing=true";
+						}
+
+						window.location = url;
 						// var salesOrderID = response.data.salesOrderID;
 						//
 						// var data3 = {
