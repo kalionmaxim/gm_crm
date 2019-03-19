@@ -199,6 +199,12 @@ html(lang='ru-RU')
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
+	$(document).ready(function () {
+		$("#name").val(getCookie("name") || "");
+		$("#email").val(getCookie("email") || "");
+		$("#phone").val(getCookie("phone") || "");
+	});
+
 	$('#form_1').submit(function (e) {
 		e.preventDefault();
 
@@ -311,7 +317,8 @@ script.
 script.
 	var header_image = 'bg1.jpg';
 	var payment_title = "#{productName}";
-	// var product_type = '#{planName}';
+	// var product_type = '
+	#{planName}';
 	var dollar_price = "#{productPrice}";
 	if (Math.ceil(dollar_price * uah_cur) < 1000) {
 		var hrn_price = Math.ceil(dollar_price * uah_cur);
