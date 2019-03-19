@@ -32,7 +32,46 @@ router.get("/checkout/2", async (ctx) => {
 			merchantID  : ctx.request.query["merchantID"] || "",
 			salesOrderID: ctx.request.query["salesOrderID"] || "",
 			firstName   : ctx.request.query["firstName"] || "",
-			lastName    : ctx.request.query["lastName"] || ""
+			lastName    : ctx.request.query["lastName"] || "",
+			landing     : ctx.request.query["landing"] || ""
+		});
+	} else {
+		ctx.body = "Some of required fields are undefined";
+	}
+});
+
+router.get("/checkout/2/fondy", async (ctx) => {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+		await ctx.render("pages/client/checkout/step2_fondy", {
+			productName : ctx.request.query["productName"] || "",
+			email       : ctx.request.query["email"] || "",
+			productPrice: ctx.request.query["productPrice"] || "",
+			currency    : ctx.request.query["currency"] || "",
+			// redirectURL : ctx.request.query["redirectURL"] || "",
+			merchantID  : ctx.request.query["merchantID"] || "",
+			salesOrderID: ctx.request.query["salesOrderID"] || "",
+			firstName   : ctx.request.query["firstName"] || "",
+			lastName    : ctx.request.query["lastName"] || "",
+			landing     : ctx.request.query["landing"] || ""
+		});
+	} else {
+		ctx.body = "Some of required fields are undefined";
+	}
+});
+
+router.get("/checkout/2/paypal", async (ctx) => {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+		await ctx.render("pages/client/checkout/step2_paypal", {
+			productName : ctx.request.query["productName"] || "",
+			email       : ctx.request.query["email"] || "",
+			productPrice: ctx.request.query["productPrice"] || "",
+			currency    : ctx.request.query["currency"] || "",
+			// redirectURL : ctx.request.query["redirectURL"] || "",
+			merchantID  : ctx.request.query["merchantID"] || "",
+			salesOrderID: ctx.request.query["salesOrderID"] || "",
+			firstName   : ctx.request.query["firstName"] || "",
+			lastName    : ctx.request.query["lastName"] || "",
+			landing     : ctx.request.query["landing"] || ""
 		});
 	} else {
 		ctx.body = "Some of required fields are undefined";
