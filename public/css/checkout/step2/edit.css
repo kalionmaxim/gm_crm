@@ -338,3 +338,13 @@ a.disable_link {
  align-items: center;
  justify-content: center;
 }
+
+
+.sec2 .links3 .link3 {
+ border-radius: 50%;
+ background: url(/img/usd-symbol.svg) no-repeat center top 20% / 36%, url(/img/usa-flag.svg) no-repeat center top / 60%;
+}
+.sec2 .links3 .link4 {
+ border-radius: 50%;
+ background: url(/img/euro-symbol.svg) no-repeat center top 27% / 25%, url(/img/euro-flag.svg) no-repeat center top / 60%;
+}
