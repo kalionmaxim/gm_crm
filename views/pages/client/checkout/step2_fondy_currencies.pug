@@ -1,0 +1,405 @@
+doctype html
+html(lang='ru-RU')
+	head
+		meta(charset='UTF-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		title Оплата участия
+		// SEO
+		meta(property='og:title', content='Оплата участия')
+		meta(property='og:description', content='Оплата участия')
+		meta(property='og:image', content='https://geniusmarketing.me/pic.png')
+		meta(property='og:url', content='https://geniusmarketing.me/')
+		meta(property='fb:admins', content='1510615147')
+		meta(property='fb:app_id', content='473200492729081')
+		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+		link(rel='stylesheet', href='/css/checkout/step2/libs.min.css')
+		link(rel='stylesheet', href='/css/checkout/step2/main.min.css')
+		link(rel='stylesheet', href='/css/checkout/step2/edit.css')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+	body
+		// SECTION 1
+		a.tostep1(href='step1.php')
+			section.sec1
+				.container
+					p.title.js_payment_title
+					.steps
+						.step.step1.inl
+							p.text
+								span.circle
+								|  Шаг 1
+							p.text1 Введите Ваши данные
+						.arrow.inl
+						.step.step2.inl
+							p.text
+								span.circle
+								|  Шаг 2
+							p.text1 Выберите способ оплаты
+						.arrow.inl
+						.step.step3.inl
+							p.text
+								span.circle
+								|  Шаг 3
+							p.text1 Завершение оплаты
+		section.sec2
+			.container
+				.block
+					.block-header
+						.product.inl.disapear
+							p.text
+								span.js_payment_title
+								br
+								span.js_product_type.product_type
+						.price.inl.disapear
+							.text2.inl К оплате:
+							p#dollar_price.inl
+								span.js_dollar_price
+								span.dollar $
+							.inl
+								p#rub_price.text3
+									span.js_rub_price
+									span.val
+								p#hrn_price.text3
+									span.js_hrn_price
+									span.val
+						p.step1text
+							| Чтобы забронировать участие в событии "
+							span.js_payment_title
+							| ",
+							b
+								span.js_product_type
+							| ,
+							br
+							| введите свои данные в форму ниже и нажмите "Забронировать".
+						p.success
+					p.text4 ВЫБЕРИТЕ ВАЛЮТУ ПЛАТЕЖА:
+					a.backlink(href='/checkout/2?email=' + email + '&salesOrderID=' + salesOrderID + '&productName=' + productName + '&productPrice=' + productPrice + '&currency=' + currency.toUpperCase() + '&merchantID=' + merchantID) ← вернуться назад
+					.links.links3
+						a.link.link1.inl(onclick="payFondy('usd');")
+							span.button2.hvr-grow Оплатить в долларах
+						a.link.link1.inl(onclick="payFondy('eur');")
+							span.button2.hvr-grow Оплатить в евро
+						a.link.link2.inl(onclick="payFondy('rub');")
+							span.button2.hvr-grow Оплатить в рублях
+						a.link.link1.inl(onclick="payFondy('uah');")
+							span.button2.hvr-grow Оплатить в гривне
+						p.anycard
+							| *Если у Вас карта в другой валюте - выбирайте любую.
+							br
+							|  В процессе платежа произойдёт конвертация.
+					script.
+						var step = '1';
+					p.text5
+						| Есть вопросы по оплате? Посмотрите
+						a(href='#modal-video', data-video='youtube', data-srcvideo='Ldo-oggnt5c') видеоинструкцию
+						|  или позвоните нам: тел.
+						b +7 495 241 07 87
+						|  (Россия),
+						b +38 044 237 13 18
+						|  (Украина)
+					.info
+						.part.part1.inl
+							p.text7 Гарантия возврата средств
+							p.text8
+								| Genius Marketing гарантирует возврат средств за приобретенный цифровой продукт и/или услугу по требованию клиента.
+								br
+								br
+								| Срок гарантийного периода регламентируется договором об оказании услуг (офертой).
+						.part.part2.inl
+							p.text7 100% защита персональных данных
+							p.text8
+								| Мы ни при каких условиях не передаём Вашу личную информацию третьим лицам.
+								br
+								br
+								| Безопасность всех платежей гарантируется сертификатами THAWTE и PCI.
+		// FOOTER
+		footer.main-footer
+			.container
+				.footer1
+					.copy-wrap
+						p.copy
+							img(src='/img/footer-logo.png')
+							br
+							br
+							| ТОВ "КОНСАЛТИНГ СИНДИКАТ"
+							br
+							| ЕГРПОУ: 42182763, Адрес: 01033, г. Киев,
+							br
+							| ул. Паньковская, 14
+							br
+				.footer2
+					.footer-inline
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-konfidencialnosti/') Политика конфиденциальности
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/otkaz-ot-otvetstvennosti/') Отказ от ответственности
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/soglasie-s-rassylkoj/') Согласие с рассылкой
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-vozvrata-denezhnyx-sredstv/') Политика возврата
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') Публичный договор
+				.footer3
+					p.social
+						| Присоединяйтесь к нам в социальных сетях:
+						br.lg
+						br
+						a.icon-fb.icon-soc(href='https://www.facebook.com/GeniusMarketing.me/', target='_blank')
+							i.fa.fa-facebook(aria-hidden='true')
+						a.icon-vk.icon-soc(href='https://vk.com/geniusmarketing', target='_blank')
+							i.fa.fa-vk(aria-hidden='true')
+						a.icon-inst.icon-soc(href='https://www.instagram.com/geniusmarketingofficial/', target='_blank')
+							i.fa.fa-instagram(aria-hidden='true')
+						a.icon-yt.icon-soc(href='https://www.youtube.com/user/Olestimofeev', target='_blank')
+							i.fa.fa-youtube(aria-hidden='true')
+					p.text4
+						span.ru +7 (495) 241 07 87
+						|  (Россия)
+					p.text4
+						span.ru +38 (044) 237 13 18
+						|  (Украина)
+				.footer-line
+				p.bottom-text
+					| © Олесь Тимофеев & GeniusMarketing. Все права защищены. Любое копирование материалов разрешено
+					br
+					|  только с согласия правообладателей. По всем вопросам обращайтесь:
+					a.mail(href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+		// END FOOTER
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
+		script.
+			function payFondy(curr) {
+				var merchant = "";
+				switch (curr) {
+					case "usd":
+						merchant = "#{merchantUSD}";
+						break;
+
+					case "eur":
+						merchant = "#{merchantEUR}";
+						break;
+
+					case "uah":
+						merchant = "#{merchantUAH}";
+						break;
+
+					case "rub":
+						merchant = "#{merchantRUB}";
+						break;
+				}
+
+				$("#preloader").show();
+
+				var data = {
+					Email             : "#{email}",
+					salesOrderID      : "#{salesOrderID}",
+					productName       : "#{productName}",
+					productPrice      : "#{productPrice}",
+					currency          : "#{currency.toUpperCase()}",
+					redirectURL       : "#{redirectURL}",
+					paymentDescription: "Оплата продукта \"#{productName}\"",
+					merchantID        : merchant || null
+				};
+
+				axios({
+					method: "post",
+					url   : "/fondy/payment",
+					data  : data
+				})
+					.then(function (response) {
+						$("#preloader").hide();
+
+						if (response.data.result && response.data.link) {
+							window.location = response.data.link;
+						} else if (response.data.error) {
+							console.error(response.data.error);
+						}
+					});
+			}
+
+		script.
+			// Курс рубля к доллару
+			var rub_cur = 66;
+			// Курс гривны к доллару
+			var uah_cur = 27;
+			console.log('success');
+		// HIDDEN ELEMENTS (MODALS)
+		#modal-video.modal-overlay
+			.modal-content
+				.close-button
+					.one
+					.two
+				#video-popup
+		// END HIDDEN ELEMENTS (MODALS)
+		script(src='/js/libs.min.js')
+		script(src='/js/common.js')
+		script.
+			$("input.phone").intlTelInput(
+				{
+					utilsScript       : '/js/utils.js',
+					defaultCountry    : 'auto',
+					separateDialCode  : false,
+					nationalMode      : false,
+					preferredCountries: ['ua', 'ru', 'by', 'kz']
+				});
+		// Validation script
+		script.
+			function validate(formid) {
+				var output = false;
+				var name, email, phone;
+				form = $(formid); // указать ID формы !
+				form.find('input.name').focus();
+				form.find('input.email').focus();
+				form.find('input.phone').focus();
+				form.find('.subm1').focus();
+				if ($('.not_error').length == 3) {
+					output = true;
+					setCookie('name', form.find('.name').val(), 365);
+					setCookie('email', form.find('.email').val(), 365);
+					setCookie('last1', form.find('.last1').val(), 365);
+					setCookie('phone', form.find('.phone').val(), 365);
+				} else {
+					form.find('input.error').first().focus();
+				}
+				return output;
+			};
+			function validate_with_exportCRM(formid, idexport) {
+				var output = false;
+				var name, email, phone;
+				form = $(formid); // указать ID формы !
+				form.find('input.name').focus();
+				form.find('input.email').focus();
+				form.find('input.phone').focus();
+				form.find('.subm1').focus();
+				name = form.find('.name').val();
+				email = form.find('.email').val();
+				phone = form.find('.phone').val();
+				phone = phone.replace(/\\s/g, '');
+				$(".last1").val(phone);
+				if ($('.not_error').length == 3) {
+					$.ajax(
+						{
+							type   : "POST",
+							url    : 'crm/export.php',
+							async  : false,
+							data   :
+								{
+									name    : name,
+									email   : email,
+									phone   : phone,
+									idexport: idexport
+								},
+							success: function () {
+								setCookie('name', form.find('.name').val(), 365);
+								setCookie('email', form.find('.email').val(), 365);
+								setCookie('last1', form.find('.last1').val(), 365);
+								setCookie('phone', form.find('.phone').val(), 365);
+								var data = {
+									First_Name : name,
+									Email      : email,
+									Phone      : phone,
+									productID  : "3678676000021012068",
+									productName: "Syndicate вариант участия Собственник"
+								};
+								$.post("https://pay.geniusmarketing.me/deal", data);
+								output = true;
+							}
+						})
+				} else {
+					form.find('input.error').first().focus();
+				}
+				return output;
+			};
+			function checkForm_57(f) {
+				if ((f.name.value == "") || (f.email.value == "")) {
+					alert("Заполните все поля!!!");
+					return false;
+				}
+				if (!f.email.value.match(/^[\\w]{1}[\w\.\-_]*@[\w]{1}[\w\-_\.]*\.[\w]{2,4}$/i)) {
+					alert("Введите корректно Ваш E-Mail адрес!");
+					f.email.focus();
+					return false;
+				}
+				if ((f.money_transfer_system.value == "") || (f.transfer_code.value == "")) {
+					alert("Заполните все поля, отмеченные звездочкой *!!!");
+					return false;
+				}
+				var phone1 = true;
+				return true;
+			}
+
+		script.
+			var header_image = 'bg1.jpg';
+			var payment_title = '#{productName}';
+			// var product_type = '';
+			// var dollar_price = "#/{productPrice}";
+			var dollar_price = parseFloat("#{productPrice}").toFixed(2);
+			var currencySym = "$";
+			var currency = "#{currency}";
+			switch (currency.toLowerCase()) {
+				case "uah":
+					currencySym = "₴";
+					break;
+
+				case "eur":
+					currencySym = "€";
+					break;
+
+				case "rub":
+					currencySym = "₽";
+					break;
+			}
+
+			if (Math.ceil(dollar_price * uah_cur) < 1000) {
+				var hrn_price = Math.ceil(dollar_price * uah_cur);
+			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
+			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
+			} else {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
+			}
+			if (Math.ceil(dollar_price * rub_cur) < 1000) {
+				var rub_price = Math.ceil(dollar_price * rub_cur);
+			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
+			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
+			} else {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
+			}
+			var tovar_id = 391748;
+			var token_GR = 'b7Qc';
+			var CRM_id = 1186;
+			var success_url = 'https://geniusmarketing.me/syndicate/2payments-owner-webinar/step1.php';
+			if (step == '0') {
+				$('.steps').addClass('zero');
+				$('.step1text').fadeIn(0);
+				$('.tostep1').addClass('disable_link');
+			} else if (step == '1') {
+				$('.steps').addClass('first');
+				$('.price').removeClass('disapear');
+				$('.product').removeClass('disapear');
+			} else if (step == '2') {
+				$('.steps').addClass('second');
+				$('.price').removeClass('disapear');
+				$('.product').removeClass('disapear');
+			} else if (step == '3') {
+				$('.steps').addClass('third');
+				$('.success').fadeIn(0);
+				$('.success').html('СПАСИБО!');
+			} else if (step == '4') {
+				$('.steps').addClass('third');
+				$('.success').fadeIn(0);
+				$('.success').html('ВАШ ЗАКАЗ ОПЛАЧЕН');
+			}
+			$('#checktoken').val(token_GR);
+			$('#checkrespo').val(success_url);
+			$('#emailexist').val(success_url);
+			$('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
+			// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
+			$('.js_payment_title').html(payment_title);
+			// $('.js_product_type').html(product_type);
+			$('.js_dollar_price').html(dollar_price);
+			if ("#{landing}" === "true") {
+				$('.js_hrn_price').html(hrn_price + " грн.");
+				$('.js_rub_price').html(rub_price + " руб.");
+			}
+			// if(rub_price > 15000){
+			//   $('.links1 .link3').fadeOut(0);
+			// }
+			$('.js_tovar_id').val(tovar_id);
+			$('.sec1').css('background-image', 'url(/img/' + header_image + ')');

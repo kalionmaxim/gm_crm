@@ -6,6 +6,12 @@ const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 // const Yandex = require("../lib/yandexKassa");
 
+const config = require("../config/config");
+const merchantUSD = config.get("fondy:usd") || "";
+const merchantEUR = config.get("fondy:eur") || "";
+const merchantUAH = config.get("fondy:uah") || "";
+const merchantRUB = config.get("fondy:rub") || "";
+
 router.get("/checkout/1", async (ctx) => {
 	if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 		await ctx.render("pages/client/checkout/step1", {
@@ -54,6 +60,29 @@ router.get("/checkout/2/fondy", async (ctx) => {
 			firstName   : ctx.request.query["firstName"] || "",
 			lastName    : ctx.request.query["lastName"] || "",
 			landing     : ctx.request.query["landing"] || ""
+		});
+	} else {
+		ctx.body = "Some of required fields are undefined";
+	}
+});
+
+router.get("/checkout/2/fondy/currencies", async (ctx) => {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+		await ctx.render("pages/client/checkout/step2_fondy_currencies", {
+			productName : ctx.request.query["productName"] || "",
+			email       : ctx.request.query["email"] || "",
+			productPrice: ctx.request.query["productPrice"] || "",
+			currency    : ctx.request.query["currency"] || "",
+			// redirectURL : ctx.request.query["redirectURL"] || "",
+			merchantID  : ctx.request.query["merchantID"] || "",
+			salesOrderID: ctx.request.query["salesOrderID"] || "",
+			firstName   : ctx.request.query["firstName"] || "",
+			lastName    : ctx.request.query["lastName"] || "",
+			landing     : ctx.request.query["landing"] || "",
+			merchantUSD : merchantUSD,
+			merchantEUR : merchantEUR,
+			merchantUAH : merchantUAH,
+			merchantRUB : merchantRUB
 		});
 	} else {
 		ctx.body = "Some of required fields are undefined";

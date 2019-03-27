@@ -191,33 +191,7 @@ html(lang='ru-RU')
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
 	function payFondy() {
-		$("#preloader").show();
-
-		var data = {
-			Email             : "#{email}",
-			salesOrderID      : "#{salesOrderID}",
-			productName       : "#{productName}",
-			productPrice      : "#{productPrice}",
-			currency          : "#{currency.toUpperCase()}",
-			redirectURL       : "#{redirectURL}",
-			paymentDescription: "Оплата продукта \"#{productName}\"",
-			merchantID        : "#{merchantID}" || null
-		};
-
-		axios({
-			method: "post",
-			url   : "/fondy/payment",
-			data  : data
-		})
-			.then(function (response) {
-				$("#preloader").hide();
-
-				if (response.data.result && response.data.link) {
-					window.location = response.data.link;
-				} else if (response.data.error) {
-					console.error(response.data.error);
-				}
-			});
+		window.location = "/checkout/2/fondy/currencies?email=#{email}&salesOrderID=#{salesOrderID}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}";
 	}
 
 	function payPayPal() {
