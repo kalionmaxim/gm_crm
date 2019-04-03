@@ -255,12 +255,12 @@ script.
 
 			if (response && response.data) {
 				if (response.data.contactID) {
-					setCookie("contactID", null, new Date());
+					setCookie("contactID", null, -1);
 					setCookie("contactID", response.data.contactID, 365);
 				}
 
 				if (response.data.dealID) {
-					setCookie("dealID", null, new Date());
+					setCookie("dealID", null, -1);
 					setCookie("dealID", response.data.dealID, 365);
 				}
 			}
