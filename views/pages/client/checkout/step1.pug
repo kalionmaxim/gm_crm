@@ -254,14 +254,12 @@ script.
 			$("#preloader").hide();
 
 			if (response && response.data) {
-				if (response.data.contactID) {
-					setCookie("contactID", null, -1);
+				if (response.data.contactID && !getCookie("contactID")) {
 					setCookie("contactID", response.data.contactID, 365);
 				}
 
 				if (response.data.dealID) {
-					setCookie("dealID", null, -1);
-					setCookie("dealID", response.data.dealID, 365);
+					setCookie("dealIDPay", response.data.dealID, 365);
 				}
 			}
 
