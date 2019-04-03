@@ -237,7 +237,7 @@ html(lang='ru-RU')
 
 							var data = {
 								Email             : "#{email}",
-								salesOrderID      : "#{salesOrderID}",
+								salesOrderID      : salesOrderID || null,
 								productName       : "#{productName}",
 								productPrice      : "#{productPrice}",
 								currency          : "#{currency.toUpperCase()}",
