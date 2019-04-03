@@ -15,7 +15,18 @@ html(lang='ru-RU')
 	body
 		div Сейчас Вы будете переадресованы на страницу оплаты...
 
-		script(src='/js/common.js')
+		script.
+			function getCookie(cname) {
+				var name = cname + "=";
+				var ca = document.cookie.split(";");
+				for (var i = 0; i < ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0) == " ") c = c.substring(1);
+					if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+				}
+				return "";
+			}
+
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 		script.
 			if ("#{salesOrderID}") {
