@@ -253,6 +253,16 @@ script.
 		}).then(function (response) {
 			$("#preloader").hide();
 
+			if (response && response.data) {
+				if (response.data.contactID) {
+					setCookie("contactID", response.data.contactID, 365);
+				}
+
+				if (response.data.dealID) {
+					setCookie("dealID", response.data.dealID, 365);
+				}
+			}
+
 			var url = `/checkout/2?email=${document.getElementById("email").value}&firstName=${document.getElementById("name").value}&phone=${document.getElementById("phone").value}&productName=#{productName}&productPrice=#{productPrice}&productID=#{productID}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
 			if ("#{landing}" === "true") {
 				url += "&landing=true";
@@ -263,45 +273,6 @@ script.
 			}
 
 			window.location = url;
-
-			// if (response.data.result) {
-			// 	var dealID = response.data.dealID || null;
-			// 	contactID = response.data.contactID || contactID;
-			//
-			// 	var data2 = {
-			// 		"First_Name"  : document.getElementById("name").value,
-			// 		"Email"       : document.getElementById("email").value,
-			// 		"Phone"       : document.getElementById("phone").value,
-			// 		"productName" : "#{productName}",
-			// 		"productID"   : "#{productID}",
-			// 		"productPrice": "#{productPrice}",
-			// 		"currency"    : "#{currency}",
-			// 		"contactID"   : contactID,
-			// 		"dealID"      : dealID
-			// 	};
-			//
-			// 	axios({
-			// 		method: "post",
-			// 		url   : "/sales_order",
-			// 		data  : data2
-			// 	})
-			// 		.then(function (response) {
-			// 			var salesOrderID = response.data.salesOrderID;
-			//
-			// 			$("#preloader").hide();
-			//
-			// 			var url = `/checkout/2?email=${document.getElementById("email").value}&salesOrderID=${salesOrderID}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
-			// 			if ("#{landing}" === "true") {
-			// 				url += "&landing=true";
-			// 			}
-			//
-			// 			if ("#{salesOrderID}") {
-			// 				url += "&salesOrderID=#{salesOrderID}";
-			// 			}
-			//
-			// 			window.location = url;
-			// 		});
-			// }
 		});
 	}
 
