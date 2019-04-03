@@ -17,27 +17,78 @@ html(lang='ru-RU')
 
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 		script.
-			var data = {
-				Email             : "#{email}",
-				salesOrderID      : "#{salesOrderID}",
-				productName       : "#{productName}",
-				productPrice      : "#{productPrice}",
-				currency          : "#{currency.toUpperCase()}",
-				paymentDescription: "Оплата продукта \"#{productName}\"",
-				redirectURL       : "#{redirectURL}" || null
-			};
+			if ("#{salesOrderID}") {
+				var data = {
+					Email             : "#{email}",
+					salesOrderID      : "#{salesOrderID}",
+					productName       : "#{productName}",
+					productPrice      : "#{productPrice}",
+					currency          : "#{currency.toUpperCase()}",
+					paymentDescription: "Оплата продукта \"#{productName}\"",
+					redirectURL       : "#{redirectURL}" || null
+				};
 
-			axios({
-				method: "post",
-				// url   : "http://localhost:3001/paypal/payment",
-				url   : "/paypal/payment",
-				data  : data
-			})
-				.then(function (response) {
-					if (response.data.result && response.data.link) {
-						// console.log(response.data.link);
-						window.location = response.data.link;
-					} else if (response.data.error) {
-						console.error(response.data.error);
-					}
-				});
+				axios({
+					method: "post",
+					// url   : "http://localhost:3001/paypal/payment",
+					url   : "/paypal/payment",
+					data  : data
+				})
+					.then(function (response) {
+						if (response.data.result && response.data.link) {
+							// console.log(response.data.link);
+							window.location = response.data.link;
+						} else if (response.data.error) {
+							console.error(response.data.error);
+						}
+					});
+			} else {
+				var dealID = getCookie("dealID") || null;
+				var contactID = getCookie("contactID") || null;
+
+				var data2 = {
+					"First_Name"  : "#{firstName}",
+					"Email"       : "#{email}",
+					"Phone"       : "#{phone}",
+					"productName" : "#{productName}",
+					"productID"   : "#{productID}",
+					"productPrice": "#{productPrice}",
+					"currency"    : "#{currency}",
+					"contactID"   : contactID,
+					"dealID"      : dealID
+				};
+
+				axios({
+					method: "post",
+					url   : "/sales_order",
+					data  : data2
+				})
+					.then(function (response) {
+						var salesOrderID = response.data.salesOrderID;
+
+						var data = {
+							Email             : "#{email}",
+							salesOrderID      : salesOrderID || null,
+							productName       : "#{productName}",
+							productPrice      : "#{productPrice}",
+							currency          : "#{currency.toUpperCase()}",
+							paymentDescription: "Оплата продукта \"#{productName}\"",
+							redirectURL       : "#{redirectURL}" || null
+						};
+
+						axios({
+							method: "post",
+							// url   : "http://localhost:3001/paypal/payment",
+							url   : "/paypal/payment",
+							data  : data
+						})
+							.then(function (response) {
+								if (response.data.result && response.data.link) {
+									// console.log(response.data.link);
+									window.location = response.data.link;
+								} else if (response.data.error) {
+									console.error(response.data.error);
+								}
+							});
+					});
+			}

@@ -29,13 +29,14 @@ router.get("/checkout/1", async (ctx) => {
 });
 
 router.get("/checkout/2", async (ctx) => {
-	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 		await ctx.render("pages/client/checkout/step2", {
 			productName : ctx.request.query["productName"] || "",
+			productID   : ctx.request.query["productID"] || "",
 			email       : ctx.request.query["email"] || "",
+			phone       : ctx.request.query["phone"] || "",
 			productPrice: ctx.request.query["productPrice"] || "",
 			currency    : ctx.request.query["currency"] || "",
-			// redirectURL : ctx.request.query["redirectURL"] || "",
 			merchantID  : ctx.request.query["merchantID"] || "",
 			salesOrderID: ctx.request.query["salesOrderID"] || "",
 			firstName   : ctx.request.query["firstName"] || "",
@@ -48,10 +49,12 @@ router.get("/checkout/2", async (ctx) => {
 });
 
 router.get("/checkout/2/fondy", async (ctx) => {
-	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 		await ctx.render("pages/client/checkout/step2_fondy", {
 			productName : ctx.request.query["productName"] || "",
+			productID   : ctx.request.query["productID"] || "",
 			email       : ctx.request.query["email"] || "",
+			phone       : ctx.request.query["phone"] || "",
 			productPrice: ctx.request.query["productPrice"] || "",
 			currency    : ctx.request.query["currency"] || "",
 			// redirectURL : ctx.request.query["redirectURL"] || "",
@@ -67,11 +70,13 @@ router.get("/checkout/2/fondy", async (ctx) => {
 });
 
 router.get("/checkout/2/fondy/currencies", async (ctx) => {
-	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 		await ctx.render("pages/client/checkout/step2_fondy_currencies", {
 			productName : ctx.request.query["productName"] || "",
 			email       : ctx.request.query["email"] || "",
+			phone       : ctx.request.query["phone"] || "",
 			productPrice: ctx.request.query["productPrice"] || "",
+			productID   : ctx.request.query["productID"] || "",
 			currency    : ctx.request.query["currency"] || "",
 			// redirectURL : ctx.request.query["redirectURL"] || "",
 			merchantID  : ctx.request.query["merchantID"] || "",
@@ -90,11 +95,13 @@ router.get("/checkout/2/fondy/currencies", async (ctx) => {
 });
 
 router.get("/checkout/2/paypal", async (ctx) => {
-	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"] && ctx.request.query["salesOrderID"]) {
+	if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 		await ctx.render("pages/client/checkout/step2_paypal", {
 			productName : ctx.request.query["productName"] || "",
 			email       : ctx.request.query["email"] || "",
+			phone       : ctx.request.query["phone"] || "",
 			productPrice: ctx.request.query["productPrice"] || "",
+			productID   : ctx.request.query["productID"] || "",
 			currency    : ctx.request.query["currency"] || "",
 			// redirectURL : ctx.request.query["redirectURL"] || "",
 			merchantID  : ctx.request.query["merchantID"] || "",
