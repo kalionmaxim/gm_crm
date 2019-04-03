@@ -191,7 +191,7 @@ html(lang='ru-RU')
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
 	function payFondy() {
-		var url = "/checkout/2/fondy/currencies?email=#{email}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
+		var url = "/checkout/2/fondy/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
 		if ("#{salesOrderID}") {
 			url += "&salesOrderID=#{salesOrderID}";
 		}
