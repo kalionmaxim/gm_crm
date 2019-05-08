@@ -1,0 +1,80 @@
+h2 Покупка "Test" на сумму 3000 грн
+form#form
+	label(for="name") Имя:&nbsp;
+	input#name(name="name" placeholder="Ваше полное имя" type="text" required=true)
+	br
+	label(for="email") Email:&nbsp;
+	input#email(name="email" placeholder="Ваш основной email" type="email" required=true)
+	br
+	label(for="phone") Телефон:&nbsp;
+	input#phone(name="phone" placeholder="+380931234567" type="text" required=true)
+	br
+	//label(for="name") Количество частей для оплаты:&nbsp;
+	//select#parts(name="parts")
+		option(value="3") 3
+		option(value="5") 5
+		option(value="7") 7
+		option(value="10") 10
+	//br
+button(type="button" onclick="submit();") Оплатить
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
+script.
+	function submit() {
+		var phone = document.getElementById("phone").value;
+		var phoneRegexp = new RegExp("\\+380\\d{9}");
+
+		if (phoneRegexp.test(phone)) {
+			//Validate monobank client
+			axios({
+				method: "post",
+				url   : "/monobank/validatePhone",
+				data  : { "phone": phone }
+			})
+				.then(function (response) {
+					if (response.data && response.data.result && response.data.data) {
+						if (response.data.data.found) {
+							var name = document.getElementById("name").value;
+							var email = document.getElementById("email").value;
+							// var parts = document.getElementById("parts").value;
+
+							//create order
+							axios({
+								method: "post",
+								url   : "/monobank/order",
+								data  : {
+									"name" : name,
+									"email": email,
+									"phone": phone,
+									// "parts": parts
+								}
+							})
+								.then(function (response) {
+									if (response && response.data && response.data.result && response.data.data) {
+										//confirm order
+										axios({
+											method: "post",
+											url   : "/monobank/confirm",
+											data  : {
+												"orderID": response.data.data.order_id
+											}
+										})
+											.then(function (response) {
+												console.log(response);
+												window.location = "/monobank/success";
+											});
+									} else {
+										alert("Unknown error");
+									}
+								});
+						} else {
+							alert("Вы не являетесь клиентом Monobank");
+						}
+					} else {
+						alert("Не удалось проверить существование номера телефона");
+					}
+				});
+		} else {
+			alert("Формат телефона должен быть +380XXXXXXXXX");
+		}
+	}

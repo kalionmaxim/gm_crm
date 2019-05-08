@@ -4,6 +4,7 @@ const router = new Router();
 const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
+const Monobank = require("../lib/monobank");
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -377,6 +378,60 @@ router.get("/paypal/process", async (ctx) => {
 	} else {
 		ctx.status = 400;
 	}
+});
+
+router.get("/monobank", async (ctx) => {
+	await ctx.render("pages/client/monobank");
+});
+
+router.post("/monobank/validatePhone", async (ctx) => {
+	ctx.body = await Monobank.validateClient(ctx.request.body.phone);
+});
+
+router.post("/monobank/order", async (ctx) => {
+	const date = new Date();
+	const year = date.getFullYear();
+	const month = ((date.getMonth() + 1) < 10) ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString();
+	const day = (date.getMonth() < 10) ? "0" + date.getMonth().toString() : date.getMonth().toString();
+	let dateStr = year + "-" + month + "-" + day;
+
+	const data = {
+		client_phone      : ctx.request.body.phone,
+		total_sum         : 3000,
+		invoice           : {
+			date  : dateStr,
+			source: "INTERNET"
+		},
+		available_programs: [{
+			available_parts_count: [10],
+			type                 : "payment_installments"
+		}],
+		products          : [{
+			name : "Test",
+			count: 1,
+			sum  : 3000
+		}],
+		result_callback   : config.get("url") + "monobank/callback"
+	};
+
+	ctx.body = await Monobank.createOrder(data);
+});
+
+router.post("/monobank/confirm", async (ctx) => {
+	ctx.body = await Monobank.confirmDelivery(ctx.request.body.orderID);
+});
+
+router.post("/monobank/callback", async (ctx) => {
+	await Monobank.processCallback(ctx.request.body);
+	ctx.status = 200;
+});
+
+router.get("/monobank/success", async (ctx) => {
+	await ctx.render("pages/client/monobank-success");
+});
+
+router.get("/monobank/failure", async (ctx) => {
+	await ctx.render("pages/client/monobank-failure");
 });
 
 /*router.get("/yandex/form", async (ctx) => {

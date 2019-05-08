@@ -52,6 +52,12 @@
         "maxLogSize": "1024000",
         "filename": "logs/yandex.log",
         "category": "yandex-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/mono.log",
+        "category": "mono-logger"
       }
     ]
   },
@@ -72,5 +78,10 @@
     "eur": "1396424",
     "uah": "1396424",
     "rub": "1396424"
+  },
+  "monobank": {
+    "url": "https://u2-demo.ftband.com/",
+    "store_id": "test_store_with_confirm",
+    "store_secret": "secret_98765432--123-123"
   }
 }
