@@ -422,6 +422,7 @@ router.post("/monobank/confirm", async (ctx) => {
 });
 
 router.post("/monobank/return", async (ctx) => {
+	console.log("BODY:", ctx.request.body);
 	ctx.body = await Monobank.returnOrder(ctx.request.body);
 });
 
