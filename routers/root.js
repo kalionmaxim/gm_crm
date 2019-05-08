@@ -397,7 +397,7 @@ router.post("/monobank/order", async (ctx) => {
 
 	const data = {
 		client_phone      : ctx.request.body.phone,
-		total_sum         : 3000,
+		total_sum         : 3000.00,
 		invoice           : {
 			date  : dateStr,
 			source: "INTERNET"
@@ -409,7 +409,7 @@ router.post("/monobank/order", async (ctx) => {
 		products          : [{
 			name : "Test",
 			count: 1,
-			sum  : 3000
+			sum  : 3000.00
 		}],
 		result_callback   : config.get("url") + "monobank/callback"
 	};
