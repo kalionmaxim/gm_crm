@@ -421,6 +421,10 @@ router.post("/monobank/confirm", async (ctx) => {
 	ctx.body = await Monobank.confirmDelivery(ctx.request.body.orderID);
 });
 
+router.post("/monobank/return", async (ctx) => {
+	ctx.body = await Monobank.returnOrder(ctx.request.body);
+});
+
 router.post("/monobank/callback", async (ctx) => {
 	await Monobank.processCallback(ctx.request.body);
 	ctx.status = 200;
