@@ -1,0 +1,180 @@
+.btn-red {
+ display: block;
+ background-color: $color-red;
+ color: $color-mercury;
+ font-family: Circe, sans-serif;
+ font-size: 15px;
+ font-weight: 700;
+ line-height: 40px;
+ text-transform: uppercase;
+ text-align: center;
+ letter-spacing: 3.3px;
+ padding: 10px 72px;
+ transition: 0.5s;
+ @include mobile {
+  font-size: 14px;
+  line-height: 23px;
+  letter-spacing: 3.08px;
+  padding: 14px 30px;
+ }
+ &:hover {
+  transform: scale(1.02);
+ }
+
+ &.btn-red--md {
+  font-size: 14px;
+  line-height: 31px;
+  letter-spacing: 3.08px;
+  padding: 10px 44px;
+  @include mobile {
+   font-size: 13px;
+   line-height: 26px;
+   letter-spacing: 2.4px;
+   padding: 10px 25px;
+  }
+ }
+ &.btn-red--sm {
+  padding: 10px 33px;
+ }
+ &.btn-red--sm-2 {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  padding: 12px 20px;
+ }
+
+ &.btn-red--disabled {
+  color: $color-white;
+  background-color: $color-alto-2;
+ }
+
+ &.btn-red--white {
+  background: $color-white;
+  color: $color-black;
+ }
+ &.btn-red--white-2 {
+  border: 2px solid $color-black;
+  background: $color-white;
+  color: $color-black;
+ }
+ &.btn-red--transparent {
+  background: transparent;
+  color: $color-white;
+  border: 1px solid $color-white;
+ }
+}
+
+.btn {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border-radius: 5px;
+ background-color: $color-gallery-2;
+ color: $color-black;
+ font-family: Circe, sans-serif;
+ font-size: 15px;
+ font-weight: 700;
+ line-height: 23px;
+ text-transform: uppercase;
+ text-align: center;
+ letter-spacing: 1.5px;
+ padding: 5px 20px;
+ &:hover {
+  transform: scale(1.02);
+ }
+
+ &.btn--2 {
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 1.2px;
+  padding: 15px 20px;
+ }
+
+ &.btn--transparent {
+  border: 1px solid #282828;
+  background: none;
+ }
+
+ svg, img {
+  display: block;
+  &:first-child {
+   margin-right: 10px;
+  }
+  &:last-child {
+   margin-left: 10px;
+  }
+ }
+}
+
+.btn-red-2 {
+ background: #ff0000;
+ color: #ffffff;
+ font-family: Roboto, sans-serif;
+ font-size: 18px;
+ line-height: 24px;
+ padding: 20px 47px;
+ @include mobile {
+  padding: 16px 30px 16px 70px;
+ }
+
+ &.btn-red-2--startup {
+  background: url(../../img/client/common/rocket-icon-white.png) no-repeat center left 33px, #ff0000;
+  padding: 20px 47px 20px 83px;
+  @include mobile {
+   background-position: center left 22px;
+   padding: 16px 30px 16px 70px;
+  }
+ }
+}
+
+.btn-round {
+ background: transparent;
+ font-family: Oswald, sans-serif;
+ color: rgba(26, 26, 26, 0.74);
+ font-size: 14px;
+ line-height: 15px;
+ letter-spacing: 0.7px;
+ border-radius: 22px;
+ border: 1px solid rgba(135, 135, 135, 0.2);
+ padding: 16px 32px;
+ cursor: pointer;
+}
+
+.btn-3 {
+ border-radius: 50px;
+ background: #F9432A;
+ font-family: Geometria, sans-serif;
+ line-height: 19px;
+ font-size: 14px;
+ font-weight: 500;
+ text-align: center;
+ text-transform: uppercase;
+ color: #FFFFFF;
+ padding: 24px 55px;
+ @include mobile {
+  line-height: 16px;
+  font-size: 12px;
+  padding: 14px 15px;
+ }
+
+ &.btn-3--transparent {
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  background: transparent;
+  color: #000000;
+ }
+}
+
+
+.btn-transparent {
+ border: 1px solid #E9E9E9;
+ font-family: Roboto, sans-serif;
+ font-size: 14px;
+ line-height: normal;
+ color: #000000;
+ padding: 12px 35px;
+ &:hover {
+  border-color: $color-red;
+  background: $color-red;
+  color: #fff;
+ }
+}

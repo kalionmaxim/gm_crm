@@ -6,6 +6,7 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "koa": "2.6.2",
     "koa-bodyparser": "4.2.1",
     "koa-convert": "1.2.0",
@@ -27,6 +28,7 @@
     "mongoose-deep-populate": "3.0.0",
     "nconf": "0.10.0",
     "node-sass-middleware": "0.11.0",
+    "passport-local": "^1.0.0",
     "path": "0.12.7",
     "paypal-rest-sdk": "1.8.1",
     "pug": "2.0.3",

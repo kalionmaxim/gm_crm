@@ -158,11 +158,11 @@ if (cluster.isMaster) {
 			ctx.status = err.status || 500;
 			if (ctx.status === 404) {
 				//Your 404.jade
-				await ctx.render("pages/error404")
+				await ctx.render("pages/error404");
 			} else {
 				eLogger.error(err);
 				//other_error jade
-				await ctx.render("pages/error500")
+				await ctx.render("pages/error500");
 			}
 		}
 	});
@@ -171,11 +171,12 @@ if (cluster.isMaster) {
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	// require("./lib/passport")(passport);
+	require("./lib/passport")(passport);
 
 	const rootRouter = require(path.join(__dirname, "routers", "root"));
-	app.use(rootRouter.routes());
-	app.use(rootRouter.allowedMethods());
+	// app.use(rootRouter.routes());
+	// app.use(rootRouter.allowedMethods());
+	rootRouter(app, passport);
 
 	// Listen to messages sent from the master. Ignore everything else.
 	process.on("message", function (message, connection) {

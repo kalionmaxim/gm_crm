@@ -1,0 +1,149 @@
+extends ../../layouts/main-admin
+
+block contents
+	// Preloader
+	.preloader
+		.cssload-speeding-wheel
+
+	#wrapper
+		// Page Content
+		#page-wrapper(style="margin: 0 0 0 0;")
+			.container-fluid
+				.row.bg-title
+					.col-lg-12.col-md-12.col-sm-12.col-xs-12
+						h4.page-title(style="text-align: center;") Авторизация
+					// /.col-lg-12
+				.row
+					.col-md-4(style="float: none; margin: 0 auto;")
+						.white-box(style="background: #3C4452;")
+							form.form-horizontal(method='post', action='/admin/login')
+								if (message)
+									.alert.alert-danger(style="background: #353c48; border-color: #424a56;")
+										h2(style="color: #91a2b4; font-weight: bold;") Ошибка:&nbsp;
+										h4.custom-alert-message(style="color: #96a2b4;")= message
+								.form-group
+									label.col-md-2.control-label Email:
+									.col-md-10
+										input#email.form-control(type='text', placeholder='Введите email адиминистратора', name='email', required='required')
+
+								.form-group
+									label.col-md-2.control-label Пароль:
+									.col-md-10
+										input#password.form-control(type='password', placeholder='Введите пароль', name='password', required='required')
+
+
+								.form-group.m-b-10
+									.col-md-offset-1.col-md-10(style="text-align:center;")
+										button.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-6(type='submit') Войти
+
+								//.form-group.m-b-0
+									.col-md-offset-1.col-md-10(style="text-align:center;")
+										a(href="/admin/forget") Забыли пароль?
+
+		//FOOTER
+		//footer.footer.text-center(style="left: 0;")
+			div.popup-alert-wrapper.edit-error-popup.error-popup.animated.shake
+				h2 Ошибка
+				div.form-errors
+			div.popup-alert-wrapper.edit-message-popup.info-popup.animated.shake
+				h2 Сообщение
+				div.form-messages
+			div.confirm-popup.popup-material__layout
+				div.popup-material
+					h2 Вопрос
+					div#confirmButtons
+						a.button.button-yes Да
+						a.button.button-no Нет
+			script.
+				function setError(text) {
+					$(".form-errors").html("<div class='alert alert-danger'><h4>" + text + "</h4></div>");
+					$('.edit-message-popup').removeClass('first-info').addClass('second-info');
+					$('.edit-error-popup').removeClass('fadeOutRight second-info').fadeIn(100).addClass('animated shake first-info');
+					setTimeout(function() {
+						$('.edit-error-popup').removeClass('shake').addClass('fadeOutRight');
+					}, 4000);
+				}
+
+				function setInfoMessage(text) {
+					$(".form-messages").html("<div class='alert alert-danger'><h4>" + text + "</h4></div>");
+					$('.edit-error-popup').removeClass('first-info').addClass('second-info');
+					$('.edit-message-popup').removeClass('fadeOutRight second-info').fadeIn(100).addClass('animated fadeInRight first-info');
+					setTimeout(function() {
+						$('.edit-message-popup').removeClass('shake').addClass('fadeOutRight');
+					}, 4000);
+				}
+
+				function Dialog(message, yesCallback, noCallback) {
+					$('.confirm-popup h2').html(message);
+					var dialog = $('.confirm-popup').fadeIn(300);
+
+					$('.button-yes').click(function() {
+						dialog.fadeOut(300);
+						yesCallback();
+						noCallback = function() {
+							return false;
+						};
+						yesCallback = function() {
+							return false;
+						}
+					});
+
+					$('.button-no').click(function() {
+						dialog.fadeOut(300);
+						noCallback();
+						yesCallback = function() {
+							return false;
+						};
+						noCallback = function() {
+							return false;
+						}
+					});
+				}
+		// /#page-wrapper
+		// /#wrapper
+
+		// jQuery
+		script(src='/plugins/bower_components/jquery/dist/jquery.min.js')
+		// Bootstrap Core JavaScript
+		script(src='/bootstrap/dist/js/bootstrap.min.js')
+		// Menu Plugin JavaScript
+		script(src='/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js')
+		// Counter js
+		script(src='/plugins/bower_components/waypoints/lib/jquery.waypoints.js')
+		script(src='/plugins/bower_components/counterup/jquery.counterup.min.js')
+		// slimscroll JavaScript
+		script(src='/js/pages/admin-material/jquery.slimscroll.js')
+		// Wave Effects
+		script(src='/js/pages/admin-material/waves.js')
+		// Custom Theme JavaScript
+		script(src='/js/pages/admin-material/custom.min.js')
+		// Style Switcher
+		script(src='/plugins/bower_components/styleswitcher/jQuery.style.switcher.js')
+
+		script.
+			//Google
+			(function (i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function () {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-81859064-1', 'auto');
+			ga('send', 'pageview');
+
+		script(src='/plugins/bower_components/datatables/jquery.dataTables.min.js')
+		//script(type='text/javascript' src='/js/pages/admin-new/admin-user-list.js')
+		// start - This is for export functionality only
+		script(src='https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')
+		script(src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js')
+		script(src='https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js')
+		script(src='https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js')
+		script(src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js')
+		script(src='https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js')

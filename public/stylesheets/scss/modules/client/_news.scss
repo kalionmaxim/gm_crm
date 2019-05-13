@@ -1,0 +1,142 @@
+#news {
+
+}
+
+.news-title {
+ display: flex;
+ align-items: center;
+ color: $color-cod-gray-3;
+ font-size: 14px;
+ line-height: 25px;
+ &:after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: $color-black-04;
+  margin-left: 10px;
+ }
+}
+
+.news {
+ display: flex;
+ align-items: flex-start;
+ margin-top: 45px;
+
+ .news__left {
+  width: 575px;
+  margin-right: 60px;
+ }
+ .news__right {
+  width: 575px;
+ }
+}
+
+.news-title {
+
+}
+
+.news-latest {
+ margin-top: 20px;
+}
+
+.news-latest-item {
+ display: block;
+ border-bottom: 1px solid $color-black-04;
+ padding-bottom: 25px;
+ margin-bottom: 35px;
+ &:hover {
+
+  .news-latest-item__title {
+   color: $color-red-2;
+  }
+ }
+ &:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+ }
+
+ .news-latest-item__thumb {
+  height: 350px;
+  background: no-repeat center / cover;
+ }
+
+ .news-latest-item__title {
+  color: $color-black;
+  font-size: 23px;
+  line-height: 27px;
+  margin-top: 30px;
+  transition: 0.5s;
+ }
+
+ .news-latest-item__date {
+  color: $color-silver-chalice;
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  margin-top: 5px;
+ }
+
+ .news-latest-item__text {
+  color: $color-black;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 25px;
+  margin-top: 15px;
+ }
+}
+
+.news-all {
+ margin-top: 20px;
+}
+
+.news-all-item {
+ display: flex;
+ align-items: flex-start;
+ border-bottom: 1px solid $color-black-04;
+ padding-bottom: 30px;
+ margin-bottom: 30px;
+ &:hover {
+
+  .news-all-item__title {
+   color: $color-red-2;
+  }
+ }
+ &:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+ }
+
+ .news-all-item__thumb {
+  width: 280px;
+  height: 170px;
+  background: no-repeat center / cover;
+  margin-right: 35px;
+ }
+
+ .news-all-item__content {
+  flex: 1;
+ }
+
+ .news-all-item__title {
+  color: $color-black;
+  font-size: 23px;
+  line-height: 27px;
+  transition: 0.5s;
+ }
+ .news-all-item__date {
+  color: $color-silver-chalice;
+  font-family: Roboto, sans-serif;
+  font-size: 13px;
+  line-height: 25px;
+  margin-top: 8px;
+ }
+ .news-all-item__text {
+  color: $color-black;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 25px;
+  margin-top: 15px;
+ }
+}

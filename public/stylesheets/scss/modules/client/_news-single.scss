@@ -1,0 +1,110 @@
+#news-single {
+
+}
+
+.news-single-date {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: $color-black;
+ font-family: Roboto, sans-serif;
+ font-size: 13px;
+ line-height: 21px;
+ margin-top: 12px;
+ &:before {
+  content: '';
+  width: 19px;
+  height: 21px;
+  background: url(../../img/client/common/calendar-icon.svg) no-repeat center / contain;
+  margin-right: 10px;
+ }
+}
+
+.news-single {
+ width: 1030px;
+ margin: 50px auto 0;
+
+ .news-single__thumb {
+  height: 515px;
+  background: no-repeat center / cover;
+ }
+ .news-single__thumb-title-layout {
+  display: flex;
+  justify-content: flex-start;
+ }
+ .news-single__thumb-title {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid $color-black-04;
+  color: $color-black;
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 31px;
+  padding-bottom: 10px;
+  margin-top: 13px;
+  &:before {
+   content: '';
+   width: 15px;
+   height: 15px;
+   background: url(../../img/client/news-single/red-triangle.svg) no-repeat center / contain;
+   margin: 6px 15px 0 0;
+  }
+ }
+
+ .news-single__content {
+  padding: 50px 180px 0 105px;
+
+  p {
+   color: $color-black;
+   font-family: Roboto, sans-serif;
+   font-size: 17px;
+   line-height: 31px;
+   margin: 35px 0;
+  }
+  h1, h2 {
+   color: $color-black;
+   font-size: 28px;
+   font-weight: 500;
+   line-height: 35px;
+   letter-spacing: -0.56px;
+   margin: 60px 0 35px;
+  }
+  h3, h4, h5, h6 {
+   margin: 35px 0;
+  }
+  h3 {
+   color: $color-black;
+   font-size: 22px;
+   line-height: 27px;
+  }
+  h4 {
+   color: $color-black;
+   font-size: 17px;
+   line-height: 22px;
+  }
+  h5 {
+   color: $color-black;
+   font-size: 15px;
+   line-height: 20px;
+  }
+  h6 {
+   color: $color-black;
+   font-size: 13px;
+   line-height: 20px;
+  }
+
+  .news-single__content-quote {
+   border-top: 1px solid $color-black-01;
+   border-bottom: 1px solid $color-black-01;
+   color: $color-bright-gray-055;
+   font-size: 21px;
+   line-height: 31px;
+   font-style: italic;
+   text-align: center;
+   letter-spacing: 0.53px;
+   padding: 35px 40px 30px;
+   margin: 65px 0 60px;
+  }
+ }
+}

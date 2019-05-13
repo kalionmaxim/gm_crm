@@ -1,0 +1,84 @@
+@mixin clearfix() {
+ &:after {
+  content: '';
+  display: table;
+  clear: both;
+ }
+}
+
+@mixin media($min-width: false, $max-width: false) {
+ @if $min-width and $max-width {
+  @media screen and (min-width: $min-width) and (max-width: $max-width) {
+   @content;
+  }
+ } @else if $min-width and not $max-width {
+  @media screen and (min-width: $min-width) {
+   @content;
+  }
+ } @else if $max-width and not $min-width {
+  @media screen and (max-width: $max-width) {
+   @content;
+  }
+ }
+}
+
+;
+
+@mixin gradient($from-color, $to-color) {
+ background-color: mix($from-color, $to-color); /* Fallback */
+ background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from-color), to($to-color));
+ background-image: -webkit-linear-gradient(top, $from-color, $to-color);
+ background-image: -moz-linear-gradient(top, $from-color, $to-color);
+ background-image: -ms-linear-gradient(top, $from-color, $to-color);
+ background-image: -o-linear-gradient(top, $from-color, $to-color);
+ -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='$from-color', EndColorStr='$to-color')";
+}
+
+@mixin laptop {
+ @media (max-width: #{$lg}) and (min-width: #{$md}) {
+  @content;
+ }
+}
+
+@mixin tablet {
+ @media (max-width: #{$md}) and (min-width: #{$sm}) {
+  @content;
+ }
+}
+
+//@mixin laptop {
+// @media (max-width: #{$lg}) {
+//  @content;
+// }
+//}
+//
+//@mixin tablet {
+// @media (max-width: 0) and (min-width: #{$sm}) {
+//  @content;
+// }
+//}
+
+@mixin mobile {
+ @media (max-width: #{$sm}) {
+  @content;
+ }
+}
+
+@mixin mobile-mini {
+ @media (max-width: #{$mc}) {
+  @content;
+ }
+}
+
+@mixin tablet-mobile {
+ @media (max-width: #{$md}) {
+  @content;
+ }
+}
+
+//@mixin tablet-mobile {
+// @media (max-width: 0) {
+//  @content;
+// }
+//}
+

@@ -1,0 +1,145 @@
+.popup-alert-wrapper {
+  display: none;
+  width: 320px;
+  height: auto;
+  min-height: 96px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 3px 0px rgba(191, 205, 222, 0.75);
+  border: 1px solid #000000;
+  padding: 25px 30px 25px 80px;
+  margin: 0 0 20px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  background-position: top 30px left 20px;
+  z-index: 1200;
+  //@include clearfix;
+
+  > h2 {
+    font-family: Lato, sans-serif;
+    font-weight: 700;
+    color: #112236;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .alert.alert-danger {
+    background-color: #ffffff;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: #112236;
+    h4 {
+      font-family: Lato, sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 500;
+      text-align: left;
+    }
+  }
+}
+
+.error-popup.popup-alert-wrapper {
+  background-image: url('../../img/icons/error-icon.png');
+}
+.info-popup.popup-alert-wrapper {
+  background-image: url('../../img/icons/info-icon.png');
+}
+
+.popup-material__layout {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+
+  .popup-material {
+    width: 750px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.22);
+    padding: 15px;
+    margin: 5% auto 0;
+    position: relative;
+    //@include clearfix;
+
+    .popup-material__close {
+      width: 13px;
+      height: 13px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      background: url(../../../img/icons/close-material.png) no-repeat center;
+      &:hover {opacity: 0.8;}
+    }
+  }
+}
+
+#confirmButtons {
+  padding: 15px 0 25px;
+  text-align: center;
+  .button {
+    display: inline-block;
+    color: white;
+    position: relative;
+    height: 33px;
+    font: 17px/33px 'Cuprum', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    margin-right: 15px;
+    padding: 0 35px 0 40px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+  &.button:last-child {
+    margin-right: 0;
+  }
+  .button span {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 5px;
+    height: 33px;
+  }
+  .button-yes {
+    background-color: #707070;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+  .button-no {
+    background-color: #5889a2;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+.confirm-popup {
+  display: none;
+  .popup-material {
+    width: 560px;
+    margin: 3% auto 0;
+    position: relative;
+    padding: 20px;
+    border-radius: 4px;
+    > h2 {
+      display: block;
+      font-family: Lato, sans-serif;
+      color: #112236;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 26px;
+      margin: 15px 0 20px;
+      text-align: center;
+    }
+  }
+}

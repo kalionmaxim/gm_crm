@@ -1,0 +1,140 @@
+#groups {
+
+}
+
+.groups {
+ display: flex;
+ flex-wrap: wrap;
+ margin-top: 70px;
+}
+
+.groups-item {
+ width: 610px;
+ display: flex;
+ flex-direction: column;
+ background-color: #F9F9F9;
+ padding: 40px 30px;
+ margin: 0 20px 20px 0;
+ @include tablet-mobile {
+  margin: 0 auto 20px;
+ }
+ @include mobile {
+  width: 100%;
+  padding: 30px 20px;
+ }
+ &:nth-child(even) {
+  margin-right: 0;
+ }
+
+ .groups-item__main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  @include mobile {
+   flex-direction: column;
+   align-items: center;
+  }
+ }
+
+ .groups-item__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+  @include mobile {
+   flex-direction: column;
+   margin-top: 20px;
+  }
+ }
+
+ .groups-item__thumb {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: no-repeat center / cover, #ccc;
+  margin-right: 30px;
+  @include mobile {
+   margin: 0 0 20px;
+  }
+ }
+
+ .groups-item__content {
+  flex: 1;
+  padding-top: 10px;
+ }
+
+ .groups-item__title {
+  display: block;
+  color: #000;
+  font-family: Oswald, sans-serif;
+  font-size: 23px;
+  font-weight: 400;
+  text-transform: uppercase;
+  @include mobile {
+   font-size: 20px;
+   text-align: center;
+  }
+ }
+ .groups-item__text {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  margin-top: 20px;
+ }
+
+ .groups-item__users {
+  background: url(../../img/client/common/user-icon.svg) no-repeat center left;
+  font-size: 18px;
+  padding-left: 25px;
+  @include mobile {
+   margin-bottom: 20px;
+  }
+ }
+
+ .groups-item__btn-telegram {
+  margin-top: 20px;
+ }
+
+ &.groups-item--big {
+  width: 100%;
+  flex-direction: row;
+  @include tablet-mobile {
+   flex-direction: column;
+  }
+
+  .groups-item__thumb {
+   width: 240px;
+   height: 240px;
+   margin-right: 50px;
+   @include tablet-mobile {
+    width: 180px;
+    height: 180px;
+   }
+   @include tablet {
+    margin-right: 30px;
+   }
+   @include mobile {
+    margin: 0 0 20px;
+   }
+  }
+
+  .groups-item__text {
+   margin: 20px 0;
+  }
+
+  .groups-item__footer {
+   flex-direction: column;
+   align-items: stretch;
+   justify-content: flex-start;
+   margin: 0 0 0 50px;
+   @include tablet {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0 0;
+   }
+   @include mobile {
+    margin: 20px auto 0;
+   }
+  }
+ }
+}

@@ -1,0 +1,250 @@
+#excursion {
+ padding-bottom: 0;
+}
+
+.excursion {
+ padding-top: 113px;
+ margin-top: 45px;
+ position: relative;
+}
+
+.excursion-banner {
+ width: 100%;
+ height: 560px;
+ background: no-repeat center / cover, $color-tuna;
+ position: absolute;
+ top: 0;
+ left: 0;
+ z-index: 0;
+}
+
+.excursion-block {
+ display: flex;
+ background: $color-athens-gray-3;
+ padding: 65px 280px 95px 95px;
+ position: relative;
+
+ .excursion-block__left {
+  width: 263px;
+  margin-right: 95px;
+ }
+ .excursion-block__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+ }
+
+ .excursion-block__date {
+  width: 263px;
+  height: 111px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(../../img/client/excursion/excursion-block-date-border.svg) no-repeat center / contain;
+  color: $color-red-2;
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 28px;
+  padding-right: 20px;
+ }
+
+ .excursion-block__title {
+  font-size: 36px;
+  line-height: 44px;
+  margin-top: 85px;
+ }
+
+ .excursion-block__logo {
+  width: 100%;
+  height: 135px;
+  background: no-repeat center left / contain;
+ }
+
+ .excursion-block__about {
+  margin-top: 60px;
+
+  &, & p {
+   font-family: Roboto, sans-serif;
+   font-size: 17px;
+   line-height: 28px;
+  }
+
+  ul {
+   @extend .check-list;
+   margin-top: 50px;
+  }
+ }
+
+ .excursion-block__btn {
+  margin-top: 50px;
+ }
+}
+
+.excursion-section {
+ display: flex;
+ align-items: flex-start;
+ justify-content: space-between;
+ margin-top: 72px;
+}
+
+.excursion-form-block {
+ width: 510px;
+ box-shadow: 0 4px 42px 15px rgba(176, 176, 176, 0.13);
+ background: $color-white;
+ padding: 72px 100px;
+ margin-right: 130px;
+
+ .excursion-form-block__title {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 24px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: -0.48px;
+ }
+}
+
+.excursion-form {
+ margin-top: 45px;
+}
+
+.excursion-about {
+ flex: 1;
+ padding-top: 15px;
+
+ .excursion-about__title {
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 64px;
+  text-transform: uppercase;
+  letter-spacing: -0.72px;
+  position: relative;
+  &:before {
+   content: '';
+   width: 23px;
+   height: 64px;
+   background-color: $color-red;
+   position: absolute;
+   top: 0;
+   left: 21px;
+   z-index: -1;
+  }
+ }
+ .excursion-about__text {
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 28px;
+  margin-top: 60px;
+ }
+}
+
+.excursion-program {
+ border: 40px solid $color-athens-gray-3;
+ padding: 135px 190px 80px 160px;
+ margin-top: 100px;
+ position: relative;
+
+ .excursion-program__title {
+  width: 454px;
+  height: 40px;
+  background: $color-white;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 40px;
+  text-transform: uppercase;
+  letter-spacing: -0.72px;
+  text-align: center;
+  position: absolute;
+  top: -40px;
+  left: calc(50% - 227px);
+ }
+}
+
+.excursion-program-list {
+
+}
+
+.excursion-program-item {
+ display: flex;
+ margin-bottom: 60px;
+ &:last-child {
+  margin-bottom: 0;
+
+  .excursion-program-item__right {
+   border-bottom: none;
+   padding: 0;
+  }
+ }
+
+ .excursion-program-item__left {
+  width: 150px;
+  margin-right: 100px;
+ }
+ .excursion-program-item__right {
+  border-bottom: 1px solid $color-black;
+  flex: 1;
+  padding-bottom: 55px;
+ }
+
+ .excursion-program-item__time {
+  background: url(../../img/client/common/check-icon-2.svg) no-repeat center left;
+  color: $color-red;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 32px;
+  text-transform: uppercase;
+  letter-spacing: -0.48px;
+  padding-left: 30px;
+ }
+ .excursion-program-item__author {
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-top: 30px;
+ }
+ .excursion-program-item__niche {
+  font-family: Roboto, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 18px;
+  margin-top: 12px;
+ }
+
+ .excursion-program-item__title {
+  font-size: 23px;
+  line-height: 32px;
+ }
+ .excursion-program-item__text {
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 28px;
+  margin-top: 20px;
+ }
+}
+
+.excursion-program-btn {
+ width: 350px;
+ margin: 85px auto 0;
+}
+
+.excursion-place {
+ border-top: 1px solid $color-gallery-3;
+ padding-top: 60px;
+ margin-top: 30px;
+
+ .excursion-place__title {
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 31px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: -0.72px;
+ }
+}
+
+.excursion-map {
+ height: 570px;
+ margin-top: 57px;
+}

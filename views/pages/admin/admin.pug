@@ -1,0 +1,206 @@
+extends ../../layouts/main-admin
+
+block contents
+  // Preloader
+  .preloader
+    .cssload-speeding-wheel
+
+  #wrapper
+    include ../../partials/admin/header
+    include ../../partials/admin/aside-menu
+
+    // Page Content
+    #page-wrapper
+      .container-fluid
+        .row.bg-title
+          .col-lg-3.col-md-4.col-sm-4.col-xs-12
+            h4.page-title Панель управления
+          .col-lg-9.col-sm-8.col-md-8.col-xs-12
+            ol.breadcrumb
+              li
+                a(href='#') Главная
+              li.active Панель управления
+          // /.col-lg-12
+        // .row
+        // .row
+        .row
+          .col-lg-6.col-sm-12.col-xs-12
+            .row
+              .col-lg-6.col-sm-6.col-xs-12
+                .white-box
+                  h3.box-title Новые пользователи
+                  ul.list-inline.two-part
+                    li
+                      i.icon-people.text-info
+                    li.text-right
+                      span.counter 23
+              .col-lg-6.col-sm-6.col-xs-12
+                .white-box
+                  h3.box-title Новые чек-листы
+                  ul.list-inline.two-part
+                    li
+                      i.icon-folder.text-purple
+                    li.text-right
+                      span.counter 169
+              .col-lg-6.col-sm-6.col-xs-12
+                .white-box
+                  h3.box-title Новые мастер-классы
+                  ul.list-inline.two-part
+                    li
+                      i.icon-folder-alt.text-danger
+                    li.text-right
+                      span 311
+              .col-lg-6.col-sm-6.col-xs-12
+                .white-box
+                  h3.box-title Новые оплаты
+                  ul.list-inline.two-part
+                    li
+                      i.ti-wallet.text-success
+                    li.text-right
+                      span 117
+          .col-lg-6.col-sm-12.col-xs-12
+            .news-slide.m-b-15
+              .vcarousel.slide
+                // Carousel items
+                .carousel-inner
+                  .active.item
+                    .overlaybg
+                      img(src='../plugins/images/news/slide1.jpg')
+                    .news-content
+                      span.label.label-danger.label-rounded Primary
+                      h2
+                        | It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                      a(href='#') Read More
+                  .item
+                    .overlaybg
+                      img(src='../plugins/images/news/slide1.jpg')
+                    .news-content
+                      span.label.label-primary.label-rounded Primary
+                      h2
+                        | It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                      a(href='#') Read More
+                  .item
+                    .overlaybg
+                      img(src='../plugins/images/news/slide1.jpg')
+                    .news-content
+                      span.label.label-success.label-rounded Primary
+                      h2
+                        | It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                      a(href='#') Read More
+        // /.row
+        // .right-sidebar
+        .right-sidebar
+          .slimscrollright
+            .rpanel-title
+              | Service Panel
+              span
+                i.ti-close.right-side-toggle
+            .r-panel-body
+              ul
+                li
+                  b Layout Options
+                li
+                  .checkbox.checkbox-info
+                    input#checkbox1.fxhdr(type='checkbox')
+                    label(for='checkbox1')  Fix Header
+                li
+                  .checkbox.checkbox-warning
+                    input#checkbox2.fxsdr(type='checkbox')
+                    label(for='checkbox2')  Fix Sidebar
+                li
+                  .checkbox.checkbox-success
+                    input#checkbox4.open-close(type='checkbox')
+                    label(for='checkbox4')  Toggle Sidebar
+              ul#themecolors.m-t-20
+                li
+                  b With Light sidebar
+                li
+                  a.default-theme(href='javascript:void(0)', theme='default') 1
+                li
+                  a.green-theme(href='javascript:void(0)', theme='green') 2
+                li
+                  a.yellow-theme(href='javascript:void(0)', theme='gray') 3
+                li
+                  a.blue-theme(href='javascript:void(0)', theme='blue') 4
+                li
+                  a.purple-theme(href='javascript:void(0)', theme='purple') 5
+                li
+                  a.megna-theme(href='javascript:void(0)', theme='megna') 6
+                li
+                  b With Dark sidebar
+                br
+                li
+                  a.default-dark-theme.working(href='javascript:void(0)', theme='default-dark') 7
+                li
+                  a.green-dark-theme(href='javascript:void(0)', theme='green-dark') 8
+                li
+                  a.yellow-dark-theme(href='javascript:void(0)', theme='gray-dark') 9
+                li
+                  a.blue-dark-theme(href='javascript:void(0)', theme='blue-dark') 10
+                li
+                  a.purple-dark-theme(href='javascript:void(0)', theme='purple-dark') 11
+                li
+                  a.megna-dark-theme(href='javascript:void(0)', theme='megna-dark') 12
+              ul.m-t-20.chatonline
+                li
+                  b Chat option
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/varun.jpg', alt='user-img')
+                    span
+                      | Varun Dhavan
+                      small.text-success online
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/genu.jpg', alt='user-img')
+                    span
+                      | Genelia Deshmukh
+                      small.text-warning Away
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/ritesh.jpg', alt='user-img')
+                    span
+                      | Ritesh Deshmukh
+                      small.text-danger Busy
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/arijit.jpg', alt='user-img')
+                    span
+                      | Arijit Sinh
+                      small.text-muted Offline
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/govinda.jpg', alt='user-img')
+                    span
+                      | Govinda Star
+                      small.text-success online
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/hritik.jpg', alt='user-img')
+                    span
+                      | John Abraham
+                      small.text-success online
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/john.jpg', alt='user-img')
+                    span
+                      | Hritik Roshan
+                      small.text-success online
+                li
+                  a(href='javascript:void(0)')
+                    img.img-circle(src='../plugins/images/users/pawandeep.jpg', alt='user-img')
+                    span
+                      | Pwandeep rajan
+                      small.text-success online
+        // /.right-sidebar
+      // /.container-fluid
+
+    include ../../partials/admin/footer
+
+    // Morris JavaScript
+    script(src='../plugins/bower_components/raphael/raphael-min.js')
+    script(src='../plugins/bower_components/morrisjs/morris.js')
+    script(src='../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js')
+    script(src='../plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js')
+    // Custom Theme JavaScript
+    script(src='/js/pages/admin-material/dashboard3.js')

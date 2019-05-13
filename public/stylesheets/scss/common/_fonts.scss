@@ -1,0 +1,425 @@
+/* font-family: "Oswald"; */
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-Regular.ttf");
+ src: url("../../fonts/Oswald/Oswald-Regular.ttf") format("truetype");
+ font-style: normal;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-RegularItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-RegularItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-ExtraLight.ttf");
+ src: url("../../fonts/Oswald/Oswald-ExtraLight.ttf") format("truetype");
+ font-style: normal;
+ font-weight: 200;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-ExtraLightItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-ExtraLightItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: 200;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-Light.ttf");
+ src: url("../../fonts/Oswald/Oswald-Light.ttf") format("truetype");
+ font-style: normal;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-LightItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-LightItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-Medium.ttf");
+ src: url("../../fonts/Oswald/Oswald-Medium.ttf") format("truetype");
+ font-style: normal;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-MediumItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-MediumItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-DemiBold.ttf");
+ src: url("../../fonts/Oswald/Oswald-DemiBold.ttf") format("truetype");
+ font-style: normal;
+ font-weight: 600;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-DemiBoldItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-DemiBoldItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: 600;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-Bold.ttf");
+ src: url("../../fonts/Oswald/Oswald-Bold.ttf") format("truetype");
+ font-style: normal;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-BoldItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-BoldItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-Heavy.ttf");
+ src: url("../../fonts/Oswald/Oswald-Heavy.ttf") format("truetype");
+ font-style: normal;
+ font-weight: 900;
+}
+@font-face {
+ font-family: "Oswald";
+ src: url("../../fonts/Oswald/Oswald-HeavyItalic.ttf");
+ src: url("../../fonts/Oswald/Oswald-HeavyItalic.ttf") format("truetype");
+ font-style: italic;
+ font-weight: 900;
+}
+
+/* font-family: "Circe"; */
+@font-face {
+ font-family: "Circe";
+ src: url("../../fonts/Circe/CirceRegular/Circe-Regular.ttf");
+ src: url("../../fonts/Circe/CirceRegular/Circe-Regular.ttf") format("truetype"), url("../../fonts/Circe/CirceRegular/Circe-Regular.eot") format("embedded-opentype"), url("../../fonts/Circe/CirceRegular/Circe-Regular.woff") format("woff");
+ font-style: normal;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Circe";
+ src: url("../../fonts/Circe/CirceBold/Circe-Bold.ttf");
+ src: url("../../fonts/Circe/CirceBold/Circe-Bold.ttf") format("truetype"), url("../../fonts/Circe/CirceBold/Circe-Bold.eot") format("embedded-opentype"), url("../../fonts/Circe/CirceBold/Circe-Bold.woff") format("woff");
+ font-style: normal;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Circe";
+ src: url("../../fonts/Circe/CirceExtraBold/Circe-ExtraBold.ttf");
+ src: url("../../fonts/Circe/CirceExtraBold/Circe-ExtraBold.ttf") format("truetype"), url("../../fonts/Circe/CirceExtraBold/Circe-ExtraBold.eot") format("embedded-opentype"), url("../../fonts/Circe/CirceExtraBold/Circe-ExtraBold.woff") format("woff");
+ font-style: normal;
+ font-weight: 800;
+}
+@font-face {
+ font-family: "Circe";
+ src: url("../../fonts/Circe/CirceLight/Circe-Light.ttf");
+ src: url("../../fonts/Circe/CirceLight/Circe-Light.ttf") format("truetype"), url("../../fonts/Circe/CirceLight/Circe-Light.eot") format("embedded-opentype"), url("../../fonts/Circe/CirceLight/Circe-Light.woff") format("woff");
+ font-style: normal;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Circe";
+ src: url("../../fonts/Circe/CirceExtraLight/Circe-ExtraLight.ttf");
+ src: url("../../fonts/Circe/CirceExtraLight/Circe-ExtraLight.ttf") format("truetype"), url("../../fonts/Circe/CirceExtraLight/Circe-ExtraLight.eot") format("embedded-opentype"), url("../../fonts/Circe/CirceExtraLight/Circe-ExtraLight.woff") format("woff");
+ font-style: normal;
+ font-weight: 200;
+}
+@font-face {
+ font-family: "Circe";
+ src: url("../../fonts/Circe/CirceThin/Circe-Thin.ttf");
+ src: url("../../fonts/Circe/CirceThin/Circe-Thin.ttf") format("truetype"), url("../../fonts/Circe/CirceThin/Circe-Thin.eot") format("embedded-opentype"), url("../../fonts/Circe/CirceThin/Circe-Thin.woff") format("woff");
+ font-style: normal;
+ font-weight: 100;
+}
+
+
+/* font-family: "Roboto"; */
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Regular.ttf");
+ src: url("../../fonts/Roboto/Roboto-Regular.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Regular.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Regular.woff") format("woff"), url("../../fonts/Roboto/Roboto-Regular.woff2") format("woff2");
+ font-style: normal;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Italic.ttf");
+ src: url("../../fonts/Roboto/Roboto-Italic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Italic.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Italic.woff") format("woff"), url("../../fonts/Roboto/Roboto-Italic.woff2") format("woff2");
+ font-style: italic;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Thin.ttf");
+ src: url("../../fonts/Roboto/Roboto-Thin.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Thin.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Thin.woff") format("woff"), url("../../fonts/Roboto/Roboto-Thin.woff2") format("woff2");
+ font-style: normal;
+ font-weight: 100;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-ThinItalic.ttf");
+ src: url("../../fonts/Roboto/Roboto-ThinItalic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-ThinItalic.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-ThinItalic.woff") format("woff"), url("../../fonts/Roboto/Roboto-ThinItalic.woff2") format("woff2");
+ font-style: italic;
+ font-weight: 100;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Light.ttf");
+ src: url("../../fonts/Roboto/Roboto-Light.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Light.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Light.woff") format("woff"), url("../../fonts/Roboto/Roboto-Light.woff2") format("woff2");
+ font-style: normal;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-LightItalic.ttf");
+ src: url("../../fonts/Roboto/Roboto-LightItalic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-LightItalic.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-LightItalic.woff") format("woff"), url("../../fonts/Roboto/Roboto-LightItalic.woff2") format("woff2");
+ font-style: italic;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Medium.ttf");
+ src: url("../../fonts/Roboto/Roboto-Medium.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Medium.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Medium.woff") format("woff"), url("../../fonts/Roboto/Roboto-Medium.woff2") format("woff2");
+ font-style: normal;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-MediumItalic.ttf");
+ src: url("../../fonts/Roboto/Roboto-MediumItalic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-MediumItalic.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-MediumItalic.woff") format("woff"), url("../../fonts/Roboto/Roboto-MediumItalic.woff2") format("woff2");
+ font-style: italic;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Bold.ttf");
+ src: url("../../fonts/Roboto/Roboto-Bold.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Bold.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Bold.woff") format("woff"), url("../../fonts/Roboto/Roboto-Bold.woff2") format("woff2");
+ font-style: normal;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-BoldItalic.ttf");
+ src: url("../../fonts/Roboto/Roboto-BoldItalic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-BoldItalic.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-BoldItalic.woff") format("woff"), url("../../fonts/Roboto/Roboto-BoldItalic.woff2") format("woff2");
+ font-style: italic;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-Black.ttf");
+ src: url("../../fonts/Roboto/Roboto-Black.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-Black.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-Black.woff") format("woff"), url("../../fonts/Roboto/Roboto-Black.woff2") format("woff2");
+ font-style: normal;
+ font-weight: 900;
+}
+@font-face {
+ font-family: "Roboto";
+ src: url("../../fonts/Roboto/Roboto-BlackItalic.ttf");
+ src: url("../../fonts/Roboto/Roboto-BlackItalic.ttf") format("truetype"), url("../../fonts/Roboto/Roboto-BlackItalic.etf") format("embedded-opentype"), url("../../fonts/Roboto/Roboto-BlackItalic.woff") format("woff"), url("../../fonts/Roboto/Roboto-BlackItalic.woff2") format("woff2");
+ font-style: italic;
+ font-weight: 900;
+}
+
+
+/* font-family: "Montserrat"; */
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Regular.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Regular.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Regular.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Regular.svg") format("svg");
+ font-style: normal;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Italic.otf");
+ src: url("../../fonts/Montserrat/Montserrat-Italic.otf") format("opentype");
+ font-style: italic;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Thin.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Thin.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Thin.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Thin.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Thin.svg") format("svg");
+ font-style: normal;
+ font-weight: 100;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-ThinItalic.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-ThinItalic.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-ThinItalic.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-ThinItalic.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-ThinItalic.svg") format("svg");
+ font-style: italic;
+ font-weight: 100;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Light.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Light.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Light.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Light.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Light.svg") format("svg");
+ font-style: normal;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-LightItalic.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-LightItalic.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-LightItalic.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-LightItalic.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-LightItalic.svg") format("svg");
+ font-style: italic;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Regular.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Regular.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Regular.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Regular.svg") format("svg");
+ font-style: italic;
+ font-weight: 400;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Medium.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Medium.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Medium.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Medium.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Medium.svg") format("svg");
+ font-style: normal;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-MediumItalic.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-MediumItalic.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-MediumItalic.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-MediumItalic.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-MediumItalic.svg") format("svg");
+ font-style: italic;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Bold.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Bold.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Bold.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Bold.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Bold.svg") format("svg");
+ font-style: normal;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-BoldItalic.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-BoldItalic.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-BoldItalic.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-BoldItalic.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-BoldItalic.svg") format("svg");
+ font-style: italic;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-Black.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-Black.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-Black.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-Black.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-Black.svg") format("svg");
+ font-style: normal;
+ font-weight: 900;
+}
+@font-face {
+ font-family: "Montserrat";
+ src: url("../../fonts/Montserrat/Montserrat-BlackItalic.ttf");
+ src: url("../../fonts/Montserrat/Montserrat-BlackItalic.ttf") format("truetype"), url("../../fonts/Montserrat/Montserrat-BlackItalic.etf") format("embedded-opentype"), url("../../fonts/Montserrat/Montserrat-BlackItalic.woff") format("woff"), url("../../fonts/Montserrat/Montserrat-BlackItalic.svg") format("svg");
+ font-style: italic;
+ font-weight: 900;
+}
+
+
+/* font-family: "Geometria"; */
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Regular.otf");
+ src: url("../../fonts/Geometria/Geometria-Regular.otf") format("opentype");
+ font-style: normal;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Italic.otf");
+ src: url("../../fonts/Geometria/Geometria-Italic.otf") format("opentype");
+ font-style: italic;
+ font-weight: normal;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Thin.otf");
+ src: url("../../fonts/Geometria/Geometria-Thin.otf") format("opentype");
+ font-style: normal;
+ font-weight: 100;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-ThinItalic.otf");
+ src: url("../../fonts/Geometria/Geometria-ThinItalic.otf") format("opentype");
+ font-style: italic;
+ font-weight: 100;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Light.otf");
+ src: url("../../fonts/Geometria/Geometria-Light.otf") format("opentype");
+ font-style: normal;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-LightItalic.otf");
+ src: url("../../fonts/Geometria/Geometria-LightItalic.otf") format("opentype");
+ font-style: italic;
+ font-weight: 300;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Medium.otf");
+ src: url("../../fonts/Geometria/Geometria-Medium.otf") format("opentype");
+ font-style: normal;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-MediumItalic.otf");
+ src: url("../../fonts/Geometria/Geometria-MediumItalic.otf") format("opentype");
+ font-style: italic;
+ font-weight: 500;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Bold.otf");
+ src: url("../../fonts/Geometria/Geometria-Bold.otf") format("opentype");
+ font-style: normal;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-BoldItalic.otf");
+ src: url("../../fonts/Geometria/Geometria-BoldItalic.otf") format("opentype");
+ font-style: italic;
+ font-weight: 700;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-ExtraBlack.otf");
+ src: url("../../fonts/Geometria/Geometria-ExtraBlack.otf") format("opentype");
+ font-style: normal;
+ font-weight: 800;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-ExtraBlackItalic.otf");
+ src: url("../../fonts/Geometria/Geometria-ExtraBlackItalic.otf") format("opentype");
+ font-style: italic;
+ font-weight: 800;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-Heavy.otf");
+ src: url("../../fonts/Geometria/Geometria-Heavy.otf") format("opentype");
+ font-style: normal;
+ font-weight: 900;
+}
+@font-face {
+ font-family: "Geometria";
+ src: url("../../fonts/Geometria/Geometria-HeavyItalic.otf");
+ src: url("../../fonts/Geometria/Geometria-HeavyItalic.otf") format("opentype");
+ font-style: italic;
+ font-weight: 900;
+}

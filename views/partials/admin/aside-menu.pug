@@ -1,0 +1,22 @@
+// Left navbar-header
+.navbar-default.sidebar(role='navigation')
+	.sidebar-nav.navbar-collapse.slimscrollsidebar
+		ul#side-menu.nav
+			li.sidebar-search.hidden-sm.hidden-md.hidden-lg
+				.input-group.custom-search-form
+					input.form-control(type='text', placeholder='Поиск...')
+					span.input-group-btn
+						button.btn.btn-default(type='button')
+							i.fa.fa-search
+			li
+				a.waves-effect(href='/admin/pages')
+					i.fa.fa-bank
+					span.hide-menu
+						| Страницы для оплаты
+
+			li
+				a.waves-effect(href='/admin/logout')
+					i.fa.fa-sign-out(data-icon='g')
+					span.hide-menu
+						| Выход
+// Left navbar-header end

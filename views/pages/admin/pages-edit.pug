@@ -1,0 +1,68 @@
+extends ../../layouts/main-admin
+
+block contents
+	// Preloader
+	.preloader
+		.cssload-speeding-wheel
+			link(rel='stylesheet', href='/stylesheets/css/jquery.clockpicker.css')
+
+	#wrapper
+		include ./../../partials/admin/header
+		include ./../../partials/admin/aside-menu
+
+		// Page Content
+		#page-wrapper
+			.container-fluid
+				.row.bg-title
+					.col-lg-12.col-md-12.col-sm-12.col-xs-12
+						h4.page-title Редактирование страницы
+				.row
+					.col-md-12
+						.white-box
+							form.form-horizontal(method='post', action='/admin/pages/' + page.page_id + '/edit')
+								.row
+									.col-md-12
+										.form-group
+											label.col-md-2.control-label Название продукта:
+											.col-md-10
+												input.form-control(name='name' placeholder='Введите название продукта' required=true value=page.name || '')
+										.form-group
+											label.col-md-2.control-label Описание:
+											.col-md-10
+												textarea.form-control(name='description' placeholder='Введите описание продукта')= page.description || ''
+										.form-group
+											label.col-md-2.control-label Цена, USD:
+											.col-md-10
+												input.form-control(name='price' type="number" min=37.04 step=0.01 placeholder='Введите цену продукта' required=true value=page.price || 37.04)
+
+										hr
+										.form-group
+											label.col-md-2.control-label GetResponse – токен кампании ДО оплаты:
+											.col-md-10
+												input.form-control(name='gr1' placeholder='Введите токен кампании' value=page.gr1 || '')
+										.form-group
+											label.col-md-2.control-label GetResponse – токен кампании ПОСЛЕ оплаты:
+											.col-md-10
+												input.form-control(name='gr2' placeholder='Введите токен кампании' value=page.gr2 || '')
+
+										hr
+										.form-group
+											label.col-md-2.control-label CRM – ID папки ДО оплаты:
+											.col-md-10
+												input.form-control(name='crm1' placeholder='Введите ID папки' value=page.crm1 || '')
+										.form-group
+											label.col-md-2.control-label CRM – ID папки ПОСЛЕ оплаты:
+											.col-md-10
+												input.form-control(name='crm2' placeholder='Введите ID папки' value=page.crm2 || '')
+
+
+								.form-group.m-b-0
+									.col-md-offset-2.col-md-10
+										button.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-10(type='submit') Сохранить изменения
+
+
+		include ./../../partials/admin/footer
+
+		script(src='/plugins/bower_components/dropify/dist/js/dropify.min.js')
+		script(type='text/javascript' src='/js/pages/admin/admin-group-add.js')
+		script(type="text/javascript" src='/js/tinymce/js/tinymce/tinymce.min.js')

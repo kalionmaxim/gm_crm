@@ -1,0 +1,8 @@
+// common scss files
+@import 'common/reset';
+@import 'common/global';
+@import 'common/fonts';
+@import 'common/variables';
+@import 'common/mixins';
+// modules scss files
+@import 'modules/audit-pdf';

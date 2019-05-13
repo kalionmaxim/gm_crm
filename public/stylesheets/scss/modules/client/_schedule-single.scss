@@ -1,0 +1,248 @@
+#schedule-single {
+
+}
+
+.schedule-single {
+
+ &.schedule-single {
+  padding-bottom: 0;
+ }
+}
+
+.schedule-single-layout {
+ display: flex;
+ align-items: flex-start;
+ justify-content: space-between;
+ margin-top: 50px;
+ @include tablet-mobile {
+  flex-direction: column;
+ }
+}
+
+.schedule-single-left {
+ width: 515px;
+ padding-top: 55px;
+ @include tablet-mobile {
+  width: 100%;
+ }
+}
+
+.schedule-single-author {
+ display: flex;
+ justify-content: space-between;
+ margin-top: 40px;
+ @include mobile {
+  flex-direction: column;
+  align-items: center;
+ }
+ &:nth-child(1) {
+  margin-top: 0;
+ }
+
+ .schedule-single-author__info {
+  width: 265px;
+  @include mobile {
+   width: 100%;
+  }
+
+  .schedule-single-author__info-item {
+   border-bottom: 1px solid $color-black-01;
+   padding-bottom: 40px;
+   margin-top: 40px;
+   &:first-child {
+    margin-top: 0;
+   }
+   &:last-child {
+    @include mobile {
+     border-bottom: 0;
+    }
+   }
+
+   h2 {
+    color: $color-red;
+    font-size: 23px;
+    line-height: 32px;
+   }
+   h3 {
+    color: $color-cod-gray-2-05;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17px;
+    text-transform: uppercase;
+   }
+   p {
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+   }
+  }
+ }
+
+ .schedule-single-author__avatar {
+  width: 225px;
+  height: 225px;
+  border-radius: 50%;
+  background: no-repeat center / cover;
+  @include mobile {
+   margin-bottom: 20px;
+  }
+ }
+}
+
+.schedule-single-author-about {
+ margin-top: 35px;
+
+ &, & p {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 27px;
+ }
+ p, ul, h1, h2, h3, h4, h5, h6 {
+  margin: 35px 0;
+ }
+
+ ul li {
+  line-height: 36px;
+  padding-left: 25px;
+  position: relative;
+  &:before {
+   content: '';
+   width: 8px;
+   height: 8px;
+   border-radius: 50%;
+   background: $color-red;
+   position: absolute;
+   top: 14px;
+   left: 0;
+  }
+ }
+}
+
+.schedule-single-right {
+ width: 615px;
+ background-color: $color-white;
+ padding: 40px 15px 77px 87px;
+ position: relative;
+ @include tablet-mobile {
+  width: 100%;
+ }
+ @include tablet {
+  padding: 40px 40px 77px;
+ }
+ @include mobile {
+  padding: 30px 25px 40px;
+ }
+ &:before {
+  content: '';
+  width: 601px;
+  height: 629px;
+  background: url(../../img/client/schedule-single/schedule-single-shadow.png) no-repeat center / contain;
+  position: absolute;
+  top: 10px;
+  left: -305px;
+  z-index: -1;
+ }
+ &:after {
+  content: '';
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, #ff010d 0%, #ff0091 100%), $color-red;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+ }
+
+ .schedule-single-right__theme {
+  color: $color-cod-gray-2-05;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 27px;
+  text-transform: uppercase;
+ }
+ .schedule-single-right__title {
+  font-size: 30px;
+  line-height: 36px;
+  margin-top: 15px;
+ }
+ .schedule-single-right__text {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 27px;
+  margin-top: 40px;
+ }
+ ul {
+  margin-top: 45px;
+
+  li{
+   font-size: 18px;
+   line-height: 22px;
+   text-transform: uppercase;
+   letter-spacing: 0.54px;
+   padding-left: 45px;
+   margin-bottom: 35px;
+   position: relative;
+   @include mobile {
+    font-size: 16px;
+    line-height: 18px;
+    padding-left: 35px;
+    margin-bottom: 18px;
+   }
+   &:before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    background: url(../../img/client/schedule-single/schedule-single-right-check.png) no-repeat center / contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include mobile {
+     width: 18px;
+     height: 18px;
+    }
+   }
+   &:last-child {
+    margin-bottom: 0;
+   }
+  }
+ }
+
+ .schedule-single-right__link {
+  width: 440px;
+  margin-top: 60px;
+  @include mobile {
+   width: 100%;
+   font-size: 13px;
+   letter-spacing: 2.5px;
+   margin-top: 40px;
+  }
+ }
+
+ .schedule-single-right__disclaimer {
+  font-family: Roboto, sans-serif;
+  color: $color-cod-gray-2-05;
+  font-size: 16px;
+  line-height: 27px;
+  margin-top: 40px;
+ }
+}
+
+.schedule-single-map {
+ height: 500px;
+ margin-top: 70px;
+
+ iframe {
+  display: block;
+  height: 100%;
+ }
+}
+
+.schedule-single-empty {
+ width: 700px;
+ text-align: center;
+ margin: 100px auto 150px;
+
+ h2 {
+  font-size: 32px;
+  line-height: 40px;
+ }
+}

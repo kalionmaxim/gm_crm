@@ -1,0 +1,89 @@
+footer.footer.text-center  2019 © GeniusMarketing
+	div.popup-alert-wrapper.edit-error-popup.error-popup.animated.shake
+		h2 Ошибка
+		div.form-errors
+	div.popup-alert-wrapper.edit-message-popup.info-popup.animated.shake
+		h2 Сообщение
+		div.form-messages
+	div.confirm-popup.popup-material__layout
+		div.popup-material
+			h2 Вопрос
+			div#confirmButtons
+				a.button.button-yes Да
+				a.button.button-no Нет
+	script.
+
+		function setError(text) {
+			$(".form-errors").html("<div class='alert alert-danger'><h4>" + text + "</h4></div>");
+			$('.edit-message-popup').removeClass('first-info').addClass('second-info');
+			$('.edit-error-popup').removeClass('fadeOutRight second-info').fadeIn(100).addClass('animated shake first-info');
+			setTimeout(function () {
+				$('.edit-error-popup').removeClass('shake').addClass('fadeOutRight');
+			}, 4000);
+		}
+
+		function setInfoMessage(text) {
+			$(".form-messages").html("<div class='alert alert-danger'><h4>" + text + "</h4></div>");
+			$('.edit-error-popup').removeClass('first-info').addClass('second-info');
+			$('.edit-message-popup').removeClass('fadeOutRight second-info').fadeIn(100).addClass('animated fadeInRight first-info');
+			setTimeout(function () {
+				$('.edit-message-popup').removeClass('shake').addClass('fadeOutRight');
+			}, 4000);
+		}
+
+		function Dialog(message, yesCallback, noCallback) {
+			$('.confirm-popup h2').html(message);
+			var dialog = $('.confirm-popup').fadeIn(300);
+
+			$('.button-yes').click(function () {
+				dialog.fadeOut(300);
+				yesCallback();
+				noCallback = function () {
+					return false;
+				};
+				yesCallback = function () {
+					return false;
+				}
+			});
+
+			$('.button-no').click(function () {
+				dialog.fadeOut(300);
+				noCallback();
+				yesCallback = function () {
+					return false;
+				};
+				noCallback = function () {
+					return false;
+				}
+			});
+		}
+// /#page-wrapper
+// /#wrapper
+
+// jQuery
+script(src='/plugins/bower_components/jquery/dist/jquery.min.js')
+// Bootstrap Core JavaScript
+script(src='/bootstrap/dist/js/bootstrap.min.js')
+// Menu Plugin JavaScript
+script(src='/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js')
+// Counter js
+script(src='/plugins/bower_components/waypoints/lib/jquery.waypoints.js')
+script(src='/plugins/bower_components/counterup/jquery.counterup.min.js')
+// slimscroll JavaScript
+script(src='/js/pages/admin-material/jquery.slimscroll.js')
+// Wave Effects
+script(src='/js/pages/admin-material/waves.js')
+// Custom Theme JavaScript
+script(src='/js/pages/admin-material/custom.min.js')
+// Style Switcher
+script(src='/plugins/bower_components/styleswitcher/jQuery.style.switcher.js')
+
+
+script.
+	if ('#{err_message}') {
+		setError('#{err_message}');
+	}
+
+	if ('#{info_message}') {
+		setInfoMessage('#{info_message}');
+	}

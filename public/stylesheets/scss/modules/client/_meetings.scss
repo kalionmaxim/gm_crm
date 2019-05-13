@@ -1,0 +1,522 @@
+#meetings {
+
+ .main-wrapper {
+  width: 1240px;
+  @include tablet {
+   width: 620px;
+  }
+  @include mobile {
+   width: 300px;
+  }
+ }
+}
+
+.meetings {
+ display: none;
+ grid-template-columns: repeat(4, 295px);
+ grid-auto-rows: 200px;
+ grid-auto-flow: row dense;
+ grid-gap: 20px;
+ margin: 44px auto 0;
+ //margin: 75px auto 0;
+ @include tablet {
+  grid-template-columns: repeat(2, 295px);
+ }
+ @include mobile {
+  grid-template-columns: repeat(1, 295px);
+ }
+
+ &.meetings--active {
+  display: inline-grid;
+ }
+}
+
+.meetings-item {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ background: url(../../img/client/meetings/meetings-item-bg.png) no-repeat center / cover, $color-alabaster;
+ padding: 20px;
+ transition: 0.5s;
+ position: relative;
+ &:hover {
+  background-image: url(../../img/client/meetings/meetings-item-bg-hover.png);
+
+  .meetings-item__title {color: $color-white;}
+
+  &.meetings-item--locked {
+   background-image: url(../../img/client/meetings/meetings-item-bg.png);
+
+   .meetings-item__title {color: $color-black;}
+
+   .meetings-item__icon {background-image: inherit}
+  }
+ }
+
+ .meetings-item__title {
+  color: $color-black;
+  font-size: 23px;
+  line-height: 27px;
+  text-transform: uppercase;
+  transition: 0.5s;
+ }
+
+ .meetings-item__icon {
+  background: no-repeat center / contain;
+  transition: 0.5s;
+ }
+
+ &.meetings-item--locked {
+  &:after {
+   content: '';
+   width: 100%;
+   height: 100%;
+   background: $color-black-05;
+   //background: url(../../img/client/common/lock-icon.svg) no-repeat center / 50px, $color-black-05;
+   position: absolute;
+   top: 0;
+   left: 0;
+   transition: 0.7s;
+  }
+ }
+
+ &.meetings-item--denied {
+  &:after {
+   content: '';
+   width: 100%;
+   height: 100%;
+   background: $color-black-02;
+   position: absolute;
+   top: 0;
+   left: 0;
+  }
+  &:before {
+   content: '';
+   width: 120px;
+   height: 120px;
+   border-radius: 50%;
+   background: url(../../img/client/common/lock-icon.svg) no-repeat center / 72px, $color-white;
+   position: absolute;
+   top: calc(50% - 60px);
+   left: calc(50% - 60px);
+   z-index: 2;
+  }
+ }
+
+ &.meetings-item--1_2 {
+  grid-row: span 2;
+  background-image: url(../../img/client/meetings/meetings-item-bg-1_2.png);
+  @include mobile {
+   grid-row: span 1;
+  }
+  &:hover {
+   background-image: url(../../img/client/meetings/meetings-item-bg-1_2-hover.png);
+   &.meetings-item--locked {
+    background-image: url(../../img/client/meetings/meetings-item-bg-1_2.png);
+   }
+  }
+ }
+ &.meetings-item--2_1 {
+  grid-column: span 2;
+  background-image: url(../../img/client/meetings/meetings-item-bg-2_1.png);
+  @include mobile {
+   grid-column: span 1;
+  }
+  &:hover {
+   background-image: url(../../img/client/meetings/meetings-item-bg-2_1-hover.png);
+   &.meetings-item--locked {
+    background-image: url(../../img/client/meetings/meetings-item-bg-2_1.png);
+   }
+  }
+ }
+
+ &.meetings-item--1 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-1-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-1.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 61px;
+   height: 63px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-1.png);
+  }
+ }
+ &.meetings-item--2 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-2-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-2.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 56px;
+   height: 55px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-2.png);
+  }
+ }
+ &.meetings-item--3 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-3-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-3.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 60px;
+   height: 48px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-3.png);
+  }
+ }
+ &.meetings-item--4 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-4-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-4.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 54px;
+   height: 53px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-4.png);
+  }
+ }
+ &.meetings-item--5 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-5-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-5.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 47px;
+   height: 53px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-5.png);
+  }
+ }
+ &.meetings-item--6 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-6-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-6.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 39px;
+   height: 63px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-6.png);
+  }
+ }
+ &.meetings-item--7 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-7-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-7.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 49px;
+   height: 55px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-7.png);
+  }
+ }
+ &.meetings-item--8 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-8-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-8.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 59px;
+   height: 49px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-8.png);
+  }
+ }
+ &.meetings-item--9 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-9-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-9.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 56px;
+   height: 59px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-9.png);
+  }
+ }
+ &.meetings-item--10 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-10-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-10.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 55px;
+   height: 48px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-10.png);
+  }
+ }
+ &.meetings-item--11 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-11-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-11.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 55px;
+   height: 48px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-11.png);
+  }
+ }
+ &.meetings-item--12 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-12-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-12.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 55px;
+   height: 48px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-12.png);
+  }
+ }
+ &.meetings-item--13 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-13-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-13.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 55px;
+   height: 48px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-13.png);
+  }
+ }
+ &.meetings-item--14 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-14-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-14.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 55px;
+   height: 48px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-14.png);
+  }
+ }
+ &.meetings-item--15 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-15-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-15.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 43px;
+   height: 51px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-15.png);
+  }
+ }
+ &.meetings-item--16 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-16-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-16.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 52px;
+   height: 57px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-16.png);
+  }
+ }
+ &.meetings-item--17 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-17-hover.png);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-17.png);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 58px;
+   height: 57px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-17.png);
+  }
+ }
+ &.meetings-item--18 {
+  &:hover {
+
+   .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-18-hover.svg);
+   }
+
+   &.meetings-item--locked .meetings-item__icon {
+    background-image: url(../../img/client/meetings/meetings-item-icon-18.svg);
+   }
+  }
+
+  .meetings-item__icon {
+   width: 58px;
+   height: 57px;
+   background-image: url(../../img/client/meetings/meetings-item-icon-18.svg);
+  }
+ }
+}
+
+
+.meetings-nav {
+ display: flex;
+ border-bottom: 1px solid #e8e8e8;
+ margin-top: 77px;
+ @include mobile {
+  justify-content: center;
+ }
+}
+.meetings-nav-item {
+ display: flex;
+ align-items: center;
+ border-bottom: 1px solid transparent;
+ padding: 0 14px 22px;
+ margin-right: 70px;
+ transition: 0.7s;
+ opacity: 0.7;
+ cursor: pointer;
+ @include mobile {
+  padding: 0 5px 15px;
+  margin: 0 20px;
+ }
+ &:last-child {
+  margin-right: 0;
+ }
+
+ .meetings-nav-item__icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 17px;
+  @include mobile {
+   width: 22px;
+   height: 22px;
+   margin-right: 12px;
+  }
+
+  svg {
+   fill: #2f2f2f;
+   @include mobile {
+    width: 100%;
+    height: 100%;
+   }
+  }
+ }
+ .meetings-nav-item__text {
+  color: #000000;
+  font-size: 23px;
+  font-weight: 300;
+  letter-spacing: -0.12px;
+  @include mobile {
+   font-size: 14px;
+   line-height: 18px;
+  }
+
+  span {
+   color: #ff010d;
+  }
+ }
+
+ &.meetings-nav-item--active {
+  border-color: #000000;
+  opacity: 1;
+ }
+}
