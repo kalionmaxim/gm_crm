@@ -479,7 +479,7 @@ module.exports = function routes(app, passport) {
 
 				const data = {
 					client_phone      : ctx.request.body.phone,
-					total_sum         : page.price.toFixed(2),
+					total_sum         : (parseFloat(config.get("monobank:usd_rate")) * parseFloat(page.price)).toFixed(2),
 					invoice           : {
 						date  : dateStr,
 						source: "INTERNET"
@@ -491,7 +491,7 @@ module.exports = function routes(app, passport) {
 					products          : [{
 						name : page.name,
 						count: 1,
-						sum  : page.price.toFixed(2)
+						sum  : (parseFloat(config.get("monobank:usd_rate")) * parseFloat(page.price)).toFixed(2)
 					}],
 					result_callback   : config.get("url") + "monobank/" + page.page_id + "/callback",
 					email             : ctx.request.body.email,
