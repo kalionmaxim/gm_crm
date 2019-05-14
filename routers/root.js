@@ -444,6 +444,94 @@ module.exports = function routes(app, passport) {
 		await ctx.render("pages/client/monobank-failure");
 	});
 
+	//MONOBANK LOGIC PROD =>
+	router.get("/monobank/:page_id", async (ctx) => {
+		try {
+			const page = await Page.findOne({ page_id: parseInt(ctx.params.page_id, 10) });
+
+			if (page) {
+				if (page.parts.length > 0) {
+					await ctx.render("pages/client/monobank/checkout", {
+						page
+					});
+				} else {
+					await ctx.render("pages/error404");
+				}
+			} else {
+				await ctx.render("pages/error404");
+			}
+		} catch (err) {
+			eLogger.error(err);
+			await ctx.render("pages/error404");
+		}
+	});
+
+	router.post("/monobank/:page_id/order", async (ctx) => {
+		try {
+			const page = await Page.findOne({ page_id: parseInt(ctx.params.page_id, 10) });
+
+			if (page) {
+				const date = new Date();
+				const year = date.getFullYear();
+				const month = ((date.getMonth() + 1) < 10) ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString();
+				const day = (date.getMonth() < 10) ? "0" + date.getMonth().toString() : date.getMonth().toString();
+				let dateStr = year + "-" + month + "-" + day;
+
+				const data = {
+					client_phone      : ctx.request.body.phone,
+					total_sum         : page.price.toFixed(2),
+					invoice           : {
+						date  : dateStr,
+						source: "INTERNET"
+					},
+					available_programs: [{
+						available_parts_count: page.parts,
+						type                 : "payment_installments"
+					}],
+					products          : [{
+						name : page.name,
+						count: 1,
+						sum  : page.price.toFixed(2)
+					}],
+					result_callback   : config.get("url") + "monobank/" + page.page_id + "/callback",
+					email             : ctx.request.body.email,
+					name              : ctx.request.body.name
+				};
+
+				//TODO: CRM and GR integration
+				/*if (page.crm1) {
+
+				}
+
+				if (page.gr1) {
+
+				}*/
+
+				ctx.body = await Monobank.createOrder(data);
+			} else {
+				ctx.body = {
+					result: 0
+				};
+			}
+		} catch (err) {
+			eLogger.error(err);
+			ctx.body = {
+				result: 0
+			};
+		}
+	});
+
+	router.post("/monobank/:page_id/confirm", async (ctx) => {
+		ctx.body = await Monobank.confirmDelivery(ctx.request.body.orderID);
+	});
+
+	router.post("/monobank/:page_id/callback", async (ctx) => {
+		await Monobank.processCallback(ctx.request.body);
+		ctx.status = 200;
+	});
+
+	//MONOBANK LOGIC PROD <=
+
 	router.get("/admin", async (ctx) => {
 		if (ctx.isAuthenticated()) {
 			await ctx.redirect("/admin/pages");
@@ -498,6 +586,13 @@ module.exports = function routes(app, passport) {
 	router.post("/admin/pages/new", async (ctx) => {
 		if (ctx.isAuthenticated()) {
 			try {
+				const parts = [];
+				if (ctx.request.body.parts) {
+					for (let i = 0; i < ctx.request.body.parts.length; i++) {
+						parts.push(parseInt(ctx.request.body.parts[i], 10));
+					}
+				}
+
 				await Page.create({
 					name       : ctx.request.body.name || "",
 					description: ctx.request.body.description || "",
@@ -505,7 +600,8 @@ module.exports = function routes(app, passport) {
 					gr1        : ctx.request.body.gr1.trim() || "",
 					gr2        : ctx.request.body.gr2.trim() || "",
 					crm1       : ctx.request.body.crm1.trim() || "",
-					crm2       : ctx.request.body.crm2.trim() || ""
+					crm2       : ctx.request.body.crm2.trim() || "",
+					parts      : parts
 				});
 
 				await ctx.redirect("/admin/pages");
@@ -565,6 +661,13 @@ module.exports = function routes(app, passport) {
 		if (ctx.isAuthenticated()) {
 			const page = await Page.findOne({ page_id: ctx.params.page_id });
 
+			const parts = [];
+			if (ctx.request.body.parts) {
+				for (let i = 0; i < ctx.request.body.parts.length; i++) {
+					parts.push(parseInt(ctx.request.body.parts[i], 10));
+				}
+			}
+
 			page.name = ctx.request.body.name || "";
 			page.description = ctx.request.body.description || "";
 			page.price = ctx.request.body.price || 37.04;
@@ -572,6 +675,8 @@ module.exports = function routes(app, passport) {
 			page.gr2 = ctx.request.body.gr2.trim() || "";
 			page.crm1 = ctx.request.body.crm1.trim() || "";
 			page.crm2 = ctx.request.body.crm2.trim() || "";
+
+			page.parts = parts;
 
 			await page.save();
 

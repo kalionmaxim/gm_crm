@@ -55,6 +55,21 @@ block contents
 											.col-md-10
 												input.form-control(name='crm2' placeholder='Введите ID папки')
 
+										hr
+										.form-group.formgroup-checkbox.checkbox.checkbox-success
+											p.col-md-2.control-label Количество частей рассрочки:
+											.col-md-10
+												ul.checkbox-block
+													li
+														input(type="checkbox" name="parts" value="2" id="plan-checkbox-2")
+														label(for="plan-checkbox-2")= 2
+													li
+														input(type="checkbox" name="parts" value="3" id="plan-checkbox-3")
+														label(for="plan-checkbox-3")= 3
+													li
+														input(type="checkbox" name="parts" value="4" id="plan-checkbox-4")
+														label(for="plan-checkbox-4")= 4
+
 
 								.form-group.m-b-0
 									.col-md-offset-2.col-md-10
@@ -62,7 +77,3 @@ block contents
 
 
 		include ./../../partials/admin/footer
-
-		script(src='/plugins/bower_components/dropify/dist/js/dropify.min.js')
-		script(type='text/javascript' src='/js/pages/admin/admin-group-add.js')
-		script(type="text/javascript" src='/js/tinymce/js/tinymce/tinymce.min.js')

@@ -27,7 +27,12 @@ const monoOrderSchema = new Schema({
 	additional_params : {
 		nds         : { type: Number },
 		seller_phone: { type: String }
-	}
+	},
+
+	email    : { type: String },
+	name     : { type: String },
+	state    : { type: String },
+	sub_state: { type: String }
 });
 
 monoOrderSchema.plugin(autoIncrement.plugin, {

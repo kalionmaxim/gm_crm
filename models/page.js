@@ -11,7 +11,8 @@ const pageSchema = new Schema({
 	gr1        : { type: String },
 	gr2        : { type: String },
 	crm1       : { type: String },
-	crm2       : { type: String }
+	crm2       : { type: String },
+	parts      : [{ type: Number }]
 });
 
 pageSchema.plugin(autoIncrement.plugin, {
