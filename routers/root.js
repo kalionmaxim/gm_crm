@@ -775,7 +775,7 @@ module.exports = function routes(app, passport) {
 					}
 
 					let reversed = "Нет";
-					if (order.reversed || order.rejected) {
+					if (order.returned || order.rejected) {
 						reversed = "Да";
 					}
 
