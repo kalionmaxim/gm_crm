@@ -539,8 +539,11 @@ module.exports = function routes(app, passport) {
 	router.get("/monobank/:page_id/success", async (ctx) => {
 		try {
 			const page = await Page.findOne({ page_id: ctx.params.page_id });
+			const usdRate = config.get("monobank:usd_rate");
+
 			await ctx.render("pages/client/monobank-success", {
-				page
+				page,
+				usdRate
 			});
 		} catch (err) {
 			eLogger.error(err);

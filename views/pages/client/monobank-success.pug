@@ -1,1 +1,1 @@
-h2 Заявка на покупку частями "#{page.name}" на сумму #{page.price} грн успешно оформлена
+h2 Заявка на покупку частями "#{page.name}" на сумму #{(parseFloat(page.price) * parseFloat(usdRate)).toFixed(2)} грн успешно оформлена
