@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const monoOrderSchema = new Schema({
 	mono_order_id     : { type: Number, unique: true },
-	external_order_id : { type: String },
+	external_order_id : { type: String, index: true },
 	client_phone      : { type: String },
 	total_sum         : { type: Number },
 	invoice           : {
@@ -32,7 +32,8 @@ const monoOrderSchema = new Schema({
 	email    : { type: String },
 	name     : { type: String },
 	state    : { type: String },
-	sub_state: { type: String }
+	sub_state: { type: String },
+	page     : { type: Schema.Types.ObjectId, ref: "Page" }
 });
 
 monoOrderSchema.plugin(autoIncrement.plugin, {

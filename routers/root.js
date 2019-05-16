@@ -495,7 +495,8 @@ module.exports = function routes(app, passport) {
 					}],
 					result_callback   : config.get("url") + "monobank/" + page.page_id + "/callback",
 					email             : ctx.request.body.email,
-					name              : ctx.request.body.name
+					name              : ctx.request.body.name,
+					page              : page
 				};
 
 				//TODO: CRM and GR integration
@@ -704,6 +705,14 @@ module.exports = function routes(app, passport) {
 			}
 		} else {
 			ctx.body = { result: 0 };
+		}
+	});
+
+	router.get("/admin/orders", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/orders-list");
+		} else {
+			await ctx.redirect("/admin");
 		}
 	});
 

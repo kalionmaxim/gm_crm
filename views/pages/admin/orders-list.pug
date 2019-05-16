@@ -1,0 +1,36 @@
+extends ../../layouts/main-admin
+
+block contents
+	// Preloader
+	.preloader
+		.cssload-speeding-wheel
+
+	#wrapper
+		include ./../../partials/admin/header
+		include ./../../partials/admin/aside-menu
+
+		// Page Content
+		#page-wrapper
+			.container-fluid
+				.row.bg-title
+					.col-lg-3.col-md-4.col-sm-4.col-xs-12
+						h4.page-title Список платежей
+
+				.row
+					.col-sm-12
+						.white-box
+							.table-responsive
+								table#table_pages.table.table-striped
+									thead
+										tr
+											th ID
+											th Название
+											th Описание
+											th Ссылка
+											th Действия
+
+
+		include ./../../partials/admin/footer
+
+		script(src='/plugins/bower_components/datatables/jquery.dataTables.min.js')
+		script(src="/js/pages/admin/pages-list.js")
