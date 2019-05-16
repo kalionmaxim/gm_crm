@@ -806,6 +806,7 @@ module.exports = function routes(app, passport) {
 
 			if (order) {
 				const stateData = await Monobank.stateOrder(order.external_order_id);
+				console.log("stateData", stateData);
 
 				if (stateData.result) {
 					if (stateData.data.state === "SUCCESS") {
