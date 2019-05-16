@@ -20,17 +20,19 @@ block contents
 					.col-sm-12
 						.white-box
 							.table-responsive
-								table#table_pages.table.table-striped
+								table#table_orders.table.table-striped
 									thead
 										tr
 											th ID
-											th Название
-											th Описание
-											th Ссылка
+											th Имя
+											th Телефон
+											th Продукт
+											th Статус
+											th Отменено/Сделан возврат
 											th Действия
 
 
 		include ./../../partials/admin/footer
 
 		script(src='/plugins/bower_components/datatables/jquery.dataTables.min.js')
-		script(src="/js/pages/admin/pages-list.js")
+		script(src="/js/pages/admin/orders-list.js")

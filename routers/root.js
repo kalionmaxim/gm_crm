@@ -16,6 +16,7 @@ const merchantRUB = config.get("fondy:rub") || "";
 const eLogger = require("../lib/logger").eLogger;
 
 const Page = require("../models/page").Page;
+const MonoOrder = require("../models/monoOrder").MonoOrder;
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -736,6 +737,101 @@ module.exports = function routes(app, passport) {
 		} else {
 			await ctx.redirect("/admin");
 		}
+	});
+
+	router.get("/admin/orders/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const data = ctx.query;
+				const queryOrder = {};
+
+				if (data["search[value]"]) {
+					queryOrder["$or"] = [
+						{ client_phone: new RegExp(".*" + data["search[value]"].replace(/(\W)/g, "\\$1") + ".*", "i") }
+					];
+				}
+
+				const orders = await MonoOrder.find(queryOrder)
+					.populate({
+						"path": "page"
+					})
+					.skip(parseInt(data.start, 10))
+					.limit(parseInt(data.length, 10))
+					.lean();
+
+				list.recordsTotal = await MonoOrder.find().count();
+				list.recordsFiltered = await MonoOrder.find(queryOrder).count();
+
+				for (let i = 0; i < orders.length; i++) {
+					const order = orders[i];
+
+					let productName = "";
+					if (order.page) {
+						productName = order.page.name;
+					}
+
+					let reversed = "Нет";
+					if (order.reversed || order.rejected) {
+						reversed = "Да";
+					}
+
+					list.data.push([
+						order.mono_order_id,
+						order.name,
+						order.client_phone,
+						productName,
+						order.status,
+						reversed,
+						null
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
+	});
+
+	router.get("/admin/orders/:order_id/return", async (ctx) => {
+		try {
+			const order = await MonoOrder.findOne({ order_id: ctx.params.order_id });
+
+			if (order) {
+				const stateData = await Monobank.stateOrder(order.external_order_id);
+
+				if (stateData.result) {
+					if (stateData.data.state === "SUCCESS") {
+						await Monobank.returnOrder({
+							orderID             : order.external_order_id,
+							return_money_to_card: true,
+							sum                 : order.total_sum
+						});
+
+						order.returned = true;
+
+						await order.save();
+					} else {
+						await Monobank.rejectOrder(order.external_order_id);
+
+						order.rejected = true;
+
+						await order.save();
+					}
+				}
+			}
+		} catch (err) {
+			eLogger.error(err);
+		}
+
+		await ctx.redirect("/admin/orders");
 	});
 
 	/*router.get("/yandex/form", async (ctx) => {

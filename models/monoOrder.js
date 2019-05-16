@@ -33,7 +33,9 @@ const monoOrderSchema = new Schema({
 	name     : { type: String },
 	state    : { type: String },
 	sub_state: { type: String },
-	page     : { type: Schema.Types.ObjectId, ref: "Page" }
+	page     : { type: Schema.Types.ObjectId, ref: "Page" },
+	returned : { type: Boolean, default: false },
+	rejected : { type: Boolean, default: false }
 });
 
 monoOrderSchema.plugin(autoIncrement.plugin, {
