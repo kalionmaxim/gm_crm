@@ -802,7 +802,7 @@ module.exports = function routes(app, passport) {
 
 	router.get("/admin/orders/:order_id/return", async (ctx) => {
 		try {
-			const order = await MonoOrder.findOne({ order_id: ctx.params.order_id });
+			const order = await MonoOrder.findOne({ mono_order_id: parseInt(ctx.params.order_id, 10) });
 
 			if (order) {
 				const stateData = await Monobank.stateOrder(order.external_order_id);
