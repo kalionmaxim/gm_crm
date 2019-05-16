@@ -426,6 +426,11 @@ module.exports = function routes(app, passport) {
 		ctx.body = await Monobank.confirmDelivery(ctx.request.body.orderID);
 	});
 
+	router.post("/monobank/reject", async (ctx) => {
+		console.log("BODY:", ctx.request.body);
+		ctx.body = await Monobank.rejectOrder(ctx.request.body);
+	});
+
 	router.post("/monobank/return", async (ctx) => {
 		console.log("BODY:", ctx.request.body);
 		ctx.body = await Monobank.returnOrder(ctx.request.body);
