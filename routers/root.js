@@ -531,6 +531,20 @@ module.exports = function routes(app, passport) {
 		ctx.status = 200;
 	});
 
+	router.get("/monobank/:page_id/success", async (ctx) => {
+		try {
+			const page = await Page.findOne({ page_id: ctx.params.page_id });
+			await ctx.render("pages/client/monobank-success", {
+				page
+			});
+		} catch (err) {
+			eLogger.error(err);
+			ctx.body = {
+				result: 0
+			};
+		}
+	});
+
 	//MONOBANK LOGIC PROD <=
 
 	router.get("/admin", async (ctx) => {

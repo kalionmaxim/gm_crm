@@ -227,18 +227,21 @@ script.
 			})
 				.then(function (response) {
 					if (response && response.data && response.data.result && response.data.data) {
+						console.log(response);
+						window.location = "/monobank/#{page.page_id}/success";
+
 						//confirm order
-						axios({
-							method: "post",
-							url   : "/monobank/#{page.page_id}/confirm",
-							data  : {
-								"orderID": response.data.data.order_id
-							}
-						})
-							.then(function (response) {
-								console.log(response);
-								window.location = "/monobank/success";
-							});
+						// axios({
+						// 	method: "post",
+						// 	url   : "/monobank/#/{page.page_id}/confirm",
+						// 	data  : {
+						// 		"orderID": response.data.data.order_id
+						// 	}
+						// })
+						// 	.then(function (response) {
+						// 		console.log(response);
+						// 		window.location = "/monobank/#/{page.page_id}/success";
+						// 	});
 					} else {
 						alert("Произошла неизвестная ошибка");
 					}
