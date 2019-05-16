@@ -18,6 +18,9 @@ const eLogger = require("../lib/logger").eLogger;
 const Page = require("../models/page").Page;
 const MonoOrder = require("../models/monoOrder").MonoOrder;
 
+const addDealToCrm = require("../lib/crm").addDealToCrm;
+const addToCampaign = require("../lib/getResponse").addToCampaign;
+
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
@@ -505,14 +508,13 @@ module.exports = function routes(app, passport) {
 					page              : page
 				};
 
-				//TODO: CRM and GR integration
-				/*if (page.crm1) {
-
+				if (page.crm1) {
+					addDealToCrm(ctx.request.body.name, ctx.request.body.email, ctx.request.body.phone, page.crm1);
 				}
 
 				if (page.gr1) {
-
-				}*/
+					addToCampaign(ctx.request.body.name, ctx.request.body.email, page.gr1, 0, "", { phone: ctx.request.body.phone });
+				}
 
 				ctx.body = await Monobank.createOrder(data);
 			} else {
@@ -759,6 +761,7 @@ module.exports = function routes(app, passport) {
 					.populate({
 						"path": "page"
 					})
+					.sort("-mono_order_id")
 					.skip(parseInt(data.start, 10))
 					.limit(parseInt(data.length, 10))
 					.lean();
