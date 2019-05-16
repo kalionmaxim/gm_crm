@@ -1,8 +1,8 @@
 const Admin = require("../models/admin").Admin;
 
 new Admin({
-	email   : "admin@email.com",
-	password: "q1w2e3r4t5"
+	email   : "blood.kh@gmail.com",
+	password: "oles1357genius"
 }).save((err, admin) => {
 	if (err) {
 		console.error(err);
