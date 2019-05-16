@@ -1,1 +1,266 @@
-h2 Заявка на покупку частями "#{page.name}" на сумму #{(parseFloat(page.price) * parseFloat(usdRate)).toFixed(2)} грн успешно оформлена
+doctype html
+html(lang='ru-RU')
+	head
+		meta(charset='UTF-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge')
+		title Оплата участия
+		// SEO
+		meta(property='og:title', content='Оплата участия')
+		meta(property='og:description', content='Оплата участия')
+		meta(property='og:image', content='https://geniusmarketing.me/pic.png')
+		meta(property='og:url', content='https://geniusmarketing.me/')
+		meta(property='fb:admins', content='1510615147')
+		meta(property='fb:app_id', content='473200492729081')
+		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+		link(rel='stylesheet', href='/css/checkout/step3/libs.min.css')
+		link(rel='stylesheet', href='/css/checkout/step3/main.min.css')
+		link(rel='stylesheet', href='/css/checkout/step3/edit.css')
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+	body
+		// Google Tag Manager
+		noscript
+			iframe(src='//www.googletagmanager.com/ns.html?id=GTM-TRNP8W', height='0', width='0', style='display:none;visibility:hidden')
+		script.
+			(function (w, d, s, l, i) {
+				w[l] = w[l] || [];
+				w[l].push(
+					{
+						'gtm.start': new Date().getTime(),
+						event      : 'gtm.js'
+					});
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
+					dl = l != 'dataLayer' ? '&l=' + l : '';
+				j.async = true;
+				j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+				f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-TRNP8W');
+		// End Google Tag Manager
+		// SECTION 1
+		a.tostep1(href='step1.php')
+			section.sec1
+				.container
+					p.title.js_payment_title
+					.steps
+						.step.step1.inl
+							p.text
+								span.circle
+								|  Шаг 1
+							p.text1 Введите Ваши данные
+						.arrow.inl
+						.step.step2.inl
+							p.text
+								span.circle
+								|  Шаг 2
+							p.text1 Выберите способ оплаты
+						.arrow.inl
+						.step.step3.inl
+							p.text
+								span.circle
+								|  Шаг 3
+							p.text1 Завершение оплаты
+		section.sec2
+			.container
+				.block
+					.block-header
+						.product.inl.disapear
+							p.text
+								span.js_payment_title
+								br
+								span.js_product_type.product_type
+						.price.inl.disapear
+							.text2.inl К оплате:
+							p#dollar_price.inl
+								span.js_dollar_price
+								span.dollar $
+							.inl
+								p#rub_price.text3
+									span.js_rub_price
+									span.val руб.
+								p#hrn_price.text3
+									span.js_hrn_price
+									span.val грн.
+						p.step1text
+							| Чтобы забронировать участие в событии "
+							span.js_payment_title
+							| ",
+							b
+								span.js_product_type
+							| ,
+							br
+							| введите свои данные в форму ниже и нажмите "Забронировать".
+						p.success
+					p.textmanual.textcenter
+						b Спасибо! Вы успешно произвели попытку оплаты.
+						br
+						|  Все данные были отправлены на Ваш E-Mail.
+						br
+						br
+						|  Если по каким-то причинам Вы не получили от нас письмо, обратитесь на наш
+						br
+						|  E-Mail клиент-сервиса:&nbsp;
+						a(target='_blank', href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+						| , либо звоните:
+						br
+						|  +7 495 241 07 87 (Россия), +38 044 237 13 18 (Украина)
+					.links.links4
+					script.
+						var step = '4';
+					p.text5
+						| Есть вопросы по оплате? Посмотрите
+						a(href='#modal-video', data-video='youtube', data-srcvideo='Ldo-oggnt5c') видеоинструкцию
+						|  или позвоните нам: тел.
+						b +7 495 241 07 87
+						|  (Россия),
+						b +38 044 237 13 18
+						|  (Украина)
+					.info
+						.part.part1.inl
+							p.text7 Гарантия возврата средств
+							p.text8
+								| Genius Marketing гарантирует возврат средств за приобретенный цифровой продукт и/или услугу по требованию клиента.
+								br
+								br
+								| Срок гарантийного периода регламентируется договором об оказании услуг (офертой).
+						.part.part2.inl
+							p.text7 100% защита персональных данных
+							p.text8
+								| Мы ни при каких условиях не передаём Вашу личную информацию третьим лицам.
+								br
+								br
+								| Безопасность всех платежей гарантируется сертификатами THAWTE и PCI.
+		// FOOTER
+		footer.main-footer
+			.container
+				.footer1
+					.copy-wrap
+						p.copy
+							img(src='/img/footer-logo.png')
+							br
+							br
+							| ТОВ "КОНСАЛТИНГ СИНДИКАТ"
+							br
+							| ЕГРПОУ: 42182763, Адрес: 01033, г. Киев,
+							br
+							| ул. Паньковская, 14
+							br
+				.footer2
+					.footer-inline
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-konfidencialnosti/') Политика конфиденциальности
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/otkaz-ot-otvetstvennosti/') Отказ от ответственности
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/soglasie-s-rassylkoj/') Согласие с рассылкой
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-vozvrata-denezhnyx-sredstv/') Политика возврата
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') Публичный договор
+				.footer3
+					p.social
+						| Присоединяйтесь к нам в социальных сетях:
+						br.lg
+						br
+						a.icon-fb.icon-soc(href='https://www.facebook.com/GeniusMarketing.me/', target='_blank')
+							i.fa.fa-facebook(aria-hidden='true')
+						a.icon-vk.icon-soc(href='https://vk.com/geniusmarketing', target='_blank')
+							i.fa.fa-vk(aria-hidden='true')
+						a.icon-inst.icon-soc(href='https://www.instagram.com/geniusmarketingofficial/', target='_blank')
+							i.fa.fa-instagram(aria-hidden='true')
+						a.icon-yt.icon-soc(href='https://www.youtube.com/user/Olestimofeev', target='_blank')
+							i.fa.fa-youtube(aria-hidden='true')
+					p.text4
+						span.ru +7 (495) 241 07 87
+						|  (Россия)
+					p.text4
+						span.ru +38 (044) 237 13 18
+						|  (Украина)
+				.footer-line
+				p.bottom-text
+					| © Олесь Тимофеев & GeniusMarketing. Все права защищены. Любое копирование материалов разрешено
+					br
+					|  только с согласия правообладателей. По всем вопросам обращайтесь:
+					a.mail(href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+		// END FOOTER
+		script.
+			// Курс рубля к доллару
+			var rub_cur = 66;
+			// Курс гривны к доллару
+			var uah_cur = 27;
+			console.log('success');
+		// HIDDEN ELEMENTS (MODALS)
+		#modal-video.modal-overlay
+			.modal-content
+				.close-button
+					.one
+					.two
+				#video-popup
+		// END HIDDEN ELEMENTS (MODALS)
+		script(src='/js/libs.min.js')
+		script(src='/js/common.js')
+		script.
+			$("input.phone").intlTelInput(
+				{
+					utilsScript       : '/js/utils.js',
+					defaultCountry    : 'auto',
+					separateDialCode  : false,
+					nationalMode      : false,
+					preferredCountries: ['ua', 'ru', 'by', 'kz']
+				});
+
+		script.
+			var header_image = 'bg1.jpg';
+			var payment_title = '#{productName}';
+			var dollar_price = 990;
+			if (Math.ceil(dollar_price * uah_cur) < 1000) {
+				var hrn_price = Math.ceil(dollar_price * uah_cur);
+			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
+			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
+			} else {
+				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
+			}
+			if (Math.ceil(dollar_price * rub_cur) < 1000) {
+				var rub_price = Math.ceil(dollar_price * rub_cur);
+			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
+			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
+			} else {
+				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
+			}
+			var tovar_id = 391746;
+			var token_GR = 'b7QW';
+			var CRM_id = 1185;
+			var success_url = 'https://geniusmarketing.me/syndicate/2payments-entrepreneur-webinar/step1.php';
+			if (step == '0') {
+				$('.steps').addClass('zero');
+				$('.step1text').fadeIn(0);
+				$('.tostep1').addClass('disable_link');
+			} else if (step == '1') {
+				$('.steps').addClass('first');
+				$('.price').removeClass('disapear');
+				$('.product').removeClass('disapear');
+			} else if (step == '2') {
+				$('.steps').addClass('second');
+				$('.price').removeClass('disapear');
+				$('.product').removeClass('disapear');
+			} else if (step == '3') {
+				$('.steps').addClass('third');
+				$('.success').fadeIn(0);
+				$('.success').html('СПАСИБО!');
+			} else if (step == '4') {
+				$('.steps').addClass('third');
+				$('.success').fadeIn(0);
+				$('.success').html('ЗАПРОС НА ОПЛАТУ ЗАКАЗА УСПЕШНО ОТПРАВЛЕН');
+			}
+			$('#checktoken').val(token_GR);
+			$('#checkrespo').val(success_url);
+			$('#emailexist').val(success_url);
+			$('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
+			// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
+			$('.js_payment_title').html(payment_title);
+			$('.js_dollar_price').html(dollar_price);
+			$('.js_hrn_price').html(hrn_price);
+			$('.js_rub_price').html(rub_price);
+			// if(rub_price > 15000){
+			//   $('.links1 .link3').fadeOut(0);
+			// }
+			$('.js_tovar_id').val(tovar_id);
+			$('.sec1').css('background-image', 'url(/img/' + header_image + ')');
