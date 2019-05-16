@@ -428,7 +428,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/monobank/reject", async (ctx) => {
 		console.log("BODY:", ctx.request.body);
-		ctx.body = await Monobank.rejectOrder(ctx.request.body);
+		ctx.body = await Monobank.rejectOrder(ctx.request.body.orderID);
 	});
 
 	router.post("/monobank/return", async (ctx) => {
