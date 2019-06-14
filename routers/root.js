@@ -782,12 +782,21 @@ module.exports = function routes(app, passport) {
 						reversed = "Да";
 					}
 
+					let status = "";
+					if (order.state) {
+						status = order.state;
+
+						if (order.sub_state) {
+							status += " (" + order.sub_state + ")";
+						}
+					}
+
 					list.data.push([
 						order.mono_order_id,
 						order.name,
 						order.client_phone,
 						productName,
-						order.status,
+						status,
 						reversed,
 						null
 					]);
