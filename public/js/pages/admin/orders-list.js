@@ -53,7 +53,7 @@ $(document).ready(function () {
 
 			//Return btn
 			var aTag = document.createElement("a");
-			aTag.setAttribute("title", "Редактировать");
+			aTag.setAttribute("title", "Сделать возврат");
 			aTag.setAttribute("style", "cursor:pointer; margin-right:5px");
 			aTag.onclick = function () {
 				returnItem(aData[0]);
@@ -73,6 +73,10 @@ $(document).ready(function () {
 	});
 
 	function returnItem(id) {
-		window.location = "/admin/orders/" + id + "/return";
+		Dialog("Сделать возврат?", function () {
+			window.location = "/admin/orders/" + id + "/return";
+		}, function () {
+			return false;
+		});
 	}
 });
