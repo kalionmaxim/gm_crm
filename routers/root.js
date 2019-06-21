@@ -797,6 +797,7 @@ module.exports = function routes(app, passport) {
 						order.client_phone,
 						productName,
 						status,
+						order.total_sum.toFixed(2) || 0,
 						reversed,
 						null
 					]);
