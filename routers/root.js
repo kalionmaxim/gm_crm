@@ -1,6 +1,8 @@
 const Router = require("koa-router");
 const router = new Router();
 
+const async = require("async");
+
 const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
@@ -17,6 +19,7 @@ const eLogger = require("../lib/logger").eLogger;
 
 const Page = require("../models/page").Page;
 const MonoOrder = require("../models/monoOrder").MonoOrder;
+const USDRate = require("../models/usdRate").USDRate;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/getResponse").addToCampaign;
@@ -97,7 +100,10 @@ module.exports = function routes(app, passport) {
 				merchantUSD : merchantUSD,
 				merchantEUR : merchantEUR,
 				merchantUAH : merchantUAH,
-				merchantRUB : merchantRUB
+				merchantRUB : merchantRUB,
+				USDRateUAH  : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR  : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB  : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -815,29 +821,31 @@ module.exports = function routes(app, passport) {
 
 	router.get("/admin/orders/:order_id/return", async (ctx) => {
 		try {
-			const order = await MonoOrder.findOne({ mono_order_id: parseInt(ctx.params.order_id, 10) });
+			if (ctx.isAuthenticated()) {
+				const order = await MonoOrder.findOne({ mono_order_id: parseInt(ctx.params.order_id, 10) });
 
-			if (order) {
-				const stateData = await Monobank.stateOrder(order.external_order_id);
-				console.log("stateData", stateData);
+				if (order) {
+					const stateData = await Monobank.stateOrder(order.external_order_id);
+					console.log("stateData", stateData);
 
-				if (stateData.result) {
-					if (stateData.data.state === "SUCCESS") {
-						await Monobank.returnOrder({
-							orderID             : order.external_order_id,
-							return_money_to_card: true,
-							sum                 : order.total_sum
-						});
+					if (stateData.result) {
+						if (stateData.data.state === "SUCCESS") {
+							await Monobank.returnOrder({
+								orderID             : order.external_order_id,
+								return_money_to_card: true,
+								sum                 : order.total_sum
+							});
 
-						order.returned = true;
+							order.returned = true;
 
-						await order.save();
-					} else {
-						await Monobank.rejectOrder(order.external_order_id);
+							await order.save();
+						} else {
+							await Monobank.rejectOrder(order.external_order_id);
 
-						order.rejected = true;
+							order.rejected = true;
 
-						await order.save();
+							await order.save();
+						}
 					}
 				}
 			}
@@ -846,6 +854,61 @@ module.exports = function routes(app, passport) {
 		}
 
 		await ctx.redirect("/admin/orders");
+	});
+
+	router.get("/admin/usdrates", async (ctx) => {
+		try {
+			if (ctx.isAuthenticated()) {
+				const usdrates = await USDRate.find().lean();
+				await ctx.render("pages/admin/usdrates-edit", {
+					usdrates
+				});
+			} else {
+				await ctx.redirect("/admin");
+			}
+		} catch (err) {
+			eLogger.error(err);
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/usdrates", async (ctx) => {
+		try {
+			const usdrates = await USDRate.find();
+
+			await (new Promise(resolve => {
+				async.eachSeries(usdrates, (rate, cb) => {
+					for (let key in ctx.request.body) {
+						if (rate.currency === key) {
+							rate.price = parseFloat(ctx.request.body[key]);
+
+							break;
+						}
+					}
+
+					rate.save((err) => {
+						cb(err);
+					});
+				}, (err) => {
+					if (err) {
+						eLogger.error(err);
+						resolve({
+							result: 0
+						});
+					} else {
+						resolve({
+							result: 1
+						});
+					}
+				});
+			}));
+
+			await ctx.redirect("/admin/usdrates");
+		} catch (err) {
+			eLogger.error(err);
+			await ctx.redirect("/admin/usdrates");
+		}
+
 	});
 
 	/*router.get("/yandex/form", async (ctx) => {

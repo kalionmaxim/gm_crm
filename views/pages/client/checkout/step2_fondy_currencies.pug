@@ -165,21 +165,46 @@ html(lang='ru-RU')
 		script.
 			function payFondy(curr) {
 				var merchant = "";
+				var sumDef = parseFloat("#{productPrice}");
+				var sumUpd = parseFloat("#{productPrice}");
+				var currDef = "#{currency.toUpperCase()}";
+				var currUpd = "#{currency.toUpperCase()}";
+
+				var USDRateUAH = parseFloat("#{USDRateUAH}");
+				var USDRateEUR = parseFloat("#{USDRateEUR}");
+				var USDRateRUB = parseFloat("#{USDRateRUB}");
+
 				switch (curr) {
 					case "usd":
 						merchant = "#{merchantUSD}";
+						if (currDef === "USD") {
+							currUpd = "USD";
+							sumUpd = sumDef;
+						}
 						break;
 
 					case "eur":
 						merchant = "#{merchantEUR}";
+						if (currDef === "USD") {
+							currUpd = "EUR";
+							sumUpd = (sumDef * USDRateEUR).toFixed(2);
+						}
 						break;
 
 					case "uah":
 						merchant = "#{merchantUAH}";
+						if (currDef === "USD") {
+							currUpd = "UAH";
+							sumUpd = (sumDef * USDRateUAH).toFixed(2);
+						}
 						break;
 
 					case "rub":
 						merchant = "#{merchantRUB}";
+						if (currDef === "USD") {
+							currUpd = "RUB";
+							sumUpd = (sumDef * USDRateRUB).toFixed(2);
+						}
 						break;
 				}
 
@@ -190,8 +215,8 @@ html(lang='ru-RU')
 						Email             : "#{email}",
 						salesOrderID      : "#{salesOrderID}",
 						productName       : "#{productName}",
-						productPrice      : "#{productPrice}",
-						currency          : "#{currency.toUpperCase()}",
+						productPrice      : "#{sumUpd}",
+						currency          : "#{currUpd}",
 						redirectURL       : "#{redirectURL}",
 						paymentDescription: "Оплата продукта \"#{productName}\"",
 						merchantID        : merchant || null
@@ -221,8 +246,8 @@ html(lang='ru-RU')
 						"Phone"       : "#{phone}",
 						"productName" : "#{productName}",
 						"productID"   : "#{productID}",
-						"productPrice": "#{productPrice}",
-						"currency"    : "#{currency}",
+						"productPrice": "#{sumUpd}",
+						"currency"    : "#{currUpd}",
 						"contactID"   : contactID,
 						"dealID"      : dealIDPay
 					};
@@ -234,13 +259,15 @@ html(lang='ru-RU')
 					})
 						.then(function (response) {
 							var salesOrderID = response.data.salesOrderID;
+							console.log("response", response);
+							console.log("salesOrderID", salesOrderID);
 
 							var data = {
 								Email             : "#{email}",
 								salesOrderID      : salesOrderID || null,
 								productName       : "#{productName}",
-								productPrice      : "#{productPrice}",
-								currency          : "#{currency.toUpperCase()}",
+								productPrice      : "#{sumUpd}",
+								currency          : "#{currUpd}",
 								redirectURL       : "#{redirectURL}",
 								paymentDescription: "Оплата продукта \"#{productName}\"",
 								merchantID        : merchant || null
@@ -380,7 +407,7 @@ html(lang='ru-RU')
 			var payment_title = '#{productName}';
 			// var product_type = '';
 			// var dollar_price = "#/{productPrice}";
-			var dollar_price = parseFloat("#{productPrice}").toFixed(2);
+			var dollar_price = parseFloat("#{productPrice}");
 			var currencySym = "$";
 			var currency = "#{currency}";
 			switch (currency.toLowerCase()) {
