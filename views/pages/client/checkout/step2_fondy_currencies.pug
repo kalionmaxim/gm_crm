@@ -169,7 +169,6 @@ html(lang='ru-RU')
 				var sumUpd = parseFloat("#{productPrice}");
 				var currDef = "#{currency.toUpperCase()}";
 				var currUpd = "#{currency.toUpperCase()}";
-				console.log("currUpd", currUpd);
 
 				var USDRateUAH = parseFloat("#{USDRateUAH}");
 				var USDRateEUR = parseFloat("#{USDRateEUR}");
@@ -208,8 +207,6 @@ html(lang='ru-RU')
 						}
 						break;
 				}
-
-				console.log("currUpd", currUpd);
 
 				$("#preloader").show();
 
@@ -255,8 +252,6 @@ html(lang='ru-RU')
 						"dealID"      : dealIDPay
 					};
 
-					console.log("data2", data2);
-
 					axios({
 						method: "post",
 						url   : "/sales_order",
@@ -264,8 +259,6 @@ html(lang='ru-RU')
 					})
 						.then(function (response) {
 							var salesOrderID = response.data.salesOrderID;
-							console.log("response", response);
-							console.log("salesOrderID", salesOrderID);
 
 							var data = {
 								Email             : "#{email}",
