@@ -169,6 +169,7 @@ html(lang='ru-RU')
 				var sumUpd = parseFloat("#{productPrice}");
 				var currDef = "#{currency.toUpperCase()}";
 				var currUpd = "#{currency.toUpperCase()}";
+				console.log("currUpd", currUpd);
 
 				var USDRateUAH = parseFloat("#{USDRateUAH}");
 				var USDRateEUR = parseFloat("#{USDRateEUR}");
@@ -208,6 +209,8 @@ html(lang='ru-RU')
 						break;
 				}
 
+				console.log("currUpd", currUpd);
+
 				$("#preloader").show();
 
 				if ("#{salesOrderID}") {
@@ -215,8 +218,8 @@ html(lang='ru-RU')
 						Email             : "#{email}",
 						salesOrderID      : "#{salesOrderID}",
 						productName       : "#{productName}",
-						productPrice      : "#{sumUpd}",
-						currency          : "#{currUpd}",
+						productPrice      : sumUpd,
+						currency          : currUpd,
 						redirectURL       : "#{redirectURL}",
 						paymentDescription: "Оплата продукта \"#{productName}\"",
 						merchantID        : merchant || null
@@ -246,11 +249,13 @@ html(lang='ru-RU')
 						"Phone"       : "#{phone}",
 						"productName" : "#{productName}",
 						"productID"   : "#{productID}",
-						"productPrice": "#{sumUpd}",
-						"currency"    : "#{currUpd}",
+						"productPrice": sumUpd,
+						"currency"    : currUpd,
 						"contactID"   : contactID,
 						"dealID"      : dealIDPay
 					};
+
+					console.log("data2", data2);
 
 					axios({
 						method: "post",
@@ -266,8 +271,8 @@ html(lang='ru-RU')
 								Email             : "#{email}",
 								salesOrderID      : salesOrderID || null,
 								productName       : "#{productName}",
-								productPrice      : "#{sumUpd}",
-								currency          : "#{currUpd}",
+								productPrice      : sumUpd,
+								currency          : currUpd,
 								redirectURL       : "#{redirectURL}",
 								paymentDescription: "Оплата продукта \"#{productName}\"",
 								merchantID        : merchant || null
