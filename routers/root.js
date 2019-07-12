@@ -484,6 +484,7 @@ module.exports = function routes(app, passport) {
 	router.post("/monobank/:page_id/order", async (ctx) => {
 		try {
 			const page = await Page.findOne({ page_id: parseInt(ctx.params.page_id, 10) });
+			const usdRatePrice = (parseFloat((await USDRate.findOne({ currency: "UAH" }).lean()).price).toFixed(2)) || 0;
 
 			if (page) {
 				const date = new Date();
@@ -494,7 +495,7 @@ module.exports = function routes(app, passport) {
 
 				const data = {
 					client_phone      : ctx.request.body.phone,
-					total_sum         : (parseFloat(config.get("monobank:usd_rate")) * parseFloat(page.price)).toFixed(2),
+					total_sum         : (usdRatePrice * parseFloat(page.price)).toFixed(2),
 					invoice           : {
 						date  : dateStr,
 						source: "INTERNET"
@@ -506,7 +507,7 @@ module.exports = function routes(app, passport) {
 					products          : [{
 						name : page.name,
 						count: 1,
-						sum  : (parseFloat(config.get("monobank:usd_rate")) * parseFloat(page.price)).toFixed(2)
+						sum  : (usdRatePrice * parseFloat(page.price)).toFixed(2)
 					}],
 					result_callback   : config.get("url") + "monobank/" + page.page_id + "/callback",
 					email             : ctx.request.body.email,
