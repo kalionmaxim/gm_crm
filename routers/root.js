@@ -909,7 +909,17 @@ module.exports = function routes(app, passport) {
 			eLogger.error(err);
 			await ctx.redirect("/admin/usdrates");
 		}
+	});
 
+	router.get("/admin/link_gen", async (ctx) => {
+		try {
+			await ctx.render("pages/admin/link-generator", {
+				baseURL: config.get("url") || ""
+			});
+		} catch (err) {
+			eLogger.error(err);
+			await ctx.redirect("/admin");
+		}
 	});
 
 	/*router.get("/yandex/form", async (ctx) => {

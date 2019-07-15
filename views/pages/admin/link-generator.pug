@@ -1,0 +1,119 @@
+extends ../../layouts/main-admin
+
+block contents
+	// Preloader
+	.preloader
+		.cssload-speeding-wheel
+			link(rel='stylesheet', href='/stylesheets/css/jquery.clockpicker.css')
+
+	#wrapper
+		include ./../../partials/admin/header
+		include ./../../partials/admin/aside-menu
+
+		// Page Content
+		#page-wrapper
+			.container-fluid
+				.row.bg-title
+					.col-lg-12.col-md-12.col-sm-12.col-xs-12
+						h4.page-title Генератор ссылок для покупки продуктов
+				.row
+					.col-md-12
+						.white-box
+							.form-horizontal
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") ID продукта в zohoCRM
+											.col-md-6
+												input#productID.form-control(type="text" placeholder='Введите ID продукта' required=true)
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Название продукта в zohoCRM
+											.col-md-6
+												input#productName.form-control(type="text" placeholder='Введите название продукта' required=true)
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Цена
+											.col-md-6
+												input#price.form-control(type="number" min=0.01 step=0.01 placeholder='Введите цену' required=true)
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Валюта
+											.col-md-6
+												select#currency.form-control
+													option(value="usd") USD
+													option(value="eur") EUR
+													option(value="uah") UAH
+													option(value="rub") RUB
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Мерчант
+											.col-md-6
+												input#merchant.form-control(type="text" placeholder='Укажите мерчант' required=true)
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") С лендинга
+											.col-md-6
+												select#landing.form-control
+													option(value="yes") Да
+													option(value="no") Нет
+
+								.form-group.m-b-12
+									.col-md-12
+										button#generateBtn.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-12(type='button' style="width: 100%;") Получит ссылку
+
+								.row
+									.form-group
+										.col-md-12
+											textarea#result.form-control(placeholder="Сгенерированная ссылка..." readonly=true)
+
+		include ./../../partials/admin/footer
+
+		script.
+			$("#generateBtn").click(function () {
+				var resultElem = $("#result");
+				resultElem.val("");
+
+				var baseURL = "#{baseURL}";
+
+				var productID = $("#productID").val().trim();
+				var productName = $("#productName").val().trim();
+				var price = parseFloat($("#price").val().trim());
+				var currency = $("#currency").val();
+				var merchant = $("#merchant").val().trim();
+				var landing = $("#landing").val();
+
+				if (!productID) {
+					setError("Укажите ID продукта");
+					return false;
+				}
+
+				if (!productName) {
+					setError("Укажите название продукта");
+					return false;
+				}
+
+				if (!price) {
+					setError("Укажите цену");
+					return false;
+				}
+
+				if (!merchant) {
+					setError("Укажите мерчант");
+					return false;
+				}
+
+				var url = baseURL + "checkout/1?";
+				url += ("productID=" + productID + "&");
+				url += ("productName=" + productName + "&");
+				url += ("productPrice=" + price + "&");
+				url += ("currency=" + currency + "&");
+				url += ("merchantID=" + merchant);
+				if (landing === "yes") {
+					url += ("&landing=true");
+				}
+
+				resultElem.val(url);
+			});
