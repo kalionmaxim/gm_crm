@@ -54,7 +54,10 @@ module.exports = function routes(app, passport) {
 				salesOrderID: ctx.request.query["salesOrderID"] || "",
 				firstName   : ctx.request.query["firstName"] || "",
 				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || ""
+				landing     : ctx.request.query["landing"] || "",
+				USDRateUAH  : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR  : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB  : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";

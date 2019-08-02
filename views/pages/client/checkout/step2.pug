@@ -162,9 +162,9 @@ html(lang='ru-RU')
 		// END FOOTER
 		script.
 			// Курс рубля к доллару
-			var rub_cur = 68;
+			var rub_cur = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
 			// Курс гривны к доллару
-			var uah_cur = 28;
+			var uah_cur = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
 			console.log('success');
 		// HIDDEN ELEMENTS (MODALS)
 		#modal-video.modal-overlay

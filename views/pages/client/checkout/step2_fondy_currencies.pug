@@ -291,9 +291,9 @@ html(lang='ru-RU')
 
 		script.
 			// Курс рубля к доллару
-			var rub_cur = 66;
+			var rub_cur = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
 			// Курс гривны к доллару
-			var uah_cur = 27;
+			var uah_cur = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
 			console.log('success');
 		// HIDDEN ELEMENTS (MODALS)
 		#modal-video.modal-overlay
@@ -473,10 +473,10 @@ html(lang='ru-RU')
 			$('.js_payment_title').html(payment_title);
 			// $('.js_product_type').html(product_type);
 			$('.js_dollar_price').html(dollar_price);
-			if ("#{landing}" === "true") {
+			//if ("#{landing}" === "true") {
 				$('.js_hrn_price').html(hrn_price + " грн.");
 				$('.js_rub_price').html(rub_price + " руб.");
-			}
+			//}
 			// if(rub_price > 15000){
 			//   $('.links1 .link3').fadeOut(0);
 			// }
