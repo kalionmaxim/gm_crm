@@ -89,14 +89,9 @@ html(lang='ru-RU')
 						//	span.button2.hvr-grow Оплатить
 					script.
 						var step = '1';
-					p.text5
-						| Есть вопросы по оплате? Посмотрите
-						a(href='#modal-video', data-video='youtube', data-srcvideo='Ldo-oggnt5c') видеоинструкцию
-						|  или позвоните нам: тел.
-						b +7 495 241 07 87
-						|  (Россия),
-						b +38 044 237 13 18
-						|  (Украина)
+					p.text5!= "Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:"
+						br
+						| тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
 					.info
 						.part.part1.inl
 							p.text7 Гарантия возврата средств
@@ -357,10 +352,10 @@ script.
 	// $('.js_product_type').html(product_type);
 	$('.js_dollar_price').html(dollar_price);
 	$('#currencySym').html(currencySym);
-	if ("#{landing}" === "true") {
+	//if ("#{landing}" === "true") {
 		$('.js_hrn_price').html(hrn_price + " грн.");
 		$('.js_rub_price').html(rub_price + " руб.");
-	}
+	//}
 
 	// if(rub_price > 15000){
 	//   $('.links1 .link3').fadeOut(0);
