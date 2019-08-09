@@ -233,13 +233,17 @@ script.
 			"campaign": getParameterByName("grUnpaid") || ""
 		};
 
-		axios({
-			method: "post",
-			url   : "/getresponse",
-			data  : data
-		}).then(function (response) {
+		if (getParameterByName("grUnpaid")) {
+			axios({
+				method: "post",
+				url   : "/getresponse",
+				data  : data
+			}).then(function (response) {
+				cb();
+			});
+		} else {
 			cb();
-		});
+		}
 	}
 
 	function createDeal() {
