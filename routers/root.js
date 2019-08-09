@@ -148,6 +148,47 @@ module.exports = function routes(app, passport) {
 		});
 	}
 
+	router.post("/getresponse", async (ctx) => {
+		/**
+		 * email, phone, name, campaign – required fields
+		 */
+
+		if (ctx.request.body) {
+			if (!ctx.request.body.email) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'email' is undefined"
+				};
+			} else if (!ctx.request.body.phone) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'phone' is undefined"
+				};
+			} else if (!ctx.request.body.name) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'name' is undefined"
+				};
+			} else if (!ctx.request.body.campaign) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'campaign' is undefined"
+				};
+			} else {
+				// ctx.body = await zoho.searchContactOrAddNew(ctx.request.body);
+				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", { phone: ctx.request.body.phone });
+				ctx.body = {
+					result: 1
+				};
+			}
+		} else {
+			ctx.body = {
+				result: 0,
+				error : "Bad request. Body is undefined"
+			};
+		}
+	});
+
 	router.post("/contact", async (ctx) => {
 		/**
 		 * Email, Phone – required fields

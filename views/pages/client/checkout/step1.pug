@@ -98,8 +98,8 @@ html(lang='ru-RU')
 							return false;
 						});;
 					p.text5!= "Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:"
-						br
-						| тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
+					br
+					| тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
 					.info
 						.part.part1.inl
 							p.text7 Гарантия возврата средств
@@ -205,7 +205,9 @@ script.
 
 		$("#preloader").show();
 
-		createDeal();
+		createContactInGR(function () {
+			createDeal();
+		});
 	});
 
 	function getCookie(cname) {
@@ -221,6 +223,23 @@ script.
 			}
 		}
 		return undefined;
+	}
+
+	function createContactInGR(cb) {
+		var data = {
+			"name"    : document.getElementById("name").value,
+			"email"   : document.getElementById("email").value,
+			"phone"   : document.getElementById("phone").value,
+			"campaign": getParameterByName("grUnpaid") || ""
+		};
+
+		axios({
+			method: "post",
+			url   : "/getresponse",
+			data  : data
+		}).then(function (response) {
+			cb();
+		});
 	}
 
 	function createDeal() {
@@ -239,7 +258,7 @@ script.
 			"utm_content" : getParameterByName("utm_content") || "",
 			"contactID"   : contactID,
 			"Stage"       : "1. Заявка",
-			"Amount"			: "#{productPrice}"
+			"Amount"      : "#{productPrice}"
 		};
 
 		axios({
@@ -346,7 +365,7 @@ script.
 script(type='text/javascript').
 	(function (d, w, s) {
 		var widgetId = '22519',
-						gcw = d.createElement(s);
+			gcw = d.createElement(s);
 		gcw.type = 'text/javascript';
 		gcw.async = true;
 		gcw.src = '//my.binotel.ua/getcall/widgets/' + widgetId + '.js';
@@ -370,12 +389,10 @@ script(type='text/javascript').
 
 		if (d.readyState == 'complete') {
 			l();
-		}
-		else {
+		} else {
 			if (w.attachEvent) {
 				w.attachEvent('onload', l);
-			}
-			else {
+			} else {
 				w.addEventListener('load', l, false);
 			}
 		}

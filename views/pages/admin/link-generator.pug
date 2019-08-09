@@ -60,6 +60,13 @@ block contents
 													option(value="yes") Да
 													option(value="no") Нет
 
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") GR токен (до оплаты)
+											.col-md-6
+												input#grUnpaid.form-control(type="text" placeholder='Укажите токен GR кампании')
+
 								.form-group.m-b-12
 									.col-md-12
 										button#generateBtn.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-12(type='button' style="width: 100%;") Получит ссылку
@@ -83,6 +90,7 @@ block contents
 				var price = parseFloat($("#price").val().trim());
 				var currency = $("#currency").val();
 				var merchant = $("#merchant").val().trim();
+				var grUnpaid = $("#grUnpaid").val().trim();
 				var landing = $("#landing").val();
 
 				if (!productID) {
@@ -110,7 +118,13 @@ block contents
 				url += ("productName=" + productName + "&");
 				url += ("productPrice=" + price + "&");
 				url += ("currency=" + currency + "&");
+
+				if (grUnpaid) {
+					url += ("grUnpaid=" + grUnpaid + "&");
+				}
+
 				url += ("merchantID=" + merchant);
+
 				if (landing === "yes") {
 					url += ("&landing=true");
 				}
