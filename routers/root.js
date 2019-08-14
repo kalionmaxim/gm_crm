@@ -280,7 +280,8 @@ module.exports = function routes(app, passport) {
 					error : "Required field 'First_Name' is undefined"
 				};
 			} else {
-				ctx.body = await zoho.searchDeal(ctx.request.body);
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.searchDeal(ctx.request.body, geoData);
 			}
 		} else {
 			ctx.body = {
@@ -347,7 +348,8 @@ module.exports = function routes(app, passport) {
 					error : "Required field 'dealID' is undefined"
 				};
 			} else {
-				ctx.body = await zoho.updateDeal(ctx.request.body);
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.updateDeal(ctx.request.body, geoData);
 			}
 		} else {
 			ctx.body = {
@@ -400,7 +402,8 @@ module.exports = function routes(app, passport) {
 					error : "Required field 'First_Name' is undefined"
 				};
 			} else {
-				ctx.body = await zoho.createSalesOrder(ctx.request.body);
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.createSalesOrder(ctx.request.body, geoData);
 			}
 		} else {
 			ctx.body = {
