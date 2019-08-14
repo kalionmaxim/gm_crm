@@ -29,7 +29,6 @@ const requestIp = require("request-ip");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
-		await getGeo();
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step1", {
 				productName : ctx.request.query["productName"] || "",
@@ -977,8 +976,7 @@ module.exports = function routes(app, passport) {
 
 	async function getGeo(ctx) {
 		try {
-			const ip = "78.111.188.3";
-			// const ip = requestIp.getClientIp(ctx);
+			const ip = requestIp.getClientIp(ctx);
 
 			return await new Promise(resolve => {
 				const options = {
