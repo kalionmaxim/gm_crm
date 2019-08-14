@@ -2,6 +2,7 @@ const Router = require("koa-router");
 const router = new Router();
 
 const async = require("async");
+const request = require("request");
 
 const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
@@ -975,13 +976,22 @@ module.exports = function routes(app, passport) {
 		try {
 			const ip = requestIp.getClientIp(ctx);
 
-			console.log(ip);
-
-			return { result: 1 };
-
-			/*await new Promise(resolve => {
-
-			});*/
+			return await new Promise(resolve => {
+				const options = {
+					method: "get",
+					url   : "https://ipapi.co/" + ip + "/json/?key=" + config.get("ipapi:key")
+				};
+				request(options, function (error, response, body) {
+					if (error) {
+						eLogger.error(error);
+						resolve({ result: 0 });
+					} else {
+						body.result = 1;
+						console.log(body);
+						resolve(body);
+					}
+				});
+			});
 		} catch (err) {
 			eLogger.error(err);
 			return { result: 0 };
