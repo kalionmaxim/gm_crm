@@ -26,13 +26,10 @@ const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/getResponse").addToCampaign;
 
 const requestIp = require("request-ip");
-const useragent = require("koa2-useragent");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
-			await getGeo(ctx);
-
 			await ctx.render("pages/client/checkout/step1", {
 				productName : ctx.request.query["productName"] || "",
 				productID   : ctx.request.query["productID"] || "",
@@ -213,7 +210,8 @@ module.exports = function routes(app, passport) {
 					error : "Required field 'Phone' is undefined"
 				};
 			} else {
-				ctx.body = await zoho.searchContactOrAddNew(ctx.request.body);
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.searchContactOrAddNew(ctx.request.body, geoData);
 			}
 		} else {
 			ctx.body = {
@@ -325,7 +323,8 @@ module.exports = function routes(app, passport) {
 					error : "Required field 'First_Name' is undefined"
 				};
 			} else {
-				ctx.body = await zoho.createDeal(ctx.request.body);
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.createDeal(ctx.request.body, geoData);
 			}
 		} else {
 			ctx.body = {
@@ -987,7 +986,6 @@ module.exports = function routes(app, passport) {
 						resolve({ result: 0 });
 					} else {
 						body.result = 1;
-						console.log(body);
 						resolve(body);
 					}
 				});
