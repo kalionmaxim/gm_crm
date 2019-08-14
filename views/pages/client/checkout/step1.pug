@@ -312,6 +312,7 @@ script.
 			url    : requestUrl,
 			type   : 'GET',
 			success: function (json) {
+				console.log("json", json);
 				geolocationData.city = json.city;
 				geolocationData.country = json.country_name;
 				geolocationData.utc_offset = 'UTC' + json.utc_offset;
