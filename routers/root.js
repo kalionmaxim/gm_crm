@@ -24,9 +24,14 @@ const USDRate = require("../models/usdRate").USDRate;
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/getResponse").addToCampaign;
 
+const requestIp = require("request-ip");
+const useragent = require("koa2-useragent");
+
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
+			await getGeo(ctx);
+
 			await ctx.render("pages/client/checkout/step1", {
 				productName : ctx.request.query["productName"] || "",
 				productID   : ctx.request.query["productID"] || "",
@@ -965,6 +970,23 @@ module.exports = function routes(app, passport) {
 			await ctx.redirect("/admin");
 		}
 	});
+
+	async function getGeo(ctx) {
+		try {
+			const ip = requestIp.getClientIp(ctx);
+
+			console.log(ip);
+
+			return { result: 1 };
+
+			/*await new Promise(resolve => {
+
+			});*/
+		} catch (err) {
+			eLogger.error(err);
+			return { result: 0 };
+		}
+	}
 
 	/*router.get("/yandex/form", async (ctx) => {
 		await ctx.render("pages/client/yandex");
