@@ -29,6 +29,7 @@ const requestIp = require("request-ip");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
+		await getGeo();
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step1", {
 				productName : ctx.request.query["productName"] || "",
@@ -976,7 +977,8 @@ module.exports = function routes(app, passport) {
 
 	async function getGeo(ctx) {
 		try {
-			const ip = requestIp.getClientIp(ctx);
+			const ip = "78.111.188.3";
+			// const ip = requestIp.getClientIp(ctx);
 
 			return await new Promise(resolve => {
 				const options = {
@@ -988,8 +990,9 @@ module.exports = function routes(app, passport) {
 						eLogger.error(error);
 						resolve({ result: 0 });
 					} else {
-						body.result = 1;
-						resolve(body);
+						const bodyJSON = JSON.parse(body);
+						bodyJSON.result = 1;
+						resolve(bodyJSON);
 					}
 				});
 			});
