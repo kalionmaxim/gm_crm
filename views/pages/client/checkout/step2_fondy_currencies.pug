@@ -53,7 +53,7 @@ html(lang='ru-RU')
 							.text2.inl К оплате:
 							p#dollar_price.inl
 								span.js_dollar_price
-								span.dollar $
+								span#currencySym.dollar
 							.inl
 								p#rub_price.text3
 									span.js_rub_price
@@ -88,7 +88,8 @@ html(lang='ru-RU')
 							|  В процессе платежа произойдёт конвертация.
 					script.
 						var step = '1';
-					.text5!= "Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:"
+					.text5
+						| Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:
 						br
 						| тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
 					.info
@@ -286,10 +287,11 @@ html(lang='ru-RU')
 
 		script.
 			// Курс рубля к доллару
-			var rub_cur = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
+			var USDRateRUB = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
 			// Курс гривны к доллару
-			var uah_cur = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
-			console.log('success');
+			var USDRateUAH = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
+			// Курс евро к доллару
+			var USDRateEUR = ("#{USDRateEUR}" && parseFloat("#{USDRateEUR}")) || 0.89;
 		// HIDDEN ELEMENTS (MODALS)
 		#modal-video.modal-overlay
 			.modal-content
@@ -400,41 +402,47 @@ html(lang='ru-RU')
 			var payment_title = '#{productName}';
 			// var product_type = '';
 			// var dollar_price = "#/{productPrice}";
-			var dollar_price = parseFloat("#{productPrice}");
+			var mainPrice = parseFloat("#{productPrice}");
 			var currencySym = "$";
 			var currency = "#{currency}";
+			var subPrice1 = null;
+			var subPrice1Curr = null;
+			var subPrice2 = null;
+			var subPrice2Curr = null;
 			switch (currency.toLowerCase()) {
+				case "usd":
+					currencySym = "$";
+					subPrice1 = Math.ceil(mainPrice * USDRateRUB);
+					subPrice1Curr = "rub";
+					subPrice2 = Math.ceil(mainPrice * USDRateUAH);
+					subPrice2Curr = "uah";
+					break;
+
 				case "uah":
 					currencySym = "₴";
+					subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateRUB);
+					subPrice1Curr = "rub";
+					subPrice2 = Math.ceil(mainPrice / USDRateUAH);
+					subPrice2Curr = "usd";
 					break;
 
 				case "eur":
 					currencySym = "€";
+					subPrice1 = Math.ceil((mainPrice / USDRateEUR) * USDRateRUB);
+					subPrice1Curr = "rub";
+					subPrice2 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
+					subPrice2Curr = "uah";
 					break;
 
 				case "rub":
 					currencySym = "₽";
+					subPrice1 = Math.ceil((mainPrice / USDRateRUB) * USDRateUAH);
+					subPrice1Curr = "uah";
+					subPrice2 = Math.ceil(mainPrice / USDRateRUB);
+					subPrice2Curr = "usd";
 					break;
 			}
 
-			if (Math.ceil(dollar_price * uah_cur) < 1000) {
-				var hrn_price = Math.ceil(dollar_price * uah_cur);
-			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
-				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
-			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
-				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
-			} else {
-				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
-			}
-			if (Math.ceil(dollar_price * rub_cur) < 1000) {
-				var rub_price = Math.ceil(dollar_price * rub_cur);
-			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
-				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
-			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
-				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
-			} else {
-				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
-			}
 			var tovar_id = 391748;
 			var token_GR = 'b7Qc';
 			var CRM_id = 1186;
@@ -467,10 +475,40 @@ html(lang='ru-RU')
 			// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
 			$('.js_payment_title').html(payment_title);
 			// $('.js_product_type').html(product_type);
-			$('.js_dollar_price').html(dollar_price);
-			//if ("#{landing}" === "true") {
-				$('.js_hrn_price').html(hrn_price + " грн.");
-				$('.js_rub_price').html(rub_price + " руб.");
+			$('.js_dollar_price').html(mainPrice);
+			$('#currencySym').html(currencySym);
+			//if ("#/{landing}" === "true") {
+			if ("#{convertationHide}" !== "true") {
+				if (subPrice1 && subPrice1Curr) {
+					switch (subPrice1Curr) {
+						case "usd":
+							$('.js_hrn_price').html(subPrice1 + " долл.");
+							break;
+						case "uah":
+							$('.js_hrn_price').html(subPrice1 + " грн.");
+							break;
+						case "rub":
+							$('.js_hrn_price').html(subPrice1 + " руб.");
+							break;
+					}
+				}
+
+				if (subPrice2 && subPrice2Curr) {
+					switch (subPrice2Curr) {
+						case "usd":
+							$('.js_rub_price').html(subPrice2 + " долл.");
+							break;
+						case "uah":
+							$('.js_rub_price').html(subPrice2 + " грн.");
+							break;
+						case "rub":
+							$('.js_rub_price').html(subPrice2 + " руб.");
+							break;
+					}
+				}
+			}
+			// $('.js_hrn_price').html(hrn_price + " грн.");
+			// $('.js_rub_price').html(rub_price + " руб.");
 			//}
 			// if(rub_price > 15000){
 			//   $('.links1 .link3').fadeOut(0);
@@ -482,7 +520,7 @@ html(lang='ru-RU')
 script(type='text/javascript').
 	(function (d, w, s) {
 		var widgetId = '22519',
-						gcw = d.createElement(s);
+			gcw = d.createElement(s);
 		gcw.type = 'text/javascript';
 		gcw.async = true;
 		gcw.src = '//my.binotel.ua/getcall/widgets/' + widgetId + '.js';
@@ -506,12 +544,10 @@ script(type='text/javascript').
 
 		if (d.readyState == 'complete') {
 			l();
-		}
-		else {
+		} else {
 			if (w.attachEvent) {
 				w.attachEvent('onload', l);
-			}
-			else {
+			} else {
 				w.addEventListener('load', l, false);
 			}
 		}

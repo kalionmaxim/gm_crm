@@ -66,6 +66,13 @@ block contents
 											label.col-md-4(style="margin-top: 10px;") GR токен (до оплаты)
 											.col-md-6
 												input#grUnpaid.form-control(type="text" placeholder='Укажите токен GR кампании')
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Скрыть конвертированные валюты
+											.col-md-6
+												select#convertationHide.form-control
+													option(value="no") Нет
+													option(value="yes") Да
 
 								.form-group.m-b-12
 									.col-md-12
@@ -92,6 +99,7 @@ block contents
 				var merchant = $("#merchant").val().trim();
 				var grUnpaid = $("#grUnpaid").val().trim();
 				var landing = $("#landing").val();
+				var convertationHide = $("#convertationHide").val();
 
 				if (!productID) {
 					setError("Укажите ID продукта");
@@ -127,6 +135,10 @@ block contents
 
 				if (landing === "yes") {
 					url += ("&landing=true");
+				}
+
+				if (convertationHide === "yes") {
+					url += ("&convertationHide=true");
 				}
 
 				resultElem.val(url);

@@ -31,13 +31,14 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step1", {
-				productName : ctx.request.query["productName"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				currency    : ctx.request.query["currency"] || "",
+				productName     : ctx.request.query["productName"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				currency        : ctx.request.query["currency"] || "",
 				// redirectURL : ctx.request.query["redirectURL"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				landing     : ctx.request.query["landing"] || "false"
+				merchantID      : ctx.request.query["merchantID"] || "",
+				landing         : ctx.request.query["landing"] || "false",
+				convertationHide: ctx.request.query["convertationHide"] || "false"
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -47,20 +48,21 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/2", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2", {
-				productName : ctx.request.query["productName"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				email       : ctx.request.query["email"] || "",
-				phone       : ctx.request.query["phone"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				currency    : ctx.request.query["currency"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				salesOrderID: ctx.request.query["salesOrderID"] || "",
-				firstName   : ctx.request.query["firstName"] || "",
-				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || "",
-				USDRateUAH  : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
-				USDRateEUR  : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB  : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
+				productName     : ctx.request.query["productName"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				currency        : ctx.request.query["currency"] || "",
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -70,18 +72,19 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/2/fondy", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy", {
-				productName : ctx.request.query["productName"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				email       : ctx.request.query["email"] || "",
-				phone       : ctx.request.query["phone"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				currency    : ctx.request.query["currency"] || "",
+				productName     : ctx.request.query["productName"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				currency        : ctx.request.query["currency"] || "",
 				// redirectURL : ctx.request.query["redirectURL"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				salesOrderID: ctx.request.query["salesOrderID"] || "",
-				firstName   : ctx.request.query["firstName"] || "",
-				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || ""
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false"
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -91,25 +94,26 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/2/fondy/currencies", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy_currencies", {
-				productName : ctx.request.query["productName"] || "",
-				email       : ctx.request.query["email"] || "",
-				phone       : ctx.request.query["phone"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				currency    : ctx.request.query["currency"] || "",
+				productName     : ctx.request.query["productName"] || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				currency        : ctx.request.query["currency"] || "",
 				// redirectURL : ctx.request.query["redirectURL"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				salesOrderID: ctx.request.query["salesOrderID"] || "",
-				firstName   : ctx.request.query["firstName"] || "",
-				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || "",
-				merchantUSD : merchantUSD,
-				merchantEUR : merchantEUR,
-				merchantUAH : merchantUAH,
-				merchantRUB : merchantRUB,
-				USDRateUAH  : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
-				USDRateEUR  : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB  : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				merchantUSD     : merchantUSD,
+				merchantEUR     : merchantEUR,
+				merchantUAH     : merchantUAH,
+				merchantRUB     : merchantRUB,
+				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
