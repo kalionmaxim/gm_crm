@@ -1,6 +1,6 @@
 const zoho = require("../lib/zohoCRM");
 
-zoho.searchContactOrAddNew({ Email: "velikova.smm@gmail.com", Phone: "+79831016663" })
+zoho.searchContact({ Email: "anton.shaiko9@mail.ru", Phone: "+37529" })
 	.then(result => {
 		console.log(result);
 	});
