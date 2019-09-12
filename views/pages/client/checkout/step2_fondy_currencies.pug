@@ -176,6 +176,15 @@ html(lang='ru-RU')
 						if (currDef === "USD") {
 							currUpd = "USD";
 							sumUpd = sumDef;
+						} else if (currDef === "EUR") {
+							currUpd = "USD";
+							sumUpd = (sumDef * (1 / USDRateEUR)).toFixed(2);
+						} else if (currDef === "UAH") {
+							currUpd = "USD";
+							sumUpd = (sumDef * (1 / USDRateUAH)).toFixed(2);
+						} else if (currDef === "RUB") {
+							currUpd = "USD";
+							sumUpd = (sumDef * (1 / USDRateRUB)).toFixed(2);
 						}
 						break;
 
@@ -184,6 +193,15 @@ html(lang='ru-RU')
 						if (currDef === "USD") {
 							currUpd = "EUR";
 							sumUpd = (sumDef * USDRateEUR).toFixed(2);
+						} else if (currDef === "EUR") {
+							currUpd = "EUR";
+							sumUpd = sumDef;
+						} else if (currDef === "UAH") {
+							currUpd = "EUR";
+							sumUpd = ((sumDef / USDRateUAH) * USDRateEUR).toFixed(2);
+						} else if (currDef === "RUB") {
+							currUpd = "EUR";
+							sumUpd = ((sumDef / USDRateRUB) * USDRateEUR).toFixed(2);
 						}
 						break;
 
@@ -192,6 +210,15 @@ html(lang='ru-RU')
 						if (currDef === "USD") {
 							currUpd = "UAH";
 							sumUpd = (sumDef * USDRateUAH).toFixed(2);
+						} else if (currDef === "EUR") {
+							currUpd = "UAH";
+							sumUpd = ((sumDef / USDRateEUR) * USDRateUAH).toFixed(2);
+						} else if (currDef === "UAH") {
+							currUpd = "UAH";
+							sumUpd = sumDef;
+						} else if (currDef === "RUB") {
+							currUpd = "UAH";
+							sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
 						}
 						break;
 
@@ -200,6 +227,15 @@ html(lang='ru-RU')
 						if (currDef === "USD") {
 							currUpd = "RUB";
 							sumUpd = (sumDef * USDRateRUB).toFixed(2);
+						} else if (currDef === "EUR") {
+							currUpd = "RUB";
+							sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
+						} else if (currDef === "UAH") {
+							currUpd = "RUB";
+							sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
+						} else if (currDef === "RUB") {
+							currUpd = "RUB";
+							sumUpd = sumDef;
 						}
 						break;
 				}
