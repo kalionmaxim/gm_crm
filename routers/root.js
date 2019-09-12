@@ -845,12 +845,18 @@ module.exports = function routes(app, passport) {
 	router.post("/admin/merchants/new", async (ctx) => {
 		if (ctx.isAuthenticated()) {
 			try {
-				await FondyMerchant.create({
-					ID      : ctx.request.body.ID.trim(),
-					password: ctx.request.body.password.trim()
-				});
+				const merchantExists = await FondyMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
 
-				await ctx.redirect("/admin/merchants");
+				if (!merchantExists) {
+					await FondyMerchant.create({
+						ID      : ctx.request.body.ID.trim(),
+						password: ctx.request.body.password.trim()
+					});
+
+					await ctx.redirect("/admin/merchants");
+				} else {
+					await ctx.render("pages/error404");
+				}
 			} catch (err) {
 				eLogger.error(err);
 				await ctx.render("pages/error404");
@@ -876,12 +882,17 @@ module.exports = function routes(app, passport) {
 		if (ctx.isAuthenticated()) {
 			const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id });
 
-			merchant.ID = ctx.request.body.ID.trim();
-			merchant.password = ctx.request.body.password.trim();
+			const merchantExists = await FondyMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
+			if (!merchantExists || (merchantExists && (merchant.fondy_merchant_id === merchantExists.fondy_merchant_id))) {
+				merchant.ID = ctx.request.body.ID.trim();
+				merchant.password = ctx.request.body.password.trim();
 
-			await merchant.save();
+				await merchant.save();
 
-			await ctx.redirect("/admin/merchants");
+				await ctx.redirect("/admin/merchants");
+			} else {
+				await ctx.render("pages/error404");
+			}
 		} else {
 			await ctx.redirect("/admin");
 		}
