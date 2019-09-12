@@ -21,6 +21,7 @@ const eLogger = require("../lib/logger").eLogger;
 const Page = require("../models/page").Page;
 const MonoOrder = require("../models/monoOrder").MonoOrder;
 const USDRate = require("../models/usdRate").USDRate;
+const FondyMerchant = require("../models/fondyMerchant").FondyMerchant;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/getResponse").addToCampaign;
@@ -696,7 +697,7 @@ module.exports = function routes(app, passport) {
 				await ctx.redirect("/admin/pages");
 			} catch (err) {
 				eLogger.error(err);
-				await ctx.render("error404");
+				await ctx.render("pages/error404");
 			}
 		} else {
 			await ctx.redirect("/admin");
@@ -782,6 +783,117 @@ module.exports = function routes(app, passport) {
 
 				if (page) {
 					await page.remove();
+
+					ctx.body = { result: 1 };
+				} else {
+					ctx.body = { result: 0 };
+				}
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = { result: 0 };
+			}
+		} else {
+			ctx.body = { result: 0 };
+		}
+	});
+
+	router.get("/admin/merchants", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/merchants-list");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/merchants/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchants = await FondyMerchant.find().lean();
+
+				for (let i = 0; i < merchants.length; i++) {
+					const merchant = merchants[i];
+
+					list.data.push([
+						merchant.ID,
+						merchant.password,
+						merchant.fondy_merchant_id
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
+	});
+
+	router.get("/admin/merchants/new", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/merchants-new");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/merchants/new", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			try {
+				await FondyMerchant.create({
+					ID      : ctx.request.body.ID.trim(),
+					password: ctx.request.body.password.trim()
+				});
+
+				await ctx.redirect("/admin/merchants");
+			} catch (err) {
+				eLogger.error(err);
+				await ctx.render("pages/error404");
+			}
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/merchants/:fondy_merchant_id/edit", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id }).lean();
+
+			await ctx.render("pages/admin/merchants-edit", {
+				merchant
+			});
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/merchants/:fondy_merchant_id/edit", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id });
+
+			merchant.ID = ctx.request.body.ID.trim();
+			merchant.password = ctx.request.body.password.trim();
+
+			await merchant.save();
+
+			await ctx.redirect("/admin/merchants");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/merchants/:fondy_merchant_id/delete", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id });
+
+				if (merchant) {
+					await merchant.remove();
 
 					ctx.body = { result: 1 };
 				} else {
