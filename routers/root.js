@@ -418,6 +418,55 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
+	router.post("/visit", async (ctx) => {
+		/**
+		 * Email, Phone, Event_Name, productID, productName, First_Name – required fields
+		 * contactID, dealID, Last_Name, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer – optionals fields
+		 */
+
+		if (ctx.request.body) {
+			if (!ctx.request.body.Email) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'Email' is undefined"
+				};
+			} else if (!ctx.request.body.Phone) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'Phone' is undefined"
+				};
+			} else if (!ctx.request.body.Event_Name) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'Event_Name' is undefined"
+				};
+			} else if (!ctx.request.body.productID) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'productID' is undefined"
+				};
+			} else if (!ctx.request.body.productName) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'productName' is undefined"
+				};
+			} else if (!ctx.request.body.First_Name) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'First_Name' is undefined"
+				};
+			} else {
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.createVisit(ctx.request.body, geoData);
+			}
+		} else {
+			ctx.body = {
+				result: 0,
+				error : "Bad request. Body is undefined"
+			};
+		}
+	});
+
 	router.get("/fondy/form", async (ctx) => {
 		await ctx.render("pages/client/fondy");
 	});
