@@ -158,7 +158,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/getresponse", async (ctx) => {
 		/**
-		 * email, phone, name, campaign – required fields
+		 * email, name, campaign – required fields
 		 */
 
 		if (ctx.request.body) {
@@ -166,11 +166,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'email' is undefined"
-				};
-			} else if (!ctx.request.body.phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'phone' is undefined"
 				};
 			} else if (!ctx.request.body.name) {
 				ctx.body = {
@@ -184,7 +179,12 @@ module.exports = function routes(app, passport) {
 				};
 			} else {
 				// ctx.body = await zoho.searchContactOrAddNew(ctx.request.body);
-				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", { phone: ctx.request.body.phone });
+				const customFields = {};
+				if (ctx.request.body.phone) {
+					customFields["phone"] = ctx.request.body.phone;
+				}
+
+				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", customFields);
 				ctx.body = {
 					result: 1
 				};
@@ -208,11 +208,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
-				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
 				};
 			} else {
 				const geoData = (await getGeo(ctx)) || {};
@@ -264,11 +259,6 @@ module.exports = function routes(app, passport) {
 					result: 0,
 					error : "Required field 'Email' is undefined"
 				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
-				};
 			} else if (!ctx.request.body.productID) {
 				ctx.body = {
 					result: 0,
@@ -298,7 +288,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/deal", async (ctx) => {
 		/**
-		 * Email, Phone, productID, productName, First_Name – required fields
+		 * Email, productID, productName, First_Name – required fields
 		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
 		 */
 
@@ -307,11 +297,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
-				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
 				};
 			} else if (!ctx.request.body.productID) {
 				ctx.body = {
@@ -376,11 +361,6 @@ module.exports = function routes(app, passport) {
 					result: 0,
 					error : "Required field 'Email' is undefined"
 				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
-				};
 			} else if (!ctx.request.body.productID) {
 				ctx.body = {
 					result: 0,
@@ -420,7 +400,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/visit", async (ctx) => {
 		/**
-		 * Email, Phone, Event_Name, productID, productName, First_Name – required fields
+		 * Email, Event_Name, productID, productName, First_Name – required fields
 		 * contactID, dealID, Last_Name, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer – optionals fields
 		 */
 
@@ -429,11 +409,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
-				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
 				};
 			} else if (!ctx.request.body.Event_Name) {
 				ctx.body = {
