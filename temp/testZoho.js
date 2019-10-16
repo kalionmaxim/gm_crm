@@ -10,7 +10,14 @@ const zoho = require("../lib/zohoCRM");
 		console.log(result);
 	});*/
 
+/*
 zoho.getPhoneByContactID("3678676000074202523")
+	.then(result => {
+		console.log(result);
+	});
+*/
+
+zoho.getDealByContactAndProduct("3678676000068771377", "3678676000069398001")
 	.then(result => {
 		console.log(result);
 	});
