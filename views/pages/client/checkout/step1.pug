@@ -97,7 +97,8 @@ html(lang='ru-RU')
 						$('.tostep1').attr("disabled", "disabled").on("click", function () {
 							return false;
 						});;
-					.text5!= "Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:"
+					.text5
+						| Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:
 						br
 						| тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
 					.info
@@ -295,6 +296,10 @@ script.
 			var url = `/checkout/2?email=${document.getElementById("email").value}&firstName=${document.getElementById("name").value}&phone=${document.getElementById("phone").value}&productName=#{productName}&productPrice=#{productPrice}&productID=#{productID}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
 			if ("#{landing}" === "true") {
 				url += "&landing=true";
+			}
+
+			if ("#{convertationHide}" === "true") {
+				url += "&convertationHide=true";
 			}
 
 			if ("#{salesOrderID}") {

@@ -21,6 +21,7 @@ const eLogger = require("../lib/logger").eLogger;
 const Page = require("../models/page").Page;
 const MonoOrder = require("../models/monoOrder").MonoOrder;
 const USDRate = require("../models/usdRate").USDRate;
+const FondyMerchant = require("../models/fondyMerchant").FondyMerchant;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/getResponse").addToCampaign;
@@ -31,13 +32,14 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step1", {
-				productName : ctx.request.query["productName"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				currency    : ctx.request.query["currency"] || "",
+				productName     : ctx.request.query["productName"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				currency        : ctx.request.query["currency"] || "",
 				// redirectURL : ctx.request.query["redirectURL"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				landing     : ctx.request.query["landing"] || "false"
+				merchantID      : ctx.request.query["merchantID"] || "",
+				landing         : ctx.request.query["landing"] || "false",
+				convertationHide: ctx.request.query["convertationHide"] || "false"
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -47,20 +49,21 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/2", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2", {
-				productName : ctx.request.query["productName"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				email       : ctx.request.query["email"] || "",
-				phone       : ctx.request.query["phone"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				currency    : ctx.request.query["currency"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				salesOrderID: ctx.request.query["salesOrderID"] || "",
-				firstName   : ctx.request.query["firstName"] || "",
-				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || "",
-				USDRateUAH  : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
-				USDRateEUR  : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB  : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
+				productName     : ctx.request.query["productName"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				currency        : ctx.request.query["currency"] || "",
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -70,18 +73,19 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/2/fondy", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy", {
-				productName : ctx.request.query["productName"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				email       : ctx.request.query["email"] || "",
-				phone       : ctx.request.query["phone"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				currency    : ctx.request.query["currency"] || "",
+				productName     : ctx.request.query["productName"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				currency        : ctx.request.query["currency"] || "",
 				// redirectURL : ctx.request.query["redirectURL"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				salesOrderID: ctx.request.query["salesOrderID"] || "",
-				firstName   : ctx.request.query["firstName"] || "",
-				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || ""
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false"
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -91,25 +95,26 @@ module.exports = function routes(app, passport) {
 	router.get("/checkout/2/fondy/currencies", async (ctx) => {
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy_currencies", {
-				productName : ctx.request.query["productName"] || "",
-				email       : ctx.request.query["email"] || "",
-				phone       : ctx.request.query["phone"] || "",
-				productPrice: ctx.request.query["productPrice"] || "",
-				productID   : ctx.request.query["productID"] || "",
-				currency    : ctx.request.query["currency"] || "",
+				productName     : ctx.request.query["productName"] || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				currency        : ctx.request.query["currency"] || "",
 				// redirectURL : ctx.request.query["redirectURL"] || "",
-				merchantID  : ctx.request.query["merchantID"] || "",
-				salesOrderID: ctx.request.query["salesOrderID"] || "",
-				firstName   : ctx.request.query["firstName"] || "",
-				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || "",
-				merchantUSD : merchantUSD,
-				merchantEUR : merchantEUR,
-				merchantUAH : merchantUAH,
-				merchantRUB : merchantRUB,
-				USDRateUAH  : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
-				USDRateEUR  : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB  : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				merchantUSD     : merchantUSD,
+				merchantEUR     : merchantEUR,
+				merchantUAH     : merchantUAH,
+				merchantRUB     : merchantRUB,
+				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -153,7 +158,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/getresponse", async (ctx) => {
 		/**
-		 * email, phone, name, campaign – required fields
+		 * email, name, campaign – required fields
 		 */
 
 		if (ctx.request.body) {
@@ -161,11 +166,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'email' is undefined"
-				};
-			} else if (!ctx.request.body.phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'phone' is undefined"
 				};
 			} else if (!ctx.request.body.name) {
 				ctx.body = {
@@ -179,7 +179,12 @@ module.exports = function routes(app, passport) {
 				};
 			} else {
 				// ctx.body = await zoho.searchContactOrAddNew(ctx.request.body);
-				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", { phone: ctx.request.body.phone });
+				const customFields = {};
+				if (ctx.request.body.phone) {
+					customFields["phone"] = ctx.request.body.phone;
+				}
+
+				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", customFields);
 				ctx.body = {
 					result: 1
 				};
@@ -203,11 +208,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
-				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
 				};
 			} else {
 				const geoData = (await getGeo(ctx)) || {};
@@ -259,11 +259,6 @@ module.exports = function routes(app, passport) {
 					result: 0,
 					error : "Required field 'Email' is undefined"
 				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
-				};
 			} else if (!ctx.request.body.productID) {
 				ctx.body = {
 					result: 0,
@@ -293,7 +288,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/deal", async (ctx) => {
 		/**
-		 * Email, Phone, productID, productName, First_Name – required fields
+		 * Email, productID, productName, First_Name – required fields
 		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
 		 */
 
@@ -302,11 +297,6 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
-				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
 				};
 			} else if (!ctx.request.body.productID) {
 				ctx.body = {
@@ -371,11 +361,6 @@ module.exports = function routes(app, passport) {
 					result: 0,
 					error : "Required field 'Email' is undefined"
 				};
-			} else if (!ctx.request.body.Phone) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'Phone' is undefined"
-				};
 			} else if (!ctx.request.body.productID) {
 				ctx.body = {
 					result: 0,
@@ -404,6 +389,50 @@ module.exports = function routes(app, passport) {
 			} else {
 				const geoData = (await getGeo(ctx)) || {};
 				ctx.body = await zoho.createSalesOrder(ctx.request.body, geoData);
+			}
+		} else {
+			ctx.body = {
+				result: 0,
+				error : "Bad request. Body is undefined"
+			};
+		}
+	});
+
+	router.post("/visit", async (ctx) => {
+		/**
+		 * Email, Event_Name, productID, productName, First_Name – required fields
+		 * contactID, dealID, Last_Name, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer – optionals fields
+		 */
+
+		if (ctx.request.body) {
+			if (!ctx.request.body.Email) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'Email' is undefined"
+				};
+			} else if (!ctx.request.body.Event_Name) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'Event_Name' is undefined"
+				};
+			} else if (!ctx.request.body.productID) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'productID' is undefined"
+				};
+			} else if (!ctx.request.body.productName) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'productName' is undefined"
+				};
+			} else if (!ctx.request.body.First_Name) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'First_Name' is undefined"
+				};
+			} else {
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.createVisit(ctx.request.body, geoData);
 			}
 		} else {
 			ctx.body = {
@@ -692,7 +721,7 @@ module.exports = function routes(app, passport) {
 				await ctx.redirect("/admin/pages");
 			} catch (err) {
 				eLogger.error(err);
-				await ctx.render("error404");
+				await ctx.render("pages/error404");
 			}
 		} else {
 			await ctx.redirect("/admin");
@@ -778,6 +807,128 @@ module.exports = function routes(app, passport) {
 
 				if (page) {
 					await page.remove();
+
+					ctx.body = { result: 1 };
+				} else {
+					ctx.body = { result: 0 };
+				}
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = { result: 0 };
+			}
+		} else {
+			ctx.body = { result: 0 };
+		}
+	});
+
+	router.get("/admin/merchants", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/merchants-list");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/merchants/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchants = await FondyMerchant.find().lean();
+
+				for (let i = 0; i < merchants.length; i++) {
+					const merchant = merchants[i];
+
+					list.data.push([
+						merchant.ID,
+						merchant.password,
+						merchant.fondy_merchant_id
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
+	});
+
+	router.get("/admin/merchants/new", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/merchants-new");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/merchants/new", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchantExists = await FondyMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
+
+				if (!merchantExists) {
+					await FondyMerchant.create({
+						ID      : ctx.request.body.ID.trim(),
+						password: ctx.request.body.password.trim()
+					});
+
+					await ctx.redirect("/admin/merchants");
+				} else {
+					await ctx.render("pages/error404");
+				}
+			} catch (err) {
+				eLogger.error(err);
+				await ctx.render("pages/error404");
+			}
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/merchants/:fondy_merchant_id/edit", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id }).lean();
+
+			await ctx.render("pages/admin/merchants-edit", {
+				merchant
+			});
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/merchants/:fondy_merchant_id/edit", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id });
+
+			const merchantExists = await FondyMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
+			if (!merchantExists || (merchantExists && (merchant.fondy_merchant_id === merchantExists.fondy_merchant_id))) {
+				merchant.ID = ctx.request.body.ID.trim();
+				merchant.password = ctx.request.body.password.trim();
+
+				await merchant.save();
+
+				await ctx.redirect("/admin/merchants");
+			} else {
+				await ctx.render("pages/error404");
+			}
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/merchants/:fondy_merchant_id/delete", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id });
+
+				if (merchant) {
+					await merchant.remove();
 
 					ctx.body = { result: 1 };
 				} else {
