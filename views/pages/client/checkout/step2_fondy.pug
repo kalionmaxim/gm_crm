@@ -75,7 +75,7 @@ html(lang='ru-RU')
 					data  : data2
 				})
 					.then(function (response) {
-						var salesOrderID = response.data.salesOrderID;
+						var salesOrderID = response.data.salesOrderID.toString();
 
 						var data = {
 							Email             : "#{email}",
