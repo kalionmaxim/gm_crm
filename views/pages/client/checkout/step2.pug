@@ -16,7 +16,30 @@ html(lang='ru-RU')
 		link(rel='stylesheet', href='/css/checkout/step2/main.min.css')
 		link(rel='stylesheet', href='/css/checkout/step2/edit.css')
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+		// Google Tag Manager
+		script.
+			(function(w, d, s, l, i)
+			{
+			w[l] = w[l] || [];
+			w[l].push(
+			{
+			'gtm.start': new Date().getTime(),
+			event: 'gtm.js'
+			});
+			var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s),
+			dl = l != 'dataLayer' ? '&l=' + l : '';
+			j.async = true;
+			j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+			f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-TRNP8W');
+		// End Google Tag Manager
 	body
+		// Google Tag Manager (noscript)
+		noscript
+			iframe(src="https://www.googletagmanager.com/ns.html?id=GTM-TRNP8W" height="0" width="0" style="display:none;visibility:hidden")
+		// Google End Tag Manager (noscript)
+
 		// SECTION 1
 		a.tostep1(href='step1.php')
 			section.sec1
