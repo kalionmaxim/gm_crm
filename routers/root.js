@@ -571,7 +571,7 @@ module.exports = function routes(app, passport) {
 				const date = new Date();
 				const year = date.getFullYear();
 				const month = ((date.getMonth() + 1) < 10) ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString();
-				const day = (date.getMonth() < 10) ? "0" + date.getMonth().toString() : date.getMonth().toString();
+				const day = (date.getDate() < 10) ? "0" + date.getDate().toString() : date.getDate().toString();
 				let dateStr = year + "-" + month + "-" + day;
 
 				const data = {
