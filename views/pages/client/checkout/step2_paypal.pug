@@ -36,7 +36,8 @@ html(lang='ru-RU')
 					productPrice      : "#{productPrice}",
 					currency          : "#{currency.toUpperCase()}",
 					paymentDescription: "Оплата продукта \"#{productName}\"",
-					redirectURL       : "#{redirectURL}" || null
+					redirectURL       : "#{redirectURL}" || null,
+					successLink       : "#{successLink}" || ""
 				};
 
 				axios({
@@ -84,7 +85,8 @@ html(lang='ru-RU')
 							productPrice      : "#{productPrice}",
 							currency          : "#{currency.toUpperCase()}",
 							paymentDescription: "Оплата продукта \"#{productName}\"",
-							redirectURL       : "#{redirectURL}" || null
+							redirectURL       : "#{redirectURL}" || null,
+							successLink       : "#{successLink}" || ""
 						};
 
 						axios({

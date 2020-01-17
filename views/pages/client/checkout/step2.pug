@@ -216,6 +216,10 @@ script.
 			url += "&convertationHide=true";
 		}
 
+		if ("#{successLink}") {
+			url += "&successLink=#{successLink}";
+		}
+
 		if ("#{salesOrderID}") {
 			url += "&salesOrderID=#{salesOrderID}";
 		}

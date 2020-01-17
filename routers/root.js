@@ -39,7 +39,8 @@ module.exports = function routes(app, passport) {
 				// redirectURL : ctx.request.query["redirectURL"] || "",
 				merchantID      : ctx.request.query["merchantID"] || "",
 				landing         : ctx.request.query["landing"] || "false",
-				convertationHide: ctx.request.query["convertationHide"] || "false"
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				successLink     : ctx.request.query["successLink"] || ""
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -61,6 +62,7 @@ module.exports = function routes(app, passport) {
 				lastName        : ctx.request.query["lastName"] || "",
 				landing         : ctx.request.query["landing"] || "",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
+				successLink     : ctx.request.query["successLink"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
@@ -85,7 +87,8 @@ module.exports = function routes(app, passport) {
 				firstName       : ctx.request.query["firstName"] || "",
 				lastName        : ctx.request.query["lastName"] || "",
 				landing         : ctx.request.query["landing"] || "",
-				convertationHide: ctx.request.query["convertationHide"] || "false"
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				successLink     : ctx.request.query["successLink"] || ""
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -108,6 +111,7 @@ module.exports = function routes(app, passport) {
 				lastName        : ctx.request.query["lastName"] || "",
 				landing         : ctx.request.query["landing"] || "",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
+				successLink     : ctx.request.query["successLink"] || "",
 				merchantUSD     : merchantUSD,
 				merchantEUR     : merchantEUR,
 				merchantUAH     : merchantUAH,
@@ -135,7 +139,8 @@ module.exports = function routes(app, passport) {
 				salesOrderID: ctx.request.query["salesOrderID"] || "",
 				firstName   : ctx.request.query["firstName"] || "",
 				lastName    : ctx.request.query["lastName"] || "",
-				landing     : ctx.request.query["landing"] || ""
+				landing     : ctx.request.query["landing"] || "",
+				successLink : ctx.request.query["successLink"] || ""
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -151,9 +156,15 @@ module.exports = function routes(app, passport) {
 	});
 
 	async function renderSuccess(ctx) {
-		await ctx.render("pages/client/checkout/step3", {
-			productName: ctx.request.query["productName"].replace(/\n/gi, "") || ""
-		});
+		const successLink = ctx.request.query["successLink"] || "";
+
+		if (successLink) {
+			await ctx.redirect(successLink);
+		} else {
+			await ctx.render("pages/client/checkout/step3", {
+				productName: ctx.request.query["productName"].replace(/\n/gi, "") || ""
+			});
+		}
 	}
 
 	router.post("/getresponse", async (ctx) => {

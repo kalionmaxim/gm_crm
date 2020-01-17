@@ -74,6 +74,13 @@ block contents
 													option(value="no") Нет
 													option(value="yes") Да
 
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Ссылка на success оплаты (необязательно)
+											.col-md-6
+												input#successLink.form-control(type="text" placeholder='https://example.com')
+
 								.form-group.m-b-12
 									.col-md-12
 										button#generateBtn.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-12(type='button' style="width: 100%;") Получит ссылку
@@ -100,6 +107,7 @@ block contents
 				var grUnpaid = $("#grUnpaid").val().trim();
 				var landing = $("#landing").val();
 				var convertationHide = $("#convertationHide").val();
+				var successLink = $("#successLink").val().trim();
 
 				if (!productID) {
 					setError("Укажите ID продукта");
@@ -139,6 +147,10 @@ block contents
 
 				if (convertationHide === "yes") {
 					url += ("&convertationHide=true");
+				}
+
+				if (successLink) {
+					url += ("&successLink=" + successLink);
 				}
 
 				resultElem.val(url);

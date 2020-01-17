@@ -38,7 +38,8 @@ html(lang='ru-RU')
 					currency          : "#{currency.toUpperCase()}",
 					redirectURL       : "#{redirectURL}",
 					paymentDescription: "Оплата продукта \"#{productName}\"",
-					merchantID        : "#{merchantID}" || null
+					merchantID        : "#{merchantID}" || null,
+					successLink       : "#{successLink}" || ""
 				};
 
 				axios({
@@ -85,7 +86,8 @@ html(lang='ru-RU')
 							currency          : "#{currency.toUpperCase()}",
 							redirectURL       : "#{redirectURL}",
 							paymentDescription: "Оплата продукта \"#{productName}\"",
-							merchantID        : "#{merchantID}" || null
+							merchantID        : "#{merchantID}" || null,
+							successLink       : "#{successLink}" || ""
 						};
 
 						axios({
