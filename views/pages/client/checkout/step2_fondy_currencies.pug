@@ -251,7 +251,8 @@ html(lang='ru-RU')
 						currency          : currUpd,
 						redirectURL       : "#{redirectURL}",
 						paymentDescription: "Оплата продукта \"#{productName}\"",
-						merchantID        : merchant || null
+						merchantID        : merchant || null,
+						successLink       : "#{successLink}" || ""
 					};
 
 					axios({
@@ -300,7 +301,8 @@ html(lang='ru-RU')
 								currency          : currUpd,
 								redirectURL       : "#{redirectURL}",
 								paymentDescription: "Оплата продукта \"#{productName}\"",
-								merchantID        : merchant || null
+								merchantID        : merchant || null,
+								successLink       : "#{successLink}" || ""
 							};
 
 							axios({

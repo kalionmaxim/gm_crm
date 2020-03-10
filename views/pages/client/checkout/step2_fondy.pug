@@ -38,7 +38,8 @@ html(lang='ru-RU')
 					currency          : "#{currency.toUpperCase()}",
 					redirectURL       : "#{redirectURL}",
 					paymentDescription: "Оплата продукта \"#{productName}\"",
-					merchantID        : "#{merchantID}" || null
+					merchantID        : "#{merchantID}" || null,
+					successLink       : "#{successLink}" || ""
 				};
 
 				axios({
@@ -64,7 +65,7 @@ html(lang='ru-RU')
 					"productName" : "#{productName}",
 					"productID"   : "#{productID}",
 					"productPrice": "#{productPrice}",
-					"currency"    : "#{currency}",
+					"currency"    : "#{currency.toUpperCase()}",
 					"contactID"   : contactID,
 					"dealID"      : dealIDPay
 				};
@@ -85,7 +86,8 @@ html(lang='ru-RU')
 							currency          : "#{currency.toUpperCase()}",
 							redirectURL       : "#{redirectURL}",
 							paymentDescription: "Оплата продукта \"#{productName}\"",
-							merchantID        : "#{merchantID}" || null
+							merchantID        : "#{merchantID}" || null,
+							successLink       : "#{successLink}" || ""
 						};
 
 						axios({

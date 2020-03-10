@@ -216,6 +216,10 @@ script.
 			url += "&convertationHide=true";
 		}
 
+		if ("#{successLink}") {
+			url += "&successLink=#{successLink}";
+		}
+
 		if ("#{salesOrderID}") {
 			url += "&salesOrderID=#{salesOrderID}";
 		}
@@ -264,7 +268,7 @@ script.
 				"productName" : "#{productName}",
 				"productID"   : "#{productID}",
 				"productPrice": "#{productPrice}",
-				"currency"    : "#{currency}",
+				"currency"    : "#{currency.toUpperCase()}",
 				"contactID"   : contactID,
 				"dealID"      : dealIDPay
 			};
