@@ -100,7 +100,7 @@ block contents
 				var baseURL = "#{baseURL}";
 
 				var productID = $("#productID").val().trim();
-				var productName = $("#productName").val().trim();
+				var productName = $("#productName").val().trim().replace(/\|/g, " ");
 				var price = parseFloat($("#price").val().trim());
 				var currency = $("#currency").val();
 				var merchant = $("#merchant").val().trim();
@@ -112,6 +112,18 @@ block contents
 				if (!productID) {
 					setError("Укажите ID продукта");
 					return false;
+				} else {
+					var reg = /^\d+$/;
+					if (!reg.test(productID)) {
+						setError("ID продукта должен содержать только цифры");
+						return false;
+					} else if (productID.length < 18) {
+						setError("ID продукта слишком короткий. Обычно требуется 18 символов.");
+						return false;
+					} else if (productID.length > 19) {
+						setError("ID продукта слишком длинный. Обычно требуется 18 символов.");
+						return false;
+					}
 				}
 
 				if (!productName) {
