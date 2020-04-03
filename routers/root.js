@@ -713,9 +713,10 @@ module.exports = function routes(app, passport) {
 			try {
 				const parts = [];
 				if (ctx.request.body.parts) {
-					for (let i = 0; i < ctx.request.body.parts.length; i++) {
+					parts.push(parseInt(ctx.request.body.parts, 10));
+					/*for (let i = 0; i < ctx.request.body.parts.length; i++) {
 						parts.push(parseInt(ctx.request.body.parts[i], 10));
-					}
+					}*/
 				}
 
 				await Page.create({
@@ -788,9 +789,10 @@ module.exports = function routes(app, passport) {
 
 			const parts = [];
 			if (ctx.request.body.parts) {
-				for (let i = 0; i < ctx.request.body.parts.length; i++) {
+				parts.push(parseInt(ctx.request.body.parts, 10));
+				/*for (let i = 0; i < ctx.request.body.parts.length; i++) {
 					parts.push(parseInt(ctx.request.body.parts[i], 10));
-				}
+				}*/
 			}
 
 			page.name = ctx.request.body.name || "";
