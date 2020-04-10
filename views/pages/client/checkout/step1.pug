@@ -299,17 +299,12 @@ script.
 			"Time_zone"    : geolocationData.utc_offset
 		};
 
-		console.log("data", data);
-		debugger;
-
 		axios({
 			method: "post",
 			url   : "/deal",
 			data  : data
 		}).then(function (response) {
 			$("#preloader").hide();
-
-			console.log(response.data.contactID);
 
 			if (response && response.data) {
 				if (response.data.contactID) {
