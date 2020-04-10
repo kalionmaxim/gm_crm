@@ -306,6 +306,8 @@ script.
 		}).then(function (response) {
 			$("#preloader").hide();
 
+			console.log(response);
+
 			if (response && response.data) {
 				if (response.data.contactID) {
 					setCookie("contactID", response.data.contactID, 365);
