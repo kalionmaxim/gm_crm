@@ -307,7 +307,7 @@ script.
 			$("#preloader").hide();
 
 			if (response && response.data) {
-				if (response.data.contactID && !getCookie("contactID")) {
+				if (response.data.contactID) {
 					setCookie("contactID", response.data.contactID, 365);
 				}
 
