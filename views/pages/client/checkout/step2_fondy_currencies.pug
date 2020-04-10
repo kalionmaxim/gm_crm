@@ -160,7 +160,7 @@ html(lang='ru-RU')
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 		script.
 			function payFondy(curr) {
-				var merchant = "";
+				var merchant = "#{merchantID || ''}";
 				var sumDef = parseFloat("#{productPrice}");
 				var sumUpd = parseFloat("#{productPrice}");
 				var currDef = "#{currency.toUpperCase()}";
@@ -172,7 +172,9 @@ html(lang='ru-RU')
 
 				switch (curr) {
 					case "usd":
-						merchant = "#{merchantUSD}";
+						if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+							merchant = "#{merchantUSD}";
+						}
 						if (currDef === "USD") {
 							currUpd = "USD";
 							sumUpd = sumDef;
@@ -189,7 +191,9 @@ html(lang='ru-RU')
 						break;
 
 					case "eur":
-						merchant = "#{merchantEUR}";
+						if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+							merchant = "#{merchantEUR}";
+						}
 						if (currDef === "USD") {
 							currUpd = "EUR";
 							sumUpd = (sumDef * USDRateEUR).toFixed(2);
@@ -206,7 +210,9 @@ html(lang='ru-RU')
 						break;
 
 					case "uah":
-						merchant = "#{merchantUAH}";
+						if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+							merchant = "#{merchantUAH}";
+						}
 						if (currDef === "USD") {
 							currUpd = "UAH";
 							sumUpd = (sumDef * USDRateUAH).toFixed(2);
@@ -223,7 +229,9 @@ html(lang='ru-RU')
 						break;
 
 					case "rub":
-						merchant = "#{merchantRUB}";
+						if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+							merchant = "#{merchantRUB}";
+						}
 						if (currDef === "USD") {
 							currUpd = "RUB";
 							sumUpd = (sumDef * USDRateRUB).toFixed(2);
