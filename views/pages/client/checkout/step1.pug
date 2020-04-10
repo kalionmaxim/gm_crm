@@ -306,7 +306,7 @@ script.
 		}).then(function (response) {
 			$("#preloader").hide();
 
-			console.log(response);
+			console.log(response.data.contactID);
 
 			if (response && response.data) {
 				if (response.data.contactID) {
