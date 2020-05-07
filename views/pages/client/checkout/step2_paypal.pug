@@ -3,17 +3,17 @@ html(lang='ru-RU')
 	head
 		meta(charset='UTF-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		title Оплата участия
+		title #{labels.title || ""}
 		// SEO
-		meta(property='og:title', content='Оплата участия')
-		meta(property='og:description', content='Оплата участия')
+		meta(property='og:title', content=(labels.title || ""))
+		meta(property='og:description', content=(labels.title || ""))
 		meta(property='og:image', content='https://geniusmarketing.me/pic.png')
 		meta(property='og:url', content='https://geniusmarketing.me/')
 		meta(property='fb:admins', content='1510615147')
 		meta(property='fb:app_id', content='473200492729081')
 		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
 	body
-		div Сейчас Вы будете переадресованы на страницу оплаты...
+		div #{labels.redirectingLbl || ""}
 
 		script.
 			function getCookie(cname) {

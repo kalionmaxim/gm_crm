@@ -80,6 +80,13 @@ block contents
 											label.col-md-4(style="margin-top: 10px;") Ссылка на success оплаты (необязательно)
 											.col-md-6
 												input#successLink.form-control(type="text" placeholder='https://example.com')
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Язык
+											.col-md-6
+												select#lang.form-control
+													option(value="ru" selected=true) Русский
+													option(value="ua") Украинский
 
 								.form-group.m-b-12
 									.col-md-12
@@ -108,6 +115,7 @@ block contents
 				var landing = $("#landing").val();
 				var convertationHide = $("#convertationHide").val();
 				var successLink = $("#successLink").val().trim();
+				var lang = $("#lang").val();
 
 				if (!productID) {
 					setError("Укажите ID продукта");
@@ -164,6 +172,8 @@ block contents
 				if (successLink) {
 					url += ("&successLink=" + successLink);
 				}
+
+				url += ("&lang=" + lang);
 
 				resultElem.val(url);
 			});

@@ -28,8 +28,12 @@ const addToCampaign = require("../lib/getResponse").addToCampaign;
 
 const requestIp = require("request-ip");
 
+const lang = require("../lang");
+
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
+		const labels = lang[getLangZone(ctx)].step1;
+
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step1", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
@@ -40,7 +44,9 @@ module.exports = function routes(app, passport) {
 				merchantID      : ctx.request.query["merchantID"] || "",
 				landing         : ctx.request.query["landing"] || "false",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
-				successLink     : ctx.request.query["successLink"] || ""
+				successLink     : ctx.request.query["successLink"] || "",
+				lang            : getLangZone(ctx),
+				labels
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -48,6 +54,8 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/checkout/2", async (ctx) => {
+		const labels = lang[getLangZone(ctx)].step2;
+
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
@@ -65,7 +73,9 @@ module.exports = function routes(app, passport) {
 				successLink     : ctx.request.query["successLink"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
+				lang            : getLangZone(ctx),
+				labels
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -73,6 +83,8 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/checkout/2/fondy", async (ctx) => {
+		const labels = lang[getLangZone(ctx)].step2_fondy;
+
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
@@ -88,7 +100,9 @@ module.exports = function routes(app, passport) {
 				lastName        : ctx.request.query["lastName"] || "",
 				landing         : ctx.request.query["landing"] || "",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
-				successLink     : ctx.request.query["successLink"] || ""
+				successLink     : ctx.request.query["successLink"] || "",
+				lang            : getLangZone(ctx),
+				labels
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -96,6 +110,8 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/checkout/2/fondy/currencies", async (ctx) => {
+		const labels = lang[getLangZone(ctx)].step2_fondy_currencies;
+
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy_currencies", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
@@ -118,7 +134,9 @@ module.exports = function routes(app, passport) {
 				merchantRUB     : merchantRUB,
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
+				lang            : getLangZone(ctx),
+				labels
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -126,6 +144,8 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/checkout/2/paypal", async (ctx) => {
+		const labels = lang[getLangZone(ctx)].step2_paypal;
+
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_paypal", {
 				productName : ctx.request.query["productName"].replace(/\n/gi, "") || "",
@@ -140,7 +160,9 @@ module.exports = function routes(app, passport) {
 				firstName   : ctx.request.query["firstName"] || "",
 				lastName    : ctx.request.query["lastName"] || "",
 				landing     : ctx.request.query["landing"] || "",
-				successLink : ctx.request.query["successLink"] || ""
+				successLink : ctx.request.query["successLink"] || "",
+				lang        : getLangZone(ctx),
+				labels
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -156,13 +178,17 @@ module.exports = function routes(app, passport) {
 	});
 
 	async function renderSuccess(ctx) {
+		const labels = lang[getLangZone(ctx)].step3;
+
 		const successLink = ctx.request.query["successLink"] || "";
 
 		if (successLink) {
 			await ctx.redirect(successLink);
 		} else {
 			await ctx.render("pages/client/checkout/step3", {
-				productName: ctx.request.query["productName"].replace(/\n/gi, "") || ""
+				productName: ctx.request.query["productName"].replace(/\n/gi, "") || "",
+				lang       : getLangZone(ctx),
+				labels
 			});
 		}
 	}
@@ -1175,6 +1201,25 @@ module.exports = function routes(app, passport) {
 	router.post("/yandex/callback", async (ctx) => {
 		ctx.status = await Yandex.processCallback(ctx.request.body);
 	});*/
+
+	function getLangZone(ctx) {
+		let zone = "ru";
+		if (ctx && ctx.request && ctx.request.query["lang"]) {
+			switch (ctx.request.query["lang"]) {
+				case "ru":
+					zone = "ru";
+					break;
+				case "ua":
+					zone = "ua";
+					break;
+				default:
+					zone = "ru";
+					break;
+			}
+		}
+
+		return zone;
+	}
 
 	app.use(router.routes());
 };

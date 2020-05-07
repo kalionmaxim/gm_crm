@@ -3,10 +3,10 @@ html(lang='ru-RU')
 	head
 		meta(charset='UTF-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge')
-		title Оплата участия
+		title #{labels.title || ""}
 		// SEO
-		meta(property='og:title', content='Оплата участия')
-		meta(property='og:description', content='Оплата участия')
+		meta(property='og:title', content=(labels.title || ""))
+		meta(property='og:description', content=(labels.title || ""))
 		meta(property='og:image', content='https://geniusmarketing.me/pic.png')
 		meta(property='og:url', content='https://geniusmarketing.me/')
 		meta(property='fb:admins', content='1510615147')
@@ -48,20 +48,20 @@ html(lang='ru-RU')
 						.step.step1.inl
 							p.text
 								span.circle
-								|  Шаг 1
-							p.text1 Введите Ваши данные
+								|  #{labels.step1Lbl || ""}
+							p.text1 #{labels.enterYourDataLbl || ""}
 						.arrow.inl
 						.step.step2.inl
 							p.text
 								span.circle
-								|  Шаг 2
-							p.text1 Выберите способ оплаты
+								|  #{labels.step2Lbl || ""}
+							p.text1 #{labels.selectPaymentMethodLbl || ""}
 						.arrow.inl
 						.step.step3.inl
 							p.text
 								span.circle
-								|  Шаг 3
-							p.text1 Завершение оплаты
+								|  #{labels.step3Lbl || ""}
+							p.text1 #{labels.finishPaymentLbl || ""}
 		section.sec2
 			.container
 				.block
@@ -72,7 +72,7 @@ html(lang='ru-RU')
 								br
 								span.js_product_type.product_type
 						.price.inl.disapear
-							.text2.inl К оплате:
+							.text2.inl #{labels.sumToPayLbl || ""}
 							p#dollar_price.inl
 								span.js_dollar_price
 								span.dollar $
@@ -84,24 +84,24 @@ html(lang='ru-RU')
 									span.js_hrn_price
 									span.val грн.
 						p.step1text
-							| Чтобы забронировать участие в "
+							| #{labels.toBookPart1Lbl || ""}"
 							span.js_payment_title
 							| ",&nbsp;
 							br
-							| введите свои данные в форму ниже и нажмите "Забронировать".
+							| #{labels.toBookPart2Lbl || ""}
 						p.success
-					p.text4 ВВЕДИТЕ ВАШИ ДАННЫЕ:
+					p.text4 #{labels.enterYourData2Lbl || ""}
 					a.backlink
 					.links.links4
 						form#form_1.mfrm.m_frm
 							.inl.formpart
-								p.namelabel Ваше имя и фамилия
-								input#name.name.f1_name(name='name', type='text', placeholder='Ваше полное имя', required='')
+								p.namelabel #{labels.enterYourNameLbl || ""}
+								input#name.name.f1_name(name='name', type='text', placeholder=(labels.yourFullNameLbl || ""), required='')
 							.inl.formpart
-								p.namelabel Ваш e-mail
-								input#email.email.f1_email(name='email', type='text', placeholder='Ваш основной e-mail', required='')
+								p.namelabel #{labels.yourEmailLbl || ""}
+								input#email.email.f1_email(name='email', type='text', placeholder=(labels.yourMainEmailLbl || ""), required='')
 							.inl.formpart
-								p.namelabel Ваш телефон
+								p.namelabel #{labels.yourPhoneLbl || ""}
 								input#phone.NumGroup.phone(type='text', name='phone', required='')
 							input#last1.last1(type='hidden', name='custom_telephone')
 							input#checktoken(type='hidden', name='campaign_token', value='')
@@ -109,35 +109,35 @@ html(lang='ru-RU')
 							input#emailexist(type='hidden', name='email_exists_url')
 							input(type='hidden', name='forward_data', value='')
 							input(type='hidden', name='start_day', value='0')
-							input.subm1.button2.hvr-grow(type='submit', value='Забронировать →')
+							input.subm1.button2.hvr-grow(type='submit', value=(labels.bookSubmitLbl || ""))
 							.check
 								input#checkbox(type='checkbox', checked='checked')
-								label.inl.active(for='checkbox') Я согласен с условиями
-								a.inl.oferta(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') оферты
+								label.inl.active(for='checkbox') #{labels.iAgreeWithOffer1Lbl || ""}
+								a.inl.oferta(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') #{labels.iAgreeWithOffer2Lbl || ""}
 					script.
 						var step = '0';
 						$('.tostep1').attr("disabled", "disabled").on("click", function () {
 							return false;
 						});;
 					.text5
-						| Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:
+						| !{labels.doYouHaveQuestsLbl || ""}
 						br
-						| тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
+						| тел. <b>+7 495 241 07 87</b> (#{labels.russiaLbl || ""}), <b>+38 044 237 13 18</b> (#{labels.ukraineLbl || ""})
 					.info
 						.part.part1.inl
-							p.text7 Гарантия возврата средств
+							p.text7 #{labels.guarantee.title || ""}
 							p.text8
-								| Genius Marketing гарантирует возврат средств за приобретенный цифровой продукт и/или услугу по требованию клиента.
+								| #{labels.guarantee.text1 || ""}
 								br
 								br
-								| Срок гарантийного периода регламентируется договором об оказании услуг (офертой).
+								| #{labels.guarantee.text2 || ""}
 						.part.part2.inl
-							p.text7 100% защита персональных данных
+							p.text7 #{labels.protection.title || ""}
 							p.text8
-								| Мы ни при каких условиях не передаём Вашу личную информацию третьим лицам.
+								| #{labels.protection.text1 || ""}
 								br
 								br
-								| Безопасность всех платежей гарантируется сертификатами THAWTE и PCI.
+								| #{labels.protection.text2 || ""}
 		// FOOTER
 		footer.main-footer
 			.container
@@ -147,22 +147,22 @@ html(lang='ru-RU')
 							img(src='/img/footer-logo.png')
 							br
 							br
-							| ТОВ "КОНСАЛТИНГ СИНДИКАТ"
+							| #{labels.address1 || ""}
 							br
-							| ЕГРПОУ: 42182763, Адрес: 01033, г. Киев,
+							| #{labels.address2 || ""}
 							br
-							| ул. Паньковская, 14
+							| #{labels.address3 || ""}
 							br
 				.footer2
 					.footer-inline
-						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-konfidencialnosti/') Политика конфиденциальности
-						a.modal-btn(target='_blank', href='https://geniusmarketing.me/otkaz-ot-otvetstvennosti/') Отказ от ответственности
-						a.modal-btn(target='_blank', href='https://geniusmarketing.me/soglasie-s-rassylkoj/') Согласие с рассылкой
-						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-vozvrata-denezhnyx-sredstv/') Политика возврата
-						a.modal-btn(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') Публичный договор
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-konfidencialnosti/') #{labels.policy1 || ""}
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/otkaz-ot-otvetstvennosti/') #{labels.policy2 || ""}
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/soglasie-s-rassylkoj/') #{labels.policy3 || ""}
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-vozvrata-denezhnyx-sredstv/') #{labels.policy4 || ""}
+						a.modal-btn(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') #{labels.policy5 || ""}
 				.footer3
 					p.social
-						| Присоединяйтесь к нам в социальных сетях:
+						| #{labels.joinUs || ""}
 						br.lg
 						br
 						a.icon-fb.icon-soc(href='https://www.facebook.com/GeniusMarketing.me/', target='_blank')
@@ -175,15 +175,15 @@ html(lang='ru-RU')
 							i.fa.fa-youtube(aria-hidden='true')
 					p.text4
 						span.ru +7 (495) 241 07 87
-						|  (Россия)
+						|  (#{labels.russiaLbl})
 					p.text4
 						span.ru +38 (044) 237 13 18
-						|  (Украина)
+						|  (#{labels.ukraineLbl})
 				.footer-line
 				p.bottom-text
-					| © Олесь Тимофеев & GeniusMarketing. Все права защищены. Любое копирование материалов разрешено
+					| #{labels.copyright1 || ""}
 					br
-					|  только с согласия правообладателей. По всем вопросам обращайтесь:
+					| #{labels.copyright2 || ""}
 					a.mail(href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
 
 		include ../../../partials/client/preloader.pug
@@ -331,6 +331,10 @@ script.
 
 			if ("#{salesOrderID}") {
 				url += "&salesOrderID=#{salesOrderID}";
+			}
+
+			if ("#{lang}") {
+				url += "&lang=#{lang}";
 			}
 
 			window.location = url;
