@@ -25,7 +25,16 @@ zoho.getDealByContactAndProduct("3678676000068771377", "3678676000069398001")
 	});
 */
 
+/*
 ZohoHelpers.getRecord("Sales_Orders", "3678676000083239836")
+	.then(result => {
+		console.log(result);
+	});*/
+
+const data = {
+	Email: "kdjsfhsakfasd@agilekz.com"
+};
+zoho.searchContact(data)
 	.then(result => {
 		console.log(result);
 	});
