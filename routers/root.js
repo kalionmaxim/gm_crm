@@ -683,6 +683,55 @@ module.exports = function routes(app, passport) {
 
 	//MONOBANK LOGIC PROD <=
 
+	// TILDA routes =>
+	router.post("/tilda/create_deal", async (ctx) => {
+		/**
+		 * Email, productID, productName, First_Name – required fields
+		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
+		 */
+
+		console.log("not passed", ctx.request.body);
+
+		if (ctx.request.body) {
+			if (!ctx.request.body.Email) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'Email' is undefined"
+				};
+			} else if (!ctx.request.body.productID) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'productID' is undefined"
+				};
+			} else if (!ctx.request.body.productName) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'productName' is undefined"
+				};
+			} else if (!ctx.request.body.First_Name) {
+				ctx.body = {
+					result: 0,
+					error : "Required field 'First_Name' is undefined"
+				};
+			} else {
+				// const geoData = (await getGeo(ctx)) || {};
+				// ctx.body = await zoho.createDeal(ctx.request.body, geoData);
+
+				console.log("passed", ctx.request.body);
+
+				ctx.body = {
+					result: 1
+				};
+			}
+		} else {
+			ctx.body = {
+				result: 0,
+				error : "Bad request. Body is undefined"
+			};
+		}
+	});
+	// TILDA routes <=
+
 	router.get("/admin", async (ctx) => {
 		if (ctx.isAuthenticated()) {
 			await ctx.redirect("/admin/pages");
