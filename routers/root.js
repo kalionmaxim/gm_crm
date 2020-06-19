@@ -690,34 +690,41 @@ module.exports = function routes(app, passport) {
 		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
 		 */
 
-		console.log("not passed", ctx.request.body);
-
 		if (ctx.request.body) {
-			if (!ctx.request.body.Email) {
+			const myBody = {
+				Email : ctx.request.body.Email,
+				First_Name : ctx.request.body.Name,
+				productID : "3678676000121151526",
+				productName : "КИМ Предприниматель Offline - 9 поток"
+			};
+
+			console.log(myBody);
+
+			if (!myBody.Email) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
 				};
-			} else if (!ctx.request.body.productID) {
+			} else if (!myBody.productID) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'productID' is undefined"
 				};
-			} else if (!ctx.request.body.productName) {
+			} else if (!myBody.productName) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'productName' is undefined"
 				};
-			} else if (!ctx.request.body.First_Name) {
+			} else if (!myBody.First_Name) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'First_Name' is undefined"
 				};
 			} else {
-				// const geoData = (await getGeo(ctx)) || {};
-				// ctx.body = await zoho.createDeal(ctx.request.body, geoData);
+				const geoData = (await getGeo(ctx)) || {};
+				ctx.body = await zoho.createDeal(myBody, geoData);
 
-				console.log("passed", ctx.request.body);
+				console.log("passed", myBody);
 
 				ctx.body = {
 					result: 1
