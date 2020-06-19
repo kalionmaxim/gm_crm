@@ -690,6 +690,8 @@ module.exports = function routes(app, passport) {
 		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
 		 */
 
+		console.log(ctx.request.body);
+
 		if (ctx.request.body) {
 			const myBody = {
 				Email : ctx.request.body.Email,
