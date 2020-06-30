@@ -690,17 +690,14 @@ module.exports = function routes(app, passport) {
 		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
 		 */
 
-		console.log("body from tilda", ctx.request.body);
-
 		if (ctx.request.body) {
 			const myBody = {
 				Email : ctx.request.body.Email,
 				First_Name : ctx.request.body.Name,
 				productID : ctx.request.body.productID,
-				productName : ctx.request.body.productName
+				productName : ctx.request.body.productName,
+				Phone: ctx.request.body.Phone
 			};
-
-			console.log("myBody", myBody);
 
 			if (!myBody.Email) {
 				ctx.body = {
@@ -725,12 +722,6 @@ module.exports = function routes(app, passport) {
 			} else {
 				const geoData = (await getGeo(ctx)) || {};
 				ctx.body = await zoho.createDeal(myBody, geoData);
-
-				console.log("myBody passed", myBody);
-
-				ctx.body = {
-					result: 1
-				};
 			}
 		} else {
 			ctx.body = {
