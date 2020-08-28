@@ -724,7 +724,11 @@ module.exports = function routes(app, passport) {
 				First_Name : ctx.request.body.Name,
 				productID  : ctx.request.body.productID,
 				productName: ctx.request.body.productName,
-				Phone      : ctx.request.body.Phone
+				Phone      : ctx.request.body.Phone,
+
+				academy_course        : ctx.request.body.academy_course,
+				academy_communication : ctx.request.body.academy_communication,
+				academy_meeting       : ctx.request.body.academy_meeting
 			};
 
 			if (!myBody.Email) {
