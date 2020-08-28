@@ -487,6 +487,10 @@ module.exports = function routes(app, passport) {
 		ctx.body = await Fondy.createPayment(ctx.request.body);
 	});
 
+	router.post("/fondy/payment/rectoken", async (ctx) => {
+		ctx.body = await Fondy.createPaymentByRectoken(ctx.request.body);
+	});
+
 	router.post("/fondy/callback", async (ctx) => {
 		ctx.status = await Fondy.processCallback(ctx.request.body);
 	});
@@ -716,11 +720,11 @@ module.exports = function routes(app, passport) {
 
 		if (ctx.request.body) {
 			const myBody = {
-				Email : ctx.request.body.Email,
+				Email      : ctx.request.body.Email,
 				First_Name : ctx.request.body.Name,
-				productID : ctx.request.body.productID,
-				productName : ctx.request.body.productName,
-				Phone: ctx.request.body.Phone
+				productID  : ctx.request.body.productID,
+				productName: ctx.request.body.productName,
+				Phone      : ctx.request.body.Phone
 			};
 
 			if (!myBody.Email) {
