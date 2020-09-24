@@ -728,7 +728,10 @@ module.exports = function routes(app, passport) {
 
 				academy_course        : ctx.request.body.academy_course,
 				academy_communication : ctx.request.body.academy_communication,
-				academy_meeting       : ctx.request.body.academy_meeting
+				academy_meeting       : ctx.request.body.academy_meeting,
+
+				corp_training        : ctx.request.body.corp_training,
+				training_directions  : ctx.request.body.training_directions
 			};
 
 			if (!myBody.Email) {
