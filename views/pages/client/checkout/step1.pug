@@ -122,7 +122,7 @@ html(lang='ru-RU')
 					.text5
 						| !{labels.doYouHaveQuestsLbl || ""}
 						br
-						| тел. <b>+7 495 241 07 87</b> (#{labels.russiaLbl || ""}), <b>+38 044 237 13 18</b> (#{labels.ukraineLbl || ""})
+						| тел. <span class="notsng_text"><b>+7 495 241 07 87</b> (#{labels.russiaLbl || ""})</span> <span class="sng_text"><b>+38 044 237 13 18</b> (#{labels.ukraineLbl || ""})</span>
 					.info
 						.part.part1.inl
 							p.text7 #{labels.guarantee.title || ""}
@@ -173,10 +173,10 @@ html(lang='ru-RU')
 							i.fa.fa-instagram(aria-hidden='true')
 						a.icon-yt.icon-soc(href='https://www.youtube.com/user/Olestimofeev', target='_blank')
 							i.fa.fa-youtube(aria-hidden='true')
-					p.text4
+					p.text4.notsng_text
 						span.ru +7 (495) 241 07 87
 						|  (#{labels.russiaLbl})
-					p.text4
+					p.text4.sng_text
 						span.ru +38 (044) 237 13 18
 						|  (#{labels.ukraineLbl})
 				.footer-line
@@ -497,3 +497,14 @@ else
 			}
 		})();
 
+
+script.
+	$(function(){
+		$.get("https://ipapi.co/json/?key=e4192db949f63bdb4a84f9d73bf5cafa9921a6a5", function (data) {
+			if (data.country_code == 'UA') {
+				$('.notsng_text').hide();
+			} else {
+				$('.sng_text').hide();
+			}
+		});
+	});
