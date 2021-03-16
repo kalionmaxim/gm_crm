@@ -719,51 +719,35 @@ module.exports = function routes(app, passport) {
 		 */
 
 		if (ctx.request.body) {
-			const myBody = {
-				Email      : ctx.request.body.Email,
-				Phone      : ctx.request.body.Phone,
-				First_Name : ctx.request.body.Name,
-				productID  : ctx.request.body.productID,
-				productName: ctx.request.body.productName,
-
-				academy_course        : ctx.request.body.academy_course,
-				academy_communication : ctx.request.body.academy_communication,
-				academy_meeting       : ctx.request.body.academy_meeting,
-
-				corp_training        : ctx.request.body.corp_training,
-				training_directions  : ctx.request.body.training_directions,
-
-				utm_campaign  : ctx.request.body.utm_campaign,
-				utm_medium    : ctx.request.body.utm_medium,
-				utm_source    : ctx.request.body.utm_source,
-				utm_term      : ctx.request.body.utm_term,
-				utm_content   : ctx.request.body.utm_content,
-				http_refferer : ctx.request.body.http_refferer
-			};
-
-			if (!myBody.Email) {
+			if (!ctx.request.body.Email) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'Email' is undefined"
 				};
-			} else if (!myBody.productID) {
+			} else if (!ctx.request.body.productID) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'productID' is undefined"
 				};
-			} else if (!myBody.productName) {
+			} else if (!ctx.request.body.productName) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'productName' is undefined"
 				};
-			} else if (!myBody.First_Name) {
-				ctx.body = {
-					result: 0,
-					error : "Required field 'First_Name' is undefined"
-				};
 			} else {
-				const geoData = (await getGeo(ctx)) || {};
-				ctx.body = await zoho.createDeal(myBody, geoData);
+				if (ctx.request.body.Name) {
+					ctx.request.body.First_Name = ctx.request.body.Name;
+				}
+
+				if (!ctx.request.body.First_Name) {
+					ctx.body = {
+						result: 0,
+						error : "Required field 'First_Name' is undefined"
+					};
+				} else {
+					const geoData = (await getGeo(ctx)) || {};
+					ctx.body = await zoho.createDeal(ctx.request.body, geoData);
+				}
 			}
 		} else {
 			ctx.body = {
