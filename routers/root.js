@@ -518,9 +518,9 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
-	router.get("/monobank", async (ctx) => {
-		await ctx.render("pages/client/monobank");
-	});
+	// router.get("/monobank", async (ctx) => {
+	// 	await ctx.render("pages/client/monobank");
+	// });
 
 	router.post("/monobank/validatePhone", async (ctx) => {
 		ctx.body = await Monobank.validateClient(ctx.request.body.phone);
@@ -686,9 +686,9 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
-	router.get("/mbtest", async (ctx) => {
-		await ctx.render("pages/client/monobank-test-page");
-	});
+	// router.get("/mbtest", async (ctx) => {
+	// 	await ctx.render("pages/client/monobank-test-page");
+	// });
 
 	router.post("/monobank/parts/callback", async (ctx) => {
 		await Monobank.processCallback(ctx.request.body);
