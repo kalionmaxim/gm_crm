@@ -1,0 +1,93 @@
+h2#hText text
+form#form
+	label(for="name") Имя:&nbsp;
+	input#name(name="name" placeholder="Ваше полное имя" type="text" required=true)
+	br
+	label(for="email") Email:&nbsp;
+	input#email(name="email" placeholder="Ваш основной email" type="email" required=true)
+	br
+	label(for="phone") Телефон:&nbsp;
+	input#phone(name="phone" placeholder="+380931234567" type="text" required=true)
+	br
+	label(for="name") Количество частей для оплаты:&nbsp;
+	select#parts(name="parts")
+		option(value=12) 12
+		option(value=11) 11
+		option(value=10) 10
+		option(value=9) 9
+		option(value=8) 8
+		option(value=7) 7
+		option(value=6) 6
+		option(value=5) 5
+		option(value=4) 4
+		option(value=3) 3
+	br
+	button(type="submit") Оплатить
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+script.
+	$(document).ready(function () {
+		$("#name").val(getCookie("name") || "");
+		$("#email").val(getCookie("email") || "");
+		$("#phone").val(getCookie("phone") || "");
+
+		$("#hText").html("Покупка " + (getParameterByName("productName") || "") + " на сумму " + (getParameterByName("productPrice") || "") + " USD");
+	});
+
+	$('#form').submit(function (e) {
+		e.preventDefault();
+
+		var data = {
+			"name": document.getElementById("name").value,
+			"email": document.getElementById("email").value,
+			"phone": document.getElementById("phone").value,
+			"parts": document.getElementById("parts").value,
+			"grUnpaid": getParameterByName("grUnpaid") || "",
+			"page_name": getParameterByName("productName") || "",
+			"productName": getParameterByName("productName") || "",
+			"productID": getParameterByName("productID") || "",
+			"price": getParameterByName("productPrice") || ""
+		};
+
+		var phoneRegexp = new RegExp("\\+380\\d{9}");
+		if (phoneRegexp.test(document.getElementById("phone").value)) {
+			axios({
+				method: "post",
+				url   : "/monobank/parts",
+				data  : data
+			}).then(function (response) {
+				console.log(response);
+				if (response && response.data && response.data.result && response.data.data) {
+					console.log(response);
+					window.location = getParameterByName("successLink") || "/monobank/success";
+				} else {
+					alert("Произошла неизвестная ошибка");
+				}
+			});
+		} else {
+			alert("Формат телефона должен быть +380XXXXXXXXX");
+		}
+	});
+
+	function getParameterByName (name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+		var results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+	function getCookie (cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
+		}
+		return undefined;
+	}
