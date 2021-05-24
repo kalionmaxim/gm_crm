@@ -348,3 +348,66 @@ a.disable_link {
  border-radius: 50%;
  background: url(/img/euro-symbol.svg) no-repeat center top 27% / 25%, url(/img/euro-flag.svg) no-repeat center top / 60%;
 }
+
+.sec2 .links1 {
+ display: flex;
+ align-content: flex-start;
+ justify-content: center;
+}
+.sec2 .links1 .link {
+ height: auto;
+ min-height: 125px;
+}
+.sec2 .links1 .link6 {
+ position: relative;
+}
+.sec2 .links1 .link6:before {
+ content: '';
+ width: 100%;
+ height: 75px;
+ background: url(/img/monobank-logo.png) no-repeat center / 90% auto, #fff;
+ box-shadow: 0 0 5px #EDDCBD;
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+
+.sec2 .links1 .button2 {
+ border: none;
+}
+
+.monobank-pay-btn .monobank-pay-btn__parts {
+ display: flex;
+ align-items: center;
+ flex-wrap: wrap;
+ margin: 10px 0 20px;
+}
+
+.monobank-pay-btn .monobank-pay-btn__parts .monobank-pay-btn__parts_text {
+ flex: 1;
+ font-size: 13px;
+ text-align: left;
+}
+.monobank-pay-btn .monobank-pay-btn__parts .monobank-pay-btn__parts_select {
+ width: 60px;
+ text-align: center;
+ padding: 0 10px;
+ margin: 0;
+}
+
+.monobank-pay-btn input {
+ width: 100%;
+ display: block;
+ color: #0e0f11;
+ font-size: 16px;
+ height: 45px;
+ border: 1px solid rgba(154, 154, 154, .85);
+ background-color: #f9f9fe;
+ padding-left: 20px;
+}
+.monobank-pay-btn input, .monobank-pay-btn .intl-tel-input {
+ margin-top: 20px;
+}
+.monobank-pay-btn .intl-tel-input {
+ display: none;
+}
