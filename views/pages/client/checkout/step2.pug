@@ -542,8 +542,8 @@ script.
 			});
 		} else {
 			$("#preloader").hide();
-			$('#monobank_form').find('.intl-tel-input').show();
-			$('#monobank_form').find('.intl-tel-input input').focus();
+			$('#monobank_phone').closest('.intl-tel-input').show();
+			$('#monobank_phone').focus();
 			alert("Формат телефона должен быть +380XXXXXXXXX");
 		}
 	});
