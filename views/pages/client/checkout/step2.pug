@@ -127,7 +127,7 @@ html(lang='ru-RU')
 										option(value=3) 3
 								input#monobank_name(name="name" type="hidden" required=true)
 								input#monobank_email(name="email" type="hidden" required=true)
-								input#monobank_phone.phone(name="phone" type="tel" placeholder="Ваш телефон" required=true)
+								input#monobank_phone(name="phone" type="tel" placeholder="Ваш телефон" required=true)
 								button(type="submit").button2.hvr-grow В рассрочку от Monobank
 					script.
 						var step = '1';
@@ -498,7 +498,14 @@ else
 			}
 		})();
 
-
+script.
+	$("#monobank_phone").intlTelInput({
+		utilsScript       : '/js/utils.js',
+		defaultCountry    : 'auto',
+		separateDialCode  : false,
+		nationalMode      : false,
+		preferredCountries: ['ua', 'ru', 'by', 'kz']
+	});
 script.
 	//-- monobank
 	$(document).ready(function () {
