@@ -731,10 +731,6 @@ module.exports = function routes(app, passport) {
 					name              : ctx.request.body.name
 				};
 
-				if (ctx.request.body.productID) {
-					addDealToCrm(ctx.request.body.name, ctx.request.body.email, ctx.request.body.phone, ctx.request.body.productID);
-				}
-
 				if (ctx.request.body.grUnpaid) {
 					addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", { phone: ctx.request.body.phone });
 				}
