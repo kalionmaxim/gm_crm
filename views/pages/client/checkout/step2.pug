@@ -531,7 +531,7 @@ script.
 				setCookie("monobankCheckoutLink", window.location.href, 365);
 				console.log(response);
 				if (response && response.data && response.data.result && response.data.data) {
-					console.log(response);
+					setCookie("mono_order_id", response.data.order_id);
 					window.location = "/monobank/process";
 					//window.location = getParameterByName("successLink") || "/monobank/success";
 				} else {

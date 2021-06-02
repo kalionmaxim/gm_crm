@@ -754,6 +754,37 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
+	router.post("/monobank/order_status", async (ctx) => {
+		try {
+			const order = await MonoOrder.findOne({ mono_order_id: ctx.request.body.order_id });
+
+			if (order) {
+				let status = "Неоплачен";
+				if (order.state) {
+					status = order.state;
+
+					if (order.sub_state) {
+						status += " (" + order.sub_state + ")";
+					}
+				}
+
+				ctx.body = {
+					result: 1,
+					status
+				};
+			} else {
+				ctx.body = {
+					result: 0
+				};
+			}
+		} catch (err) {
+			eLogger.error(err);
+			ctx.body = {
+				result: 0
+			};
+		}
+	});
+
 	//MONOBANK LOGIC PROD <=
 
 	// TILDA routes =>

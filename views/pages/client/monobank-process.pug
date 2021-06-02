@@ -76,8 +76,8 @@ html(lang='ru-RU')
 
 					.monobank-process-status
 						b Статус заказа:&nbsp;
-						| Неоплачен
-						button(title="Проверить статус").monobank-process-status__btn
+						p#statusText Неоплачен
+						button#statusCheck(title="Проверить статус" onclick="getOrderStatus(this)").monobank-process-status__btn
 
 
 		// FOOTER
@@ -142,6 +142,7 @@ html(lang='ru-RU')
 					.two
 				#video-popup
 		// END HIDDEN ELEMENTS (MODALS)
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 		script(src='/js/libs.min.js')
 		script(src='/js/common.js')
 		script.
@@ -153,7 +154,20 @@ html(lang='ru-RU')
 					nationalMode      : false,
 					preferredCountries: ['ua', 'ru', 'by', 'kz']
 				});
-
+		script.
+			function getOrderStatus (element) {
+				axios({
+					method: "post",
+					url: "/monobank/order_status",
+					data: {
+						order_id: getCookie("mono_order_id")
+					}
+				}).then(function (response) {
+					if (response && response.data.result) {
+						$('#statusText').html(response.data.status);
+					}
+				});
+			}
 		script.
 			var header_image = 'bg1.jpg';
 			var payment_title = '#{productName}';
