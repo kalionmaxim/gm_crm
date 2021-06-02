@@ -156,6 +156,10 @@ html(lang='ru-RU')
 				});
 		script.
 			function getOrderStatus (element) {
+				$(element).addClass('monobank-process-status__btn--rotate');
+				setTimeout(function(){
+					$(element).removeClass('monobank-process-status__btn--rotate');
+				}, 1000);
 				axios({
 					method: "post",
 					url: "/monobank/order_status",

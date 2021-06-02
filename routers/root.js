@@ -766,6 +766,12 @@ module.exports = function routes(app, passport) {
 					if (order.sub_state) {
 						status += " (" + order.sub_state + ")";
 					}
+
+					if (order.state === "SUCCESS") {
+						await ctx.redirect("/monobank/success");
+					} else if (order.state === "FAIL") {
+						await ctx.redirect("/monobank/failure");
+					}
 				}
 
 				ctx.body = {

@@ -426,9 +426,23 @@ a.disable_link {
  height: 32px;
  border: none;
  border-radius: 4px;
- background: url(/img/icon-process.svg) no-repeat center / 60%, #E5BF43;
+ background: #E5BF43;
  margin-left: 10px;
  cursor: pointer;
+ position: relative;
+}
+.monobank-process-status .monobank-process-status__btn:before {
+ content: '';
+ width: 100%;
+ height: 100%;
+ background: url(/img/icon-process.svg) no-repeat center / 60%;
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+.monobank-process-status .monobank-process-status__btn.monobank-process-status__btn--rotate:before {
+ transition: 1s;
+ transform: rotate(360deg);
 }
 
 
