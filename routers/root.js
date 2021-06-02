@@ -574,6 +574,10 @@ module.exports = function routes(app, passport) {
 		ctx.status = 200;
 	});
 
+	router.get("/monobank/process", async (ctx) => {
+		await ctx.render("pages/client/monobank-process");
+	});
+
 	router.get("/monobank/success", async (ctx) => {
 		await ctx.render("pages/client/monobank-success");
 	});

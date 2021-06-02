@@ -135,7 +135,7 @@
  text-align: center;
  color: #3acb58;
  font-size: 28px;
- line-height: 24px;
+ line-height: 140%;
  letter-spacing: 0.7px;
  font-weight: 700;
  padding: 55px 0px;
@@ -337,4 +337,136 @@ a.disable_link {
  display: flex;
  align-items: center;
  justify-content: center;
+}
+
+.success.success--fail {
+ color: #f44336;
+}
+
+.sec1 .step.step--fail .text .circle {
+ background: url(/img/icon-cross.svg) no-repeat center / 40%, #f44336;
+}
+
+.sec1 .step.step--process .text .circle {
+ background: url(/img/icon-process.svg) no-repeat center / 45%, #E5BF43;
+}
+
+.block-header .block-header__title {
+ font-family: RobotoBold, sans-serif;
+ font-size: 28px;
+ line-height: 140%;
+ text-align: center;
+ padding: 60px 20px;
+}
+
+.monobank-failure {
+
+}
+
+.monobank-failure .monobank-failure__btn {
+ width: 320px;
+ display: block;
+ border: none;
+ background-color: #1ac33d;
+ color: #fff;
+ line-height: 140%;
+ font-family: RobotoBold, sans-serif;
+ font-size: 20px;
+ text-transform: uppercase;
+ text-align: center;
+ padding: 14px 45px;
+ margin: 20px auto 120px;
+ cursor: pointer;
+}
+.monobank-failure .monobank-failure__btn:hover {
+ text-decoration: none;
+}
+
+
+.monobank-process {
+ display: flex;
+ align-items: center;
+ padding: 40px 20px;
+}
+.monobank-process .monobank-process__col {
+ flex: 1;
+ padding: 20px;
+}
+
+.monobank-process-item {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+}
+
+.monobank-process-item .monobank-process-item__img {
+
+}
+.monobank-process-item .monobank-process-item__title {
+ font-family: RobotoBold, sans-serif;
+ line-height: 130%;
+ text-align: center;
+ margin-top: 12px;
+}
+
+.monobank-process-status {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 20px;
+ text-align: center;
+ padding: 40px 0;
+}
+.monobank-process-status b {
+ font-family: RobotoBold, sans-serif;
+}
+.monobank-process-status .monobank-process-status__btn {
+ width: 32px;
+ height: 32px;
+ border: none;
+ border-radius: 4px;
+ background: url(/img/icon-process.svg) no-repeat center / 60%, #E5BF43;
+ margin-left: 10px;
+ cursor: pointer;
+}
+
+
+@media only screen and (max-width: 720px) {
+
+ .sec1 {
+  height: auto;
+ }
+ .sec1 .step {
+  padding-bottom: 60px;
+ }
+ .sec1 .text1:after {
+  bottom: 25px;
+ }
+ .sec2 .success {
+  font-size: 20px;
+ }
+ .monobank-failure .monobank-failure__btn {
+  width: 240px;
+  font-size: 16px;
+  padding: 12px 35px;
+  margin: 0 auto 60px;
+ }
+
+ .block-header .block-header__title {
+  font-size: 18px;
+  padding: 30px 20px;
+ }
+
+ .monobank-process {
+  flex-direction: column;
+ }
+ .monobank-process-item .monobank-process-item__img {
+  max-width: 200px;
+ }
+
+ .monobank-process-status {
+  padding-top: 0;
+ }
+
 }

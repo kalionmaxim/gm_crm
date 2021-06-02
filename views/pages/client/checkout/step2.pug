@@ -111,24 +111,7 @@ html(lang='ru-RU')
 						//a.link.link5.inl(href='manual.php')
 						//	span.button2.hvr-grow Оплатить
 						.link.link6.inl.monobank-pay-btn
-							form#monobank_form
-								.monobank-pay-btn__parts
-									p.monobank-pay-btn__parts_text Выберите на сколько частей разбить платеж
-									select#monobank_parts.monobank-pay-btn__parts_select(name="parts")
-										option(value=12) 12
-										option(value=11) 11
-										option(value=10) 10
-										option(value=9) 9
-										option(value=8) 8
-										option(value=7) 7
-										option(value=6) 6
-										option(value=5) 5
-										option(value=4) 4
-										option(value=3) 3
-								input#monobank_name(name="name" type="hidden" required=true)
-								input#monobank_email(name="email" type="hidden" required=true)
-								input#monobank_phone(name="phone" type="tel" placeholder="Ваш телефон" required=true)
-								button(type="submit").button2.hvr-grow В рассрочку от Monobank
+							button(type="button")#showMonbankPopupBtn.button2.hvr-grow В рассрочку от Monobank
 					script.
 						var step = '1';
 					.text5
@@ -212,6 +195,43 @@ html(lang='ru-RU')
 					.one
 					.two
 				#video-popup
+
+
+		#modal-monobank.modal-overlay
+			.modal-content
+				.close-button
+					.one
+					.two
+				form#monobank_form.monobank-form
+					p.monobank-form__title Покупка частями monobank
+					.monobank-form-parts-layout
+						.monobank-form-parts
+							p.monobank-form-parts__text <span id="monobankPartsText">12 платежей</span> на:
+							select#monobank_parts.monobank-form-parts__select(name="parts")
+								option(value=12) 12 месяцев
+								option(value=11) 11 месяцев
+								option(value=10) 10 месяцев
+								option(value=9) 9 месяцев
+								option(value=8) 8 месяцев
+								option(value=7) 7 месяцев
+								option(value=6) 6 месяцев
+								option(value=5) 5 месяцев
+								option(value=4) 4 месяцев
+								option(value=3) 3 месяцев
+							p.monobank-form-parts__text <span id="monobankPartsPrice">-</span> грн / месяц
+						.monobank-form-parts
+							p.monobank-form-parts__text Мобильный телефон: <span class="color-red">*</span>
+							input#monobank_phone(name="phone" type="tel" placeholder="Ваш телефон" required=true disabled)
+							button(type="button")#monobankUpdatePhoneBtn.button2.button2--gray.monobank-form-parts__btn Изменить
+
+					button(type="submit").button2.hvr-grow.monobank-form__submit Оплатить
+
+					input#monobank_name(name="name" type="hidden" required=true)
+					input#monobank_email(name="email" type="hidden" required=true)
+
+				p.monobank-form-disclaimer <span class="color-red">*</span> Укажите Ваш финансовый телефон в Monobank. Услуга оплаты частями доступна только клиентам Monobank. <a href="https://www.monobank.com.ua/cpa" target="_blank">Стать клиентом Monobank</a>
+
+
 		// END HIDDEN ELEMENTS (MODALS)
 		script(src='/js/libs.min.js')
 		script(src='/js/common.js')
@@ -345,6 +365,9 @@ script.
 	var subPrice1Curr = null;
 	var subPrice2 = null;
 	var subPrice2Curr = null;
+
+	var UAHPrice;
+
 	switch (currency.toLowerCase()) {
 		case "usd":
 			currencySym = "$";
@@ -417,6 +440,7 @@ script.
 					break;
 				case "uah":
 					$('.js_hrn_price').html(subPrice1 + " грн.");
+					UAHPrice = subPrice1;
 					break;
 				case "rub":
 					$('.js_hrn_price').html(subPrice1 + " руб.");
@@ -431,6 +455,7 @@ script.
 					break;
 				case "uah":
 					$('.js_rub_price').html(subPrice2 + " грн.");
+					UAHPrice = subPrice2;
 					break;
 				case "rub":
 					$('.js_rub_price').html(subPrice2 + " руб.");
@@ -445,6 +470,90 @@ script.
 	// }
 	$('.js_tovar_id').val(tovar_id);
 	$('.sec1').css('background-image', 'url(/img/' + header_image + ')');
+
+
+
+	//-- monobank
+	$('#showMonbankPopupBtn').click(function () {
+		$('#modal-monobank').fadeIn(200);
+	});
+
+	$('#monobankUpdatePhoneBtn').click(function () {
+		$(this).css('opacity', 0);
+		$('#monobank_phone').removeAttr('disabled').focus();
+	});
+
+	$('#monobankPartsPrice').text(parseFloat(UAHPrice / 12).toFixed(2));
+
+	$('#monobank_parts').on('change', function () {
+		var parts = parseInt($(this).val());
+
+		if (parts > 4) {
+			$('#monobankPartsText').text(parts + " платежей");
+		} else {
+			$('#monobankPartsText').text(parts + " платежа");
+		}
+
+		$('#monobankPartsPrice').text(parseFloat(UAHPrice / parts).toFixed(2));
+	});
+
+
+	$(document).ready(function () {
+		$("#monobank_name").val(getParameterByName("firstName") || "");
+		$("#monobank_email").val(getParameterByName("email") || "");
+		$("#monobank_phone").val(getParameterByName("phone") || "");
+	});
+
+	$('#monobank_form').submit(function (e) {
+		e.preventDefault();
+
+		$("#preloader").show();
+
+		var data = {
+			"name"       : document.getElementById("monobank_name").value,
+			"email"      : document.getElementById("monobank_email").value,
+			"phone"      : document.getElementById("monobank_phone").value,
+			"parts"      : document.getElementById("monobank_parts").value,
+			"grUnpaid"   : getParameterByName("grUnpaid") || "",
+			"page_name"  : getParameterByName("productName") || "",
+			"productName": getParameterByName("productName") || "",
+			"productID"  : getParameterByName("productID") || "",
+			"price"      : getParameterByName("productPrice") || ""
+		};
+
+		var phoneRegexp = new RegExp("\\+380\\d{9}");
+		if (phoneRegexp.test(document.getElementById("monobank_phone").value)) {
+			axios({
+				method: "post",
+				url   : "/monobank/parts",
+				data  : data
+			}).then(function (response) {
+				setCookie("monobankCheckoutLink", window.location.href, 365);
+				console.log(response);
+				if (response && response.data && response.data.result && response.data.data) {
+					console.log(response);
+					window.location = "/monobank/process";
+					//window.location = getParameterByName("successLink") || "/monobank/success";
+				} else {
+					$("#preloader").hide();
+					alert("Произошла неизвестная ошибка");
+				}
+			});
+		} else {
+			$("#preloader").hide();
+			//$('#monobank_phone').closest('.intl-tel-input').show();
+			$('#monobank_phone').removeAttr('disabled').focus();
+			$('#monobankUpdatePhoneBtn').css('opacity', 0);
+			alert("Формат телефона должен быть +380XXXXXXXXX");
+		}
+	});
+
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+		var results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
 
 
 script(type='text/javascript').
@@ -506,59 +615,4 @@ script.
 		nationalMode      : false,
 		preferredCountries: ['ua', 'ru', 'by', 'kz']
 	});
-script.
-	//-- monobank
-	$(document).ready(function () {
-		$("#monobank_name").val(getParameterByName("firstName") || "");
-		$("#monobank_email").val(getParameterByName("email") || "");
-		$("#monobank_phone").val(getParameterByName("phone") || "");
-	});
-
-	$('#monobank_form').submit(function (e) {
-		e.preventDefault();
-
-		$("#preloader").show();
-
-		var data = {
-			"name"       : document.getElementById("monobank_name").value,
-			"email"      : document.getElementById("monobank_email").value,
-			"phone"      : document.getElementById("monobank_phone").value,
-			"parts"      : document.getElementById("monobank_parts").value,
-			"grUnpaid"   : getParameterByName("grUnpaid") || "",
-			"page_name"  : getParameterByName("productName") || "",
-			"productName": getParameterByName("productName") || "",
-			"productID"  : getParameterByName("productID") || "",
-			"price"      : getParameterByName("productPrice") || ""
-		};
-
-		var phoneRegexp = new RegExp("\\+380\\d{9}");
-		if (phoneRegexp.test(document.getElementById("monobank_phone").value)) {
-			axios({
-				method: "post",
-				url   : "/monobank/parts",
-				data  : data
-			}).then(function (response) {
-				console.log(response);
-				if (response && response.data && response.data.result && response.data.data) {
-					console.log(response);
-					window.location = getParameterByName("successLink") || "/monobank/success";
-				} else {
-					$("#preloader").hide();
-					alert("Произошла неизвестная ошибка");
-				}
-			});
-		} else {
-			$("#preloader").hide();
-			$('#monobank_phone').closest('.intl-tel-input').show();
-			$('#monobank_phone').focus();
-			alert("Формат телефона должен быть +380XXXXXXXXX");
-		}
-	});
-
-	function getParameterByName(name) {
-		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
-		var results = regex.exec(location.search);
-		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-	}
 

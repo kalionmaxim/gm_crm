@@ -395,19 +395,180 @@ a.disable_link {
  margin: 0;
 }
 
-.monobank-pay-btn input {
+.monobank-pay-btn input, .monobank-form input, .monobank-form select {
  width: 100%;
  display: block;
  color: #0e0f11;
  font-size: 16px;
- height: 45px;
+ height: 36px;
  border: 1px solid rgba(154, 154, 154, .85);
  background-color: #f9f9fe;
  padding-left: 20px;
+}
+.monobank-pay-btn input:disabled, .monobank-form input:disabled, .monobank-form select:disabled {
+ color: rgba(154, 154, 154, .95);
+ opacity: 0.6;
 }
 .monobank-pay-btn input, .monobank-pay-btn .intl-tel-input {
  margin-top: 20px;
 }
 .monobank-pay-btn .intl-tel-input {
  display: none;
+}
+
+
+#modal-monobank.modal-overlay .modal-content {
+ max-width: 920px;
+ height: auto;
+ padding: 50px;
+}
+
+.monobank-form {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+.monobank-form .button2 {
+ height: auto;
+ border: none;
+ background-color: #1ac33d;
+ color: #fff;
+ font-size: 14px;
+ line-height: 140%;
+ padding: 8px 25px 9px;
+ cursor: pointer;
+}
+.monobank-form .button2.button2--gray {
+ background-color: rgba(154, 154, 154, .85);
+}
+.monobank-form select {
+ -webkit-appearance: none;
+ background: url(/img/icon-dropdown.svg) no-repeat center right 12px / 12px, #f9f9fe;
+ padding-right: 35px;
+}
+
+.monobank-form .monobank-form__title {
+ background: url(/img/monobank-logo-2.svg) no-repeat center right / contain;
+ font-size: 24px;
+ line-height: 140%;
+ font-family: RobotoBold, sans-serif;
+ text-align: center;
+ padding-right: 45px;
+ margin-bottom: 40px;
+}
+
+.monobank-form .monobank-form__submit {
+ display: flex;
+ align-items: center;
+ font-family: RobotoBold, sans-serif;
+ font-size: 20px;
+ text-transform: uppercase;
+ padding: 14px 45px;
+ margin-top: 20px;
+}
+.monobank-form .monobank-form__submit:after {
+ content: '';
+ width: 28px;
+ height: 28px;
+ display: block;
+ background: url(/img/arrow-right.svg) no-repeat center / contain;
+ margin-left: 30px;
+}
+
+.monobank-form-parts {
+ display: flex;
+ align-items: center;
+ padding-left: 20px;
+ margin-bottom: 20px;
+}
+
+.monobank-form-parts .monobank-form-parts__text, .monobank-form-parts .monobank-form-parts__select, .monobank-form-parts .monobank-form-parts__input, .monobank-form-parts .monobank-form-parts__btn, .monobank-form-parts .intl-tel-input {
+ margin-right: 20px;
+}
+
+.monobank-form-parts .monobank-form-parts__text, .monobank-form-parts .monobank-form-parts__btn {
+ min-width: 175px;
+}
+
+.monobank-form-parts .monobank-form-parts__text {
+ font-size: 16px;
+ line-height: 140%;
+ font-family: RobotoMedium, sans-serif;
+}
+
+.monobank-form-parts .monobank-form-parts__select {
+ width: auto;
+ min-width: 230px;
+}
+
+
+.monobank-form-disclaimer {
+ max-width: 460px;
+ font-size: 13px;
+ line-height: 130%;
+ color: rgba(154, 154, 154, .95);
+ text-align: center;
+ margin: 60px auto 0;
+}
+
+.color-red {
+ color: red;
+}
+
+@media only screen and (max-width: 1130px) {
+
+ .monobank-form-parts {
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+ }
+ .monobank-form-parts .monobank-form-parts__text, .monobank-form-parts .monobank-form-parts__select, .monobank-form-parts .monobank-form-parts__input, .monobank-form-parts .monobank-form-parts__btn, .monobank-form-parts .intl-tel-input {
+  margin: 0 0 20px;
+ }
+
+ .monobank-form-parts .monobank-form-parts__text, .monobank-form-parts .monobank-form-parts__btn {
+  min-width: 230px;
+  text-align: center;
+ }
+
+}
+
+@media only screen and (max-width: 720px) {
+
+ .sec2 .links1 {
+  flex-direction: column;
+  align-items: center;
+ }
+
+ #modal-monobank.modal-overlay .modal-content {
+  width: 90vw;
+  padding: 20px;
+ }
+
+ .monobank-form-parts .monobank-form-parts__text, .monobank-form-parts .monobank-form-parts__select, .monobank-form-parts .monobank-form-parts__input, .monobank-form-parts .monobank-form-parts__btn, .monobank-form-parts .intl-tel-input {
+  min-width: 0;
+  width: 100%;
+  margin: 0 0 10px;
+ }
+ .monobank-form-parts .monobank-form-parts__text {
+  font-size: 14px;
+ }
+
+ .monobank-form .monobank-form__title {
+  background: none;
+  font-size: 20px;
+  padding-right: 0;
+ }
+
+ .monobank-form .monobank-form__submit {
+  font-size: 16px;
+  padding: 10px 30px;
+  margin-top: 0;
+ }
+
+ .monobank-form-disclaimer {
+  font-size: 12px;
+  margin-top: 25px;
+ }
+
 }

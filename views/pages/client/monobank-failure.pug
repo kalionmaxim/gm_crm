@@ -1,39 +1,171 @@
-h2 Не удалось оформить покупку частями
+doctype html
+html(lang='ru-RU')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Оплата участия
+    // SEO
+    meta(property='og:title', content='Оплата участия')
+    meta(property='og:description', content='Оплата участия')
+    meta(property='og:image', content='https://geniusmarketing.me/pic.png')
+    meta(property='og:url', content='https://geniusmarketing.me/')
+    meta(property='fb:admins', content='1510615147')
+    meta(property='fb:app_id', content='473200492729081')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='/css/checkout/step3/libs.min.css')
+    link(rel='stylesheet', href='/css/checkout/step3/main.min.css')
+    link(rel='stylesheet', href='/css/checkout/step3/edit.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+  body
+    // Google Tag Manager
+    noscript
+      iframe(src='//www.googletagmanager.com/ns.html?id=GTM-TRNP8W', height='0', width='0', style='display:none;visibility:hidden')
+    script.
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push(
+                {
+                  'gtm.start': new Date().getTime(),
+                  event      : 'gtm.js'
+                });
+        var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TRNP8W');
+    // End Google Tag Manager
+    // SECTION 1
+    .tostep1
+      section.sec1(style="background-image: url(/img/bg1.jpg);")
+        .container
+          p.title.js_payment_title
+          .steps
+            .step.step1.inl
+              p.text
+                span.circle
+                |  Шаг 1
+              p.text1 Введите Ваши данные
+            .arrow.inl
+            .step.step2.inl
+              p.text
+                span.circle
+                |  Шаг 2
+              p.text1 Выберите способ оплаты
+            .arrow.inl
+            .step.step3.inl.step--fail
+              p.text
+                span.circle
+                |  Шаг 3
+              p.text1 Проблема с оплатой
 
-script(type='text/javascript').
-  (function (d, w, s) {
-    var widgetId = '22519',
-            gcw = d.createElement(s);
-    gcw.type = 'text/javascript';
-    gcw.async = true;
-    gcw.src = '//my.binotel.ua/getcall/widgets/' + widgetId + '.js';
-    var sn = d.getElementsByTagName(s)[0];
-    sn.parentNode.insertBefore(gcw, sn);
-  })(document, window, 'script');
-script(type='text/javascript').
-  (function () {
-    var widget_id = 'OkTveMoYQF';
-    var d = document;
-    var w = window;
+    section.sec2
+      .container
+        .block
+          .block-header
+            p.success.success--fail(style="display: block") НЕ УДАЛОСЬ ОФОРМИТЬ ПОКУПКУ ЧАСТЯМИ
 
-    function l() {
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = '//code.jivosite.com/script/widget/' + widget_id;
-      var ss = document.getElementsByTagName('script')[0];
-      ss.parentNode.insertBefore(s, ss);
-    }
+            .monobank-failure
+              a(href="#")#checkoutUrl.button2.hvr-grow.monobank-failure__btn Оформить еще раз
 
-    if (d.readyState == 'complete') {
-      l();
-    }
-    else {
-      if (w.attachEvent) {
-        w.attachEvent('onload', l);
+
+    // FOOTER
+    footer.main-footer
+      .container
+        .footer1
+          .copy-wrap
+            p.copy
+              img(src='/img/footer-logo.png')
+              br
+              br
+              | ТОВ "КОНСАЛТИНГ СИНДИКАТ"
+              br
+              | ЕГРПОУ: 42182763, Адрес: 01033, г. Киев,
+              br
+              | ул. Паньковская, 14
+              br
+        .footer2
+          .footer-inline
+            a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-konfidencialnosti/') Политика конфиденциальности
+            a.modal-btn(target='_blank', href='https://geniusmarketing.me/otkaz-ot-otvetstvennosti/') Отказ от ответственности
+            a.modal-btn(target='_blank', href='https://geniusmarketing.me/soglasie-s-rassylkoj/') Согласие с рассылкой
+            a.modal-btn(target='_blank', href='https://geniusmarketing.me/politika-vozvrata-denezhnyx-sredstv/') Политика возврата
+            a.modal-btn(target='_blank', href='https://geniusmarketing.me/usloviya-oferty/') Публичный договор
+        .footer3
+          p.social
+            | Присоединяйтесь к нам в социальных сетях:
+            br.lg
+            br
+            a.icon-fb.icon-soc(href='https://www.facebook.com/GeniusMarketing.me/', target='_blank')
+              i.fa.fa-facebook(aria-hidden='true')
+            a.icon-vk.icon-soc(href='https://vk.com/geniusmarketing', target='_blank')
+              i.fa.fa-vk(aria-hidden='true')
+            a.icon-inst.icon-soc(href='https://www.instagram.com/geniusmarketingofficial/', target='_blank')
+              i.fa.fa-instagram(aria-hidden='true')
+            a.icon-yt.icon-soc(href='https://www.youtube.com/user/Olestimofeev', target='_blank')
+              i.fa.fa-youtube(aria-hidden='true')
+          p.text4
+            span.ru +7 (495) 241 07 87
+            |  (Россия)
+          p.text4
+            span.ru +38 (044) 237 13 18
+            |  (Украина)
+        .footer-line
+        p.bottom-text
+          | © Олесь Тимофеев & GeniusMarketing. Все права защищены. Любое копирование материалов разрешено
+          br
+          |  только с согласия правообладателей. По всем вопросам обращайтесь:
+          a.mail(href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+    // END FOOTER
+
+
+    script(src='/js/libs.min.js')
+    script(src='/js/common.js')
+
+    script(type='text/javascript').
+      (function (d, w, s) {
+        var widgetId = '22519',
+                gcw = d.createElement(s);
+        gcw.type = 'text/javascript';
+        gcw.async = true;
+        gcw.src = '//my.binotel.ua/getcall/widgets/' + widgetId + '.js';
+        var sn = d.getElementsByTagName(s)[0];
+        sn.parentNode.insertBefore(gcw, sn);
+      })(document, window, 'script');
+    script(type='text/javascript').
+      (function () {
+        var widget_id = 'OkTveMoYQF';
+        var d = document;
+        var w = window;
+
+        function l() {
+          var s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = '//code.jivosite.com/script/widget/' + widget_id;
+          var ss = document.getElementsByTagName('script')[0];
+          ss.parentNode.insertBefore(s, ss);
+        }
+
+        if (d.readyState == 'complete') {
+          l();
+        }
+        else {
+          if (w.attachEvent) {
+            w.attachEvent('onload', l);
+          }
+          else {
+            w.addEventListener('load', l, false);
+          }
+        }
+      })();
+
+
+    script.
+      var checkoutURL = getCookie("monobankCheckoutLink") || "";
+      if (checkoutURL) {
+        $('#checkoutUrl').attr('href', checkoutURL);
+      } else {
+        $('#checkoutUrl').hide();
       }
-      else {
-        w.addEventListener('load', l, false);
-      }
-    }
-  })();
