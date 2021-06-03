@@ -38,7 +38,7 @@ html(lang='ru-RU')
 		// End Google Tag Manager
 		// SECTION 1
 		.tostep1
-			section.sec1
+			section.sec1(style="background-image: url(/img/bg1.jpg);")
 				.container
 					p.title.js_payment_title
 					.steps
@@ -63,37 +63,11 @@ html(lang='ru-RU')
 			.container
 				.block
 					.block-header
-						.product.inl.disapear
-							p.text
-								span.js_payment_title
-								br
-								span.js_product_type.product_type
-						.price.inl.disapear
-							.text2.inl К оплате:
-							p#dollar_price.inl
-								span.js_dollar_price
-								span.dollar $
-							.inl
-								p#rub_price.text3
-									span.js_rub_price
-									span.val руб.
-								p#hrn_price.text3
-									span.js_hrn_price
-									span.val грн.
-						p.step1text
-							| Чтобы забронировать участие в событии "
-							span.js_payment_title
-							| ",
-							b
-								span.js_product_type
-							| ,
-							br
-							| введите свои данные в форму ниже и нажмите "Забронировать".
-						p.success
+						p.block-header__title
+							img(src="/img/icon-check-in-circle.svg")
+							| Покупка частями подтвержена.
 					p.textmanual.textcenter
-						b Спасибо! Вы успешно произвели попытку оплаты.
-						br
-						|  Все данные были отправлены на Ваш E-Mail.
+						b Все детали заказа и данные для доступа к<br> продукту отправлены на Ваш E-Mail.
 						br
 						br
 						|  Если по каким-то причинам Вы не получили от нас письмо, обратитесь на наш
@@ -197,68 +171,6 @@ html(lang='ru-RU')
 					nationalMode      : false,
 					preferredCountries: ['ua', 'ru', 'by', 'kz']
 				});
-
-		script.
-			var header_image = 'bg1.jpg';
-			var payment_title = '#{productName}';
-			var dollar_price = 990;
-			if (Math.ceil(dollar_price * uah_cur) < 1000) {
-				var hrn_price = Math.ceil(dollar_price * uah_cur);
-			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
-				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
-			} else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
-				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
-			} else {
-				var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
-			}
-			if (Math.ceil(dollar_price * rub_cur) < 1000) {
-				var rub_price = Math.ceil(dollar_price * rub_cur);
-			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
-				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
-			} else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
-				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
-			} else {
-				var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
-			}
-			var tovar_id = 391746;
-			var token_GR = 'b7QW';
-			var CRM_id = 1185;
-			var success_url = 'https://geniusmarketing.me/syndicate/2payments-entrepreneur-webinar/step1.php';
-			if (step == '0') {
-				$('.steps').addClass('zero');
-				$('.step1text').fadeIn(0);
-				$('.tostep1').addClass('disable_link');
-			} else if (step == '1') {
-				$('.steps').addClass('first');
-				$('.price').removeClass('disapear');
-				$('.product').removeClass('disapear');
-			} else if (step == '2') {
-				$('.steps').addClass('second');
-				$('.price').removeClass('disapear');
-				$('.product').removeClass('disapear');
-			} else if (step == '3') {
-				$('.steps').addClass('third');
-				$('.success').fadeIn(0);
-				$('.success').html('СПАСИБО!');
-			} else if (step == '4') {
-				$('.steps').addClass('third');
-				$('.success').fadeIn(0);
-				$('.success').html('ЗАПРОС НА ОПЛАТУ ЗАКАЗА УСПЕШНО ОТПРАВЛЕН');
-			}
-			$('#checktoken').val(token_GR);
-			$('#checkrespo').val(success_url);
-			$('#emailexist').val(success_url);
-			$('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
-			// $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
-			$('.js_payment_title').html(payment_title);
-			$('.js_dollar_price').html(dollar_price);
-			$('.js_hrn_price').html(hrn_price);
-			$('.js_rub_price').html(rub_price);
-			// if(rub_price > 15000){
-			//   $('.links1 .link3').fadeOut(0);
-			// }
-			$('.js_tovar_id').val(tovar_id);
-			$('.sec1').css('background-image', 'url(/img/' + header_image + ')');
 
 		script(type='text/javascript').
 			(function (d, w, s) {

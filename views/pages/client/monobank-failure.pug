@@ -64,10 +64,46 @@ html(lang='ru-RU')
       .container
         .block
           .block-header
-            p.success.success--fail(style="display: block") НЕ УДАЛОСЬ ОФОРМИТЬ ПОКУПКУ ЧАСТЯМИ
-
-            .monobank-failure
-              a(href="#")#checkoutUrl.button2.hvr-grow.monobank-failure__btn Оформить еще раз
+            p.block-header__title
+              img(src="/img/icon-cross-in-circle.svg")
+              | Банк отказал в оформлении покупки частями
+          p.textmanual.textcenter
+            b
+              | Возможно на вашей карте недостаточно средств для первого<br> платежа или ограничен лимит для покупки частями.
+              br
+              br
+              | Пополните  вашу карту или измените свой лимит в настройках<br> карты и попробуйте еще раз.
+              a(href="#")#checkoutUrl.button2.hvr-grow.monobank-failure-btn-2 Оформить еще раз
+            br
+            br
+            |  Если по каким-то причинам Вы не получили от нас письмо, обратитесь на наш
+            br
+            |  E-Mail клиент-сервиса:&nbsp;
+            a(target='_blank', href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+            | , либо звоните:
+            br
+            |  +7 495 241 07 87 (Россия), +38 044 237 13 18 (Украина)
+          .links.links4
+          script.
+            var step = '4';
+          .text5!= "Есть вопросы по оплате? Посмотрите <a href='#modal-video' data-video='youtube' data-srcvideo='Ldo-oggnt5c'>видеоинструкцию</a> или позвоните нам:"
+            br
+            | тел. <b>+7 495 241 07 87</b> (Россия), <b>+38 044 237 13 18</b> (Украина)
+          .info
+            .part.part1.inl
+              p.text7 Гарантия возврата средств
+              p.text8
+                | Genius Marketing гарантирует возврат средств за приобретенный цифровой продукт и/или услугу по требованию клиента.
+                br
+                br
+                | Срок гарантийного периода регламентируется договором об оказании услуг (офертой).
+            .part.part2.inl
+              p.text7 100% защита персональных данных
+              p.text8
+                | Мы ни при каких условиях не передаём Вашу личную информацию третьим лицам.
+                br
+                br
+                | Безопасность всех платежей гарантируется сертификатами THAWTE и PCI.
 
 
     // FOOTER
