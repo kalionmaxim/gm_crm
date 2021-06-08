@@ -501,7 +501,7 @@ script.
 	$(document).ready(function () {
 		$("#monobank_name").val(getParameterByName("firstName") || "");
 		$("#monobank_email").val(getParameterByName("email") || "");
-		$("#monobank_phone").val(getParameterByName("phone") || "");
+		$("#monobank_phone").val('+' + getParameterByName("phone").trim() || "");
 	});
 
 	$('#monobank_form').submit(function (e) {
@@ -512,7 +512,7 @@ script.
 		var data = {
 			"name"       : document.getElementById("monobank_name").value,
 			"email"      : document.getElementById("monobank_email").value,
-			"phone"      : document.getElementById("monobank_phone").value,
+			"phone"      : document.getElementById("monobank_phone").value.replace(/\s+/g, ''),
 			"parts"      : document.getElementById("monobank_parts").value,
 			"grUnpaid"   : getParameterByName("grUnpaid") || "",
 			"page_name"  : getParameterByName("productName") || "",
@@ -521,8 +521,8 @@ script.
 			"price"      : getParameterByName("productPrice") || ""
 		};
 
-		var phoneRegexp = new RegExp("\\+380\\d{9}");
-		if (phoneRegexp.test(document.getElementById("monobank_phone").value)) {
+		var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
+		if (phoneRegexp.test(data.phone)) {
 			axios({
 				method: "post",
 				url   : "/monobank/parts",
