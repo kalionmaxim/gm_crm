@@ -168,9 +168,9 @@ html(lang='ru-RU')
 					}
 				}).then(function (response) {
 					if (response && response.data.result) {
-						if (response.data.status.includes("SUCCESS")) {
+						if (response.data.status === "SUCCESS") {
 							window.location = "/monobank/success";
-						} else if (response.data.status.includes("FAIL")) {
+						} else if (response.data.status === "FAIL") {
 							window.location = "/monobank/failure";
 						}
 					}

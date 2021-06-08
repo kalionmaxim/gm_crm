@@ -760,12 +760,9 @@ module.exports = function routes(app, passport) {
 
 			if (order) {
 				let status = "Неоплачен";
+
 				if (order.state) {
 					status = order.state;
-
-					if (order.sub_state) {
-						status += " (" + order.sub_state + ")";
-					}
 				}
 
 				ctx.body = {
