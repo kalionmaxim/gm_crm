@@ -483,8 +483,6 @@ script.
 		$('#monobank_phone').removeAttr('disabled').focus();
 	});
 
-	$('#monobankPartsPrice').text(parseFloat(UAHPrice / 12).toFixed(2));
-
 	$('#monobank_parts').on('change', function () {
 		var parts = parseInt($(this).val());
 
@@ -494,7 +492,12 @@ script.
 			$('#monobankPartsText').text(parts + " платежа");
 		}
 
-		$('#monobankPartsPrice').text(parseFloat(UAHPrice / parts).toFixed(2));
+		var currency = getParameterByName("currency");
+		if (currency.toUpperCase() === 'UAH') {
+			$('#monobankPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / parts).toFixed(2));
+		} else {
+			$('#monobankPartsPrice').text(parseFloat(UAHPrice / parts).toFixed(2));
+		}
 	});
 
 
@@ -502,6 +505,17 @@ script.
 		$("#monobank_name").val(getParameterByName("firstName") || "");
 		$("#monobank_email").val(getParameterByName("email") || "");
 		$("#monobank_phone").val('+' + getParameterByName("phone").trim() || "");
+
+		var currency = getParameterByName("currency");
+		if (currency.toUpperCase() === 'EUR' || currency.toUpperCase() === 'RUB') {
+			document.getElementsByClassName('monobank-pay-btn')[0].style.display = "none";
+		}
+
+		if (currency.toUpperCase() === 'UAH') {
+			$('#monobankPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / 12).toFixed(2));
+		} else {
+			$('#monobankPartsPrice').text(parseFloat(UAHPrice / 12).toFixed(2));
+		}
 	});
 
 	$('#monobank_form').submit(function (e) {
@@ -514,8 +528,8 @@ script.
 			"email"      : document.getElementById("monobank_email").value,
 			"phone"      : document.getElementById("monobank_phone").value.replace(/\s+/g, ''),
 			"parts"      : document.getElementById("monobank_parts").value,
+			"currency"   : getParameterByName("currency") || "",
 			"grUnpaid"   : getParameterByName("grUnpaid") || "",
-			"page_name"  : getParameterByName("productName") || "",
 			"productName": getParameterByName("productName") || "",
 			"productID"  : getParameterByName("productID") || "",
 			"price"      : getParameterByName("productPrice") || ""
@@ -529,11 +543,9 @@ script.
 				data  : data
 			}).then(function (response) {
 				setCookie("monobankCheckoutLink", window.location.href, 365);
-				console.log(response);
 				if (response && response.data && response.data.result && response.data.data) {
 					setCookie("mono_order_id", response.data.order_id);
 					window.location = "/monobank/process";
-					//window.location = getParameterByName("successLink") || "/monobank/success";
 				} else {
 					$("#preloader").hide();
 					alert("Произошла неизвестная ошибка");

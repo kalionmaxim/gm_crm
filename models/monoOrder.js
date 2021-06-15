@@ -29,6 +29,8 @@ const monoOrderSchema = new Schema({
 		seller_phone: { type: String }
 	},
 
+	product_name : { type: String },
+
 	email    : { type: String },
 	name     : { type: String },
 	state    : { type: String },

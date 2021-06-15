@@ -8,7 +8,6 @@ const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 const Monobank = require("../lib/monobank");
-// const MonobankTest = require("../lib/monobank_test");
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -701,47 +700,75 @@ module.exports = function routes(app, passport) {
 
 	router.post("/monobank/parts", async (ctx) => {
 		try {
-			const usdRatePrice = (parseFloat((await USDRate.findOne({ currency: "UAH" }).lean()).price).toFixed(2)) || 0;
-			if (usdRatePrice) {
-				const date = new Date();
-				const year = date.getFullYear();
-				const month = ((date.getMonth() + 1) < 10) ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString();
-				const day = (date.getDate() < 10) ? "0" + date.getDate().toString() : date.getDate().toString();
-				let dateStr = year + "-" + month + "-" + day;
+			const allowedCurrency = ["UAH", "USD"];
 
-				const parts = [];
-				if (ctx.request.body.parts) {
-					parts.push(parseInt(ctx.request.body.parts, 10));
+			if (ctx.request.body.currency) {
+				if (allowedCurrency.includes(ctx.request.body.currency.toUpperCase())) {
+					const date = new Date();
+					const year = date.getFullYear();
+					const month = ((date.getMonth() + 1) < 10) ? "0" + (date.getMonth() + 1).toString() : (date.getMonth() + 1).toString();
+					const day = (date.getDate() < 10) ? "0" + date.getDate().toString() : date.getDate().toString();
+					const dateStr = year + "-" + month + "-" + day;
+
+					const parts = [];
+					if (ctx.request.body.parts) {
+						parts.push(parseInt(ctx.request.body.parts, 10));
+					}
+
+					const data = {
+						client_phone      : ctx.request.body.phone,
+						total_sum         : 0,
+						invoice           : {
+							date  : dateStr,
+							source: "INTERNET"
+						},
+						available_programs: [{
+							available_parts_count: parts,
+							type                 : "payment_installments"
+						}],
+						products          : [{
+							name : ctx.request.body.productName,
+							count: 1,
+							sum  : 0
+						}],
+						result_callback   : config.get("url") + "monobank/parts/callback",
+						email             : ctx.request.body.email,
+						name              : ctx.request.body.name,
+						product_name      : ctx.request.body.productName
+					};
+
+					if (ctx.request.body.currency.toUpperCase() === "USD") {
+						const rate = (parseFloat((await USDRate.findOne({ currency: "UAH" }).lean()).price).toFixed(2)) || 0;
+						if (rate) {
+							data.total_sum = (rate * parseFloat(ctx.request.body.price)).toFixed(2);
+							data.products[0].sum = (rate * parseFloat(ctx.request.body.price)).toFixed(2);
+
+							if (ctx.request.body.grUnpaid) {
+								addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", { phone: ctx.request.body.phone });
+							}
+
+							ctx.body = await Monobank.createOrder(data);
+						} else {
+							ctx.body = {
+								result: 0
+							};
+						}
+					} else if (ctx.request.body.currency.toUpperCase() === "UAH") {
+						data.total_sum = (parseFloat(ctx.request.body.price)).toFixed(2);
+						data.products[0].sum = (parseFloat(ctx.request.body.price)).toFixed(2);
+
+						if (ctx.request.body.grUnpaid) {
+							addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", { phone: ctx.request.body.phone });
+						}
+
+						ctx.body = await Monobank.createOrder(data);
+					}
+				} else {
+					ctx.body = {
+						result: 0
+					};
 				}
-
-				const data = {
-					client_phone      : ctx.request.body.phone,
-					total_sum         : (usdRatePrice * parseFloat(ctx.request.body.price)).toFixed(2),
-					invoice           : {
-						date  : dateStr,
-						source: "INTERNET"
-					},
-					available_programs: [{
-						available_parts_count: parts,
-						type                 : "payment_installments"
-					}],
-					products          : [{
-						name : ctx.request.body.productName,
-						count: 1,
-						sum  : (usdRatePrice * parseFloat(ctx.request.body.price)).toFixed(2)
-					}],
-					result_callback   : config.get("url") + "monobank/parts/callback",
-					email             : ctx.request.body.email,
-					name              : ctx.request.body.name
-				};
-
-				if (ctx.request.body.grUnpaid) {
-					addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", { phone: ctx.request.body.phone });
-				}
-
-				ctx.body = await Monobank.createOrder(data);
 			} else {
-				eLogger.error(err);
 				ctx.body = {
 					result: 0
 				};
@@ -1193,7 +1220,7 @@ module.exports = function routes(app, passport) {
 				for (let i = 0; i < orders.length; i++) {
 					const order = orders[i];
 
-					let productName = "";
+					let productName = order.product_name ? order.product_name : "";
 					if (order.page) {
 						productName = order.page.name;
 					}

@@ -6,10 +6,10 @@ const Monobank = require("../lib/monobank");
 // Monobank.confirmDelivery("1")
 // Monobank.rejectOrder("a0eebc99-9c0b-4ef8-bb6d-000000000002")
 // Monobank.stateOrder("a0eebc99-9c0b-4ef8-bb6d-000000000002")
-Monobank.validateClient("+380938412212")
-	.then((result) => {
-		console.log("result", result);
-	});
+// Monobank.validateClient("+380938412212")
+// 	.then((result) => {
+// 		console.log("result", result);
+// 	});
 
 /*const data = {
 	orderID             : "a0eebc99-9c0b-4ef8-bb6d-000000000002",
@@ -46,3 +46,14 @@ Monobank.createOrder(data)
 	.then((result) => {
 		console.log("result", result);
 	});*/
+
+async function main() {
+	// uah 980
+	// rub 643
+	// eur 978
+	// usd 840
+	const currencyPair = await Monobank.getCurrencyInfo(978, 980);
+	console.log(currencyPair);
+}
+
+main().then(() => { console.log("Done"); });
