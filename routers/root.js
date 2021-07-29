@@ -332,7 +332,7 @@ module.exports = function routes(app, passport) {
 	router.post("/deal", async (ctx) => {
 		/**
 		 * Email, productID, productName, First_Name – required fields
-		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone – optionals fields
+		 * Amount, utm_campaign, utm_medium, utm_source, utm_term, utm_content, http_refferer, Country, City, Time_zone, sposob_svyazi – optionals fields
 		 */
 
 		if (ctx.request.body) {
