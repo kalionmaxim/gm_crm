@@ -87,6 +87,29 @@ block contents
 												select#lang.form-control
 													option(value="ru" selected=true) Русский
 													option(value="ua") Украинский
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Скрыть оплату через PayPal
+											.col-md-6
+												select#payPalHide.form-control
+													option(value="no") Нет
+													option(value="yes") Да
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Скрыть оплату через Monobank
+											.col-md-6
+												select#monoHide.form-control
+													option(value="no") Нет
+													option(value="yes") Да
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Скрыть оплату через Fondy
+											.col-md-6
+												select#fondyHide.form-control
+													option(value="no") Нет
+													option(value="yes") Да
 
 								.form-group.m-b-12
 									.col-md-12
@@ -116,6 +139,9 @@ block contents
 				var convertationHide = $("#convertationHide").val();
 				var successLink = $("#successLink").val().trim();
 				var lang = $("#lang").val();
+				var payPalHide = $("#payPalHide").val();
+				var fondyHide = $("#fondyHide").val();
+				var monoHide = $("#monoHide").val();
 
 				if (!productID) {
 					setError("Укажите ID продукта");
@@ -174,6 +200,18 @@ block contents
 				}
 
 				url += ("&lang=" + lang);
+
+				if (payPalHide === "yes") {
+					url += ("&payPalHide=true");
+				}
+
+				if (fondyHide === "yes") {
+					url += ("&fondyHide=true");
+				}
+
+				if (monoHide === "yes") {
+					url += ("&monoHide=true");
+				}
 
 				resultElem.val(url);
 			});

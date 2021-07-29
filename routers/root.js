@@ -45,6 +45,9 @@ module.exports = function routes(app, passport) {
 				landing         : ctx.request.query["landing"] || "false",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
 				successLink     : ctx.request.query["successLink"] || "",
+				payPalHide      : ctx.request.query["payPalHide"] || "",
+				fondyHide       : ctx.request.query["fondyHide"] || "",
+				monoHide        : ctx.request.query["monoHide"] || "",
 				lang            : getLangZone(ctx),
 				labels
 			});
@@ -71,6 +74,9 @@ module.exports = function routes(app, passport) {
 				landing         : ctx.request.query["landing"] || "",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
 				successLink     : ctx.request.query["successLink"] || "",
+				payPalHide      : ctx.request.query["payPalHide"] || "",
+				fondyHide       : ctx.request.query["fondyHide"] || "",
+				monoHide        : ctx.request.query["monoHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,

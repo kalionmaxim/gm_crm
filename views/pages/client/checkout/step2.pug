@@ -96,8 +96,10 @@ html(lang='ru-RU')
 						p.success
 					p.text4 #{labels.selectPaymentMethod2 || ""}
 					.links.links1
-						a.link.link1.inl(onclick="payFondy();")
-							span.button2.hvr-grow #{labels.payLbl || ""}
+						if (fondyHide && fondyHide === "true")
+						else
+							a.link.link1.inl(onclick="payFondy();")
+								span.button2.hvr-grow #{labels.payLbl || ""}
 						//
 							<a href='yandex.php' class="link link2 inl">
 							<span class="button2 hvr-grow">Оплатить</span>
@@ -106,12 +108,16 @@ html(lang='ru-RU')
 							<a href='webmoney.php' class="link link3 inl">
 							<span class="button2 hvr-grow">Оплатить</span>
 							</a>
-						a.link.link4.inl(onclick="payPayPal();")
-							span.button2.hvr-grow #{labels.payLbl || ""}
+						if (payPalHide && payPalHide === "true")
+						else
+							a.link.link4.inl(onclick="payPayPal();")
+								span.button2.hvr-grow #{labels.payLbl || ""}
 						//a.link.link5.inl(href='manual.php')
 						//	span.button2.hvr-grow Оплатить
-						.link.link6.inl.monobank-pay-btn
-							button(type="button")#showMonbankPopupBtn.button2.hvr-grow В рассрочку от Monobank
+						if (monoHide && monoHide === "true")
+						else
+							.link.link6.inl.monobank-pay-btn
+								button(type="button")#showMonbankPopupBtn.button2.hvr-grow В рассрочку от Monobank
 					script.
 						var step = '1';
 					.text5
