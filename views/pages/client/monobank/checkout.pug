@@ -171,7 +171,6 @@ html(lang='ru-RU')
 			var rub_cur = 68;
 			// Курс гривны к доллару
 			var uah_cur = 28;
-			console.log('success');
 		// HIDDEN ELEMENTS (MODALS)
 		#modal-video.modal-overlay
 			.modal-content
@@ -193,57 +192,78 @@ html(lang='ru-RU')
 				});
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
+script(src='/js/jquery.validate.min.js')
+script(src='/js/validate_messages_ru.min.js')
+script(src='/js/jquery.maskedinput.min.js')
+
 script.
 	$(document).ready(function () {
 		$("#name").val(getCookie("name") || "");
 		$("#email").val(getCookie("email") || "");
 		// $("#phone").val(getCookie("phone") || "");
-	});
 
-	$('#form_1').submit(function (e) {
-		e.preventDefault();
+		$.mask.definitions['~'] = '[0-9+]';
+		$.mask.definitions['9'] = null;
 
-		$("#preloader").show();
+		$("#phone").mask('+380?~~~~~~~~~', {
+			"placeholder": "",
+			"autoclear"  : false
+		});
 
-		var phone = document.getElementById("phone").value;
-		var email = document.getElementById("email").value;
-		var name = document.getElementById("name").value;
-
-		var phoneRegexp = new RegExp("\\+380\\d{9}");
-		if (phoneRegexp.test(phone)) {
-			axios({
-				method: "post",
-				url   : "/monobank/#{page.page_id}/order",
-				data  : {
-					"name" : name,
-					"email": email,
-					"phone": phone,
+		$('#form_1').validate({
+			rules: {
+				name : {
+					required: true
+				},
+				email: {
+					required: true
+				},
+				phone: {
+					minlength: 13,
+					required   : true
 				}
-			})
-				.then(function (response) {
-					if (response && response.data && response.data.result && response.data.data) {
-						console.log(response);
-						window.location = "/monobank/#{page.page_id}/success";
+			},
+			submitHandler: function (form) {
+				$("#preloader").show();
 
-						//confirm order
-						// axios({
-						// 	method: "post",
-						// 	url   : "/monobank/#/{page.page_id}/confirm",
-						// 	data  : {
-						// 		"orderID": response.data.data.order_id
-						// 	}
-						// })
-						// 	.then(function (response) {
-						// 		console.log(response);
-						// 		window.location = "/monobank/#/{page.page_id}/success";
-						// 	});
-					} else {
-						alert("Произошла неизвестная ошибка");
+				var phone = document.getElementById("phone").value;
+				var email = document.getElementById("email").value;
+				var name = document.getElementById("name").value;
+
+				axios({
+					method: "post",
+					url   : "/monobank/#{page.page_id}/order",
+					data  : {
+						"name" : name,
+						"email": email,
+						"phone": phone
 					}
-				});
-		} else {
-			alert("Формат телефона должен быть +380XXXXXXXXX");
-		}
+				})
+								.then(function (response) {
+									if (response && response.data && response.data.result && response.data.data) {
+										console.log(response);
+										window.location = "/monobank/#{page.page_id}/success";
+
+										//confirm order
+										// axios({
+										// 	method: "post",
+										// 	url   : "/monobank/#/{page.page_id}/confirm",
+										// 	data  : {
+										// 		"orderID": response.data.data.order_id
+										// 	}
+										// })
+										// 	.then(function (response) {
+										// 		console.log(response);
+										// 		window.location = "/monobank/#/{page.page_id}/success";
+										// 	});
+									} else {
+										alert("Произошла неизвестная ошибка");
+									}
+								});
+
+				return false;  // block the default submit action
+			}
+		});
 	});
 
 	function getCookie(cname) {
@@ -261,16 +281,16 @@ script.
 		return undefined;
 	}
 
-	$(document).on('keydown', function (e) {
-		var $phone = $('#phone');
-		if (e.keyCode === 8 && $phone.is(":focus") && $phone.val().length < 5) {
-			e.preventDefault();
-		}
-
-		if ($phone.is(":focus") && !(((e.keyCode >= 48) && (e.keyCode <= 57)) || (e.keyCode === 8))) {
-			e.preventDefault();
-		}
-	});
+	// $(document).on('keydown', function (e) {
+	// 	var $phone = $('#phone');
+	// 	if (e.keyCode === 8 && $phone.is(":focus") && $phone.val().length < 5) {
+	// 		e.preventDefault();
+	// 	}
+	//
+	// 	if ($phone.is(":focus") && !(((e.keyCode >= 48) && (e.keyCode <= 57)) || (e.keyCode === 8))) {
+	// 		e.preventDefault();
+	// 	}
+	// });
 
 	document.getElementById('phone').onpaste = function (e) {
 		e.preventDefault();
