@@ -24,7 +24,7 @@ const USDRate = require("../models/usdRate").USDRate;
 const FondyMerchant = require("../models/fondyMerchant").FondyMerchant;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
-const addToCampaign = require("../lib/getResponse").addToCampaign;
+const addToCampaign = require("../lib/gr").addToCampaign;
 
 const requestIp = require("request-ip");
 
@@ -227,7 +227,7 @@ module.exports = function routes(app, passport) {
 					customFields["phone"] = ctx.request.body.phone;
 				}
 
-				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", customFields);
+				addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.campaign, 0, "", [customFields]);
 				ctx.body = {
 					result: 1
 				};
@@ -652,7 +652,7 @@ module.exports = function routes(app, passport) {
 				}
 
 				if (page.gr1) {
-					addToCampaign(ctx.request.body.name, ctx.request.body.email, page.gr1, 0, "", { phone: ctx.request.body.phone });
+					addToCampaign(ctx.request.body.name, ctx.request.body.email, page.gr1, 0, "", [{ phone: ctx.request.body.phone }]);
 				}
 
 				ctx.body = await Monobank.createOrder(data);
@@ -750,7 +750,7 @@ module.exports = function routes(app, passport) {
 							data.products[0].sum = (rate * parseFloat(ctx.request.body.price)).toFixed(2);
 
 							if (ctx.request.body.grUnpaid) {
-								addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", { phone: ctx.request.body.phone });
+								addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", [{ phone: ctx.request.body.phone }]);
 							}
 
 							ctx.body = await Monobank.createOrder(data);
@@ -764,7 +764,7 @@ module.exports = function routes(app, passport) {
 						data.products[0].sum = (parseFloat(ctx.request.body.price)).toFixed(2);
 
 						if (ctx.request.body.grUnpaid) {
-							addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", { phone: ctx.request.body.phone });
+							addToCampaign(ctx.request.body.name, ctx.request.body.email, ctx.request.body.grUnpaid, 0, "", [{ phone: ctx.request.body.phone }]);
 						}
 
 						ctx.body = await Monobank.createOrder(data);

@@ -1,20 +1,20 @@
 var addToCampaign = require("../lib/gr").addToCampaign;
-// var addToCampaign = require("../lib/getResponse").addToCampaign;
 var getContactByEmail = require("../lib/gr").getContactByEmail;
 var deleteContact = require("../lib/gr").deleteContact;
 var deleteContactFromCampaign = require("../lib/gr").deleteContactFromCampaign;
-
-// var removeFromCampaign = require("../lib/getResponse").removeFromCampaign;
-//
-// removeFromCampaign("sumson65@gmail.com", "b7k1");
+var getListOfCustomFields = require("../lib/gr").getListOfCustomFields;
 
 // addToCampaign(null, "gonipeb910@tst999.com", "b7k1", null, null, null, null, null);
+// addToCampaign(null, "gonipeb910@tst999.com", "b7k1", null, null, [{phone: "123123123"}], null, null);
+// getListOfCustomFields("phone", function (result) {
+// 	console.log(result);
+// });
 // addToCampaign(null, "sumson65@gmail.com", "b7k1", null, null, null, null, null);
-getContactByEmail("gonipeb910@tst999.com", "b7k1", function (result) {
-	console.log(result);
-});
+// getContactByEmail("gonipeb910@tst999.com", "b7k1", function (result) {
+// 	console.log(result);
+// });
 
-// deleteContact("JUrCFK");
+// deleteContact("JUrCMI");
 
 // deleteContactFromCampaign("sumson65@gmail.com", "b7k1");
 
