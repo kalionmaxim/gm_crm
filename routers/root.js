@@ -29,7 +29,7 @@ const addToCampaign = require("../lib/gr").addToCampaign;
 const requestIp = require("request-ip");
 
 const lang = require("../lang");
-const { iLogger } = require("../lib/logger");
+const { generateLink } = require("../lib/linkGen");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -819,17 +819,7 @@ module.exports = function routes(app, passport) {
 	//MONOBANK LOGIC PROD <=
 
 	router.post("/zoho/payment/link", async (ctx) => {
-		try {
-			iLogger.info(`ZOHO request for link creation ${JSON.stringify(ctx.request, null, 2)}, body: ${JSON.stringify(ctx.request.body, null, 2)}`);
-			ctx.body = {
-				status: 200
-			};
-		} catch (err) {
-			eLogger.error(err);
-			ctx.body = {
-				status: 500
-			};
-		}
+		ctx.body = await generateLink(ctx);
 	});
 
 	// TILDA routes =>
