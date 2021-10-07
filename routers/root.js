@@ -818,7 +818,7 @@ module.exports = function routes(app, passport) {
 
 	//MONOBANK LOGIC PROD <=
 
-	router.post("/zoho/payment/link", async (ctx) => {
+	router.get("/zoho/payment/link", async (ctx) => {
 		ctx.body = await generateLink(ctx);
 	});
 
