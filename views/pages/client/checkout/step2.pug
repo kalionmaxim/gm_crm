@@ -100,6 +100,10 @@ html(lang='ru-RU')
 						else
 							a.link.link1.inl(onclick="payFondy();")
 								span.button2.hvr-grow #{labels.payLbl || ""}
+						if (fondyHide && fondyHide === "true")
+						else
+							a.link.link1.inl(onclick="payFrisbee();")
+								span.button2.hvr-grow #{labels.payLbl || ""}
 						//
 							<a href='yandex.php' class="link link2 inl">
 							<span class="button2 hvr-grow">Оплатить</span>
@@ -257,6 +261,26 @@ script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
 	function payFondy() {
 		var url = "/checkout/2/fondy/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
+		if ("#{convertationHide}" === "true") {
+			url += "&convertationHide=true";
+		}
+
+		if ("#{successLink}") {
+			url += "&successLink=#{successLink}";
+		}
+
+		if ("#{salesOrderID}") {
+			url += "&salesOrderID=#{salesOrderID}";
+		}
+
+		if ("#{lang}") {
+			url += "&lang=#{lang}";
+		}
+
+		window.location = url;
+	}
+	function payFrisbee() {
+		var url = "/checkout/2/frisbee/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
 		if ("#{convertationHide}" === "true") {
 			url += "&convertationHide=true";
 		}
