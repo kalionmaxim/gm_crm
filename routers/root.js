@@ -549,11 +549,7 @@ module.exports = function routes(app, passport) {
 	router.post("/frisbee/callback", async (ctx) => {
 		ctx.status = await frisbee.processCallback(ctx.request.body);
 	});
-	
-	router.post("/privatbank/payment", async (ctx) => {
-		ctx.body = await privatBank.createPayment(ctx.request.body);
-	});
-	
+		
 	router.get("/paypal/form", async (ctx) => {
 		await ctx.render("pages/client/paypal");
 	});
