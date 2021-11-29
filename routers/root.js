@@ -960,7 +960,6 @@ module.exports = function routes(app, passport) {
 				ctx.session.error = "Пробема доступа к БД";
 				ctx.redirect("/admin");
 			} else if (!data) {
-				console.log(ctx.request.body);
 				ctx.session.error = message.message;
 				ctx.redirect("/admin");
 			} else {

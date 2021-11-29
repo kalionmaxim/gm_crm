@@ -74,12 +74,6 @@ html(lang='ru-RU')
 					p.text4 #{labels.selectCurrency || ""}
 					a.backlink(href='/checkout/2?email=' + email + "&firstName=" + firstName + "&phone=" + phone + "&productID=" + productID + '&salesOrderID=' + salesOrderID + '&productName=' + productName + '&productPrice=' + productPrice + '&currency=' + currency.toUpperCase() + '&merchantID=' + merchantID + "&lang=" + lang) #{labels.goBackLbl || ""}
 					.links.links3
-						a.link.link3.inl(onclick="payFrisbee('usd');")
-							span.button2.hvr-grow #{labels.payUSDLbl || ""}
-						a.link.link4.inl(onclick="payFrisbee('eur');")
-							span.button2.hvr-grow #{labels.payEURLbl || ""}
-						a.link.link2.inl(onclick="payFrisbee('rub');")
-							span.button2.hvr-grow #{labels.payRUBLbl || ""}
 						a.link.link1.inl(onclick="payFrisbee('uah');")
 							span.button2.hvr-grow #{labels.payUAHLbl || ""}
 						p.anycard
