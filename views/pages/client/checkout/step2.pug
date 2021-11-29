@@ -134,30 +134,30 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/paypal.svg").payment__icon
-						a(href="#").payment.payment--2
+						a(href="#").payment.payment--2.ru-block.hidden
 							span.payment__title Оплата частями от Tinkoff
 							span.payment__footer
 								span.payment__footer_text Без переплат
 								span.payment__icons
 									img(src="/img/icons/pay/tinkoff.svg").payment__icon
-						a(href="#").payment.payment--2
+						a(href="#").payment.payment--2.ru-block.hidden
 							span.payment__title Оплата частями от Сбербанк
 							span.payment__footer
 								span.payment__footer_text Без переплат
 								span.payment__icons
 									img(src="/img/icons/pay/sber.png").payment__icon
 						if !(monoHide && monoHide === "true")
-							button(type="button")#showMonbankPopupBtn.payment
+							button(type="button")#showMonbankPopupBtn.payment.ua-block.hidden
 								span.payment__title Оплата частями от Monobank
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/monobank.svg").payment__icon
-						a(href="#").payment
+						a(href="#").payment.ua-block.hidden
 							span.payment__title Оплата частями от ПриватБанк
 							span.payment__footer
 								span.payment__icons
 									img(src="/img/icons/pay/privat.png").payment__icon
-						a(href="#").payment
+						a(href="#").payment.ua-block.hidden
 							span.payment__title Оплата частями от Frisbee
 							span.payment__footer
 								span.payment__icons
@@ -491,10 +491,12 @@ script.
 					break;
 				case "uah":
 					$('.js_hrn_price').html(subPrice1 + " грн.");
+					$('.js_hrn_price').addClass('ua-block hidden');
 					UAHPrice = subPrice1;
 					break;
 				case "rub":
 					$('.js_hrn_price').html(subPrice1 + " руб.");
+					$('.js_hrn_price').addClass('ru-block hidden');
 					break;
 			}
 		}
@@ -506,10 +508,12 @@ script.
 					break;
 				case "uah":
 					$('.js_rub_price').html(subPrice2 + " грн.");
+					$('.js_rub_price').addClass('ua-block hidden');
 					UAHPrice = subPrice2;
 					break;
 				case "rub":
 					$('.js_rub_price').html(subPrice2 + " руб.");
+					$('.js_rub_price').addClass('ru-block hidden');
 					break;
 			}
 		}
@@ -681,3 +685,33 @@ script.
 		preferredCountries: ['ua', 'ru', 'by', 'kz']
 	});
 
+
+script.
+	var country = "";
+
+	function getGeolocationData(callback) {
+		var requestUrl = "https://ipapi.co/json";
+
+		$.ajax({
+			url    : requestUrl,
+			type   : 'GET',
+			success: function (json) {
+				console.log("json", json);
+				country = json.country_code;
+
+				callback();
+			},
+			error  : function (err) {
+				console.log("Request failed, error= " + err);
+				callback();
+			}
+		});
+	}
+
+	getGeolocationData(function() {
+		if (country.toLowerCase() === "ru") {
+			$('.ru-block').removeClass('hidden');
+		} else if (country.toLowerCase() === "ua") {
+			$('.ua-block').removeClass('hidden');
+		}
+	});
