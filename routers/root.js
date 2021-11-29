@@ -49,6 +49,7 @@ module.exports = function routes(app, passport) {
 				payPalHide      : ctx.request.query["payPalHide"] || "",
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
+				privatHide      : ctx.request.query["privatHide"] || "",
 				lang            : getLangZone(ctx),
 				labels
 			});
@@ -78,6 +79,7 @@ module.exports = function routes(app, passport) {
 				payPalHide      : ctx.request.query["payPalHide"] || "",
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
+				privatHide      : ctx.request.query["privatHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
@@ -817,6 +819,14 @@ module.exports = function routes(app, passport) {
 	});
 
 	//MONOBANK LOGIC PROD <=
+
+	router.get("/payment-success", async (ctx) => {
+		await ctx.render("pages/client/monobank-success");
+	});
+
+	router.get("/payment-failure", async (ctx) => {
+		await ctx.render("pages/client/monobank-failure");
+	});
 
 	router.get("/zoho/payment/link", async (ctx) => {
 		ctx.body = await generateLink(ctx);

@@ -152,11 +152,12 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/monobank.svg").payment__icon
-						a(href="#").payment.ua-block.hidden
-							span.payment__title Оплата частями от ПриватБанк
-							span.payment__footer
-								span.payment__icons
-									img(src="/img/icons/pay/privat.png").payment__icon
+						if !(privatHide && privatHide === "true")
+							button(type="button")#showPrivatPopupBtn.payment.ua-block.hidden
+								span.payment__title Оплата частями от ПриватБанк
+								span.payment__footer
+									span.payment__icons
+										img(src="/img/icons/pay/privat.png").payment__icon
 						a(href="#").payment.ua-block.hidden
 							span.payment__title Оплата частями от Frisbee
 							span.payment__footer
@@ -248,39 +249,8 @@ html(lang='ru-RU')
 				#video-popup
 
 
-		#modal-monobank.modal-overlay
-			.modal-content
-				.close-button
-					.one
-					.two
-				form#monobank_form.monobank-form
-					p.monobank-form__title Покупка частями monobank
-					.monobank-form-parts-layout
-						.monobank-form-parts
-							p.monobank-form-parts__text <span id="monobankPartsText">12 платежей</span> на:
-							select#monobank_parts.monobank-form-parts__select(name="parts")
-								option(value=12) 12 месяцев
-								option(value=11) 11 месяцев
-								option(value=10) 10 месяцев
-								option(value=9) 9 месяцев
-								option(value=8) 8 месяцев
-								option(value=7) 7 месяцев
-								option(value=6) 6 месяцев
-								option(value=5) 5 месяцев
-								option(value=4) 4 месяцев
-								option(value=3) 3 месяцев
-							p.monobank-form-parts__text <span id="monobankPartsPrice">-</span> грн / месяц
-						.monobank-form-parts
-							p.monobank-form-parts__text Мобильный телефон: <span class="color-red">*</span>
-							input#monobank_phone(name="phone" type="tel" placeholder="Ваш телефон" required=true disabled)
-							button(type="button")#monobankUpdatePhoneBtn.button2.button2--gray.monobank-form-parts__btn Изменить
-
-					button(type="submit").button2.hvr-grow.monobank-form__submit Оплатить
-
-					input#monobank_name(name="name" type="hidden" required=true)
-					input#monobank_email(name="email" type="hidden" required=true)
-
-				p.monobank-form-disclaimer <span class="color-red">*</span> Укажите Ваш финансовый телефон в Monobank. Услуга оплаты частями доступна только клиентам Monobank. <a href="https://www.monobank.com.ua/cpa" target="_blank">Стать клиентом Monobank</a>
+		include ../../../partials/client/popups/modal-monobank
+		include ../../../partials/client/popups/modal-privat
 
 
 		// END HIDDEN ELEMENTS (MODALS)
@@ -615,6 +585,51 @@ script.
 		}
 	});
 
+
+
+	//-- privat
+	$('#showPrivatPopupBtn').click(function () {
+		$('#modal-privat').fadeIn(200);
+	});
+
+	$('#privatUpdatePhoneBtn').click(function () {
+		$(this).css('opacity', 0);
+		$('#privat_phone').removeAttr('disabled').focus();
+	});
+
+	$('#privat_parts').on('change', function () {
+		var parts = parseInt($(this).val());
+
+		if (parts > 4) {
+			$('#privatPartsText').text(parts + " платежей");
+		} else {
+			$('#privatPartsText').text(parts + " платежа");
+		}
+
+		var currency = getParameterByName("currency");
+		if (currency.toUpperCase() === 'UAH') {
+			$('#privatPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / parts).toFixed(2));
+		} else {
+			$('#privatPartsPrice').text(parseFloat(UAHPrice / parts).toFixed(2));
+		}
+	});
+
+
+	$(document).ready(function () {
+		$("#privat_name").val(getParameterByName("firstName") || "");
+		$("#privat_email").val(getParameterByName("email") || "");
+		$("#privat_phone").val('+' + getParameterByName("phone").trim() || "");
+
+		var currency = getParameterByName("currency");
+		if (currency.toUpperCase() === 'UAH') {
+			$('#privatPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / 12).toFixed(2));
+		} else {
+			$('#privatPartsPrice').text(parseFloat(UAHPrice / 12).toFixed(2));
+		}
+	});
+
+
+
 	function getParameterByName(name) {
 		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
@@ -634,50 +649,11 @@ script(type='text/javascript').
 		sn.parentNode.insertBefore(gcw, sn);
 	})(document, window, 'script');
 
-//if productID === '3678676000144209890'
-//	script(src='//code.jivosite.com/widget/4v59buNscx', async='')
-//else if productID === '3678676000068245785'
-//	script(src='//code.jivosite.com/widget/0kh3HDIwDH', async='')
-//else if productID === '3678676000139748212'
-//	script(src='//code.jivosite.com/widget/z30UkodmQX', async='')
-//else if productID === '3678676000149969336'
-//	script(src='//code.jivosite.com/widget/TxOfQ1O3dV', async='')
-//	//script(src='//code.jivosite.com/widget/KuOIS0te3X', async='')
-//else if productID === '3678676000149969130'
-//	script(src='//code.jivosite.com/widget/kdAyfYZvv7', async='')
-//else if productID === '3678676000149969241'
-//	script(src='//code.jivosite.com/widget/hDzgfVriJo', async='')
-//else
-//	script(type='text/javascript').
-//		(function () {
-//			var widget_id = 'OkTveMoYQF';
-//			var d = document;
-//			var w = window;
-//
-//			function l() {
-//				var s = document.createElement('script');
-//				s.type = 'text/javascript';
-//				s.async = true;
-//				s.src = '//code.jivosite.com/script/widget/' + widget_id;
-//				var ss = document.getElementsByTagName('script')[0];
-//				ss.parentNode.insertBefore(s, ss);
-//			}
-//
-//			if (d.readyState == 'complete') {
-//				l();
-//			} else {
-//				if (w.attachEvent) {
-//					w.attachEvent('onload', l);
-//				} else {
-//					w.addEventListener('load', l, false);
-//				}
-//			}
-//		})();
 script#ss-gadget(src='https://customer.smartsender.eu/js/client/gd.min.js?v2.0.0' data-target='FJPXlTvX' data-domain='myminismm')
 
 
 script.
-	$("#monobank_phone").intlTelInput({
+	$("#monobank_phone, #privat_phone").intlTelInput({
 		utilsScript       : '/js/utils.js',
 		defaultCountry    : 'auto',
 		separateDialCode  : false,
