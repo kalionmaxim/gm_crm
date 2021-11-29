@@ -8,6 +8,7 @@ const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 const Monobank = require("../lib/monobank");
+
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -30,6 +31,8 @@ const requestIp = require("request-ip");
 
 const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
+const frisbee = require("../lib/frisbee");
+
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -121,6 +124,39 @@ module.exports = function routes(app, passport) {
 
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client/checkout/step2_fondy_currencies", {
+				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
+				email           : ctx.request.query["email"] || "",
+				phone           : ctx.request.query["phone"] || "",
+				productPrice    : ctx.request.query["productPrice"] || "",
+				productID       : ctx.request.query["productID"] || "",
+				currency        : ctx.request.query["currency"] || "",
+				// redirectURL : ctx.request.query["redirectURL"] || "",
+				merchantID      : ctx.request.query["merchantID"] || "",
+				salesOrderID    : ctx.request.query["salesOrderID"] || "",
+				firstName       : ctx.request.query["firstName"] || "",
+				lastName        : ctx.request.query["lastName"] || "",
+				landing         : ctx.request.query["landing"] || "",
+				convertationHide: ctx.request.query["convertationHide"] || "false",
+				successLink     : ctx.request.query["successLink"] || "",
+				merchantUSD     : merchantUSD,
+				merchantEUR     : merchantEUR,
+				merchantUAH     : merchantUAH,
+				merchantRUB     : merchantRUB,
+				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
+				lang            : getLangZone(ctx),
+				labels
+			});
+		} else {
+			ctx.body = "Some of required fields are undefined";
+		}
+	});
+	router.get("/checkout/2/frisbee/currencies", async (ctx) => {
+		const labels = lang[getLangZone(ctx)].step2_fondy_currencies;
+
+		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
+			await ctx.render("pages/client/checkout/step2_frisbee_currencies", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
 				email           : ctx.request.query["email"] || "",
 				phone           : ctx.request.query["phone"] || "",
@@ -502,6 +538,18 @@ module.exports = function routes(app, passport) {
 		ctx.status = await Fondy.processCallback(ctx.request.body);
 	});
 
+	router.post("/frisbee/payment/rectoken", async (ctx) => {
+		ctx.body = await Fondy.createPaymentByRectoken(ctx.request.body);
+	});
+
+	router.post("/frisbee/payment", async (ctx) => {
+		ctx.body = await frisbee.createPayment(ctx.request.body);
+	});
+
+	router.post("/frisbee/callback", async (ctx) => {
+		ctx.status = await frisbee.processCallback(ctx.request.body);
+	});
+		
 	router.get("/paypal/form", async (ctx) => {
 		await ctx.render("pages/client/paypal");
 	});
