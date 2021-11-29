@@ -284,7 +284,39 @@ html(lang='ru-RU')
 					input#monobank_email(name="email" type="hidden" required=true)
 
 				p.monobank-form-disclaimer <span class="color-red">*</span> Укажите Ваш финансовый телефон в Monobank. Услуга оплаты частями доступна только клиентам Monobank. <a href="https://www.monobank.com.ua/cpa" target="_blank">Стать клиентом Monobank</a>
+		#modal-monobank.modal-overlay
+			.modal-content
+				.close-button
+					.one
+					.two
+				form#monobank_form.monobank-form
+					p.monobank-form__title Покупка частями privatbank
+					.monobank-form-parts-layout
+						.monobank-form-parts
+							p.monobank-form-parts__text <span id="monobankPartsText">12 платежей</span> на:
+							select#monobank_parts.monobank-form-parts__select(name="parts")
+								option(value=12) 12 месяцев
+								option(value=11) 11 месяцев
+								option(value=10) 10 месяцев
+								option(value=9) 9 месяцев
+								option(value=8) 8 месяцев
+								option(value=7) 7 месяцев
+								option(value=6) 6 месяцев
+								option(value=5) 5 месяцев
+								option(value=4) 4 месяцев
+								option(value=3) 3 месяцев
+							p.monobank-form-parts__text <span id="monobankPartsPrice">-</span> грн / месяц
+						.monobank-form-parts
+							p.monobank-form-parts__text Мобильный телефон: <span class="color-red">*</span>
+							input#monobank_phone(name="phone" type="tel" placeholder="Ваш телефон" required=true disabled)
+							button(type="button")#monobankUpdatePhoneBtn.button2.button2--gray.monobank-form-parts__btn Изменить
 
+					button(type="submit").button2.hvr-grow.monobank-form__submit Оплатить
+
+					input#monobank_name(name="name" type="hidden" required=true)
+					input#monobank_email(name="email" type="hidden" required=true)
+
+				p.monobank-form-disclaimer <span class="color-red">*</span> Укажите Ваш финансовый телефон в Privatbank. Услуга оплаты частями доступна только клиентам Monobank. <a href="https://www.monobank.com.ua/cpa" target="_blank">Стать клиентом Monobank</a>
 
 		// END HIDDEN ELEMENTS (MODALS)
 		script(src='/js/libs.min.js')
