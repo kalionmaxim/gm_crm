@@ -8,7 +8,7 @@ const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 const Monobank = require("../lib/monobank");
-const PrivatBank = require("../lib/privatBank");
+
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -32,7 +32,7 @@ const requestIp = require("request-ip");
 const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
 const frisbee = require("../lib/frisbee");
-const privatBank = require("../lib/privatBank");
+
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {

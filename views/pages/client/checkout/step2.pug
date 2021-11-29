@@ -135,30 +135,13 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/paypal.svg").payment__icon
-						a(href="#").payment.payment--2
-							span.payment__title Оплата частями от Tinkoff
-							span.payment__footer
-								span.payment__footer_text Без переплат
-								span.payment__icons
-									img(src="/img/icons/pay/tinkoff.svg").payment__icon
-						a(href="#").payment.payment--2
-							span.payment__title Оплата частями от Сбербанк
-							span.payment__footer
-								span.payment__footer_text Без переплат
-								span.payment__icons
-									img(src="/img/icons/pay/sber.png").payment__icon
 						if !(monoHide && monoHide === "true")
 							button(type="button")#showMonbankPopupBtn.payment
 								span.payment__title Оплата частями от Monobank
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/monobank.svg").payment__icon
-						if !(monoHide && monoHide === "true")
-							button(type="button")#showMonbankPopupBtn.payment
-								span.payment__title Оплата частями от Приватбанк
-								span.payment__footer
-									span.payment__icons
-										img(src="/img/icons/pay/privat.png").payment__icon
+						
 						a(onclick="payFrisbee()").payment
 							span.payment__title Оплата частями от Frisbee
 							span.payment__footer
