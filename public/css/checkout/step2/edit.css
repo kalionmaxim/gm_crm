@@ -456,6 +456,9 @@ a.disable_link {
  padding-right: 45px;
  margin-bottom: 40px;
 }
+.monobank-form .monobank-form__title.monobank-form__title--privat {
+ background-image: url(/img/icons/pay/privat.png);
+}
 
 .monobank-form .monobank-form__submit {
  display: flex;
@@ -594,6 +597,7 @@ a.disable_link {
  margin: 20px;
  transition: 0.4s;
  box-shadow: 1px 2px 4px rgb(0 0 1 / 22%);
+ cursor: pointer;
 }
 .payment.payment--2 {
  width: 380px;
@@ -650,4 +654,12 @@ a.disable_link {
  .payment.payment--3 {
   width: 240px;
  }
+}
+
+.hidden {
+ display: none;
+}
+
+.modal-overlay .modal-content.modal-payment-parts {
+ height: auto;
 }

@@ -1,0 +1,34 @@
+#modal-privat.modal-overlay
+  .modal-content.modal-payment-parts
+    .close-button
+      .one
+      .two
+    form#privat_form.monobank-form
+      p.monobank-form__title.monobank-form__title--privat Покупка частями от ПриватБанк
+      .monobank-form-parts-layout
+        .monobank-form-parts
+          p.monobank-form-parts__text <span id="privatPartsText">12 платежей</span> на:
+          select#privat_parts.monobank-form-parts__select(name="parts")
+            option(value=12) 12 месяцев
+            option(value=11) 11 месяцев
+            option(value=10) 10 месяцев
+            option(value=9) 9 месяцев
+            option(value=8) 8 месяцев
+            option(value=7) 7 месяцев
+            option(value=6) 6 месяцев
+            option(value=5) 5 месяцев
+            option(value=4) 4 месяцев
+            option(value=3) 3 месяцев
+          p.monobank-form-parts__text <span id="privatPartsPrice">-</span> грн / месяц
+        .monobank-form-parts
+          p.monobank-form-parts__text Мобильный телефон: <span class="color-red">*</span>
+          input#privat_phone(name="phone" type="tel" placeholder="Ваш телефон" required=true disabled)
+          button(type="button")#privatUpdatePhoneBtn.button2.button2--gray.monobank-form-parts__btn Изменить
+
+      button(type="submit").button2.hvr-grow.monobank-form__submit Оплатить
+
+      input#privat_name(name="name" type="hidden" required=true)
+      input#privat_email(name="email" type="hidden" required=true)
+
+    p.monobank-form-disclaimer <span class="color-red">*</span> Укажите Ваш финансовый телефон в ПриватБанк. Услуга оплаты частями доступна только клиентам ПриватБанк. <a href="https://privatbank.ua/" target="_blank">Стать клиентом ПриватБанк</a>
+
