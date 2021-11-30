@@ -589,11 +589,11 @@ a.disable_link {
  flex-direction: column;
  border-radius: 4px;
  border: 1px solid #eaeaea;
- background: #f8f8f8;
+ background: #fff;
  padding: 15px 20px;
  margin: 20px;
  transition: 0.4s;
- box-shadow: 1px 2px 4px rgb(0 0 1 / 22%);
+ box-shadow: 1px 2px 2px rgb(0 0 1 / 7%);
 }
 .payment.payment--2 {
  width: 380px;
