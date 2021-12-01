@@ -16,7 +16,7 @@ const merchantUSD = config.get("fondy:usd") || "";
 const merchantEUR = config.get("fondy:eur") || "";
 const merchantUAH = config.get("fondy:uah") || "";
 const merchantRUB = config.get("fondy:rub") || "";
-
+const API_URL = config.get("privatbank:api_url");
 const eLogger = require("../lib/logger").eLogger;
 
 const Page = require("../models/page").Page;
@@ -554,6 +554,7 @@ module.exports = function routes(app, passport) {
 	
 	router.post("/privatbank/payment", async (ctx) => {
 		ctx.body = await privatBank.createPayment(ctx.request.body);
+		
 	});
 	
 	router.get("/paypal/form", async (ctx) => {
@@ -930,7 +931,7 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'productName' is undefined"
-				};
+				};9
 			} else {
 				if (ctx.request.body.Name) {
 					ctx.request.body.First_Name = ctx.request.body.Name;

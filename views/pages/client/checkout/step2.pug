@@ -301,10 +301,7 @@ script.
 		window.location = url;
 	}
 
-	function payPayPal() {
-		$("#preloader").show();
-
-		if ("#{salesOrderID}") {
+	function payPayPal() window.location = url;lesOrderID}") {
 			var data = {
 				Email             : "#{email}",
 				salesOrderID      : "#{salesOrderID}",
@@ -662,14 +659,13 @@ script.
 				url: "/privatbank/payment",
 				data: data
 			}).then(function (response) {
-				// setCookie("privatbankCheckoutLink", window.location.href, 365);
-				// if (response && response.data && response.data.result && response.data.data) {
-				// 	setCookie("privat_order_id", response.data.order_id);
-				// 	window.location = "/privatbank/process";
-				// } else {
-				// 	$("#preloader").hide();
-				// 	alert("Произошла неизвестная ошибка");
-				// }
+				console.log(response.data)
+				if (response.data == 0) {
+				    console.error("An error has occurred");
+				}
+				else {
+				window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data}`;
+			}
 			});
 		} else {
 			$("#preloader").hide();
