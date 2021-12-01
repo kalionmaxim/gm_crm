@@ -78,9 +78,9 @@ html(lang='ru-RU')
 							span.button2.hvr-grow #{labels.payUSDLbl || ""}
 						a.link.link4.inl(onclick="payFondy('eur');")
 							span.button2.hvr-grow #{labels.payEURLbl || ""}
-						a.link.link2.inl(onclick="payFondy('rub');")
+						a.link.link2.inl.ru-block.hidden(onclick="payFondy('rub');")
 							span.button2.hvr-grow #{labels.payRUBLbl || ""}
-						a.link.link1.inl(onclick="payFondy('uah');")
+						a.link.link1.inl.ua-block.hidden(onclick="payFondy('uah');")
 							span.button2.hvr-grow #{labels.payUAHLbl || ""}
 						p.anycard
 							| #{labels.selectAny1 || ""}
@@ -706,9 +706,11 @@ html(lang='ru-RU')
 							break;
 						case "uah":
 							$('.js_hrn_price').html(subPrice1 + " грн.");
+							$('.js_hrn_price').addClass('ua-block hidden');
 							break;
 						case "rub":
 							$('.js_hrn_price').html(subPrice1 + " руб.");
+							$('.js_hrn_price').addClass('ru-block hidden');
 							break;
 					}
 				}
@@ -720,9 +722,11 @@ html(lang='ru-RU')
 							break;
 						case "uah":
 							$('.js_rub_price').html(subPrice2 + " грн.");
+							$('.js_rub_price').addClass('ua-block hidden');
 							break;
 						case "rub":
 							$('.js_rub_price').html(subPrice2 + " руб.");
+							$('.js_rub_price').addClass('ru-block hidden');
 							break;
 					}
 				}
@@ -749,3 +753,34 @@ script(type='text/javascript').
 	})(document, window, 'script');
 
 script#ss-gadget(src='https://customer.smartsender.eu/js/client/gd.min.js?v2.0.0' data-target='FJPXlTvX' data-domain='myminismm')
+
+
+script.
+	var country = "";
+
+	function getGeolocationData(callback) {
+		var requestUrl = "https://ipapi.co/json";
+
+		$.ajax({
+			url    : requestUrl,
+			type   : 'GET',
+			success: function (json) {
+				console.log("json", json);
+				country = json.country_code;
+
+				callback();
+			},
+			error  : function (err) {
+				console.log("Request failed, error= " + err);
+				callback();
+			}
+		});
+	}
+
+	getGeolocationData(function() {
+		if (country.toLowerCase() === "ru") {
+			$('.ru-block').removeClass('hidden');
+		} else if (country.toLowerCase() === "ua") {
+			$('.ua-block').removeClass('hidden');
+		}
+	});
