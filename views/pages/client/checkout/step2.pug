@@ -301,7 +301,10 @@ script.
 		window.location = url;
 	}
 
-	function payPayPal() window.location = url;lesOrderID}") {
+		function payPayPal() {
+		$("#preloader").show();
+
+		if ("#{salesOrderID}") {
 			var data = {
 				Email             : "#{email}",
 				salesOrderID      : "#{salesOrderID}",
@@ -659,12 +662,12 @@ script.
 				url: "/privatbank/payment",
 				data: data
 			}).then(function (response) {
-				console.log(response.data)
-				if (response.data == 0) {
-				    console.error("An error has occurred");
+				
+				if (response.data && response.data.result ) {
+				    window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data.token}`;
 				}
 				else {
-				window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data}`;
+				console.error("An error has occurred")
 			}
 			});
 		} else {

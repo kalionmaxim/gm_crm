@@ -931,7 +931,7 @@ module.exports = function routes(app, passport) {
 				ctx.body = {
 					result: 0,
 					error : "Required field 'productName' is undefined"
-				};9
+				};
 			} else {
 				if (ctx.request.body.Name) {
 					ctx.request.body.First_Name = ctx.request.body.Name;
