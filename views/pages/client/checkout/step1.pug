@@ -349,6 +349,10 @@ script.
 				url += "&payPalHide=true";
 			}
 
+			if ("#{privatHide}" === "true") {
+				url += "&privatHide=true";
+			}
+
 			window.location = url;
 		});
 	}

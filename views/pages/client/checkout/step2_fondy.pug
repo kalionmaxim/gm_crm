@@ -97,6 +97,7 @@ html(lang='ru-RU')
 						})
 							.then(function (response) {
 								if (response.data.result && response.data.link) {
+
 									window.location = response.data.link;
 								} else if (response.data.error) {
 									console.error(response.data.error);
