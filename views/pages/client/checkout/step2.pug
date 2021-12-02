@@ -147,7 +147,7 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/privat.png").payment__icon
-						a(onclick="payFrisbee()").payment
+						a(onclick="payFrisbee()").payment.ua-block.hidden
 							span.payment__title Оплата частями от Frisbee
 							span.payment__footer
 								span.payment__icons
@@ -301,7 +301,7 @@ script.
 		window.location = url;
 	}
 
-		function payPayPal() {
+	function payPayPal() {
 		$("#preloader").show();
 
 		if ("#{salesOrderID}") {
