@@ -14,7 +14,6 @@ const privatOrderSchema = new Schema({
 		date: { type: String }, //yyyy-MM-dd
 		number: { type: String },
 		point_id: { type: String },
-		paymentState: { type: String },
 		source: { type: String } // "STORE", "INTERNET"
 	},
 
@@ -39,6 +38,7 @@ const privatOrderSchema = new Schema({
 
 	status: { type: String, enum: processingStatuses, default: processingStatuses[0] },
 	state: { type: String },
+	paymentState: { type: String },
 	token: { type: String }
 });
 
