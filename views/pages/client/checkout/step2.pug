@@ -662,13 +662,11 @@ script.
 				url: "/privatbank/payment",
 				data: data
 			}).then(function (response) {
-				
-				if (response.data && response.data.result ) {
-				    window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data.token}`;
+				if (response.data && response.data.result) {
+					window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data.token}`;
+				} else {
+					console.error("An error has occurred");
 				}
-				else {
-				console.error("An error has occurred")
-			}
 			});
 		} else {
 			$("#preloader").hide();
