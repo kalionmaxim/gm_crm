@@ -39,7 +39,9 @@ const privatOrderSchema = new Schema({
 	status: { type: String, enum: processingStatuses, default: processingStatuses[0] },
 	state: { type: String },
 	paymentState: { type: String },
-	token: { type: String }
+	token: { type: String },
+
+	requestCallbackDate: { type: Date }
 });
 
 privatOrderSchema.plugin(autoIncrement.plugin, {
