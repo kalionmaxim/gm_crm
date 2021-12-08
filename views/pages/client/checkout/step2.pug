@@ -535,7 +535,6 @@ script.
 		}
 	});
 
-
 	$(document).ready(function () {
 		$("#monobank_name").val(getParameterByName("firstName") || "");
 		$("#monobank_email").val(getParameterByName("email") || "");
@@ -572,23 +571,65 @@ script.
 
 		var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
 		if (phoneRegexp.test(data.phone)) {
-			axios({
-				method: "post",
-				url   : "/monobank/parts",
-				data  : data
-			}).then(function (response) {
-				setCookie("monobankCheckoutLink", window.location.href, 365);
-				if (response && response.data && response.data.result && response.data.data) {
-					setCookie("mono_order_id", response.data.order_id);
-					window.location = "/monobank/process";
-				} else {
-					$("#preloader").hide();
-					alert("Произошла неизвестная ошибка");
-				}
-			});
+			if ("#{salesOrderID}") {
+				data.salesOrderID = "#{salesOrderID}";
+
+				axios({
+					method: "post",
+					url: "/monobank/parts",
+					data: data
+				}).then(function (response) {
+					setCookie("monobankCheckoutLink", window.location.href, 365);
+					if (response && response.data && response.data.result && response.data.data) {
+						setCookie("mono_order_id", response.data.order_id);
+						window.location = "/monobank/process";
+					} else {
+						$("#preloader").hide();
+						alert("Произошла неизвестная ошибка");
+					}
+				});
+			} else {
+				var dealIDPay = getCookie("dealIDPay") || null;
+				var contactID = getCookie("contactID") || null;
+
+				var data2 = {
+					"First_Name": "#{firstName}",
+					"Email": "#{email}",
+					"Phone": "#{phone}",
+					"productName": "#{productName}",
+					"productID": "#{productID}",
+					"productPrice": "#{productPrice}",
+					"currency": "#{currency.toUpperCase()}",
+					"contactID": contactID,
+					"dealID": dealIDPay
+				};
+
+				axios({
+					method: "post",
+					url: "/sales_order",
+					data: data2
+				})
+					.then(function (response) {
+						data.salesOrderID = response && response.data ? response.data.salesOrderID : null;
+
+						axios({
+							method: "post",
+							url: "/monobank/parts",
+							data: data
+						}).then(function (response) {
+							setCookie("monobankCheckoutLink", window.location.href, 365);
+							if (response && response.data && response.data.result && response.data.data) {
+								setCookie("mono_order_id", response.data.order_id);
+								window.location = "/monobank/process";
+							} else {
+								$("#preloader").hide();
+								alert("Произошла неизвестная ошибка");
+							}
+						});
+					});
+			}
 		} else {
 			$("#preloader").hide();
-			//$('#monobank_phone').closest('.intl-tel-input').show();
 			$('#monobank_phone').removeAttr('disabled').focus();
 			$('#monobankUpdatePhoneBtn').css('opacity', 0);
 			alert("Формат телефона должен быть +380XXXXXXXXX");
@@ -624,7 +665,6 @@ script.
 		}
 	});
 
-
 	$(document).ready(function () {
 		$("#privat_name").val(getParameterByName("firstName") || "");
 		$("#privat_email").val(getParameterByName("email") || "");
@@ -657,17 +697,57 @@ script.
 
 		var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
 		if (phoneRegexp.test(data.phone)) {
-			axios({
-				method: "post",
-				url: "/privatbank/payment",
-				data: data
-			}).then(function (response) {
-				if (response.data && response.data.result) {
-					window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data.token}`;
-				} else {
-					console.error("An error has occurred");
-				}
-			});
+			if ("#{salesOrderID}") {
+				data.salesOrderID = "#{salesOrderID}";
+
+				axios({
+					method: "post",
+					url: "/privatbank/payment",
+					data: data
+				}).then(function (response) {
+					if (response.data && response.data.result) {
+						window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data.token}`;
+					} else {
+						console.error("An error has occurred");
+					}
+				});
+			} else {
+				var dealIDPay = getCookie("dealIDPay") || null;
+				var contactID = getCookie("contactID") || null;
+
+				var data2 = {
+					"First_Name": "#{firstName}",
+					"Email": "#{email}",
+					"Phone": "#{phone}",
+					"productName": "#{productName}",
+					"productID": "#{productID}",
+					"productPrice": "#{productPrice}",
+					"currency": "#{currency.toUpperCase()}",
+					"contactID": contactID,
+					"dealID": dealIDPay
+				};
+
+				axios({
+					method: "post",
+					url: "/sales_order",
+					data: data2
+				})
+					.then(function (response) {
+						data.salesOrderID = response && response.data ? response.data.salesOrderID : null;
+
+						axios({
+							method: "post",
+							url: "/privatbank/payment",
+							data: data
+						}).then(function (response) {
+							if (response.data && response.data.result) {
+								window.location = `https://payparts2.privatbank.ua/ipp/v2/payment?token=${response.data.token}`;
+							} else {
+								console.error("An error has occurred");
+							}
+						});
+					});
+			}
 		} else {
 			$("#preloader").hide();
 			$('#privat_phone').removeAttr('disabled').focus();

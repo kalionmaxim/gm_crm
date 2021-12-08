@@ -757,8 +757,7 @@ module.exports = function routes(app, passport) {
 	// });
 
 	router.post("/monobank/parts/callback", async (ctx) => {
-		await Monobank.processCallback(ctx.request.body);
-		ctx.status = 200;
+		ctx.body = await Monobank.processCallback(ctx.request.body);
 	});
 
 	router.post("/monobank/parts", async (ctx) => {
@@ -781,6 +780,7 @@ module.exports = function routes(app, passport) {
 					const data = {
 						client_phone      : ctx.request.body.phone,
 						total_sum         : 0,
+						salesOrderID      : ctx.request.body.salesOrderID,
 						invoice           : {
 							date  : dateStr,
 							source: "INTERNET"

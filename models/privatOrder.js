@@ -10,12 +10,7 @@ const privatOrderSchema = new Schema({
 
 	internal_order_id: { type: String },
 
-	invoice: {
-		date: { type: String }, //yyyy-MM-dd
-		number: { type: String },
-		point_id: { type: String },
-		source: { type: String } // "STORE", "INTERNET"
-	},
+	salesOrderID: { type: String },
 
 	amount: { type: Number },
 	partsCount: { type: Number },
