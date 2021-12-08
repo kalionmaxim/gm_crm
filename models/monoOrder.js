@@ -8,6 +8,9 @@ const monoOrderSchema = new Schema({
 	external_order_id : { type: String, index: true },
 	client_phone      : { type: String },
 	total_sum         : { type: Number },
+
+	salesOrderID      : { type: String },
+
 	invoice           : {
 		date    : { type: String }, //yyyy-MM-dd
 		number  : { type: String },

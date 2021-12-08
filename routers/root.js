@@ -8,7 +8,8 @@ const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 const Monobank = require("../lib/monobank");
-
+const frisbee = require("../lib/frisbee");
+const privatBank = require("../lib/privatBank");
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -16,7 +17,6 @@ const merchantUSD = config.get("fondy:usd") || "";
 const merchantEUR = config.get("fondy:eur") || "";
 const merchantUAH = config.get("fondy:uah") || "";
 const merchantRUB = config.get("fondy:rub") || "";
-
 const eLogger = require("../lib/logger").eLogger;
 
 const Page = require("../models/page").Page;
@@ -31,8 +31,6 @@ const requestIp = require("request-ip");
 
 const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
-const frisbee = require("../lib/frisbee");
-
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -52,6 +50,7 @@ module.exports = function routes(app, passport) {
 				payPalHide      : ctx.request.query["payPalHide"] || "",
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
+				privatHide      : ctx.request.query["privatHide"] || "",
 				lang            : getLangZone(ctx),
 				labels
 			});
@@ -81,6 +80,7 @@ module.exports = function routes(app, passport) {
 				payPalHide      : ctx.request.query["payPalHide"] || "",
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
+				privatHide      : ctx.request.query["privatHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
@@ -516,7 +516,15 @@ module.exports = function routes(app, passport) {
 	router.post("/frisbee/callback", async (ctx) => {
 		ctx.status = await frisbee.processCallback(ctx.request.body);
 	});
-		
+
+	router.post("/privatbank/payment", async (ctx) => {
+		ctx.body = await privatBank.createPayment(ctx.request.body);
+	});
+
+	router.post("/privatbank/callback", async (ctx) => {
+		ctx.body = await privatBank.processCallback(ctx.request.body);
+	});
+
 	router.get("/paypal/form", async (ctx) => {
 		await ctx.render("pages/client/paypal");
 	});
@@ -716,8 +724,7 @@ module.exports = function routes(app, passport) {
 	// });
 
 	router.post("/monobank/parts/callback", async (ctx) => {
-		await Monobank.processCallback(ctx.request.body);
-		ctx.status = 200;
+		ctx.body = await Monobank.processCallback(ctx.request.body);
 	});
 
 	router.post("/monobank/parts", async (ctx) => {
@@ -740,6 +747,7 @@ module.exports = function routes(app, passport) {
 					const data = {
 						client_phone      : ctx.request.body.phone,
 						total_sum         : 0,
+						salesOrderID      : ctx.request.body.salesOrderID,
 						invoice           : {
 							date  : dateStr,
 							source: "INTERNET"
@@ -832,6 +840,14 @@ module.exports = function routes(app, passport) {
 	});
 
 	//MONOBANK LOGIC PROD <=
+
+	router.get("/payment-success", async (ctx) => {
+		await ctx.render("pages/client/monobank-success");
+	});
+
+	router.get("/payment-failure", async (ctx) => {
+		await ctx.render("pages/client/monobank-failure");
+	});
 
 	router.get("/zoho/payment/link", async (ctx) => {
 		ctx.body = await generateLink(ctx);

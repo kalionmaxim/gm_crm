@@ -110,6 +110,13 @@ block contents
 												select#fondyHide.form-control
 													option(value="no") Нет
 													option(value="yes") Да
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Скрыть оплату через ПриватБанк
+											.col-md-6
+												select#privatHide.form-control
+													option(value="no") Нет
+													option(value="yes") Да
 
 								.form-group.m-b-12
 									.col-md-12
@@ -142,6 +149,7 @@ block contents
 				var payPalHide = $("#payPalHide").val();
 				var fondyHide = $("#fondyHide").val();
 				var monoHide = $("#monoHide").val();
+				var privatHide = $("#privatHide").val();
 
 				if (!productID) {
 					setError("Укажите ID продукта");
@@ -211,6 +219,10 @@ block contents
 
 				if (monoHide === "yes") {
 					url += ("&monoHide=true");
+				}
+
+				if (privatHide === "yes") {
+					url += ("&privatHide=true");
 				}
 
 				resultElem.val(url);
