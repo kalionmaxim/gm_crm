@@ -16,6 +16,7 @@ html(lang='ru-RU')
 		link(rel='stylesheet', href='/css/checkout/step2/main.min.css')
 		link(rel='stylesheet', href='/css/checkout/step2/edit.css')
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+		script(src="https://forma.tinkoff.ru/static/onlineScript.js")
 		// Google Tag Manager
 		script.
 			(function(w, d, s, l, i)
@@ -121,6 +122,7 @@ html(lang='ru-RU')
 					//			button(type="button")#showMonbankPopupBtn.button2.hvr-grow Оплата частями от Monobank
 
 					.payments
+						
 						if !(fondyHide && fondyHide === "true")
 							a(onclick="payFondy();").payment.payment--3
 								span.payment__title Банковская карта
@@ -135,18 +137,64 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/paypal.svg").payment__icon
+						
+						a(onclick="payTinkoff()").payment.payment--2
+							span.payment__title Оплата частями от Tinkoff
+							span.payment__footer
+								span.payment__footer_text Без переплат
+								span.payment__icons
+									img(src="/img/icons/pay/tinkoff.svg").payment__icon
+						
 						if !(monoHide && monoHide === "true")
 							button(type="button")#showMonbankPopupBtn.payment.ua-block.hidden
 								span.payment__title Оплата частями от Monobank
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/monobank.svg").payment__icon
+						
 						if !(privatHide && privatHide === "true")
 							button(type="button")#showPrivatPopupBtn.payment.ua-block.hidden
 								span.payment__title Оплата частями от ПриватБанк
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/privat.png").payment__icon
+						
+						
+						
+						
+						a(onclick="payFrisbee()").payment
+							span.payment__title Оплата частями от Frisbee
+							span.payment__footer
+								span.payment__icons
+									img(src="/img/icons/pay/frisbee.svg").payment__icon
+
+
+					script.
+						var step = '1';
+					.text5
+						| !{labels.doYouHaveQuestsLbl || ""}
+						br
+						| тел. <b>+7 495 241 07 87</b> (#{labels.russiaLbl || ""}), <b>+38 044 237 13 18</b> (#{labels.ukraineLbl || ""})
+					.info
+						.part.part1.inl
+							p.text7 #{labels.guarantee.title || ""}
+							p.text8
+								| #{labels.guarantee.text1 || ""}
+								br
+								br
+								| #{labels.guarantee.text2 || ""}
+						.part.part2.inl
+							p.text7 #{labels.protection.title || ""}
+							p.text8
+								| #{labels.protection.text1 || ""}
+						span.payment__title Оплата частями от ПриватБанк
+								span.payment__footer
+									span.payment__icons
+										img(src="/img/icons/pay/privat.png").payment__icon
+						
+						
+						
+						
 						a(onclick="payFrisbee()").payment
 							span.payment__title Оплата частями от Frisbee
 							span.payment__footer
@@ -175,7 +223,6 @@ html(lang='ru-RU')
 								br
 								br
 								| #{labels.protection.text2 || ""}
-		// FOOTER
 		footer.main-footer
 			.container
 				.footer1
@@ -260,6 +307,76 @@ html(lang='ru-RU')
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
+	
+	 function payTinkoff() {
+				var merchant = "#{merchantID || ''}";
+				var sumDef = parseFloat("#{productPrice}");
+				var sumUpd = parseFloat("#{productPrice}");
+				var currDef = "#{currency.toUpperCase()}";
+				var currUpd = "#{currency.toUpperCase()}";
+
+				var USDRateUAH = parseFloat("#{USDRateUAH}");
+				var USDRateEUR = parseFloat("#{USDRateEUR}");
+				var USDRateRUB = parseFloat("#{USDRateRUB}");
+
+				if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+					merchant = "#{merchantRUB}";
+				}
+				if (currDef === "USD") {
+					currUpd = "RUB";
+					sumUpd = (sumDef * USDRateRUB).toFixed(2);
+				} else if (currDef === "EUR") {
+					currUpd = "RUB";
+					sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
+				} else if (currDef === "UAH") {
+					currUpd = "RUB";
+					sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
+				} else if (currDef === "RUB") {
+					currUpd = "RUB";
+					sumUpd = sumDef;
+				}
+					
+			 	
+				axios({
+				method: "get",
+				// url   : "http://localhost:3001/tinkoff/orderId,
+				url   : "/tinkoff/orderId"
+				})
+				
+				.then(function (response) {
+					tinkoff.createDemo({
+						shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
+						showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
+						orderNumber: response.data,
+						webhookURL: "https://897c-188-191-102-20.ngrok.io" /* "document.location.origin" */  + "/tinkoff/callback",
+						demoFlow: "sms",
+						items: [
+						{
+							name: getParameterByName("productName"), 
+							price: sumUpd , 
+							quantity: 1
+						}]
+					,sum: sumUpd 
+					});
+					
+					function log(data) {
+						axios({
+							method: "post",
+							// url   : "http://localhost:3001/tinkoff/orderId,
+							url   : "/tinkoff/callback",
+							data  : {orderNumber: response.data}  
+						})
+					
+					
+						tinkoff.methods.off(tinkoff.constants.SUCCESS, log);
+						}
+						tinkoff.methods.on(tinkoff.constants.SUCCESS,log );
+					});
+				
+				
+	
+		} 
+	
 	function payFondy() {
 		var url = "/checkout/2/fondy/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
 		if ("#{convertationHide}" === "true") {

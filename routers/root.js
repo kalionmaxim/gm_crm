@@ -33,6 +33,7 @@ const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
 const frisbee = require("../lib/frisbee");
 const privatBank = require("../lib/privatBank");
+const tinkoff = require("../lib/tinkoff");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -647,6 +648,13 @@ module.exports = function routes(app, passport) {
 		await ctx.render("pages/client/monobank-failure");
 	});
 
+	router.get("/tinkoff/orderId", (ctx) => {
+		ctx.body = tinkoff.getOrderId();
+	});
+	
+	router.post("/tinkoff/callback", (ctx) => {
+		ctx.body = tinkoff.callback(ctx.request.body);
+	});
 	//MONOBANK LOGIC PROD =>
 	router.get("/monobank/:page_id", async (ctx) => {
 		try {
