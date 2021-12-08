@@ -142,7 +142,7 @@ html(lang='ru-RU')
 									span.payment__icons
 										img(src="/img/icons/pay/monobank.svg").payment__icon
 						
-						a(onclick="payFrisbee()").payment
+						a(onclick="payFrisbee('uah')").payment
 							span.payment__title Оплата частями от Frisbee
 							span.payment__footer
 								span.payment__icons
@@ -306,26 +306,121 @@ script.
 
 		window.location = url;
 	}
-	function payFrisbee() {
-		var url = "/checkout/2/frisbee/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
-		if ("#{convertationHide}" === "true") {
-			url += "&convertationHide=true";
-		}
+				function payFrisbee(curr) {
+				var merchant = "#{merchantID || ''}";
+				var sumDef = parseFloat("#{productPrice}");
+				var sumUpd = parseFloat("#{productPrice}");
+				var currDef = "#{currency.toUpperCase()}";
+				var currUpd = "#{currency.toUpperCase()}";
 
-		if ("#{successLink}") {
-			url += "&successLink=#{successLink}";
-		}
+				var USDRateUAH = parseFloat("#{USDRateUAH}");
+				var USDRateEUR = parseFloat("#{USDRateEUR}");
+				var USDRateRUB = parseFloat("#{USDRateRUB}");
+				
+				if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+					merchant = "#{merchantUAH}";
+				}
+				if (currDef === "USD") {
+					currUpd = "UAH";
+					sumUpd = (sumDef * USDRateUAH).toFixed(2);
+				} else if (currDef === "EUR") {
+					currUpd = "UAH";
+					sumUpd = ((sumDef / USDRateEUR) * USDRateUAH).toFixed(2);
+				} else if (currDef === "UAH") {
+					currUpd = "UAH";
+					sumUpd = sumDef;
+				} else if (currDef === "RUB") {
+					currUpd = "UAH";
+					sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
+				}
 
-		if ("#{salesOrderID}") {
-			url += "&salesOrderID=#{salesOrderID}";
-		}
+					
+			
 
-		if ("#{lang}") {
-			url += "&lang=#{lang}";
-		}
+				$("#preloader").show();
 
-		window.location = url;
-	}
+				if ("#{salesOrderID}") {
+					var data = {
+						Email             : "#{email}",
+						salesOrderID      : "#{salesOrderID}",
+						productName       : "#{productName}",
+						productPrice      : sumUpd,
+						currency          : currUpd,
+						redirectURL       : "#{redirectURL}",
+						paymentDescription: "Оплата продукта \"#{productName}\"",
+						merchantID        : merchant || null,
+						successLink       : "#{successLink}" || "",
+						lang              : "#{lang}" || "ru"
+					};
+
+					axios({
+						method: "post",
+						url   : "/frisbee/payment",
+						data  : data
+					})
+						.then(function (response) {
+							$("#preloader").hide();
+
+							if (response.data.result && response.data.link) {
+								window.location = response.data.link;
+							} else if (response.data.error) {
+								console.error(response.data.error);
+							}
+						});
+				} else {
+					var dealIDPay = getCookie("dealIDPay") || null;
+					var contactID = getCookie("contactID") || null;
+
+					var data2 = {
+						"First_Name"  : "#{firstName}",
+						"Email"       : "#{email}",
+						"Phone"       : "#{phone}",
+						"productName" : "#{productName}",
+						"productID"   : "#{productID}",
+						"productPrice": sumUpd,
+						"currency"    : currUpd,
+						"contactID"   : contactID,
+						"dealID"      : dealIDPay
+					};
+
+					axios({
+						method: "post",
+						url   : "/sales_order",
+						data  : data2
+					})
+						.then(function (response) {
+							var salesOrderID = response.data.salesOrderID.toString();
+
+							var data = {
+								Email             : "#{email}",
+								salesOrderID      : salesOrderID || null,
+								productName       : "#{productName}",
+								productPrice      : sumUpd,
+								currency          : currUpd,
+								redirectURL       : "#{redirectURL}",
+								paymentDescription: "Оплата продукта \"#{productName}\"",
+								merchantID        : merchant || null,
+								successLink       : "#{successLink}" || "",
+								lang              : "#{lang}" || "ru"
+							};
+
+							axios({
+								method: "post",
+								url   : "/frisbee/payment",
+								data  : data
+							})
+								.then(function (response) {
+									$("#preloader").hide();
+
+									if (response.data.result && response.data.link) {
+										window.location = response.data.link;
+									} else if (response.data.error) {
+										console.error(response.data.error);
+									}
+								});
+						});
+				}
+			}
 
 	function payPayPal() {
 		$("#preloader").show();
