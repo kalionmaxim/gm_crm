@@ -268,75 +268,133 @@ html(lang='ru-RU')
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
+	function payTinkoff () {
+		var merchant = "#{merchantID || ''}";
+		var sumDef = parseFloat("#{productPrice}");
+		var sumUpd = parseFloat("#{productPrice}");
+		var currDef = "#{currency.toUpperCase()}";
+		var currUpd = "#{currency.toUpperCase()}";
 
-	 function payTinkoff() {
-				var merchant = "#{merchantID || ''}";
-				var sumDef = parseFloat("#{productPrice}");
-				var sumUpd = parseFloat("#{productPrice}");
-				var currDef = "#{currency.toUpperCase()}";
-				var currUpd = "#{currency.toUpperCase()}";
+		var USDRateUAH = parseFloat("#{USDRateUAH}");
+		var USDRateEUR = parseFloat("#{USDRateEUR}");
+		var USDRateRUB = parseFloat("#{USDRateRUB}");
 
-				var USDRateUAH = parseFloat("#{USDRateUAH}");
-				var USDRateEUR = parseFloat("#{USDRateEUR}");
-				var USDRateRUB = parseFloat("#{USDRateRUB}");
+		if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+			merchant = "#{merchantRUB}";
+		}
+		if (currDef === "USD") {
+			currUpd = "RUB";
+			sumUpd = (sumDef * USDRateRUB).toFixed(2);
+		} else if (currDef === "EUR") {
+			currUpd = "RUB";
+			sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
+		} else if (currDef === "UAH") {
+			currUpd = "RUB";
+			sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
+		} else if (currDef === "RUB") {
+			currUpd = "RUB";
+			sumUpd = sumDef;
+		}
 
-				if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-					merchant = "#{merchantRUB}";
+		var data = {
+			amount: sumUpd,
+			currency: getParameterByName("currency") || "",
+			items: [
+				{
+					name: getParameterByName("productName"),
+					price: sumUpd,
+					quantity: 1
 				}
-				if (currDef === "USD") {
-					currUpd = "RUB";
-					sumUpd = (sumDef * USDRateRUB).toFixed(2);
-				} else if (currDef === "EUR") {
-					currUpd = "RUB";
-					sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
-				} else if (currDef === "UAH") {
-					currUpd = "RUB";
-					sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
-				} else if (currDef === "RUB") {
-					currUpd = "RUB";
-					sumUpd = sumDef;
-				}
+			],
+			productID: getParameterByName("productID"),
+			productName: getParameterByName("productName"),
+			description: "Покупка продукта " + getParameterByName("productName"),
+		};
 
+		if ("#{salesOrderID}") {
+			data.salesOrderID = "#{salesOrderID}";
 
-				axios({
-				method: "get",
-				// url   : "http://localhost:3001/tinkoff/orderId,
-				url   : "/tinkoff/orderId"
-				})
-
-				.then(function (response) {
+			axios({
+				method: "post",
+				url: "/tinkoff/order",
+				data: data
+			}).then(function (response) {
+				if (response && response.data && response.data.result) {
 					tinkoff.createDemo({
+						sum: sumUpd,
+						demoFlow: "sms",
 						shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
 						showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
-						orderNumber: response.data,
-						webhookURL: "https://897c-188-191-102-20.ngrok.io" /* "document.location.origin" */  + "/tinkoff/callback",
-						demoFlow: "sms",
+						orderNumber: response.data.internal_order_id,
+						webhookURL: document.location.origin + "/tinkoff/callback",
+						successURL: document.location.origin + "/payment-success",
+						failURL: document.location.origin + "/payment-failure",
 						items: [
-						{
-							name: getParameterByName("productName"),
-							price: sumUpd ,
-							quantity: 1
-						}]
-					,sum: sumUpd
-					});
+							{
+								name: getParameterByName("productName"),
+								price: sumUpd,
+								quantity: 1
+							}
+						]
+					}, { view: "self" });
+				} else {
+					alert("Ошибка при создании заказа");
+				}
+			});
+		} else {
+			var dealIDPay = getCookie("dealIDPay") || null;
+			var contactID = getCookie("contactID") || null;
 
-					function log(data) {
-						axios({
-							method: "post",
-							// url   : "http://localhost:3001/tinkoff/orderId,
-							url   : "/tinkoff/callback",
-							data  : {orderNumber: response.data}
-						})
+			var data2 = {
+				"First_Name": "#{firstName}",
+				"Email": "#{email}",
+				"Phone": "#{phone}",
+				"productName": "#{productName}",
+				"productID": "#{productID}",
+				"productPrice": "#{productPrice}",
+				"currency": "#{currency.toUpperCase()}",
+				"contactID": contactID,
+				"dealID": dealIDPay
+			};
 
+			axios({
+				method: "post",
+				url: "/sales_order",
+				data: data2
+			})
+				.then(function (response) {
+					data.salesOrderID = response && response.data ? response.data.salesOrderID : null;
 
-						tinkoff.methods.off(tinkoff.constants.SUCCESS, log);
+					axios({
+						method: "post",
+						url: "/tinkoff/order",
+						data: data
+					}).then(function (response) {
+						if (response && response.data && response.data.result) {
+							tinkoff.createDemo({
+								sum: sumUpd,
+								demoFlow: "sms",
+								shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
+								showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
+								orderNumber: response.data.internal_order_id,
+								webhookURL: document.location.origin + "/tinkoff/callback",
+								successURL: document.location.origin + "/payment-success",
+								failURL: document.location.origin + "/payment-failure",
+								items: [
+									{
+										name: getParameterByName("productName"),
+										price: sumUpd,
+										quantity: 1
+									}
+								]
+							}, { view: "self" });
+						} else {
+							alert("Ошибка при создании заказа");
 						}
-						tinkoff.methods.on(tinkoff.constants.SUCCESS,log );
 					});
-
-
-
+				});
 		}
+	}
 
 	function payFondy() {
 		var url = "/checkout/2/fondy/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";

@@ -649,12 +649,12 @@ module.exports = function routes(app, passport) {
 		await ctx.render("pages/client/monobank-failure");
 	});
 
-	router.get("/tinkoff/orderId", (ctx) => {
-		ctx.body = tinkoff.getOrderId();
+	router.post("/tinkoff/order", async (ctx) => {
+		ctx.body = await tinkoff.createOrder(ctx.request.body);
 	});
 
-	router.post("/tinkoff/callback", (ctx) => {
-		ctx.body = tinkoff.callback(ctx.request.body);
+	router.post("/tinkoff/callback", async (ctx) => {
+		ctx.body = await tinkoff.processCallback(ctx.request.body);
 	});
 
 	//MONOBANK LOGIC PROD =>
