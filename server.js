@@ -27,6 +27,10 @@ if (cluster.isMaster) {
 		spawn(i);
 	}
 
+	if (config.get("enableScheduler") === "true") {
+		require("./scheduler");
+	}
+
 	// Helper function for getting a worker index based on IP address.
 	// This is a hot path so it should be really fast. The way it works
 	// is by converting the IP address to a number by removing the dots,
@@ -85,30 +89,30 @@ if (cluster.isMaster) {
 
 	app.keys = ["session-secret", "another-session-secret"];
 	app.use(session({
-		key   : "nika:sess",
+		key: "nika:sess",
 		cookie: ctx => ({
 			maxAge: (ctx.session && ctx.session.remember) ? 365 * 24 * 60 * 60 * 1000 : 0
 		}),
-		store : new MongoStore({
+		store: new MongoStore({
 			db: config.get("mongoose:dbName")
 		})
 	}));
 
 	const sassMiddleware = function (options) {
 		const mw = require("node-sass-middleware")(options);
-		return convert(function* (next) {
+		return convert(function * (next) {
 			yield mw.bind(mw, this.req, this.res);
 			yield next;
 		});
 	};
 
 	app.use(sassMiddleware({
-		src        : path.join(__dirname, "/public/stylesheets/scss"),
-		dest       : path.join(__dirname, "/public/stylesheets/css"),
-		debug      : false,
+		src: path.join(__dirname, "/public/stylesheets/scss"),
+		dest: path.join(__dirname, "/public/stylesheets/css"),
+		debug: false,
 		outputStyle: "compressed",
-		force      : false,
-		prefix     : "/stylesheets/css"
+		force: false,
+		prefix: "/stylesheets/css"
 	}));
 
 	// body parser

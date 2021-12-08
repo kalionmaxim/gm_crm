@@ -8,7 +8,9 @@ const zoho = require("../lib/zohoCRM");
 const Fondy = require("../lib/fondy");
 const PayPal = require("../lib/paypal");
 const Monobank = require("../lib/monobank");
-const PrivatBank = require("../lib/privatBank");
+const frisbee = require("../lib/frisbee");
+const privatBank = require("../lib/privatBank");
+const tinkoff = require("../lib/tinkoff");
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -16,7 +18,6 @@ const merchantUSD = config.get("fondy:usd") || "";
 const merchantEUR = config.get("fondy:eur") || "";
 const merchantUAH = config.get("fondy:uah") || "";
 const merchantRUB = config.get("fondy:rub") || "";
-const API_URL = config.get("privatbank:api_url");
 const eLogger = require("../lib/logger").eLogger;
 
 const Page = require("../models/page").Page;
@@ -31,9 +32,6 @@ const requestIp = require("request-ip");
 
 const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
-const frisbee = require("../lib/frisbee");
-const privatBank = require("../lib/privatBank");
-const tinkoff = require("../lib/tinkoff");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -552,12 +550,15 @@ module.exports = function routes(app, passport) {
 	router.post("/frisbee/callback", async (ctx) => {
 		ctx.status = await frisbee.processCallback(ctx.request.body);
 	});
-	
+
 	router.post("/privatbank/payment", async (ctx) => {
 		ctx.body = await privatBank.createPayment(ctx.request.body);
-		
 	});
-	
+
+	router.post("/privatbank/callback", async (ctx) => {
+		ctx.body = await privatBank.processCallback(ctx.request.body);
+	});
+
 	router.get("/paypal/form", async (ctx) => {
 		await ctx.render("pages/client/paypal");
 	});
@@ -651,10 +652,11 @@ module.exports = function routes(app, passport) {
 	router.get("/tinkoff/orderId", (ctx) => {
 		ctx.body = tinkoff.getOrderId();
 	});
-	
+
 	router.post("/tinkoff/callback", (ctx) => {
 		ctx.body = tinkoff.callback(ctx.request.body);
 	});
+
 	//MONOBANK LOGIC PROD =>
 	router.get("/monobank/:page_id", async (ctx) => {
 		try {
@@ -764,8 +766,7 @@ module.exports = function routes(app, passport) {
 	// });
 
 	router.post("/monobank/parts/callback", async (ctx) => {
-		await Monobank.processCallback(ctx.request.body);
-		ctx.status = 200;
+		ctx.body = await Monobank.processCallback(ctx.request.body);
 	});
 
 	router.post("/monobank/parts", async (ctx) => {
@@ -788,6 +789,7 @@ module.exports = function routes(app, passport) {
 					const data = {
 						client_phone      : ctx.request.body.phone,
 						total_sum         : 0,
+						salesOrderID      : ctx.request.body.salesOrderID,
 						invoice           : {
 							date  : dateStr,
 							source: "INTERNET"
