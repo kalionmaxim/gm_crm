@@ -320,6 +320,24 @@ script.
 				data: data
 			}).then(function (response) {
 				if (response && response.data && response.data.result) {
+
+					console.log({
+						sum: sumUpd,
+						shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
+						showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
+						orderNumber: response.data.internal_order_id,
+						webhookURL: document.location.origin + "/tinkoff/callback",
+						successURL: document.location.origin + "/payment-success",
+						failURL: document.location.origin + "/payment-failure",
+						items: [
+							{
+								name: getParameterByName("productName"),
+								price: sumUpd,
+								quantity: 1
+							}
+						]
+					});
+
 					tinkoff.create({
 						sum: sumUpd,
 						shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
@@ -370,6 +388,24 @@ script.
 						data: data
 					}).then(function (response) {
 						if (response && response.data && response.data.result) {
+
+							console.log({
+								sum: sumUpd,
+								shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
+								showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
+								orderNumber: response.data.internal_order_id,
+								webhookURL: document.location.origin + "/tinkoff/callback",
+								successURL: document.location.origin + "/payment-success",
+								failURL: document.location.origin + "/payment-failure",
+								items: [
+									{
+										name: getParameterByName("productName"),
+										price: sumUpd,
+										quantity: 1
+									}
+								]
+							});
+
 							tinkoff.create({
 								sum: sumUpd,
 								shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
