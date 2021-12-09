@@ -52,6 +52,8 @@ module.exports = function routes(app, passport) {
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
 				privatHide      : ctx.request.query["privatHide"] || "",
+				frisbeeHide     : ctx.request.query["frisbeeHide"] || "",
+				tinkoffHide     : ctx.request.query["tinkoffHide"] || "",
 				lang            : getLangZone(ctx),
 				labels
 			});
@@ -82,6 +84,8 @@ module.exports = function routes(app, passport) {
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
 				privatHide      : ctx.request.query["privatHide"] || "",
+				frisbeeHide     : ctx.request.query["frisbeeHide"] || "",
+				tinkoffHide     : ctx.request.query["tinkoffHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
