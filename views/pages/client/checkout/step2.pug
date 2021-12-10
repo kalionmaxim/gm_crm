@@ -16,6 +16,7 @@ html(lang='ru-RU')
 		link(rel='stylesheet', href='/css/checkout/step2/main.min.css')
 		link(rel='stylesheet', href='/css/checkout/step2/edit.css')
 		script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+		script(src="https://forma.tinkoff.ru/static/onlineScript.js")
 		// Google Tag Manager
 		script.
 			(function(w, d, s, l, i)
@@ -135,6 +136,13 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/paypal.svg").payment__icon
+						if !(tinkoffHide && tinkoffHide === "true")
+							a(onclick="payTinkoff()").payment.payment--2
+								span.payment__title Оплата частями от Tinkoff
+								span.payment__footer
+									span.payment__footer_text Без переплат
+									span.payment__icons
+										img(src="/img/icons/pay/tinkoff.svg").payment__icon
 						if !(monoHide && monoHide === "true")
 							button(type="button")#showMonbankPopupBtn.payment.ua-block.hidden
 								span.payment__title Оплата частями от Monobank
@@ -147,12 +155,12 @@ html(lang='ru-RU')
 								span.payment__footer
 									span.payment__icons
 										img(src="/img/icons/pay/privat.png").payment__icon
-						a(onclick="payFrisbee()").payment.ua-block.hidden
-							span.payment__title Оплата частями от Frisbee
-							span.payment__footer
-								span.payment__icons
-									img(src="/img/icons/pay/frisbee.svg").payment__icon
-
+						if !(frisbeeHide && frisbeeHide === "true")
+							a(onclick="payFrisbee()").payment.ua-block.hidden
+								span.payment__title Оплата частями от Frisbee
+								span.payment__footer
+									span.payment__icons
+										img(src="/img/icons/pay/frisbee.svg").payment__icon
 
 					script.
 						var step = '1';
@@ -260,6 +268,132 @@ html(lang='ru-RU')
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
+	function payTinkoff () {
+		var merchant = "#{merchantID || ''}";
+		var sumDef = parseFloat("#{productPrice}");
+		var sumUpd = parseFloat("#{productPrice}");
+		var currDef = "#{currency.toUpperCase()}";
+		var currUpd = "#{currency.toUpperCase()}";
+
+		var USDRateUAH = parseFloat("#{USDRateUAH}");
+		var USDRateEUR = parseFloat("#{USDRateEUR}");
+		var USDRateRUB = parseFloat("#{USDRateRUB}");
+
+		if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
+			merchant = "#{merchantRUB}";
+		}
+		if (currDef === "USD") {
+			currUpd = "RUB";
+			sumUpd = (sumDef * USDRateRUB).toFixed(2);
+		} else if (currDef === "EUR") {
+			currUpd = "RUB";
+			sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
+		} else if (currDef === "UAH") {
+			currUpd = "RUB";
+			sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
+		} else if (currDef === "RUB") {
+			currUpd = "RUB";
+			sumUpd = sumDef;
+		}
+
+		var data = {
+			amount: sumUpd,
+			currency: getParameterByName("currency") || "",
+			items: [
+				{
+					name: getParameterByName("productName"),
+					price: sumUpd,
+					quantity: 1
+				}
+			],
+			productID: getParameterByName("productID"),
+			productName: getParameterByName("productName"),
+			description: "Покупка продукта " + getParameterByName("productName"),
+		};
+
+		if ("#{salesOrderID}") {
+			data.salesOrderID = "#{salesOrderID}";
+
+			axios({
+				method: "post",
+				url: "/tinkoff/order",
+				data: data
+			}).then(function (response) {
+				if (response && response.data && response.data.result) {
+					tinkoff.create({
+						sum: sumUpd,
+						shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
+						showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
+						orderNumber: response.data.internal_order_id,
+						webhookURL: document.location.origin + "/tinkoff/callback",
+						successURL: document.location.origin + "/payment-success",
+						failURL: document.location.origin + "/payment-failure",
+						items: [
+							{
+								name: getParameterByName("productName"),
+								price: sumUpd,
+								quantity: 1
+							}
+						]
+					}, { view: "self" });
+				} else {
+					alert("Ошибка при создании заказа");
+				}
+			});
+		} else {
+			var dealIDPay = getCookie("dealIDPay") || null;
+			var contactID = getCookie("contactID") || null;
+
+			var data2 = {
+				"First_Name": "#{firstName}",
+				"Email": "#{email}",
+				"Phone": "#{phone}",
+				"productName": "#{productName}",
+				"productID": "#{productID}",
+				"productPrice": "#{productPrice}",
+				"currency": "#{currency.toUpperCase()}",
+				"contactID": contactID,
+				"dealID": dealIDPay
+			};
+
+			axios({
+				method: "post",
+				url: "/sales_order",
+				data: data2
+			})
+				.then(function (response) {
+					data.salesOrderID = response && response.data ? response.data.salesOrderID : null;
+
+					axios({
+						method: "post",
+						url: "/tinkoff/order",
+						data: data
+					}).then(function (response) {
+						if (response && response.data && response.data.result) {
+							tinkoff.create({
+								sum: sumUpd,
+								shopId: "dd44bc8c-fcf0-4ed0-88e3-d3b1efad2635",
+								showcaseId: "df2220a8-2000-48fd-9e9e-4b439640bc1a",
+								orderNumber: response.data.internal_order_id,
+								webhookURL: document.location.origin + "/tinkoff/callback",
+								successURL: document.location.origin + "/payment-success",
+								failURL: document.location.origin + "/payment-failure",
+								items: [
+									{
+										name: getParameterByName("productName"),
+										price: sumUpd,
+										quantity: 1
+									}
+								]
+							}, { view: "self" });
+						} else {
+							alert("Ошибка при создании заказа");
+						}
+					});
+				});
+		}
+	}
+
 	function payFondy() {
 		var url = "/checkout/2/fondy/currencies?email=#{email}&firstName=#{firstName}&productName=#{productName}&productPrice=#{productPrice}&currency=#{currency.toUpperCase()}&merchantID=#{merchantID}&phone=#{phone}&productID=#{productID}";
 		if ("#{convertationHide}" === "true") {
