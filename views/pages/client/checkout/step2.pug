@@ -137,7 +137,7 @@ html(lang='ru-RU')
 									span.payment__icons
 										img(src="/img/icons/pay/paypal.svg").payment__icon
 						if !(tinkoffHide && tinkoffHide === "true")
-							a(onclick="payTinkoff()").payment.payment--2
+							a(onclick="payTinkoff()").payment.payment--2.ru-block.hidden
 								span.payment__title Оплата частями от Tinkoff
 								span.payment__footer
 									span.payment__footer_text Без переплат
