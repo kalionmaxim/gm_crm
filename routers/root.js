@@ -896,7 +896,15 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/zoho/payment/link", async (ctx) => {
-		ctx.body = await generateLink(ctx);
+		ctx.body = await generateLink(ctx, "mono");
+	});
+
+	router.get("/zoho/payment/link/frisbee", async (ctx) => {
+		ctx.body = await generateLink(ctx, "frisbee");
+	});
+
+	router.get("/zoho/payment/link/privat", async (ctx) => {
+		ctx.body = await generateLink(ctx, "privat");
 	});
 
 	// TILDA routes =>
