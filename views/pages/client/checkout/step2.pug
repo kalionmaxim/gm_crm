@@ -353,7 +353,9 @@ script.
 				"productPrice": "#{productPrice}",
 				"currency": "#{currency.toUpperCase()}",
 				"contactID": contactID,
-				"dealID": dealIDPay
+				"dealID": dealIDPay,
+				"Payment_Sys": "Банковская рассрочка",
+				"type_rassrochka": "Тинькофф Россия"
 			};
 
 			axios({
@@ -735,7 +737,10 @@ script.
 					"productPrice": "#{productPrice}",
 					"currency": "#{currency.toUpperCase()}",
 					"contactID": contactID,
-					"dealID": dealIDPay
+					"dealID": dealIDPay,
+					"Payment_Sys": "Банковская рассрочка",
+					"type_rassrochka": "Монобанк",
+					"count_parts": document.getElementById("monobank_parts").value
 				};
 
 				axios({
@@ -858,7 +863,10 @@ script.
 					"productPrice": "#{productPrice}",
 					"currency": "#{currency.toUpperCase()}",
 					"contactID": contactID,
-					"dealID": dealIDPay
+					"dealID": dealIDPay,
+					"Payment_Sys": "Банковская рассрочка",
+					"type_rassrochka": "Приват",
+					"count_parts": document.getElementById("privat_parts").value
 				};
 
 				axios({
