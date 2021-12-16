@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const privatOrderSchema = new Schema({
 	privat_order_id: { type: Number, unique: true },
 
-	internal_order_id: { type: String },
+	internal_order_id: { type: String, unique: true },
 
 	salesOrderID: { type: String },
 

@@ -10,6 +10,7 @@ const PayPal = require("../lib/paypal");
 const Monobank = require("../lib/monobank");
 const frisbee = require("../lib/frisbee");
 const privatBank = require("../lib/privatBank");
+const tinkoff = require("../lib/tinkoff");
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -51,6 +52,8 @@ module.exports = function routes(app, passport) {
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
 				privatHide      : ctx.request.query["privatHide"] || "",
+				frisbeeHide     : ctx.request.query["frisbeeHide"] || "",
+				tinkoffHide     : ctx.request.query["tinkoffHide"] || "",
 				lang            : getLangZone(ctx),
 				labels
 			});
@@ -81,6 +84,8 @@ module.exports = function routes(app, passport) {
 				fondyHide       : ctx.request.query["fondyHide"] || "",
 				monoHide        : ctx.request.query["monoHide"] || "",
 				privatHide      : ctx.request.query["privatHide"] || "",
+				frisbeeHide     : ctx.request.query["frisbeeHide"] || "",
+				tinkoffHide     : ctx.request.query["tinkoffHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
@@ -615,6 +620,14 @@ module.exports = function routes(app, passport) {
 		await ctx.render("pages/client/monobank-failure");
 	});
 
+	router.post("/tinkoff/order", async (ctx) => {
+		ctx.body = await tinkoff.createOrder(ctx.request.body);
+	});
+
+	router.post("/tinkoff/callback", async (ctx) => {
+		ctx.body = await tinkoff.processCallback(ctx.request.body);
+	});
+
 	//MONOBANK LOGIC PROD =>
 	router.get("/monobank/:page_id", async (ctx) => {
 		try {
@@ -850,7 +863,15 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/zoho/payment/link", async (ctx) => {
-		ctx.body = await generateLink(ctx);
+		ctx.body = await generateLink(ctx, "mono");
+	});
+
+	router.get("/zoho/payment/link/frisbee", async (ctx) => {
+		ctx.body = await generateLink(ctx, "frisbee");
+	});
+
+	router.get("/zoho/payment/link/privat", async (ctx) => {
+		ctx.body = await generateLink(ctx, "privat");
 	});
 
 	// TILDA routes =>
