@@ -66,6 +66,9 @@ if (cluster.isMaster) {
 	}).listen(config.get("port"));
 } else {
 	console.log("Slave");
+
+	require("dotenv").config();
+
 	const eLogger = require("./lib/logger").eLogger;
 
 	const path = require("path");

@@ -9,6 +9,7 @@
     "async": "3.1.0",
     "axios": "0.21.4",
     "bcrypt-nodejs": "0.0.3",
+    "dotenv": "10.0.0",
     "koa": "2.6.2",
     "koa-bodyparser": "4.2.1",
     "koa-convert": "1.2.0",
