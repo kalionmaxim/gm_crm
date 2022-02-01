@@ -862,7 +862,7 @@ module.exports = function routes(app, passport) {
 		await ctx.render("pages/client/monobank-failure");
 	});
 
-	router.get("/zoho/payment/link", async (ctx) => {
+	router.get("/zoho/payment/link/mono", async (ctx) => {
 		ctx.body = await generateLink(ctx, "mono");
 	});
 
