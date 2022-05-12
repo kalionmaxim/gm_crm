@@ -130,12 +130,12 @@ html(lang='ru-RU')
 										img(src="/img/icons/pay/visa.svg").payment__icon
 										img(src="/img/icons/pay/mastercard.svg").payment__icon
 										//- img(src="/img/icons/pay/mir.svg").payment__icon
-						if !(payPalHide && payPalHide === "true")
-							a(onclick="payPayPal();").payment
-								span.payment__title PayPal
-								span.payment__footer
-									span.payment__icons
-										img(src="/img/icons/pay/paypal.svg").payment__icon
+						//- if !(payPalHide && payPalHide === "true")
+						//- 	a(onclick="payPayPal();").payment
+						//- 		span.payment__title PayPal
+						//- 		span.payment__footer
+						//- 			span.payment__icons
+						//- 				img(src="/img/icons/pay/paypal.svg").payment__icon
 						if !(tinkoffHide && tinkoffHide === "true")
 							a(onclick="payTinkoff()").payment.payment--2.ru-block.hidden
 								span.payment__title Оплата частями от Tinkoff
@@ -230,7 +230,7 @@ html(lang='ru-RU')
 					| #{labels.copyright1 || ""}
 					br
 					| #{labels.copyright2 || ""}
-					a.mail(href='mailto:info@geniusmarketing.me') info@geniusmarketing.me
+					a.mail(href='mailto:info@genius.space') info@genius.space
 		// END FOOTER
 		script.
 			// Курс рубля к доллару
