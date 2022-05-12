@@ -119,10 +119,10 @@ html(lang='ru-RU')
 						$('.tostep1').attr("disabled", "disabled").on("click", function () {
 							return false;
 						});;
-					.text5
-						| !{labels.doYouHaveQuestsLbl || ""}
-						br
-						| тел. <span class="notsng_text"><b>+7 495 241 07 87</b> (#{labels.russiaLbl || ""})</span> <span class="sng_text"><b>+38 044 237 13 18</b> (#{labels.ukraineLbl || ""})</span>
+					//- .text5
+					//- 	| !{labels.doYouHaveQuestsLbl || ""}
+					//- 	br
+					//- 	| тел. <span class="notsng_text"><b>+7 495 241 07 87</b> (#{labels.russiaLbl || ""})</span> <span class="sng_text"><b>+38 044 237 13 18</b> (#{labels.ukraineLbl || ""})</span>
 					.info
 						.part.part1.inl
 							p.text7 #{labels.guarantee.title || ""}
@@ -144,7 +144,7 @@ html(lang='ru-RU')
 				.footer1
 					.copy-wrap
 						p.copy
-							img(src='/img/footer-logo.png')
+							img(src='/img/footer-logo.svg')
 							br
 							br
 							| #{labels.address1 || ""}
@@ -167,15 +167,15 @@ html(lang='ru-RU')
 						br
 						a.icon-fb.icon-soc(href='https://www.facebook.com/GeniusMarketing.me/', target='_blank')
 							i.fa.fa-facebook(aria-hidden='true')
-						a.icon-vk.icon-soc(href='https://vk.com/geniusmarketing', target='_blank')
-							i.fa.fa-vk(aria-hidden='true')
+						//- a.icon-vk.icon-soc(href='https://vk.com/geniusmarketing', target='_blank')
+						//- 	i.fa.fa-vk(aria-hidden='true')
 						a.icon-inst.icon-soc(href='https://www.instagram.com/geniusmarketingofficial/', target='_blank')
 							i.fa.fa-instagram(aria-hidden='true')
 						a.icon-yt.icon-soc(href='https://www.youtube.com/user/Olestimofeev', target='_blank')
 							i.fa.fa-youtube(aria-hidden='true')
-					p.text4.notsng_text
-						span.ru +7 (495) 241 07 87
-						|  (#{labels.russiaLbl})
+					//- p.text4.notsng_text
+					//- 	span.ru +7 (495) 241 07 87
+					//- 	|  (#{labels.russiaLbl})
 					p.text4.sng_text
 						span.ru +38 (044) 237 13 18
 						|  (#{labels.ukraineLbl})
