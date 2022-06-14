@@ -1,0 +1,57 @@
+body {
+  font-size: 14px;
+  line-height: 150%;
+  color: #322847;
+}
+
+body, button, input {
+  font-family: "Gilroy", sans-serif;
+}
+
+.container {
+  max-width: 930px;
+  width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  background: url(/img/client-new/common/main-bg.svg) no-repeat center;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+b {
+    font-weight: 700;
+}
+
+.logo {
+  width: 96px;
+  height: 38px;
+  display: inline-block;
+  background: url(/img/client-new/logo.svg) no-repeat center / contain;
+
+  &.logo--white {
+    background-image: url(/img/client-new/logo-white.svg);
+  }
+}
+
+input, textarea, select {
+  @extend .input;
+}
+
+label {
+  @extend .label;
+}

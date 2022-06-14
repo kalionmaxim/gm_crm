@@ -1,0 +1,76 @@
+extends ../../../layouts/main-client-new.pug
+
+block contents
+    .page
+        .main
+            include ../../../partials/client-new/header.pug
+
+            .container
+                .step-header
+                    p.step-header__title КИМ Специалист Онлайн 18 поток
+                    p.step-header-prices
+                        span.step-header-prices__current 390 грн 
+                        span / 12$ / 10€
+
+                .steps-counter
+                    .steps-counter-item.steps-counter-item--active
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 1
+                            p.steps-counter-item__title Введите свои данные
+                    .steps-counter-item
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 2
+                            p.steps-counter-item__title Выберите способ оплаты
+                    .steps-counter-item
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 3
+                            p.steps-counter-item__title Завершение оплаты
+
+                .steps-main
+                    .steps-formblock
+                        p.steps-formblock__title Введите <span>ваши данные:</span>
+                        p.steps-formblock__text Чтобы забронировать участие в <b>"КИМ Специалист Онлайн 18 поток"</b>, введите свои данные в форму ниже и нажмите "Далее".
+                        .steps-form.form 
+                            .formgroup
+                                label Ваше имя и фамилия
+                                input(type="text")
+                            .formgroup
+                                label Email
+                                input(type="text")
+                            .formgroup
+                                label Ваше имя и фамилия
+                                input(type="text")
+                            .form__submit
+                                button(type="button").button Далее
+                            .steps-agreement
+                                .custom-checkbox
+                                    input(id="agreement-checkbox" type="checkbox")
+                                    label(for="agreement-checkbox")
+                                        | Я согласен с условиями <a href="#">оферты</a>
+                                        .custom-checkbox__box
+
+
+                    .steps-guarantees
+                        .steps-guarantees-item
+                            .steps-guarantees-item__header
+                                .steps-guarantees-item__icon
+                                    img(src="/img/client-new/step/guarantee-return.svg")
+                                p.steps-guarantees-item__title Гарантия возврата<br /> средств
+                            p.steps-guarantees-item__text
+                                | Genius.Space <b>гарантирует возврат средств</b> за приобретенный цифровой продукт и/или услугу по требованию клиента.
+                                br
+                                br
+                                | Срок гарантийного периода регламентируется <b>договором об оказании услуг</b> (офертой).
+                        .steps-guarantees-item
+                            .steps-guarantees-item__header
+                                .steps-guarantees-item__icon
+                                    img(src="/img/client-new/step/guarantee-protection.svg")
+                                p.steps-guarantees-item__title 100% защита<br /> персональных данных
+                            p.steps-guarantees-item__text
+                                | Вся информация о покупателях, их картах и проведённых оплатах защищена по <b>международному стандарту PCI DSS</b>, хранение данных регламентировано политиками <b>GDPR</b>, а номера карт передаются в <b>зашифрованном виде</b>.
+
+
+        include ../../../partials/client-new/footer.pug

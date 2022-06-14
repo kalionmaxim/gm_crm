@@ -1,0 +1,14 @@
+// common scss files
+@import 'common/reset';
+@import 'common/global';
+@import 'common/variables';
+@import 'common/mixins';
+@import 'client-new/common/fonts';
+
+@import 'client-new/partials/header';
+@import 'client-new/partials/footer';
+@import 'client-new/partials/forms';
+@import 'client-new/partials/buttons';
+
+@import 'client-new/modules/main';
+@import 'client-new/modules/step';
