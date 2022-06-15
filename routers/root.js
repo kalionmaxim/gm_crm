@@ -1448,6 +1448,17 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
+	router.get("/success_new", async (ctx) => {
+		try {
+			const labels = lang[getLangZone(ctx)].step1;
+
+			await ctx.render("pages/client-new/checkout/success", { labels });
+		} catch (err) {
+			eLogger.error(err);
+			await ctx.redirect("/admin");
+		}
+	});
+
 	async function getGeo(ctx) {
 		try {
 			const ip = requestIp.getClientIp(ctx);

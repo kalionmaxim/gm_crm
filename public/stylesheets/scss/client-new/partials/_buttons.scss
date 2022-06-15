@@ -1,6 +1,7 @@
 .button {
   display: inline-block;
   border: none;
+  border: 1px solid #ff3800;
   background: #ff3800;
   border-radius: 2px;
   font-weight: 600;
@@ -14,5 +15,11 @@
   transition: 0.4s;
   &:hover {
     transform: scale(1.04);
+    text-decoration: none;
+  }
+
+  &.button--bordered {
+    background: transparent;
+    color: #ff3800;
   }
 }
