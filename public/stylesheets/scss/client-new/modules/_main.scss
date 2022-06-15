@@ -4,7 +4,7 @@ body {
   color: #322847;
 }
 
-body, button, input {
+body, button {
   font-family: "Gilroy", sans-serif;
 }
 
@@ -48,8 +48,12 @@ b {
   }
 }
 
-input, textarea, select {
+input, textarea {
   @extend .input;
+}
+
+select {
+  @extend .select;
 }
 
 label {

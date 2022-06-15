@@ -52,12 +52,11 @@ block contents
                                     .steps-payways-item__images
                                         img(src="/img/client-new/step/payway-visa.png")
                                         img(src="/img/client-new/step/payway-mc.png")
-
                             
                             .steps-payways-installment
                                 p.steps-payways-installment__title Оплата частями от:
                                 .steps-payways-installment-list
-                                    .steps-payways-item
+                                    .steps-payways-item(onclick="showInstallmentModal()")
                                         .steps-payways-item__text ПриватБанк
                                         .steps-payways-item__images
                                             img(src="/img/client-new/step/payway-privat.svg")
@@ -69,6 +68,8 @@ block contents
                                         .steps-payways-item__text WayForPay
                                         .steps-payways-item__images
                                             img(src="/img/client-new/step/payway-wfp.png")
+
+                        include ../../../partials/client-new/modals/installment-privat
 
                     include ../../../partials/client-new/guarantees
 

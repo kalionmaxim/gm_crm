@@ -1,0 +1,73 @@
+.installment-modal {
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: #ffffff;
+  padding: 35px 68px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9;
+
+  &__close {
+    width: 20px;
+    height: 20px;
+    background: url(/img/client-new/common/close.svg) no-repeat center / contain;
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    cursor: pointer;
+  }
+
+  &__logo {
+    text-align: center;
+  }
+
+  &__title {
+    @extend .title2;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  &__subtitle {
+    @extend .subtitle;
+    text-align: center;
+    margin-top: 7px;
+  }
+
+  &-form {
+    margin-top: 16px;
+  }
+
+  &-sum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+
+    &__title {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 160%;
+      color: #322847;
+      margin-right: 12px;
+    }
+
+    &__value {
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 160%;
+      color: #ff3800;
+
+      &-period {
+        font-size: 12px;
+      }
+    }
+  }
+
+  &__disclaimer {
+    @extend .text-mute;
+    text-align: center;
+    margin-top: 18px;
+  }
+}
