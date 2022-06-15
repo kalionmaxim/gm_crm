@@ -1,0 +1,76 @@
+extends ../../../layouts/main-client-new.pug
+
+block contents
+    .page
+        .main
+            include ../../../partials/client-new/header.pug
+
+            .container
+                .step-header
+                    p.step-header__title КИМ Специалист Онлайн 18 поток
+                    p.step-header-prices
+                        span.step-header-prices__current 390 грн 
+                        span / 12$ / 10€
+
+                .steps-counter
+                    .steps-counter-item.steps-counter-item--active
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 1
+                            p.steps-counter-item__title Введите свои данные
+                    .steps-counter-item.steps-counter-item--active
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 2
+                            p.steps-counter-item__title Выберите способ оплаты
+                    .steps-counter-item
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 3
+                            p.steps-counter-item__title Завершение оплаты
+
+                .steps-main
+                    .steps-formblock
+                        .steps-payways
+                            .steps-payways-header
+                                p.steps-payways-title Выберите <span class="color-orange">способ оплаты</span>
+                                p.steps-payways-subtitle КИМ Специалист Онлайн 18 поток
+                                
+                                .steps-payways-summary
+                                    .steps-payways-summary__title К оплате:
+                                    .steps-payways-summary__sum <span class="steps-payways-summary__sum-current">390 грн</span> / 12$ / 10€ 
+
+                            .steps-payways-card
+                                .steps-payways-card-currency
+                                    .steps-payways-card-currency__title Валюта карты:
+                                    .steps-payways-card-currency-list
+                                        button(type="button").steps-payways-card-currency-list__item.steps-payways-card-currency-list__item--active Гривна
+                                        button(type="button").steps-payways-card-currency-list__item Доллар
+                                        button(type="button").steps-payways-card-currency-list__item Евро
+                                .steps-payways-item
+                                    .steps-payways-item__text Оплатить картой
+                                    .steps-payways-item__images
+                                        img(src="/img/client-new/step/payway-visa.png")
+                                        img(src="/img/client-new/step/payway-mc.png")
+
+                            
+                            .steps-payways-installment
+                                p.steps-payways-installment__title Оплата частями от:
+                                .steps-payways-installment-list
+                                    .steps-payways-item
+                                        .steps-payways-item__text ПриватБанк
+                                        .steps-payways-item__images
+                                            img(src="/img/client-new/step/payway-privat.svg")
+                                    .steps-payways-item
+                                        .steps-payways-item__text Frisbee
+                                        .steps-payways-item__images
+                                            img(src="/img/client-new/step/payway-frisbee.png")
+                                    .steps-payways-item
+                                        .steps-payways-item__text WayForPay
+                                        .steps-payways-item__images
+                                            img(src="/img/client-new/step/payway-wfp.png")
+
+                    include ../../../partials/client-new/guarantees
+
+
+        include ../../../partials/client-new/footer.pug

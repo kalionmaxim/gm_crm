@@ -100,19 +100,19 @@
   padding: 42px 38px;
 
   &__title {
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 37px;
-    color: #322847;
+    @extend .title;
     text-align: center;
   }
 
-  &__text {
-    font-size: 14px;
-    line-height: 160%;
-    text-align: center;
-    color: #322847;
+  &__subtitle {
+    @extend .subtitle;
     margin-top: 6px;
+  }
+
+  &__text {
+    @extend .text;
+    text-align: center;
+    margin: 6px auto 0;
   }
 }
 
@@ -171,13 +171,149 @@
 }
 
 .steps-form {
-    max-width: 342px;
-    margin: 20px auto 0;
+  max-width: 342px;
+  margin: 20px auto 0;
 }
 
 .steps-agreement {
-    margin: 12px auto 0;
+  margin: 12px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-payways {
+  max-width: 384px;
+  margin: 0 auto;
+
+  &-header {
+    padding-left: 17px;
+  }
+
+  &-title {
+    @extend .title;
+  }
+
+  &-subtitle {
+    @extend .subtitle;
+    margin-top: 7px;
+  }
+
+  &-summary {
+    margin-top: 17px;
+
+    &__title {
+      @extend .text2;
+    }
+    &__sum {
+      font-family: "Gotham Pro", sans-serif;
+      font-size: 16px;
+      line-height: 160%;
+      color: #322847;
+      padding: 7px 0;
+
+      &-current {
+        font-size: 26px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &-item {
+    min-height: 60px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    border: 1px solid rgba(84, 59, 139, 0.81);
+    border-radius: 10px;
+    padding: 12px 20px;
+    margin: 11px 11px 0 0;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+      transform: scale(1.02);
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &__text {
+      @extend .text2;
+      flex: 1;
+      margin-right: 12px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &__images {
+      display: flex;
+      align-items: center;
+
+      > img {
+        margin-right: 10px;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &-card {
+    background: #f5f4f8;
+    border-radius: 6px;
+    padding: 20px;
+    margin-top: 18px;
+
+    &-currency {
+      display: flex;
+      align-items: center;
+
+      &__title {
+        @extend .text2;
+        flex: 1;
+        margin-right: 12px;
+      }
+
+      &-list {
+        display: flex;
+        align-items: center;
+
+        &__item {
+          border: 1px solid #ff3800;
+          border-radius: 4px;
+          background: transparent;
+          font-family: "Gotham Pro", sans-serif;
+          font-size: 12px;
+          line-height: 160%;
+          color: #ff3800;
+          padding: 2px 7px 3px;
+          margin-right: 8px;
+          cursor: pointer;
+          transition: 0.4s;
+          &:last-child {
+            margin-right: 0;
+          }
+          &:hover,
+          &.steps-payways-card-currency-list__item--active {
+            background: #ff3800;
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  &-installment {
+    padding-left: 17px;
+    margin-top: 25px;
+
+    &__title {
+      @extend .text2;
+    }
+
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 }

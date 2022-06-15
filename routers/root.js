@@ -1437,6 +1437,17 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
+	router.get("/step_2_new", async (ctx) => {
+		try {
+			const labels = lang[getLangZone(ctx)].step2;
+
+			await ctx.render("pages/client-new/checkout/step2", { labels });
+		} catch (err) {
+			eLogger.error(err);
+			await ctx.redirect("/admin");
+		}
+	});
+
 	async function getGeo(ctx) {
 		try {
 			const ip = requestIp.getClientIp(ctx);
