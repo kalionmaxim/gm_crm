@@ -5,20 +5,21 @@ block contents
         .main
             include ../../../partials/client-new/header.pug
 
-            .container
-                .success
-                    img(src="/img/client-new/success/illustration.svg").success__image
-                    p.success__title Оплата принята в обработку
-                    p.success__text Спасибо! Как только процесс оплаты завершится, отправим все детали заказа на ваш Email.
-                    .success-contacts
-                        p.success-contacts__title Если по каким-то причинам вы не получили от нас письмо, обратитесь в наш контактный центр:
-                        .success-contacts-list
-                            a(href="mailto:info@genius.space").success-contacts-item
-                                img.success-contacts-item__icon(src="/img/client-new/common/email.svg")
-                                .success-contacts-item__text info@genius.space
-                            a(href="tel:+38 044 237 13 18").success-contacts-item
-                                img.success-contacts-item__icon(src="/img/client-new/common/phone.svg")
-                                .success-contacts-item__text +38 044 237 13 18
-                    a(href="#").button.button--bordered.success__more Посмотреть другие курсы
+            .success-layout
+                .container
+                    .success
+                        img(src="/img/client-new/success/illustration.svg").success__image
+                        p.success__title Оплата принята в обработку
+                        p.success__text Спасибо! Как только процесс оплаты завершится, отправим все детали заказа на ваш Email.
+                        .success-contacts
+                            p.success-contacts__title Если по каким-то причинам вы не получили от нас письмо, обратитесь в наш контактный центр:
+                            .success-contacts-list
+                                a(href="mailto:info@genius.space").success-contacts-item
+                                    img.success-contacts-item__icon(src="/img/client-new/common/email.svg")
+                                    .success-contacts-item__text info@genius.space
+                                a(href="tel:+38 044 237 13 18").success-contacts-item
+                                    img.success-contacts-item__icon(src="/img/client-new/common/phone.svg")
+                                    .success-contacts-item__text +38 044 237 13 18
+                        a(href="#").button.button--bordered.success__more Посмотреть другие курсы
 
         include ../../../partials/client-new/footer.pug

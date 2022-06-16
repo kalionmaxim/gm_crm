@@ -1,3 +1,20 @@
+mixin footer_contacts
+    .main-footer-contacts
+        p.footer-subtitle.main-footer-contacts__title Контакты
+        p.footer-text.main-footer-contacts__text
+            | Украина, Киев, Площадь Независимости, 2,
+            br
+            | Spaces Maidan Plaza, 02000
+            br
+            br
+            | +7 495 241 07 87 (Россия),
+            br
+            br
+            | +38 044 237 13 18 (Украина),
+            br
+            br
+            | info@geniusmarketing.me
+
 footer.main-footer
     .container
         .main-footer-top
@@ -42,21 +59,10 @@ footer.main-footer
                         a(href="#").main-footer-menu__link Все вебинары
                         a(href="#").main-footer-menu__link Плейлисты
                         a(href="#").main-footer-menu__link Расписание
-            .main-footer-contacts
-                p.footer-subtitle.main-footer-contacts__title Контакты
-                p.footer-text.main-footer-contacts__text
-                    | Украина, Киев, Площадь Независимости, 2,
-                    br
-                    | Spaces Maidan Plaza, 02000
-                    br
-                    br
-                    | +7 495 241 07 87 (Россия),
-                    br
-                    br
-                    | +38 044 237 13 18 (Украина),
-                    br
-                    br
-                    | info@geniusmarketing.me
+                .main-footer-menu-block.main-footer-menu-block--mobile
+                    +footer_contacts
+            .main-footer-contacts-desktop
+                +footer_contacts
 
         .main-footer-bottom
             p.main-footer-bottom__text © Genius.Space Все права защищены.

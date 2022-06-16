@@ -1,11 +1,17 @@
 .main-footer {
   background: #231e2e;
   padding: 64px 0 30px;
+  @include mobile {
+    padding: 57px 0 20px;
+  }
 
   .container {
     max-width: 1280px;
     @include tablet {
       max-width: 720px;
+    }
+    @include mobile {
+      max-width: 320px;
     }
   }
 }
@@ -17,6 +23,9 @@
   @include tablet {
     flex-wrap: wrap;
   }
+  @include mobile {
+    flex-direction: column;
+  }
 }
 
 .main-footer-info {
@@ -24,12 +33,20 @@
   @include tablet {
     order: 1;
   }
-    
+  @include mobile {
+    margin: 0 0 20px;
+  }
+
   &__text {
     font-size: 12px;
     line-height: 133%;
     color: #ffffff;
     margin-top: 15px;
+    @include mobile {
+      font-size: 10px;
+      line-height: 160%;
+      margin-top: 12px;
+    }
   }
 
   .main-footer-socials {
@@ -54,40 +71,96 @@
   font-size: 18px;
   line-height: 24px;
   color: #ffffff;
+  @include mobile {
+    font-size: 15px;
+    line-height: 20px;
+  }
 }
 
 .footer-text {
   font-size: 13px;
   line-height: 15px;
   color: #ffffff;
+  @include mobile {
+    font-size: 10px;
+    line-height: 14px;
+  }
 }
 
 .main-footer-menu-layout {
-    display: flex;
+  display: flex;
+  align-items: flex-start;
+  @include tablet {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    margin: 60px auto 0;
+  }
+  @include mobile {
+    flex-wrap: wrap;
     align-items: flex-start;
-    @include tablet {
-      order: 3;
-      width: 100%;
-      justify-content: space-between;
-      margin: 60px auto 0;
-    }
+  }
 }
 
 .main-footer-menu-block {
-    margin-right: 80px;
-    &:last-child {
-        margin-right: 0;
+  margin-right: 80px;
+  @include mobile {
+    width: 50%;
+    margin: 20px 0 0;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+  &:nth-child(1) {
+    @include mobile {
+      order: 1
     }
+  }
+  &:nth-child(2) {
+    @include mobile {
+      order: 3
+    }
+  }
+  &:nth-child(3) {
+    @include mobile {
+      order: 2
+    }
+  }
+  &:nth-child(4) {
+    @include mobile {
+      order: 4
+    }
+  }
+
+  &.main-footer-menu-block--mobile {
+    display: none;
+    @include mobile {
+      display: block;
+    }
+  }
 }
 
 .main-footer-menu {
-    margin-top: 20px;
+  margin-top: 20px;
+  @include mobile {
+    margin-top: 12px
+  }
 
-    &__link {
-        @extend .footer-text;
-        display: block;
-        margin-bottom: 12px;
+  &__link {
+    @extend .footer-text;
+    display: block;
+    margin-bottom: 12px;
+    @include mobile {
+      margin-bottom: 7px;
     }
+  }
+}
+
+.main-footer-contacts-desktop {
+  display: block;
+  @include mobile {
+    display: none;
+  }
 }
 
 .main-footer-contacts {
@@ -98,6 +171,9 @@
 
   &__text {
     margin-top: 20px;
+    @include mobile {
+      margin-top: 12px
+    }
   }
 }
 
@@ -106,8 +182,12 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 30px;
   margin-top: 30px;
-  @include tablet {
+  @include tablet-mobile {
     flex-wrap: wrap;
+  }
+  @include mobile {
+    padding-top: 20px;
+    margin-top: 20px;
   }
 
   &__text,
@@ -116,14 +196,18 @@
     font-size: 12px;
     line-height: 14px;
     color: #ffffff;
+    @include mobile {
+      font-size: 10px;
+      line-height: 120%;
+    }
   }
 
   &__text {
     width: 300px;
     margin-right: 20px;
-    @include tablet {
+    @include tablet-mobile {
       width: 100%;
-      margin: 0 0 20px;
+      margin: 0 0 15px;
     }
   }
 
@@ -132,9 +216,21 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include mobile {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
 
     &__item {
-      font-size: 10px;
+      @include tablet {
+        font-size: 10px;
+      }
+      @include mobile {
+        margin: 7px 10px 0 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }

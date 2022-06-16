@@ -1,5 +1,8 @@
 .main-header {
   padding: 23px 0 35px;
+  @include mobile {
+    padding: 13px 0 24px;
+  }
 
   .container {
     display: flex;

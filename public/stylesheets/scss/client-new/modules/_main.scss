@@ -31,6 +31,9 @@ body, button {
 .main {
   flex: 1;
   background: url(/img/client-new/common/main-bg.svg) no-repeat center;
+  @include mobile {
+    background: none;
+  }
 }
 
 a {
@@ -49,6 +52,10 @@ b {
   height: 38px;
   display: inline-block;
   background: url(/img/client-new/logo.svg) no-repeat center / contain;
+  @include mobile {
+    width: 77px;
+    height: 31px;
+  }
 
   &.logo--white {
     background-image: url(/img/client-new/logo-white.svg);

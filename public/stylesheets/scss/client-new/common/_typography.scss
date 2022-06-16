@@ -3,6 +3,10 @@
   font-size: 30px;
   line-height: 37px;
   color: #322847;
+  @include mobile {
+    font-size: 21px;
+    line-height: 26px;
+  }
 }
 
 .title2 {
@@ -18,6 +22,9 @@
   font-size: 18px;
   line-height: 160%;
   color: #322847;
+  @include mobile {
+    font-size: 14px;
+  }
 }
 
 .text {
@@ -26,6 +33,9 @@
   line-height: 160%;
   text-align: center;
   color: #322847;
+  @include mobile {
+    font-size: 12px;
+  }
 }
 
 .text2 {
@@ -33,6 +43,9 @@
   font-size: 16px;
   line-height: 160%;
   color: #322847;
+  @include mobile {
+    font-size: 14px;
+  }
 }
 
 .text-mute {

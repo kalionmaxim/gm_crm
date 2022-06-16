@@ -13,6 +13,9 @@
   outline: none;
   cursor: pointer;
   transition: 0.4s;
+  @include mobile {
+    padding: 17px 25px;
+  }
   &:hover {
     transform: scale(1.04);
     text-decoration: none;

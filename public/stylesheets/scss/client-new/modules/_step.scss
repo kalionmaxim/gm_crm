@@ -5,6 +5,9 @@
   background: rgba(#543b8b, 0.06);
   border-radius: 10px;
   padding: 14px 44px;
+  @include mobile {
+    padding: 9px 16px 12px;
+  }
 
   &__title {
     flex: 1;
@@ -17,6 +20,11 @@
     color: #322847;
     padding: 5px 0 0 47px;
     margin-right: 20px;
+    @include mobile {
+      font-size: 14px;
+      line-height: 17px;
+      margin-right: 10px;
+    }
   }
 
   &-prices {
@@ -24,9 +32,17 @@
     font-size: 16px;
     line-height: 160%;
     color: #543b8b;
+    @include mobile {
+      max-width: 80px;
+      font-size: 12px;
+    }
 
     &__current {
       font-size: 26px;
+      @include mobile {
+        display: block;
+        font-size: 16px;
+      }
     }
   }
 }
@@ -36,15 +52,30 @@
   align-items: flex-start;
   justify-content: center;
   margin-top: 32px;
+  @include mobile {
+    margin-top: 16px;
+  }
 
   &-item {
     width: 254px;
     margin: 0 2px;
+    @include mobile {
+      width: 90px;
+      margin: 0;
+    }
+    &:last-child {
+      @include mobile {
+        width: 30px;
+      }
+    }
 
     &__line {
       height: 4px;
       background: rgba(104, 74, 184, 0.2);
       border-radius: 2px;
+      @include mobile {
+        display: none;
+      }
     }
 
     &__content {
@@ -52,6 +83,18 @@
       align-items: center;
       justify-content: center;
       margin-top: 15px;
+      @include mobile {
+        flex-direction: row;
+        margin-top: 0;
+      }
+      &:after {
+        @include mobile {
+          content: "";
+          flex: 1;
+          height: 4px;
+          background: #d7d3ed;
+        }
+      }
     }
 
     &__number {
@@ -59,23 +102,42 @@
       height: 36px;
       border-radius: 50%;
       background: #e4def2;
+      font-family: "Gotham Pro", sans-serif;
       font-weight: 700;
       font-size: 20px;
       line-height: 36px;
       text-align: center;
       color: #543b8b;
       margin-right: 12px;
+      @include mobile {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        line-height: 30px;
+        margin: 0;
+      }
     }
 
     &__title {
       font-size: 12px;
       line-height: 150%;
       color: #322847;
+      @include mobile {
+        display: none;
+      }
     }
 
     &.steps-counter-item--active {
       .steps-counter-item__line {
         background: #543b8b;
+      }
+
+      .steps-counter-item__content {
+        &::after {
+          @include mobile {
+            background: #543b8b;
+          }
+        }
       }
 
       .steps-counter-item__number {
@@ -89,8 +151,11 @@
 .steps-main {
   display: flex;
   padding: 35px 0 140px;
-  @include tablet {
+  @include tablet-mobile {
     flex-direction: column;
+  }
+  @include mobile {
+    padding: 16px 0 35px;
   }
 }
 
@@ -102,6 +167,12 @@
   border-radius: 10px;
   padding: 42px 38px;
   position: relative;
+  @include mobile {
+    width: 320px;
+    border-width: 4px;
+    padding: 35px 25px;
+    left: calc(50% - 160px);
+  }
 
   &__title {
     @extend .title;
@@ -119,6 +190,13 @@
     text-align: center;
     margin: 6px auto 0;
   }
+
+  &.steps-formblock--2 {
+    @include mobile {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
 }
 
 .steps-guarantees {
@@ -128,10 +206,10 @@
   margin-left: 17px;
   @include tablet-mobile {
     width: 100%;
+    margin: 30px 0 0;
   }
   @include tablet {
     flex-direction: row;
-    margin: 20px 0 0;
   }
 
   &-item {
@@ -146,7 +224,13 @@
     padding: 36px 30px;
     margin-bottom: 17px;
     @include tablet {
-      margin: 0 20px 0 0;
+      margin: 0 30px 0 0;
+    }
+    @include mobile {
+      background: none;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 28px;
     }
     &:last-child {
       margin: 0;
@@ -156,6 +240,9 @@
       display: flex;
       align-items: center;
       margin-bottom: 18px;
+      @include mobile {
+        margin-bottom: 13px;
+      }
     }
 
     &__icon {
@@ -167,6 +254,12 @@
       background: #eae7f1;
       border-radius: 7px;
       margin-right: 21px;
+      @include mobile {
+        width: 43px;
+        height: 43px;
+        border-radius: 5px;
+        margin-right: 14px;
+      }
     }
 
     &__title {
@@ -175,7 +268,7 @@
       font-size: 18px;
       line-height: 22px;
       color: #322847;
-      @include tablet {
+      @include tablet-mobile {
         font-size: 16px;
         line-height: 20px;
       }
@@ -195,6 +288,9 @@
 
   .form__submit button {
     min-width: 260px;
+    @include mobile {
+      min-width: 100%;
+    }
   }
 }
 
@@ -211,6 +307,9 @@
 
   &-header {
     padding-left: 17px;
+    @include mobile {
+      padding-left: 10px
+    }
   }
 
   &-title {
@@ -224,6 +323,9 @@
 
   &-summary {
     margin-top: 17px;
+    @include mobile {
+      margin-top: 12px;
+    }
 
     &__title {
       @extend .text2;
@@ -234,10 +336,16 @@
       line-height: 160%;
       color: #322847;
       padding: 7px 0;
+      @include mobile {
+        font-size: 14px;
+      }
 
       &-current {
         font-size: 26px;
         font-weight: 600;
+        @include mobile {
+          font-size: 22px;
+        }
       }
     }
   }
@@ -252,6 +360,11 @@
     margin: 11px 11px 0 0;
     cursor: pointer;
     transition: 0.4s;
+    @include mobile {
+      min-height: 45px;
+      padding: 10px;
+      margin-right: 5px;
+    }
     &:hover {
       transform: scale(1.02);
     }
@@ -263,6 +376,9 @@
       @extend .text2;
       flex: 1;
       margin-right: 12px;
+      @include mobile {
+        margin-right: 5px;
+      }
       &:last-child {
         margin-right: 0;
       }
@@ -274,6 +390,10 @@
 
       > img {
         margin-right: 10px;
+        @include mobile {
+          max-height: 24px;
+          margin-right: 6px;
+        }
         &:last-child {
           margin-right: 0;
         }
@@ -286,15 +406,27 @@
     border-radius: 6px;
     padding: 20px;
     margin-top: 18px;
+    @include mobile {
+      padding: 15px 10px;
+      margin-top: 10px;
+    }
 
     &-currency {
       display: flex;
       align-items: center;
+      @include mobile {
+        flex-wrap: wrap;
+      }
 
       &__title {
         @extend .text2;
         flex: 1;
         margin-right: 12px;
+        @include mobile {
+          flex: initial;
+          width: 100%;
+          margin: 0 0 6px;
+        }
       }
 
       &-list {
@@ -329,6 +461,10 @@
   &-installment {
     padding-left: 17px;
     margin-top: 25px;
+    @include mobile {
+      margin-top: 16px;
+      padding-left: 10px;
+    }
 
     &__title {
       @extend .text2;
