@@ -4,6 +4,9 @@
 
   .container {
     max-width: 1280px;
+    @include tablet {
+      max-width: 720px;
+    }
   }
 }
 
@@ -11,10 +14,16 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  @include tablet {
+    flex-wrap: wrap;
+  }
 }
 
 .main-footer-info {
   max-width: 290px;
+  @include tablet {
+    order: 1;
+  }
     
   &__text {
     font-size: 12px;
@@ -56,6 +65,12 @@
 .main-footer-menu-layout {
     display: flex;
     align-items: flex-start;
+    @include tablet {
+      order: 3;
+      width: 100%;
+      justify-content: space-between;
+      margin: 60px auto 0;
+    }
 }
 
 .main-footer-menu-block {
@@ -77,6 +92,9 @@
 
 .main-footer-contacts {
   max-width: 290px;
+  @include tablet {
+    order: 2;
+  }
 
   &__text {
     margin-top: 20px;
@@ -88,6 +106,9 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding-top: 30px;
   margin-top: 30px;
+  @include tablet {
+    flex-wrap: wrap;
+  }
 
   &__text,
   &-links__item {
@@ -100,6 +121,10 @@
   &__text {
     width: 300px;
     margin-right: 20px;
+    @include tablet {
+      width: 100%;
+      margin: 0 0 20px;
+    }
   }
 
   &-links {
@@ -107,5 +132,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &__item {
+      font-size: 10px;
+    }
   }
 }

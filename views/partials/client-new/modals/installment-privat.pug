@@ -1,23 +1,24 @@
 .installment-modal
     .installment-modal__close
-    .installment-modal__logo
-        img(src="/img/client-new/common/modals/installment/installment-privat-logo.png")
-    p.installment-modal__title Оплата частями<br /> от <span class="color-orange">ПриватБанк</span>
-    p.installment-modal__subtitle 12 платежей на:
-    .form.installment-modal-form
-        .formgroup
-            select
-                option 12 месяцев
-                option 12 месяцев
-                option 12 месяцев
-                option 12 месяцев
-        .installment-modal-sum
-            .installment-modal-sum__title Сумма платежа:
-            .installment-modal-sum__value 124 грн <span class="installment-modal-sum__value-period">/ мес.</span>
+    .installment-modal__inner
+        .installment-modal__logo
+            img(src="/img/client-new/common/modals/installment/installment-privat-logo.png")
+        p.installment-modal__title Оплата частями<br /> от <span class="color-orange">ПриватБанк</span>
+        p.installment-modal__subtitle 12 платежей на:
+        .form.installment-modal-form
+            .formgroup
+                select
+                    option 12 месяцев
+                    option 12 месяцев
+                    option 12 месяцев
+                    option 12 месяцев
+            .installment-modal-sum
+                .installment-modal-sum__title Сумма платежа:
+                .installment-modal-sum__value 124 грн <span class="installment-modal-sum__value-period">/ мес.</span>
 
-        .formgroup
-            label Номер телефона
-            input(type="text")
-        .form__submit
-            button(type="button").button Оформить оплату
-    .installment-modal__disclaimer Укажите Ваш финансовый телефон в ПриватБанк. Услуга оплаты частями доступна только клиентам ПриватБанк. Стать клиентом ПриватБанк
+            .formgroup
+                label Номер телефона
+                input.phone(type="text")
+            .form__submit
+                button(type="button").button Оформить оплату
+        .installment-modal__disclaimer Укажите Ваш финансовый телефон в ПриватБанк. Услуга оплаты частями доступна только клиентам ПриватБанк. Стать клиентом ПриватБанк

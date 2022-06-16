@@ -87,3 +87,11 @@ $(".check label").on("click", function () {
 	}
 });
 
+$("input.phone").intlTelInput(
+	{
+		utilsScript       : 'utils.js',
+		defaultCountry    : 'auto',
+		separateDialCode  : false,
+		nationalMode      : false,
+		preferredCountries: ['ua', 'ru', 'by', 'kz']
+	});
