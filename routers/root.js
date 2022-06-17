@@ -38,7 +38,7 @@ module.exports = function routes(app, passport) {
 		const labels = lang[getLangZone(ctx)].step1;
 
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
-			await ctx.render("pages/client/checkout/step1", {
+			await ctx.render("pages/client-new/checkout/step1", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
 				productID       : ctx.request.query["productID"] || "",
 				productPrice    : ctx.request.query["productPrice"] || "",
@@ -66,7 +66,7 @@ module.exports = function routes(app, passport) {
 		const labels = lang[getLangZone(ctx)].step2;
 
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
-			await ctx.render("pages/client/checkout/step2", {
+			await ctx.render("pages/client-new/checkout/step2", {
 				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
 				productID       : ctx.request.query["productID"] || "",
 				email           : ctx.request.query["email"] || "",
@@ -200,7 +200,7 @@ module.exports = function routes(app, passport) {
 		if (successLink) {
 			await ctx.redirect(successLink);
 		} else {
-			await ctx.render("pages/client/checkout/step3", {
+			await ctx.render("pages/client-new/checkout/step3", {
 				// productName: ctx.request.query["productName"].replace(/\n/gi, "") || "",
 				// lang       : getLangZone(ctx),
 				labels
