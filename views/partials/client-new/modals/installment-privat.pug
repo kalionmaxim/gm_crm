@@ -1,24 +1,34 @@
-.installment-modal
+.installment-modal#installmentModalPrivat
     .installment-modal__close
     .installment-modal__inner
         .installment-modal__logo
             img(src="/img/client-new/common/modals/installment/installment-privat-logo.png")
-        p.installment-modal__title Оплата частями<br /> от <span class="color-orange">ПриватБанк</span>
-        p.installment-modal__subtitle 12 платежей на:
-        .form.installment-modal-form
+        p.installment-modal__title #{labels.installmentTitle || ""} <br /> <span class="color-orange">ПриватБанк</span>
+        p.installment-modal__subtitle <span id="privatPartsText">12</span> #{labels.installmentParts || ""}:
+        form#privat_form.form.installment-modal-form
             .formgroup
-                select
-                    option 12 месяцев
-                    option 12 месяцев
-                    option 12 месяцев
-                    option 12 месяцев
+                select#privat_parts(name="parts")
+                    option(value=12) 12 #{labels.monthes || ""}
+                    option(value=11) 11 #{labels.monthes || ""}
+                    option(value=10) 10 #{labels.monthes || ""}
+                    option(value=9) 9 #{labels.monthes || ""}
+                    option(value=8) 8 #{labels.monthes || ""}
+                    option(value=7) 7 #{labels.monthes || ""}
+                    option(value=6) 6 #{labels.monthes || ""}
+                    option(value=5) 5 #{labels.monthes || ""}
+                    option(value=4) 4 #{labels.monthes || ""}
+                    option(value=3) 3 #{labels.monthes || ""}
             .installment-modal-sum
-                .installment-modal-sum__title Сумма платежа:
-                .installment-modal-sum__value 124 грн <span class="installment-modal-sum__value-period">/ мес.</span>
+                .installment-modal-sum__title #{labels.installmentSum || ""}:
+                .installment-modal-sum__value <span id="privatPartsPrice">-</span> грн <span class="installment-modal-sum__value-period">/ мес.</span>
 
             .formgroup
-                label Номер телефона
-                input.phone(type="text")
+                label #{labels.yourPhoneLbl || ""}
+                input#privat_phone.phone(name="phone" type="tel" placeholder="Ваш телефон" required=true)
+            
+            input#privat_name(name="name" type="hidden" required=true)
+            input#privat_email(name="email" type="hidden" required=true)
+            
             .form__submit
-                button(type="button").button Оформить оплату
-        .installment-modal__disclaimer Укажите Ваш финансовый телефон в ПриватБанк. Услуга оплаты частями доступна только клиентам ПриватБанк. Стать клиентом ПриватБанк
+                button(type="submit").button #{labels.installmentSubmit || ""}
+        .installment-modal__disclaimer #{labels.installmentPrivatDisclaimer1 || ""} <a href="https://privatbank.ua/" target="_blank">#{labels.installmentPrivatDisclaimer2 || ""}</a>

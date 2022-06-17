@@ -9,10 +9,12 @@ block contents
                 .container
                     .success
                         img(src="/img/client-new/success/illustration.svg").success__image
-                        p.success__title Оплата принята в обработку
-                        p.success__text Спасибо! Как только процесс оплаты завершится, отправим все детали заказа на ваш Email.
+                        p.success__title #{labels.successTitle || ""}
+                        p.success__text 
+                            | #{labels.successText1 || ""}
+                            | #{labels.successText2 || ""}
                         .success-contacts
-                            p.success-contacts__title Если по каким-то причинам вы не получили от нас письмо, обратитесь в наш контактный центр:
+                            p.success-contacts__title #{labels.successText3 || ""}
                             .success-contacts-list
                                 a(href="mailto:info@genius.space").success-contacts-item
                                     img.success-contacts-item__icon(src="/img/client-new/common/email.svg")
@@ -20,6 +22,6 @@ block contents
                                 a(href="tel:+38 044 237 13 18").success-contacts-item
                                     img.success-contacts-item__icon(src="/img/client-new/common/phone.svg")
                                     .success-contacts-item__text +38 044 237 13 18
-                        a(href="#").button.button--bordered.success__more Посмотреть другие курсы
+                        a(href="https://genius.space/nashi-programmy-obucheniya/").button.button--bordered.success__more #{labels.otherCourses || ""}
 
         include ../../../partials/client-new/footer.pug

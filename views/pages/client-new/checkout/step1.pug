@@ -10,7 +10,7 @@ block contents
                     p.step-header__title.js_payment_title 
                     p.step-header-prices
                         span#dollar_price.step-header-prices__current 
-                            span.js_dollar_price 390 
+                            span.js_dollar_price 
                             span.dollar $ 
                         span#hrn_price
                             span.js_hrn_price
@@ -49,7 +49,7 @@ block contents
                                 input#name.name.f1_name(name='name' type='text', placeholder=(labels.yourFullNameLbl || ""), required='')
                             .formgroup
                                 label #{labels.yourEmailLbl || ""}
-                                input#email.email.f1_email(name='email' type='text', placeholder=(labels.yourMainEmailLbl || ""), required='')
+                                input#email.email.f1_email(name='email' type='email', placeholder=(labels.yourMainEmailLbl || ""), required='')
                             .formgroup
                                 label #{labels.yourPhoneLbl || ""}
                                 input#phone.NumGroup.phone(type='text' name='phone' required='')

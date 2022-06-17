@@ -94,6 +94,11 @@ script.
             "Time_zone"    : geolocationData.utc_offset
         };
 
+        setCookie('name', document.getElementById("name").value, 365);
+        setCookie('email', document.getElementById("email").value, 365);
+        setCookie('last1', document.getElementById("phone").value, 365);
+        setCookie('phone', document.getElementById("phone").value, 365);
+
         axios({
             method: "post",
             url   : "/deal",

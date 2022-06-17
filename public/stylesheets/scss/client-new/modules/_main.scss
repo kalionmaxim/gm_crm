@@ -36,6 +36,10 @@ body, button {
   }
 }
 
+.hidden {
+  display: none!important;
+}
+
 a {
   text-decoration: none;
   &:hover {
