@@ -7,52 +7,70 @@ block contents
 
             .container
                 .step-header
-                    p.step-header__title КИМ Специалист Онлайн 18 поток
+                    p.step-header__title.js_payment_title 
                     p.step-header-prices
-                        span.step-header-prices__current 390 грн 
-                        span / 12$ / 10€
+                        span#dollar_price.step-header-prices__current 
+                            span.js_dollar_price 390 
+                            span.dollar $ 
+                        span#hrn_price
+                            span.js_hrn_price
+                            span грн.
+                        span#rub_price 
+                            span.js_rub_price
+                            span руб.
 
                 .steps-counter
                     .steps-counter-item.steps-counter-item--active
                         .steps-counter-item__line
                         .steps-counter-item__content
                             p.steps-counter-item__number 1
-                            p.steps-counter-item__title Введите свои данные
+                            p.steps-counter-item__title #{labels.enterYourDataLbl || ""}
                     .steps-counter-item
                         .steps-counter-item__line
                         .steps-counter-item__content
                             p.steps-counter-item__number 2
-                            p.steps-counter-item__title Выберите способ оплаты
+                            p.steps-counter-item__title #{labels.selectPaymentMethodLbl || ""}
                     .steps-counter-item
                         .steps-counter-item__line
                         .steps-counter-item__content
                             p.steps-counter-item__number 3
-                            p.steps-counter-item__title Завершение оплаты
+                            p.steps-counter-item__title #{labels.finishPaymentLbl || ""}
 
                 .steps-main
                     .steps-formblock
-                        p.steps-formblock__title Введите <span class="color-orange">ваши данные:</span>
-                        p.steps-formblock__text Чтобы забронировать участие в <b>"КИМ Специалист Онлайн 18 поток"</b>, введите свои данные в форму ниже и нажмите "Далее".
-                        .steps-form.form 
+                        p.steps-formblock__title #{labels.enterYourData2Lbl || ""}
+                        p.steps-formblock__text 
+                            | #{labels.toBookPart1Lbl || ""}"
+                            b.js_payment_title
+                            | " #{labels.toBookPart2Lbl || ""}
+                        form#form_1.mfrm.m_frm.steps-form.form 
                             .formgroup
-                                label Ваше имя и фамилия
-                                input(type="text")
+                                label #{labels.enterYourNameLbl || ""}
+                                input#name.name.f1_name(name='name' type='text', placeholder=(labels.yourFullNameLbl || ""), required='')
                             .formgroup
-                                label Email
-                                input(type="text")
+                                label #{labels.yourEmailLbl || ""}
+                                input#email.email.f1_email(name='email' type='text', placeholder=(labels.yourMainEmailLbl || ""), required='')
                             .formgroup
-                                label Номер телефона
-                                input.phone(type="tel")
+                                label #{labels.yourPhoneLbl || ""}
+                                input#phone.NumGroup.phone(type='text' name='phone' required='')
+                            input#last1.last1(type='hidden' name='custom_telephone')
+                            input#checktoken(type='hidden' name='campaign_token' value='')
+                            input#checkrespo(type='hidden' name='thankyou_url')
+                            input#emailexist(type='hidden' name='email_exists_url')
+                            input(type='hidden' name='forward_data' value='')
+                            input(type='hidden' name='start_day' value='0')
                             .form__submit
-                                button(type="button").button Далее
+                                button#submit(type="submit").button #{labels.bookSubmitLbl || ""}
                             .steps-agreement
                                 .custom-checkbox
-                                    input(id="agreement-checkbox" type="checkbox")
-                                    label(for="agreement-checkbox")
-                                        | Я согласен с условиями <a href="#">оферты</a>
+                                    input(id="checkbox" type="checkbox" checked='checked')
+                                    label(for="checkbox")
+                                        | #{labels.iAgreeWithOffer1Lbl || ""} <a target='_blank', href='https://geniusmarketing.me/usloviya-oferty/'>#{labels.iAgreeWithOffer2Lbl || ""}</a>
                                         .custom-checkbox__box
 
-                    include ../../../partials/client-new/guarantees
+                    include ../../../partials/client-new/checkout/guarantees
 
 
         include ../../../partials/client-new/footer.pug
+        include ../../../partials/client-new/checkout/step1-scripts.pug
+

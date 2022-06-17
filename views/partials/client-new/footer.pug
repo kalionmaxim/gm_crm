@@ -1,19 +1,23 @@
 mixin footer_contacts
     .main-footer-contacts
-        p.footer-subtitle.main-footer-contacts__title Контакты
+        p.footer-subtitle.main-footer-contacts__title #{labels.contacts || "Контакты"}
         p.footer-text.main-footer-contacts__text
-            | Украина, Киев, Площадь Независимости, 2,
-            br
-            | Spaces Maidan Plaza, 02000
-            br
-            br
-            | +7 495 241 07 87 (Россия),
-            br
-            br
-            | +38 044 237 13 18 (Украина),
+            //- | Украина, Киев, Площадь Независимости, 2,
+            //- br
+            //- | Spaces Maidan Plaza, 02000
+            //- br
+            //- br
+            a(href="tel:+38 044 237 13 38") +38 044 237 13 38
             br
             br
-            | info@geniusmarketing.me
+            a(href="tel:+38 093 170 00 64") +38 093 170 00 64
+            br
+            br
+            a(href="tel:0 800 500 502") 0 800 500 502
+            span &nbsp;(#{labels.phoneFree || "Бесплатно по Украине"}) 
+            br
+            br
+            a(href="mailto:info@genius.space") info@genius.space
 
 footer.main-footer
     .container
@@ -21,58 +25,55 @@ footer.main-footer
             .main-footer-info
                 a(href="/").logo.logo--white.main-footer-info__logo
                 p.main-footer-info__text 
-                    | ТОВ "КОНСАЛТИНГ СИНДИКАТ", 
+                    | #{labels.address1 || "ТОВ \"КОНСАЛТИНГ СИНДИКАТ\""}
                     br
-                    | ЕГРПОУ: 42182763, Адрес: 02000, 
+                    | #{labels.address2 || "ЕГРПОУ: 42182763, Адрес: 01033, г. Киев,"}
                     br
-                    | г. Киев, ул. Паньковская, 14, 3 этаж.
+                    | #{labels.address3 || "ул. Паньковская, 14"}
                 .main-footer-socials
-                    a(href="#").main-footer-social
-                        img(src="/img/client-new/common/socials/vk.svg").main-footer-social__icon
-                    a(href="#").main-footer-social
+                    //- a(href="#").main-footer-social
+                    //-     img(src="/img/client-new/common/socials/vk.svg").main-footer-social__icon
+                    a(target="_blank" href="https://facebook.com/geniusmarketingme").main-footer-social
                         img(src="/img/client-new/common/socials/fb.svg").main-footer-social__icon
-                    a(href="#").main-footer-social
+                    a(target="_blank" href="https://www.youtube.com/user/Olestimofeev").main-footer-social
                         img(src="/img/client-new/common/socials/yt.svg").main-footer-social__icon
-                    a(href="#").main-footer-social
+                    a(target="_blank" href="https://t.me/genius_space").main-footer-social
                         img(src="/img/client-new/common/socials/tg.svg").main-footer-social__icon
-                    a(href="#").main-footer-social
+                    a(target="_blank" href="https://www.instagram.com/geniusmarketingofficial/").main-footer-social
                         img(src="/img/client-new/common/socials/in.svg").main-footer-social__icon
             .main-footer-menu-layout
                 .main-footer-menu-block
-                    p.footer-subtitle.main-footer-menu-title Курсы
+                    p.footer-subtitle.main-footer-menu-title #{labels.footerMenuTitle1 || "О Genius.Space"}
                     .main-footer-menu
-                        a(href="#").main-footer-menu__link  Маркетинг
-                        a(href="#").main-footer-menu__link  Управление
-                        a(href="#").main-footer-menu__link  Старт и развитие бизнеса
-                        a(href="#").main-footer-menu__link  Финансы
+                        a(target="_blank" href="https://genius.space/").main-footer-menu__link #{labels.footerLink1 || "Главная"}
+                        a(target="_blank" href="https://genius.space/blizhajshie-meropriyatiya/").main-footer-menu__link #{labels.footerLink2 || "Ближайшие  мероприятия"}
+                        a(target="_blank" href="https://genius.space/lab/").main-footer-menu__link #{labels.footerLink3 || "Полезные образовательные материалы"}
+                        a(target="_blank" href="https://genius.space/nashi-programmy-obucheniya/").main-footer-menu__link #{labels.footerLink4 || "Наши программы обучения"}
+                        a(target="_blank" href="https://genius.space/otzyvy/").main-footer-menu__link #{labels.footerLink5 || "Отзывы"}
                 .main-footer-menu-block
-                    p.footer-subtitle.main-footer-menu-title О Genius.Space
+                    p.footer-subtitle.main-footer-menu-title &nbsp;
                     .main-footer-menu
-                        a(href="#").main-footer-menu__link Мы и СМИ
-                        a(href="#").main-footer-menu__link Команда
-                        a(href="#").main-footer-menu__link Вакансии
-                        a(href="#").main-footer-menu__link Оставить отзыв
-                        a(href="#").main-footer-menu__link Отзывы
-                .main-footer-menu-block
-                    p.footer-subtitle.main-footer-menu-title Вебинары
-                    .main-footer-menu
-                        a(href="#").main-footer-menu__link Все вебинары
-                        a(href="#").main-footer-menu__link Плейлисты
-                        a(href="#").main-footer-menu__link Расписание
-                .main-footer-menu-block.main-footer-menu-block--mobile
-                    +footer_contacts
+                        a(target="_blank" href="https://genius.space/o-nas/").main-footer-menu__link #{labels.footerLink6 || "О нас"}
+                        a(target="_blank" href="https://genius.space/dlya-biznesa/").main-footer-menu__link #{labels.footerLink7 || "Для бизнеса"}
+                        a(target="_blank" href="https://genius.space/sitemap_index.xml").main-footer-menu__link #{labels.footerLink8 || "Карта сайта"}
+                        a(target="_blank" href="https://events.genius.space/logo/").main-footer-menu__link #{labels.footerLink9 || "Логотипы"}
+                        a(target="_blank" href="https://events.genius.space/free").main-footer-menu__link #{labels.footerLink10 || "Бесплатные курсы"}
+                //- .main-footer-menu-block.main-footer-menu-block--mobile
+                //-     +footer_contacts
             .main-footer-contacts-desktop
                 +footer_contacts
 
         .main-footer-bottom
-            p.main-footer-bottom__text © Genius.Space Все права защищены.
+            p.main-footer-bottom__text © Genius.Space #{labels.copyright3 || "Все права защищены."}
             .main-footer-bottom-links 
-                a(href="#").main-footer-bottom-links__item Условия оказания услуг
-                a(href="#").main-footer-bottom-links__item Политика конфиденциальности
-                a(href="#").main-footer-bottom-links__item Условия возврата
-                a(href="#").main-footer-bottom-links__item Условия предзаказа услуг
-                a(href="#").main-footer-bottom-links__item Поставщики услуг
-                a(href="#").main-footer-bottom-links__item Предупреждение
+                a(target="_blank" href="https://policies.genius.space/policies#pol1_title").main-footer-bottom-links__item #{labels.copyrightLink1 || "Условия оказания услуг"}
+                a(target="_blank" href="https://policies.genius.space/policies#pol2_title").main-footer-bottom-links__item #{labels.copyrightLink2 || "Политика конфиденциальности"}
+                a(target="_blank" href="https://policies.genius.space/policies#pol1_11").main-footer-bottom-links__item #{labels.copyrightLink3 || "Условия возврата"}
+                a(target="_blank" href="https://policies.genius.space/policies#pol1_8").main-footer-bottom-links__item #{labels.copyrightLink4 || "Условия предзаказа услуг"}
+                a(target="_blank" href="https://policies.genius.space/policies#pol1_24").main-footer-bottom-links__item #{labels.copyrightLink5 || "Поставщики услуг"}
+                a(target="_blank" href="https://policies.genius.space/policies#pol3_title").main-footer-bottom-links__item #{labels.copyrightLink6 || "Предупреждение"}
+
+include ../client/preloader.pug
 
 script(src='/js/libs.min.js')
 script(src='/js/common.js')

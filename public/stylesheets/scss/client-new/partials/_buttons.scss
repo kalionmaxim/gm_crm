@@ -16,9 +16,15 @@
   @include mobile {
     padding: 17px 25px;
   }
-  &:hover {
+  &:hover:not(:disabled) {
     transform: scale(1.04);
     text-decoration: none;
+  }
+  &:disabled {
+    border-color: #d9d9d9;
+    background: #d9d9d9;
+    color: rgba(#322847, 0.8);
+    cursor: default;
   }
 
   &.button--bordered {

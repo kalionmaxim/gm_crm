@@ -5,7 +5,15 @@ $(function () {
 
   // close installment-modal
   $(".installment-modal__close").click(function () {
-    $(this).closest('.installment-modal').fadeOut(300);
+    $(this).closest(".installment-modal").fadeOut(300);
+  });
+
+  $("#checkbox").change(function () {
+    if (this.checked) {
+      $("#submit").removeAttr("disabled");
+    } else {
+      $("#submit").attr("disabled", true);
+    }
   });
 });
 

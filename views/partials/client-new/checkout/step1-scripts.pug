@@ -1,0 +1,286 @@
+script.
+    var step = '0';
+    $('.tostep1').attr("disabled", "disabled").on("click", function () {
+        return false;
+    });;
+
+script.
+    // Курс рубля к доллару
+    var rub_cur = 68;
+    // Курс гривны к доллару
+    var uah_cur = 28;
+
+script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
+script.
+    var geolocationData = {
+        country   : "",
+        city      : "",
+        utc_offset: ""
+    }
+
+    $(document).ready(function () {
+        $("#name").val(getCookie("name") || "");
+        $("#email").val(getCookie("email") || "");
+        $("#phone").val(getCookie("phone") || "");
+    });
+
+    $('#form_1').submit(function (e) {
+        e.preventDefault();
+
+        $("#preloader").show();
+
+        createContactInGR(function () {
+            createDeal();
+        });
+    });
+
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return undefined;
+    }
+
+    function createContactInGR(cb) {
+        var data = {
+            "name"    : document.getElementById("name").value,
+            "email"   : document.getElementById("email").value,
+            "phone"   : document.getElementById("phone").value,
+            "campaign": getParameterByName("grUnpaid") || ""
+        };
+
+        if (getParameterByName("grUnpaid")) {
+            axios({
+                method: "post",
+                url   : "/getresponse",
+                data  : data
+            }).then(function (response) {
+                cb();
+            });
+        } else {
+            cb();
+        }
+    }
+
+    function createDeal() {
+        var contactID = getCookie("contactID") || null;
+
+        var data = {
+            "First_Name"   : document.getElementById("name").value,
+            "Email"        : document.getElementById("email").value,
+            "Phone"        : document.getElementById("phone").value,
+            "productName"  : "#{productName}",
+            "productID"    : "#{productID}",
+            "utm_campaign" : getParameterByName("utm_campaign") || "",
+            "utm_medium"   : getParameterByName("utm_medium") || "",
+            "utm_source"   : getParameterByName("utm_source") || "",
+            "utm_term"     : getParameterByName("utm_term") || "",
+            "utm_content"  : getParameterByName("utm_content") || "",
+            "contactID"    : contactID,
+            "Stage"        : "1. Заявка",
+            "Amount"       : "#{productPrice}",
+            "Currency"     : "#{currency.toUpperCase()}",
+            "http_refferer": document.location.href || "",
+            "Country"      : geolocationData.country || '',
+            "City"         : geolocationData.city || '',
+            "Time_zone"    : geolocationData.utc_offset
+        };
+
+        axios({
+            method: "post",
+            url   : "/deal",
+            data  : data
+        }).then(function (response) {
+            $("#preloader").hide();
+
+            if (response && response.data) {
+                if (response.data.contactID) {
+                    setCookie("contactID", response.data.contactID, 365);
+                }
+
+                if (response.data.dealID) {
+                    setCookie("dealIDPay", response.data.dealID, 365);
+                }
+            }
+
+            var url = `/checkout/2?email=${document.getElementById("email").value}&firstName=${document.getElementById("name").value}&phone=${document.getElementById("phone").value}&productName=#{productName}&productPrice=#{productPrice}&productID=#{productID}&currency=#{currency}&redirectURL=#{redirectURL}&merchantID=#{merchantID}`;
+            if ("#{landing}" === "true") {
+                url += "&landing=true";
+            }
+
+            if ("#{convertationHide}" === "true") {
+                url += "&convertationHide=true";
+            }
+
+            if ("#{successLink}") {
+                url += "&successLink=#{successLink}";
+            }
+
+            if ("#{salesOrderID}") {
+                url += "&salesOrderID=#{salesOrderID}";
+            }
+
+            if ("#{lang}") {
+                url += "&lang=#{lang}";
+            }
+
+            if ("#{fondyHide}" === "true") {
+                url += "&fondyHide=true";
+            }
+
+            if ("#{monoHide}" === "true") {
+                url += "&monoHide=true";
+            }
+
+            if ("#{payPalHide}" === "true") {
+                url += "&payPalHide=true";
+            }
+
+            if ("#{privatHide}" === "true") {
+                url += "&privatHide=true";
+            }
+
+            if ("#{frisbeeHide}" === "true") {
+                url += "&frisbeeHide=true";
+            }
+
+            if ("#{tinkoffHide}" === "true") {
+                url += "&tinkoffHide=true";
+            }
+
+            window.location = url;
+        });
+    }
+
+    function getGeolocationData(callback) {
+        var requestUrl = "https://ipapi.co/json";
+
+        $.ajax({
+            url    : requestUrl,
+            type   : 'GET',
+            success: function (json) {
+                console.log("json", json);
+                geolocationData.city = json.city;
+                geolocationData.country = json.country_name;
+                geolocationData.utc_offset = 'UTC' + json.utc_offset;
+
+                callback();
+            },
+            error  : function (err) {
+                console.log("Request failed, error= " + err);
+                callback();
+            }
+        });
+    }
+
+    getGeolocationData(function () {
+        console.log(geolocationData);
+    });
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+script.
+    var header_image = 'bg1.jpg';
+    var payment_title = "#{productName}";
+    var dollar_price = "#{productPrice}";
+    if (Math.ceil(dollar_price * uah_cur) < 1000) {
+        var hrn_price = Math.ceil(dollar_price * uah_cur);
+    } else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
+        var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
+    } else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
+        var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
+    } else {
+        var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
+    }
+    if (Math.ceil(dollar_price * rub_cur) < 1000) {
+        var rub_price = Math.ceil(dollar_price * rub_cur);
+    } else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
+        var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
+    } else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
+        var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
+    } else {
+        var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
+    }
+    var tovar_id = 394979;
+    var token_GR = 'b7qk';
+    var CRM_id = 1203;
+    // var success_url = 'https://geniusmarketing.me/syndicate/payment-startup-webinar/step1.php';
+    if (step == '0') {
+        $('.steps').addClass('zero');
+        $('.step1text').fadeIn(0);
+        $('.tostep1').addClass('disable_link');
+    } else if (step == '1') {
+        $('.steps').addClass('first');
+        $('.price').removeClass('disapear');
+        $('.product').removeClass('disapear');
+    } else if (step == '2') {
+        $('.steps').addClass('second');
+        $('.price').removeClass('disapear');
+        $('.product').removeClass('disapear');
+    } else if (step == '3') {
+        $('.steps').addClass('third');
+        $('.success').fadeIn(0);
+        $('.success').html('СПАСИБО!');
+    } else if (step == '4') {
+        $('.steps').addClass('third');
+        $('.success').fadeIn(0);
+        $('.success').html('ВАШ ЗАКАЗ ОПЛАЧЕН');
+    }
+    $('#checktoken').val(token_GR);
+    // $('#checkrespo').val(success_url);
+    // $('#emailexist').val(success_url);
+    // $('#form_1').attr('onsubmit', 'return validate_with_exportCRM(form_1,' + CRM_id + ');');
+    // $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
+    $('.js_payment_title').html(payment_title);
+    // $('.js_product_type').html(product_type);
+    $('.js_dollar_price').html(dollar_price);
+    $('.js_hrn_price').html(hrn_price);
+    $('.js_rub_price').html(rub_price);
+    // if(rub_price > 15000){
+    //   $('.links1 .link3').fadeOut(0);
+    // }
+    $('.js_tovar_id').val(tovar_id);
+    $('.sec1').css('background-image', 'url(/img/' + header_image + ')');
+
+
+script(type='text/javascript').
+    (function (d, w, s) {
+        var widgetId = '22519',
+            gcw = d.createElement(s);
+        gcw.type = 'text/javascript';
+        gcw.async = true;
+        gcw.src = '//my.binotel.ua/getcall/widgets/' + widgetId + '.js';
+        var sn = d.getElementsByTagName(s)[0];
+        sn.parentNode.insertBefore(gcw, sn);
+    })(document, window, 'script');
+
+if productID === '3678676000321184808' || productID === '3678676000321184818' || productID === '3678676000321184828' || productID === '3678676000321184838' || productID === '3678676000321184848'
+    script#ss-gadget(src='https://customer.smartsender.eu/js/client/gd.min.js?v2.0.0' data-target='SovslbBP' data-domain='lob21')
+else if productID === '3678676000278768981' || productID === '3678676000279239002' || productID === '3678676000279239036'
+    script#ss-gadget(src='https://customer.smartsender.eu/js/client/gd.min.js?v2.0.0' data-target='DwlVZvJM' data-domain='myminismm')
+
+
+
+script.
+    $(function(){
+        $.get("https://ipapi.co/json/?key=e4192db949f63bdb4a84f9d73bf5cafa9921a6a5", function (data) {
+            if (data.country_code == 'UA') {
+                $('.notsng_text').hide();
+            } else {
+                $('.sng_text').hide();
+            }
+        });
+    });
