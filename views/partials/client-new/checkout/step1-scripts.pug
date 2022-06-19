@@ -6,9 +6,11 @@ script.
 
 script.
     // Курс рубля к доллару
-    var rub_cur = 68;
+    var USDRateRUB = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
     // Курс гривны к доллару
-    var uah_cur = 28;
+    var USDRateUAH = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
+    // Курс евро к доллару
+    var USDRateEUR = ("#{USDRateEUR}" && parseFloat("#{USDRateEUR}")) || 0.89;
 
 script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
 script.
@@ -200,25 +202,50 @@ script.
 script.
     var header_image = 'bg1.jpg';
     var payment_title = "#{productName}";
-    var dollar_price = "#{productPrice}";
-    if (Math.ceil(dollar_price * uah_cur) < 1000) {
-        var hrn_price = Math.ceil(dollar_price * uah_cur);
-    } else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 10) {
-        var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * uah_cur) % 1000;
-    } else if ((Math.ceil(dollar_price * uah_cur) % 1000) < 100) {
-        var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * uah_cur) % 1000;
-    } else {
-        var hrn_price = Math.floor(Math.ceil(dollar_price * uah_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * uah_cur) % 1000;
+    var mainPrice = "#{productPrice}";
+    var currencySym = "$";
+    var currency = "#{currency}";
+    var subPrice1 = null;
+    var subPrice1Curr = null;
+    var subPrice2 = null;
+    var subPrice2Curr = null;
+
+    var UAHPrice;
+
+    switch (currency.toLowerCase()) {
+        case "usd":
+            currencySym = "$";
+            subPrice1 = Math.ceil(mainPrice * USDRateEUR);
+            subPrice1Curr = "eur";
+            subPrice2 = Math.ceil(mainPrice * USDRateUAH);
+            subPrice2Curr = "uah";
+            break;
+
+        case "uah":
+            currencySym = "₴";
+            subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
+            subPrice1Curr = "eur";
+            subPrice2 = Math.ceil(mainPrice / USDRateUAH);
+            subPrice2Curr = "usd";
+            break;
+
+        case "eur":
+            currencySym = "€";
+            subPrice1 = Math.ceil(mainPrice / USDRateEUR);
+            subPrice1Curr = "usd";
+            subPrice2 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
+            subPrice2Curr = "uah";
+            break;
+
+        case "rub":
+            currencySym = "₽";
+            subPrice1 = Math.ceil((mainPrice / USDRateRUB) * USDRateUAH);
+            subPrice1Curr = "uah";
+            subPrice2 = Math.ceil(mainPrice / USDRateRUB);
+            subPrice2Curr = "usd";
+            break;
     }
-    if (Math.ceil(dollar_price * rub_cur) < 1000) {
-        var rub_price = Math.ceil(dollar_price * rub_cur);
-    } else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 10) {
-        var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;00' + Math.ceil(dollar_price * rub_cur) % 1000;
-    } else if ((Math.ceil(dollar_price * rub_cur) % 1000) < 100) {
-        var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;0' + Math.ceil(dollar_price * rub_cur) % 1000;
-    } else {
-        var rub_price = Math.floor(Math.ceil(dollar_price * rub_cur) / 1000) + '&nbsp;' + Math.ceil(dollar_price * rub_cur) % 1000;
-    }
+
     var tovar_id = 394979;
     var token_GR = 'b7qk';
     var CRM_id = 1203;
@@ -251,12 +278,47 @@ script.
     // $('#form_1').attr('onsubmit','return validate(form_1,' + CRM_id + ');');
     $('.js_payment_title').html(payment_title);
     // $('.js_product_type').html(product_type);
-    $('.js_dollar_price').html(dollar_price);
-    $('.js_hrn_price').html(hrn_price);
-    $('.js_rub_price').html(rub_price);
-    // if(rub_price > 15000){
-    //   $('.links1 .link3').fadeOut(0);
-    // }
+
+    $('.js_payment_title').html(payment_title);
+    $('.js_dollar_price').html(mainPrice);
+    $('.currencySym').html(currencySym);
+    //if ("#/{landing}" === "true") {
+    if ("#{convertationHide}" !== "true") {
+        if (subPrice1 && subPrice1Curr) {
+            switch (subPrice1Curr) {
+                case "usd":
+                    $('.js_hrn_price').html(subPrice1 + " долл.");
+                    break;
+                case "uah":
+                    $('.js_hrn_price').html(subPrice1 + " грн.");
+                    $('.js_hrn_price').addClass('ua-block');
+                    UAHPrice = subPrice1;
+                    break;
+                case "eur":
+                    $('.js_hrn_price').html(subPrice1 + " евро");
+                    $('.js_hrn_price').addClass('ru-block');
+                    break;
+            }
+        }
+
+        if (subPrice2 && subPrice2Curr) {
+            switch (subPrice2Curr) {
+                case "usd":
+                    $('.js_rub_price').html(subPrice2 + " долл.");
+                    break;
+                case "uah":
+                    $('.js_rub_price').html(subPrice2 + " грн.");
+                    $('.js_rub_price').addClass('ua-block');
+                    UAHPrice = subPrice2;
+                    break;
+                case "eur":
+                    $('.js_rub_price').html(subPrice2 + " евро");
+                    $('.js_rub_price').addClass('ru-block');
+                    break;
+            }
+        }
+    }
+
     $('.js_tovar_id').val(tovar_id);
     $('.sec1').css('background-image', 'url(/img/' + header_image + ')');
 

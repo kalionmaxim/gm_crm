@@ -378,24 +378,24 @@ script.
     switch (currency.toLowerCase()) {
         case "usd":
             currencySym = "$";
-            subPrice1 = Math.ceil(mainPrice * USDRateRUB);
-            subPrice1Curr = "rub";
+            subPrice1 = Math.ceil(mainPrice * USDRateEUR);
+            subPrice1Curr = "eur";
             subPrice2 = Math.ceil(mainPrice * USDRateUAH);
             subPrice2Curr = "uah";
             break;
 
         case "uah":
             currencySym = "₴";
-            subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateRUB);
-            subPrice1Curr = "rub";
+            subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
+            subPrice1Curr = "eur";
             subPrice2 = Math.ceil(mainPrice / USDRateUAH);
             subPrice2Curr = "usd";
             break;
 
         case "eur":
             currencySym = "€";
-            subPrice1 = Math.ceil((mainPrice / USDRateEUR) * USDRateRUB);
-            subPrice1Curr = "rub";
+            subPrice1 = Math.ceil(mainPrice / USDRateEUR);
+            subPrice1Curr = "usd";
             subPrice2 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
             subPrice2Curr = "uah";
             break;
@@ -450,8 +450,8 @@ script.
                     $('.js_hrn_price').addClass('ua-block');
                     UAHPrice = subPrice1;
                     break;
-                case "rub":
-                    $('.js_hrn_price').html(subPrice1 + " руб.");
+                case "eur":
+                    $('.js_hrn_price').html(subPrice1 + " евро");
                     $('.js_hrn_price').addClass('ru-block');
                     break;
             }
@@ -467,8 +467,8 @@ script.
                     $('.js_rub_price').addClass('ua-block');
                     UAHPrice = subPrice2;
                     break;
-                case "rub":
-                    $('.js_rub_price').html(subPrice2 + " руб.");
+                case "eur":
+                    $('.js_rub_price').html(subPrice2 + " евро");
                     $('.js_rub_price').addClass('ru-block');
                     break;
             }
