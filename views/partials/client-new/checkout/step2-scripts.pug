@@ -377,7 +377,7 @@ script.
 
     switch (currency.toLowerCase()) {
         case "usd":
-            currencySym = "$";
+            currencySym = " $";
             subPrice1 = Math.ceil(mainPrice * USDRateEUR);
             subPrice1Curr = "eur";
             subPrice2 = Math.ceil(mainPrice * USDRateUAH);
@@ -385,7 +385,7 @@ script.
             break;
 
         case "uah":
-            currencySym = "грн";
+            currencySym = " грн";
             subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
             subPrice1Curr = "eur";
             subPrice2 = Math.ceil(mainPrice / USDRateUAH);
@@ -393,7 +393,7 @@ script.
             break;
 
         case "eur":
-            currencySym = "€";
+            currencySym = " €";
             subPrice1 = Math.ceil(mainPrice / USDRateEUR);
             subPrice1Curr = "usd";
             subPrice2 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
@@ -401,7 +401,7 @@ script.
             break;
 
         case "rub":
-            currencySym = "₽";
+            currencySym = " ₽";
             subPrice1 = Math.ceil((mainPrice / USDRateRUB) * USDRateUAH);
             subPrice1Curr = "uah";
             subPrice2 = Math.ceil(mainPrice / USDRateRUB);
