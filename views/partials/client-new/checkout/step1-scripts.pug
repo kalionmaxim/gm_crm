@@ -222,7 +222,7 @@ script.
             break;
 
         case "uah":
-            currencySym = "₴";
+            currencySym = "грн";
             subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
             subPrice1Curr = "eur";
             subPrice2 = Math.ceil(mainPrice / USDRateUAH);
@@ -287,15 +287,15 @@ script.
         if (subPrice1 && subPrice1Curr) {
             switch (subPrice1Curr) {
                 case "usd":
-                    $('.js_hrn_price').html(subPrice1 + " долл.");
+                    $('.js_hrn_price').html(subPrice1 + " $");
                     break;
                 case "uah":
-                    $('.js_hrn_price').html(subPrice1 + " грн.");
+                    $('.js_hrn_price').html(subPrice1 + " грн");
                     $('.js_hrn_price').addClass('ua-block');
                     UAHPrice = subPrice1;
                     break;
                 case "eur":
-                    $('.js_hrn_price').html(subPrice1 + " евро");
+                    $('.js_hrn_price').html(subPrice1 + " €");
                     $('.js_hrn_price').addClass('ru-block');
                     break;
             }
@@ -304,15 +304,15 @@ script.
         if (subPrice2 && subPrice2Curr) {
             switch (subPrice2Curr) {
                 case "usd":
-                    $('.js_rub_price').html(subPrice2 + " долл.");
+                    $('.js_rub_price').html(subPrice2 + " $");
                     break;
                 case "uah":
-                    $('.js_rub_price').html(subPrice2 + " грн.");
+                    $('.js_rub_price').html(subPrice2 + " грн");
                     $('.js_rub_price').addClass('ua-block');
                     UAHPrice = subPrice2;
                     break;
                 case "eur":
-                    $('.js_rub_price').html(subPrice2 + " евро");
+                    $('.js_rub_price').html(subPrice2 + " €");
                     $('.js_rub_price').addClass('ru-block');
                     break;
             }
