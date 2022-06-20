@@ -1,5 +1,11 @@
 extends ../../../layouts/main-client-new.pug
 
+block headTitle
+    if labels.title && productName
+        title!= labels.title + ' "' + productName + '"'
+    else
+        title Оплата участі
+
 block contents
     .page
         .main
@@ -7,7 +13,7 @@ block contents
 
             .container
                 .step-header
-                    p.step-header__title.js_payment_title
+                    p.step-header__title.js_payment_title!= productName
                     p.step-header-prices
                         span.dollar_price.step-header-prices__current 
                             span.js_dollar_price 
@@ -39,7 +45,7 @@ block contents
                         .steps-payways
                             .steps-payways-header
                                 p.steps-payways-title #{labels.selectPaymentMethod2 || ""}
-                                p.steps-payways-subtitle.js_payment_title
+                                p.steps-payways-subtitle.js_payment_title!= productName
                                 
                                 .steps-payways-summary
                                     .steps-payways-summary__title #{labels.sumToPayLbl || ""}

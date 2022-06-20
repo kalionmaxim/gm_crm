@@ -435,7 +435,7 @@ script.
         $('.success').html('ВАШ ЗАКАЗ ОПЛАЧЕН');
     }
     $('#checktoken').val(token_GR);
-    $('.js_payment_title').html(payment_title);
+    //- $('.js_payment_title').html(payment_title);
     $('.js_dollar_price').html(mainPrice);
     $('.currencySym').html(currencySym);
     //if ("#/{landing}" === "true") {
@@ -621,7 +621,8 @@ script.
     $('#privat_phone').val(getParameterByName("phone") || "");
 
     $('#showPrivatPopupBtn').click(function () {
-        $('#installmentModalPrivat').fadeIn(200);
+        $('.steps-payways').hide();
+        $('#installmentModalPrivat').show();
     });
 
     $('#privatUpdatePhoneBtn').click(function () {

@@ -181,8 +181,14 @@
       margin-top: 12px
     }
 
-    a {
+    &-link {
+      display: flex;
+      align-items: center;
       color: inherit;
+
+      &-icon {
+        margin-right: 5px;
+      }
     }
   }
 }

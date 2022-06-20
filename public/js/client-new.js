@@ -5,7 +5,8 @@ $(function () {
 
   // close installment-modal
   $(".installment-modal__close").click(function () {
-    $(this).closest(".installment-modal").fadeOut(300);
+    $(this).closest(".installment-modal").hide();
+    $(".steps-payways").show();
   });
 
   // change lang
@@ -16,18 +17,12 @@ $(function () {
     case "ru":
       $(".lang-switcher-list__item")
         .text("UA")
-        .attr(
-          "href",
-          updateURLParameter(window.location.href, "lang", "ua")
-        );
+        .attr("href", updateURLParameter(window.location.href, "lang", "ua"));
       break;
     case "ua":
       $(".lang-switcher-list__item")
         .text("RU")
-        .attr(
-          "href",
-          updateURLParameter(window.location.href, "lang", "ru")
-        );
+        .attr("href", updateURLParameter(window.location.href, "lang", "ru"));
       break;
   }
 

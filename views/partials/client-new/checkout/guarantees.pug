@@ -3,19 +3,19 @@
         .steps-guarantees-item__header
             .steps-guarantees-item__icon
                 img(src="/img/client-new/step/guarantee-return.svg")
-            p.steps-guarantees-item__title #{labels.guarantee.title || ""}
+            p.steps-guarantees-item__title!= labels.guarantee.title || ""
         p.steps-guarantees-item__text
-            | #{labels.guarantee.text1 || ""}
+            span!= labels.guarantee.text1 || ""
             br
             br
-            | #{labels.guarantee.text2 || ""}
+            span!= labels.guarantee.text2 || ""
     .steps-guarantees-item
         .steps-guarantees-item__header
             .steps-guarantees-item__icon
                 img(src="/img/client-new/step/guarantee-protection.svg")
-            p.steps-guarantees-item__title #{labels.protection.title || ""}
+            p.steps-guarantees-item__title!= labels.protection.title || ""
         p.steps-guarantees-item__text
-            | #{labels.protection.text1 || ""}
+            span!= labels.protection.text1 || ""
             br
             br
-            | #{labels.protection.text2 || ""}
+            span!= labels.protection.text2 || ""

@@ -1,5 +1,11 @@
 extends ../../../layouts/main-client-new.pug
 
+block headTitle
+    if labels.title && productName
+        title!= labels.title + ' "' + productName + '"'
+    else
+        title Оплата участі
+
 block contents
     .page
         .main
