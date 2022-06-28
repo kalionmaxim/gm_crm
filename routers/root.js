@@ -11,6 +11,7 @@ const Monobank = require("../lib/monobank");
 const frisbee = require("../lib/frisbee");
 const privatBank = require("../lib/privatBank");
 const tinkoff = require("../lib/tinkoff");
+const WayForPay = require("../lib/wayforpay");
 // const Yandex = require("../lib/yandexKassa");
 
 const config = require("../config/config");
@@ -853,6 +854,29 @@ module.exports = function routes(app, passport) {
 	});
 
 	//MONOBANK LOGIC PROD <=
+
+	router.get("/wayforpay/generate_signature", async (ctx) => {
+		if (!(ctx.request.query && ctx.request.query.baseString)) {
+			ctx.body = {
+				result: 0,
+				error: "Error while creating WayForPay signature. Query is empty"
+			};
+		}
+
+		const response = await WayForPay.sign(ctx.request.query.baseString);
+
+		if (response.result) {
+			ctx.body = {
+				result: 1,
+				sign: response.sign
+			};
+		} else {
+			ctx.body = {
+				result: 0,
+				error: "Error while creating WayForPay signature."
+			};
+		}
+	});
 
 	router.get("/payment-success", async (ctx) => {
 		await ctx.render("pages/client/monobank-success");

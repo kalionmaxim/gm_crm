@@ -1000,3 +1000,127 @@ script.
                 });
         }
     }
+
+
+// WayForPay logic
+script#widget-wfp-script(language='javascript' type='text/javascript' src='https://secure.wayforpay.com/server/pay-widget.js')
+script.
+    var wayforpay = new Wayforpay(); 	
+
+    var sum = parseFloat("#{productPrice}");
+    var currency = "#{currency.toUpperCase()}";
+    var salesOrderID = "#{salesOrderID || ''}";
+    var now = new Date();
+
+    $('#wfpForm [name="orderDate"]').val(now.getTime());
+
+    generateSignature();
+
+    if (!salesOrderID) {
+        var dealIDPay = getCookie("dealIDPay") || null;
+        var contactID = getCookie("contactID") || null;
+
+        var data = {
+            "First_Name"  : "#{firstName}",
+            "Email"       : "#{email}",
+            "Phone"       : "#{phone}",
+            "productName" : "#{productName}",
+            "productID"   : "#{productID}",
+            "productPrice": sum,
+            "currency"    : currency,
+            "contactID"   : contactID,
+            "dealID"      : dealIDPay
+        };
+
+        axios({
+            method: "post",
+            url   : "/sales_order",
+            data  : data
+        })
+            .then(function (response) {
+                $('#wfpForm [name="orderReference"]').val(response.data.salesOrderID.toString());
+
+                generateSignature();
+            });
+    }
+
+    function generateSignature() {
+        var baseString = getBaseString();
+        
+        $.ajax({
+            url: '/wayforpay/generate_signature',
+            data: { baseString: baseString },
+        }).done(function(response) {
+            if (response.result) {
+                $('#wfpForm [name="merchantSignature"]').val(response.sign);
+            } else {
+                console.log("Error while creating WFP signature");
+            }
+        });
+    }
+    
+    function getBaseString() {
+        var merchantAccount = $('#wfpForm [name="merchantAccount"]').val();
+        var merchantDomainName = $('#wfpForm [name="merchantDomainName"]').val();
+        var orderReference = $('#wfpForm [name="orderReference"]').val();
+        var orderDate = $('#wfpForm [name="orderDate"]').val();
+        var amount = $('#wfpForm [name="amount"]').val();
+        var currency = $('#wfpForm [name="currency"]').val();
+        
+        var productName = ''; 
+        $('#wfpForm [name="productName"]').each(function() {
+            productName += ';' + $(this).val();
+        });
+        
+        var productCount = ''; 
+        $('#wfpForm [name="productCount"]').each(function() {
+            productCount += ';' + $(this).val();
+        });
+        
+        var productPrice = ''; 
+        $('#wfpForm [name="productPrice"]').each(function() {
+            productPrice += ';' + $(this).val();
+        });
+        
+        var baseString = 
+            merchantAccount + ';' + 
+            merchantDomainName + ';' + 
+            orderReference + ';' + 
+            orderDate + ';' + 
+            amount + ';' + 
+            currency +
+            productName +
+            productCount + 
+            productPrice;
+            
+        return baseString;
+    }
+
+    function payWFP (data) { 		
+        wayforpay.run(
+            data, 			
+            function (response) {
+                // on approved		
+                console.log('WFP approved', response);
+            }, 			
+            function (response) {
+                // on declined
+                console.log('WFP declined', response);	
+            }, 			
+            function (response) {
+                // on pending or in processing
+                console.log('WFP pending', response);
+            } 		
+        ); 	
+    }
+
+    $('#wfpForm').on('submit', function(e) {
+        e.preventDefault();
+
+        var data = $(this).serializeArray().reduce(function(obj, item) {
+            obj[item.name] = item.value;
+            return obj;
+        }, {});
+
+        payWFP(data);
+    });
