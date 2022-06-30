@@ -385,13 +385,11 @@
     align-items: center;
     border: 1px solid rgba(84, 59, 139, 0.81);
     border-radius: 10px;
-    padding: 12px 20px;
     margin: 11px 11px 0 0;
     cursor: pointer;
     transition: 0.4s;
     @include mobile {
       min-height: 45px;
-      padding: 10px;
       margin-right: 5px;
     }
     &:hover {
@@ -406,11 +404,15 @@
     }
 
     &__inner {
+      flex: 1;
       display: flex;
       align-items: center;
       background: transparent;
       border: none;
-      padding: 0;
+      padding: 12px 20px;
+      @include mobile {
+        padding: 10px;
+      }
     }
 
     &__text {

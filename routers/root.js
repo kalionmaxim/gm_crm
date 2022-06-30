@@ -19,6 +19,7 @@ const merchantUSD = config.get("fondy:usd") || "";
 const merchantEUR = config.get("fondy:eur") || "";
 const merchantUAH = config.get("fondy:uah") || "";
 const merchantRUB = config.get("fondy:rub") || "";
+const wayforpayMerchant = config.get("wayforpay:merchantAccount") || "";
 const eLogger = require("../lib/logger").eLogger;
 
 const Page = require("../models/page").Page;
@@ -91,7 +92,8 @@ module.exports = function routes(app, passport) {
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
 				lang            : getLangZone(ctx),
-				labels
+				labels,
+				wayforpayMerchant
 			});
 		} else {
 			ctx.body = "Some of required fields are undefined";
@@ -874,6 +876,21 @@ module.exports = function routes(app, passport) {
 			ctx.body = {
 				result: 0,
 				error: "Error while creating WayForPay signature."
+			};
+		}
+	});
+
+	router.post("/wayforpay/save_order", async (ctx) => {
+		const orderData = await WayForPay.createOrder(ctx.request.body);
+
+		if (orderData.result) {
+			ctx.body = {
+				result: 1,
+				order: orderData.order
+			};
+		} else {
+			ctx.body = {
+				result: 0
 			};
 		}
 	});

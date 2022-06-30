@@ -67,10 +67,11 @@ block contents
                                             button(type="button" data-curr="usd").steps-payways-card-currency-list__item #{labels.USD || ""}
                                             button(type="button" data-curr="eur").steps-payways-card-currency-list__item #{labels.EUR || ""}
                                     .steps-payways-item(onclick="payFondy()")
-                                        .steps-payways-item__text #{labels.payCard || ""}
-                                        .steps-payways-item__images
-                                            img(src="/img/client-new/step/payway-visa.png")
-                                            img(src="/img/client-new/step/payway-mc.png")
+                                        .steps-payways-item__inner
+                                            .steps-payways-item__text #{labels.payCard || ""}
+                                            .steps-payways-item__images
+                                                img(src="/img/client-new/step/payway-visa.png")
+                                                img(src="/img/client-new/step/payway-mc.png")
                             
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true")
                                 .steps-payways-installment
@@ -78,15 +79,16 @@ block contents
                                     .steps-payways-installment-list
                                         if !(privatHide && privatHide === "true")
                                             .steps-payways-item#showPrivatPopupBtn.ua-block
-                                                .steps-payways-item__text ПриватБанк
-                                                .steps-payways-item__images
-                                                    img(src="/img/client-new/step/payway-privat.svg")
+                                                .steps-payways-item__inner
+                                                    .steps-payways-item__text ПриватБанк
+                                                    .steps-payways-item__images
+                                                        img(src="/img/client-new/step/payway-privat.svg")
 
                                         .steps-payways-item
                                             form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
-                                                input(type="hidden" name='merchantAccount' value='test_merch_n1')
+                                                input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
                                                 input(type="hidden" name='merchantAuthType' value='SimpleSignature')
-                                                input(type="hidden" name='merchantDomainName' value='https://pay.geniusmarketing.me')
+                                                input(type="hidden" name='merchantDomainName' value='pay.geniusmarketing.me')
                                                 input(type="hidden" name='merchantSignature' value='')
                                                 input(type="hidden" name='orderReference' value=salesOrderID || '')
                                                 input(type="hidden" name='orderDate' value='')
