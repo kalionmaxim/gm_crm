@@ -134,6 +134,15 @@ block contents
 													option(value="no") Нет
 													option(value="yes") Да
 
+								.row
+									.col-md-6
+										.form-group
+											label.col-md-4(style="margin-top: 10px;") Скрыть оплату через WayForPay
+											.col-md-6
+												select#wayforpayHide.form-control
+													option(value="no") Нет
+													option(value="yes") Да
+
 								.form-group.m-b-12
 									.col-md-12
 										button#generateBtn.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-12(type='button' style="width: 100%;") Получит ссылку
@@ -168,6 +177,7 @@ block contents
 				var privatHide = $("#privatHide").val();
 				var frisbeeHide = $("#frisbeeHide").val();
 				var tinkoffHide = $("#tinkoffHide").val();
+				var wayforpayHide = $("#wayforpayHide").val();
 
 				if (!productID) {
 					setError("Укажите ID продукта");
@@ -249,6 +259,10 @@ block contents
 
 				if (tinkoffHide === "yes") {
 					url += ("&tinkoffHide=true");
+				}
+
+				if (wayforpayHide === "yes") {
+					url += ("&wayforpayHide=true");
 				}
 
 				resultElem.val(url);

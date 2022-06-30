@@ -73,7 +73,7 @@ block contents
                                                 img(src="/img/client-new/step/payway-visa.png")
                                                 img(src="/img/client-new/step/payway-mc.png")
                             
-                            if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true")
+                            if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true")
                                 .steps-payways-installment
                                     p.steps-payways-installment__title #{labels.installment || ""}
                                     .steps-payways-installment-list
@@ -84,25 +84,26 @@ block contents
                                                     .steps-payways-item__images
                                                         img(src="/img/client-new/step/payway-privat.svg")
 
-                                        .steps-payways-item
-                                            form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
-                                                input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
-                                                input(type="hidden" name='merchantAuthType' value='SimpleSignature')
-                                                input(type="hidden" name='merchantDomainName' value='pay.geniusmarketing.me')
-                                                input(type="hidden" name='merchantSignature' value='')
-                                                input(type="hidden" name='orderReference' value=salesOrderID || '')
-                                                input(type="hidden" name='orderDate' value='')
-                                                input(type="hidden" name='amount' value=productPrice || '')
-                                                input(type="hidden" name='currency' value=currency.toUpperCase() || '')
-                                                input(type="hidden" name='productName' value=productName || '')
-                                                input(type="hidden" name='productPrice' value=productPrice || '')
-                                                input(type="hidden" name='productCount' value='1')
-                                                input(type="hidden" name='defaultPaymentSystem' value='card')
+                                        if !(wayforpayHide && wayforpayHide === "true")
+                                            .steps-payways-item
+                                                form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
+                                                    input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
+                                                    input(type="hidden" name='merchantAuthType' value='SimpleSignature')
+                                                    input(type="hidden" name='merchantDomainName' value='pay.geniusmarketing.me')
+                                                    input(type="hidden" name='merchantSignature' value='')
+                                                    input(type="hidden" name='orderReference' value=salesOrderID || '')
+                                                    input(type="hidden" name='orderDate' value='')
+                                                    input(type="hidden" name='amount' value=productPrice || '')
+                                                    input(type="hidden" name='currency' value=currency.toUpperCase() || '')
+                                                    input(type="hidden" name='productName' value=productName || '')
+                                                    input(type="hidden" name='productPrice' value=productPrice || '')
+                                                    input(type="hidden" name='productCount' value='1')
+                                                    input(type="hidden" name='defaultPaymentSystem' value='card')
 
-                                                button.steps-payways-item__inner(type="submit")
-                                                    span.steps-payways-item__text WayForPay
-                                                    span.steps-payways-item__images
-                                                        img(src="/img/client-new/step/payway-wfp.png")
+                                                    button.steps-payways-item__inner(type="submit")
+                                                        span.steps-payways-item__text WayForPay
+                                                        span.steps-payways-item__images
+                                                            img(src="/img/client-new/step/payway-wfp.png")
                                         
                                         //- if !(monoHide && monoHide === "true")
                                         //-     .steps-payways-item#showMonbankPopupBtn.ua-block.hidden
