@@ -70,19 +70,19 @@ block contents
                                         .steps-payways-item__inner
                                             .steps-payways-item__text #{labels.payCard || ""}
                                             .steps-payways-item__images
-                                                img(src="/img/client-new/step/payway-visa.png")
-                                                img(src="/img/client-new/step/payway-mc.png")
+                                                img(src="/img/client-new/step/payway-visa.svg")
+                                                img(src="/img/client-new/step/payway-mc.svg")
                             
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true")
                                 .steps-payways-installment
                                     p.steps-payways-installment__title #{labels.installment || ""}
                                     .steps-payways-installment-list
-                                        if !(privatHide && privatHide === "true")
-                                            .steps-payways-item#showPrivatPopupBtn.ua-block
-                                                .steps-payways-item__inner
-                                                    .steps-payways-item__text ПриватБанк
-                                                    .steps-payways-item__images
-                                                        img(src="/img/client-new/step/payway-privat.svg")
+                                        //- if !(privatHide && privatHide === "true")
+                                        //-     .steps-payways-item#showPrivatPopupBtn.ua-block
+                                        //-         .steps-payways-item__inner
+                                        //-             .steps-payways-item__text ПриватБанк
+                                        //-             .steps-payways-item__images
+                                        //-                 img(src="/img/client-new/step/payway-privat.svg")
 
                                         if !(wayforpayHide && wayforpayHide === "true")
                                             .steps-payways-item
@@ -103,7 +103,8 @@ block contents
                                                     button.steps-payways-item__inner(type="submit")
                                                         span.steps-payways-item__text WayForPay
                                                         span.steps-payways-item__images
-                                                            img(src="/img/client-new/step/payway-wfp.png")
+                                                            img(src="/img/client-new/step/payway-mono-parts.png")
+                                                            img(src="/img/client-new/step/payway-privat-parts.png")
                                         
                                         //- if !(monoHide && monoHide === "true")
                                         //-     .steps-payways-item#showMonbankPopupBtn.ua-block.hidden
