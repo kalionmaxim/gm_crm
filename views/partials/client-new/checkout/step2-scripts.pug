@@ -1038,7 +1038,11 @@ script.
             data  : data
         })
             .then(function (response) {
-                $('#wfpForm [name="orderReference"]').val(response.data.salesOrderID.toString());
+                if (response.data && response.data.result) {
+                    $('#wfpForm [name="orderReference"]').val(response.data.salesOrderID.toString());
+                } else {
+                    console.log(response.data.error);
+                }
 
                 generateSignature();
             });
