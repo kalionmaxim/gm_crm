@@ -80,12 +80,12 @@ footer.main-footer
         .main-footer-bottom
             p.main-footer-bottom__text © Genius.Space #{labels.copyright3 || "Все права защищены."}
             .main-footer-bottom-links 
-                a(target="_blank" href="https://policies.genius.space/policies#pol1_title").main-footer-bottom-links__item #{labels.copyrightLink1 || "Условия оказания услуг"}
-                a(target="_blank" href="https://policies.genius.space/policies#pol2_title").main-footer-bottom-links__item #{labels.copyrightLink2 || "Политика конфиденциальности"}
-                a(target="_blank" href="https://policies.genius.space/policies#pol1_11").main-footer-bottom-links__item #{labels.copyrightLink3 || "Условия возврата"}
-                a(target="_blank" href="https://policies.genius.space/policies#pol1_8").main-footer-bottom-links__item #{labels.copyrightLink4 || "Условия предзаказа услуг"}
-                a(target="_blank" href="https://policies.genius.space/policies#pol1_24").main-footer-bottom-links__item #{labels.copyrightLink5 || "Поставщики услуг"}
-                a(target="_blank" href="https://policies.genius.space/policies#pol3_title").main-footer-bottom-links__item #{labels.copyrightLink6 || "Предупреждение"}
+                a(target="_blank" href=lang === "ua" ? "https://ua-policies.genius.space/policies#pol1_title" : "https://policies.genius.space/policies#pol1_title").main-footer-bottom-links__item #{labels.copyrightLink1 || "Условия оказания услуг"}
+                a(target="_blank" href=lang === "ua" ? "https://ua-policies.genius.space/policies#pol2_title" : "https://policies.genius.space/policies#pol2_title").main-footer-bottom-links__item #{labels.copyrightLink2 || "Политика конфиденциальности"}
+                a(target="_blank" href=lang === "ua" ? "https://ua-policies.genius.space/policies#pol1_11" : "https://policies.genius.space/policies#pol1_11").main-footer-bottom-links__item #{labels.copyrightLink3 || "Условия возврата"}
+                a(target="_blank" href=lang === "ua" ? "https://ua-policies.genius.space/policies#pol1_8" : "https://policies.genius.space/policies#pol1_8").main-footer-bottom-links__item #{labels.copyrightLink4 || "Условия предзаказа услуг"}
+                a(target="_blank" href=lang === "ua" ? "https://ua-policies.genius.space/policies#pol1_24" : "https://policies.genius.space/policies#pol1_24").main-footer-bottom-links__item #{labels.copyrightLink5 || "Поставщики услуг"}
+                a(target="_blank" href=lang === "ua" ? "https://ua-policies.genius.space/policies#pol3_title" : "https://policies.genius.space/policies#pol3_title").main-footer-bottom-links__item #{labels.copyrightLink6 || "Предупреждение"}
 
 include ../client/preloader.pug
 
