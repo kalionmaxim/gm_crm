@@ -57,6 +57,9 @@ module.exports = function routes(app, passport) {
 				frisbeeHide     : ctx.request.query["frisbeeHide"] || "",
 				tinkoffHide     : ctx.request.query["tinkoffHide"] || "",
 				wayforpayHide   : ctx.request.query["wayforpayHide"] || "",
+				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
+				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
+				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
 				lang            : getLangZone(ctx),
 				labels
 			});
