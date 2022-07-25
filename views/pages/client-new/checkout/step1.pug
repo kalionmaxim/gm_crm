@@ -56,7 +56,7 @@ block contents
                                 input#email.email.f1_email(name='email' type='email', placeholder=(labels.yourMainEmailLbl || ""), required='')
                             .formgroup
                                 label #{labels.yourPhoneLbl || ""}
-                                input#phone.NumGroup.phone(type='text' name='phone' required='')
+                                input#phone.NumGroup.phone(type='tel' name='phone' required='' value="+380")
                             input#last1.last1(type='hidden' name='custom_telephone')
                             input#checktoken(type='hidden' name='campaign_token' value='')
                             input#checkrespo(type='hidden' name='thankyou_url')

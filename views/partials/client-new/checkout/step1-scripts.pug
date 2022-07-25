@@ -21,9 +21,11 @@ script.
     }
 
     $(document).ready(function () {
-        $("#name").val(getCookie("name") || "");
-        $("#email").val(getCookie("email") || "");
-        $("#phone").val(getCookie("phone") || "");
+        setTimeout(function() {
+            $("#name").val(getCookie("name") || "");
+            $("#email").val(getCookie("email") || "");
+            $("#phone").val(getCookie("phone") || "+380");
+        }, 1000)
     });
 
     $('#form_1').submit(function (e) {

@@ -1,17 +1,14 @@
-$(document).ready(function () {
-	//Check
+// $(document).ready(function () {
+// 	//Check
 
-	if ($(window).width() > 1000) {
-		wow = new WOW(
-			{
-				animateClass: "animated",
-				offset      : 100
-			}
-		);
-		wow.init();
-	}
-
-});
+// 	if ($(window).width() > 1000) {
+// 		wow = new WOW({
+// 			animateClass: "animated",
+// 			offset: 100,
+// 		});
+// 		wow.init();
+// 	}
+// });
 
 // cookie script
 function getCookie(cname) {
@@ -27,7 +24,7 @@ function getCookie(cname) {
 
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();
-	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
 	var expires = "expires=" + d.toUTCString();
 	document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
 }
@@ -53,8 +50,12 @@ $(window).load(function () {
 		if (country != "UA") {
 			(function (w, d, s, l, i) {
 				w[l] = w[l] || [];
-				w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-				var f = d.getElementsByTagName(s)[0], j = d.createElement(s),
+				w[l].push({
+					"gtm.start": new Date().getTime(),
+					event: "gtm.js",
+				});
+				var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s),
 					dl = l != "dataLayer" ? "&l=" + l : "";
 				j.async = true;
 				j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
@@ -69,7 +70,9 @@ $(window).load(function () {
 		} else if (country === "RU") {
 			$("#phone").val("+7");
 		} else {
-			var countryData = $("#phone").intlTelInput("getSelectedCountryData");
+			var countryData = $("#phone").intlTelInput(
+				"getSelectedCountryData"
+			);
 			var dialCode = countryData.dialCode;
 			$("#phone").val("+" + dialCode);
 		}
@@ -77,7 +80,7 @@ $(window).load(function () {
 });
 
 $(".check label").on("click", function () {
-	var button = $(".sec2 form input[type=\"submit\"]");
+	var button = $('.sec2 form input[type="submit"]');
 	if ($("#checkbox").prop("checked")) {
 		$(".check label").removeClass("active");
 		button.addClass("disable");
@@ -87,11 +90,33 @@ $(".check label").on("click", function () {
 	}
 });
 
-$("input.phone").intlTelInput(
-	{
-		utilsScript       : 'utils.js',
-		defaultCountry    : 'auto',
-		separateDialCode  : false,
-		nationalMode      : false,
-		preferredCountries: ['ua', 'ru', 'by', 'kz']
-	});
+$("input.phone").intlTelInput({
+	utilsScript: "utils.js",
+	defaultCountry: "auto",
+	separateDialCode: false,
+	nationalMode: false,
+	preferredCountries: ["ua", "kz"],
+});
+
+var inputEl = document.getElementById("phone");
+var goodKey = "0123456789+ ";
+
+var checkInputTel = function (e) {
+	var key = typeof e.which == "number" ? e.which : e.keyCode;
+	var start = this.selectionStart,
+		end = this.selectionEnd;
+
+	var filtered = this.value.split("").filter(filterInput);
+	this.value = filtered.join("");
+
+	/* Prevents moving the pointer for a bad character */
+	var move =
+		filterInput(String.fromCharCode(key)) || key == 0 || key == 8 ? 0 : 1;
+	this.setSelectionRange(start - move, end - move);
+};
+
+var filterInput = function (val) {
+	return goodKey.indexOf(val) > -1;
+};
+
+inputEl.addEventListener("input", checkInputTel);
