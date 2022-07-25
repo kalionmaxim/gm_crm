@@ -473,6 +473,9 @@ script.
                     break;
             }
         }
+    } else {
+        $('.hrn_price').hide();
+        $('.rub_price').hide();
     }
     //}
 
@@ -826,6 +829,8 @@ script.
             curr = $(this).data('curr')
         }
     });
+
+    console.log("#{salesOrderID}");
 
     function payFondy() {
         var merchant = "#{merchantID || ''}";
