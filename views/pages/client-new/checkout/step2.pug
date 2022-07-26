@@ -99,12 +99,13 @@ block contents
                                                     input(type="hidden" name='productPrice' value=productPrice || '')
                                                     input(type="hidden" name='productCount' value='1')
                                                     input(type="hidden" name='defaultPaymentSystem' value='card')
+                                                    button(type="submit" style="display: none")
 
-                                                    button.steps-payways-item__inner(type="submit")
-                                                        span.steps-payways-item__text WayForPay
-                                                        span.steps-payways-item__images
-                                                            img(src="/img/client-new/step/payway-mono-parts.png")
-                                                            img(src="/img/client-new/step/payway-privat-parts.png")
+                                                button#wfpSubmit.steps-payways-item__inner(type="button")
+                                                    span.steps-payways-item__text WayForPay
+                                                    span.steps-payways-item__images
+                                                        img(src="/img/client-new/step/payway-mono-parts.png")
+                                                        img(src="/img/client-new/step/payway-privat-parts.png")
                                         
                                         //- if !(monoHide && monoHide === "true")
                                         //-     .steps-payways-item#showMonbankPopupBtn.ua-block.hidden

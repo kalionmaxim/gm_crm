@@ -830,8 +830,6 @@ script.
         }
     });
 
-    console.log("#{salesOrderID}");
-
     function payFondy() {
         var merchant = "#{merchantID || ''}";
         var sumDef = parseFloat("#{productPrice}");
@@ -1014,6 +1012,8 @@ script.
 
     var sum = parseFloat("#{productPrice}");
     var currency = "#{currency.toUpperCase()}";
+    var dealIDPay = getCookie("dealIDPay") || null;
+    var contactID = getCookie("contactID") || null;
     var salesOrderID = "#{salesOrderID || ''}";
     var now = new Date();
 
@@ -1021,41 +1021,9 @@ script.
 
     generateSignature();
 
-    if (!salesOrderID) {
-        var dealIDPay = getCookie("dealIDPay") || null;
-        var contactID = getCookie("contactID") || null;
-
-        var data = {
-            "First_Name"  : "#{firstName}",
-            "Email"       : "#{email}",
-            "Phone"       : "#{phone}",
-            "productName" : "#{productName}",
-            "productID"   : "#{productID}",
-            "productPrice": sum,
-            "currency"    : currency,
-            "contactID"   : contactID,
-            "dealID"      : dealIDPay
-        };
-
-        axios({
-            method: "post",
-            url   : "/sales_order",
-            data  : data
-        })
-            .then(function (response) {
-                if (response.data && response.data.result) {
-                    $('#wfpForm [name="orderReference"]').val(response.data.salesOrderID.toString());
-                } else {
-                    console.log(response.data.error);
-                }
-
-                generateSignature();
-            });
-    }
-
-    function generateSignature() {
+    function generateSignature(cb) {
         var baseString = getBaseString();
-        
+
         $.ajax({
             url: '/wayforpay/generate_signature',
             data: { baseString: baseString },
@@ -1065,9 +1033,11 @@ script.
             } else {
                 console.log("Error while creating WFP signature");
             }
+
+            cb();
         });
     }
-    
+
     function getBaseString() {
         var merchantAccount = $('#wfpForm [name="merchantAccount"]').val();
         var merchantDomainName = $('#wfpForm [name="merchantDomainName"]').val();
@@ -1075,22 +1045,22 @@ script.
         var orderDate = $('#wfpForm [name="orderDate"]').val();
         var amount = $('#wfpForm [name="amount"]').val();
         var currency = $('#wfpForm [name="currency"]').val();
-        
+
         var productName = ''; 
         $('#wfpForm [name="productName"]').each(function() {
             productName += ';' + $(this).val();
         });
-        
+
         var productCount = ''; 
         $('#wfpForm [name="productCount"]').each(function() {
             productCount += ';' + $(this).val();
         });
-        
+
         var productPrice = ''; 
         $('#wfpForm [name="productPrice"]').each(function() {
             productPrice += ';' + $(this).val();
         });
-        
+
         var baseString = 
             merchantAccount + ';' + 
             merchantDomainName + ';' + 
@@ -1101,7 +1071,7 @@ script.
             productName +
             productCount + 
             productPrice;
-            
+
         return baseString;
     }
 
@@ -1140,6 +1110,44 @@ script.
                 }
             });
     }
+
+    var isWFPSubmitted = false;
+
+    $('#wfpSubmit').on('click', function(e) {
+        $("#preloader").show();
+
+        var data = {
+            "First_Name"  : "#{firstName}",
+            "Email"       : "#{email}",
+            "Phone"       : "#{phone}",
+            "productName" : "#{productName}",
+            "productID"   : "#{productID}",
+            "productPrice": sum,
+            "currency"    : currency,
+            "contactID"   : contactID,
+            "dealID"      : dealIDPay
+        };
+
+        axios({
+            method: "post",
+            url   : "/sales_order",
+            data  : data
+        })
+            .then(function (response) {
+                if (response.data && response.data.result) {
+                    salesOrderID = response.data.salesOrderID.toString();
+                    $('#wfpForm [name="orderReference"]').val(salesOrderID);
+
+                    generateSignature(function() {
+                        $('#wfpForm').submit();
+                    });
+                } else {
+                    console.log(response.data.error);
+                }
+
+                $("#preloader").hide();
+            });
+    });
 
     $('#wfpForm').on('submit', function(e) {
         e.preventDefault();
