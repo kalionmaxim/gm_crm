@@ -15,12 +15,12 @@ block contents
                 .step-header
                     p.step-header__title.js_payment_title!= productName
                     p.step-header-prices
-                        span.dollar_price.step-header-prices__current 
-                            span.js_dollar_price 
+                        span.dollar_price.step-header-prices__current
+                            span.js_dollar_price
                             span.currencySym.dollar
                         span.hrn_price
                             span.js_hrn_price
-                        span.rub_price 
+                        span.rub_price
                             span.js_rub_price
 
                 .steps-counter
@@ -46,16 +46,16 @@ block contents
                             .steps-payways-header
                                 p.steps-payways-title #{labels.selectPaymentMethod2 || ""}
                                 p.steps-payways-subtitle.js_payment_title!= productName
-                                
+
                                 .steps-payways-summary
                                     .steps-payways-summary__title #{labels.sumToPayLbl || ""}
-                                    .steps-payways-summary__sum 
+                                    .steps-payways-summary__sum
                                         span.dollar_price.steps-payways-summary__sum-current
-                                            span.js_dollar_price 
+                                            span.js_dollar_price
                                             span.currencySym.dollar
                                         span.hrn_price
                                             span.js_hrn_price
-                                        span.rub_price 
+                                        span.rub_price
                                             span.js_rub_price
 
                             if !(fondyHide && fondyHide === "true")
@@ -72,7 +72,7 @@ block contents
                                             .steps-payways-item__images
                                                 img(src="/img/client-new/step/payway-visa.svg")
                                                 img(src="/img/client-new/step/payway-mc.svg")
-                            
+
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true")
                                 .steps-payways-installment
                                     p.steps-payways-installment__title #{labels.installment || ""}
@@ -89,7 +89,7 @@ block contents
                                                 form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
                                                     input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
                                                     input(type="hidden" name='merchantAuthType' value='SimpleSignature')
-                                                    input(type="hidden" name='merchantDomainName' value='pay.geniusmarketing.me')
+                                                    input(type="hidden" name='merchantDomainName' value='pay.genius.space')
                                                     input(type="hidden" name='merchantSignature' value='')
                                                     input(type="hidden" name='orderReference' value=salesOrderID || '')
                                                     input(type="hidden" name='orderDate' value='')
@@ -106,20 +106,20 @@ block contents
                                                     span.steps-payways-item__images
                                                         img(src="/img/client-new/step/payway-mono-parts.png")
                                                         img(src="/img/client-new/step/payway-privat-parts.png")
-                                        
+
                                         //- if !(monoHide && monoHide === "true")
                                         //-     .steps-payways-item#showMonbankPopupBtn.ua-block.hidden
                                         //-         .steps-payways-item__text Monobank
                                         //-         .steps-payways-item__images
                                         //-             img(src="/img/icons/pay/monobank.svg")
-                                        
+
                                         //- if !(frisbeeHide && frisbeeHide === "true")
                                         //-     .steps-payways-item(onclick="payFrisbee()").ua-block
                                         //-         .steps-payways-item__text Frisbee
                                         //-         .steps-payways-item__images
                                         //-             img(src="/img/client-new/step/payway-frisbee.png")
-                                        
-                                        
+
+
                                         //- if !(tinkoffHide && tinkoffHide === "true")
                                         //-     .steps-payways-item(onclick="payTinkoff()").ru-block.hidden
                                         //-         .steps-payways-item__text Tinkoff
