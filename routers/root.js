@@ -886,7 +886,7 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.post("/wayforpay/save_order", async (ctx) => {
-		const orderData = await WayForPay.createOrder(ctx.request.body);
+		const orderData = await WayForPay.processOrder(ctx.request.body);
 
 		if (orderData.result) {
 			ctx.body = {

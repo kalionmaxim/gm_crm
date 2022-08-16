@@ -18,7 +18,7 @@ const wayforpayOrderSchema = new Schema({
 	issuerBankName: { type: String },
 	merchantAccount: { type: String },
 	merchantSignature: { type: String },
-	orderReference: { type: String },
+	orderReference: { type: String }, // sales order id here
 	paymentSystem: { type: String },
 	phone: { type: String },
 	processingDate: { type: Number },
