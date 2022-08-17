@@ -25,9 +25,10 @@ block contents
                                 a(href="mailto:info@genius.space").success-contacts-item
                                     img.success-contacts-item__icon(src="/img/client-new/common/email.svg")
                                     .success-contacts-item__text info@genius.space
-                                a(href="tel:+38 044 237 13 18").success-contacts-item
-                                    img.success-contacts-item__icon(src="/img/client-new/common/phone.svg")
-                                    .success-contacts-item__text +38 044 237 13 18
+                                a(href="https://t.me/genius_support_bot").success-contacts-item
+                                    //- img.success-contacts-item__icon(src="/img/client-new/common/phone.svg")
+                                    img.success-contacts-item__icon(src="/img/client-new/common/socials/tg-red.svg")
+                                    .success-contacts-item__text @genius_support_bot
                         a(href="https://genius.space/nashi-programmy-obucheniya/").button.button--bordered.success__more #{labels.otherCourses || ""}
 
         include ../../../partials/client-new/footer.pug
