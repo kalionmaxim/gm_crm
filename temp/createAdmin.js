@@ -1,12 +1,24 @@
 const Admin = require("../models/admin").Admin;
 
-new Admin({
-	email   : "blood.kh@gmail.com",
-	password: "oles1357genius"
-}).save((err, admin) => {
-	if (err) {
+async function createAdmin() {
+	try {
+		const admin = await Admin.findOne({ email: "blood.kh@gmail.com" });
+
+		if (admin) {
+			admin.password = "c5Ci6DQz01W%5NNP";
+
+			await admin.save();
+		} else {
+			await Admin.create({
+				email: "blood.kh@gmail.com",
+				password: "c5Ci6DQz01W%5NNP"
+			});
+		}
+	} catch (err) {
 		console.error(err);
-	} else {
-		console.log("Success!");
 	}
+}
+
+createAdmin().then(() => {
+	console.log("Complete");
 });
