@@ -10,7 +10,7 @@ $(function () {
   });
 
   // change lang
-  var currentLang = getParameterByName("lang").toLowerCase() || "ru";
+  var currentLang = getParameterByName("lang").toLowerCase() || "ua";
   $(".lang-switcher__current").text(currentLang.toUpperCase());
 
   switch (currentLang) {

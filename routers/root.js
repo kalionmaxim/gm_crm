@@ -1511,7 +1511,7 @@ module.exports = function routes(app, passport) {
 	});*/
 
 	function getLangZone(ctx) {
-		let zone = "ru";
+		let zone = "ua";
 		if (ctx && ctx.request && ctx.request.query["lang"]) {
 			switch (ctx.request.query["lang"]) {
 				case "ru":
