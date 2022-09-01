@@ -34,6 +34,7 @@ const requestIp = require("request-ip");
 
 const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
+const { iLogger } = require("../lib/logger");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -898,6 +899,15 @@ module.exports = function routes(app, passport) {
 				result: 0
 			};
 		}
+	});
+
+	router.post("/wayforpay/cb/process", async (ctx) => {
+		iLogger.info(`WFP request: ${JSON.stringify(ctx.request)}`);
+		iLogger.info(`WFP callback body: ${JSON.stringify(ctx.request.body)}`);
+
+		ctx.body = {
+			result: 1
+		};
 	});
 
 	router.get("/payment-success", async (ctx) => {
