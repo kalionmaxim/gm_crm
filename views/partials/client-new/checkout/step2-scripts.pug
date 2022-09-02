@@ -1008,7 +1008,7 @@ script.
 // WayForPay logic
 script#widget-wfp-script(language='javascript' type='text/javascript' src='https://secure.wayforpay.com/server/pay-widget.js')
 script.
-    var wayforpay = new Wayforpay(); 	
+    var wayforpay = new Wayforpay();
 
     var sum = parseFloat("#{productPrice}");
     var currency = "#{currency.toUpperCase()}";
@@ -1046,54 +1046,54 @@ script.
         var amount = $('#wfpForm [name="amount"]').val();
         var currency = $('#wfpForm [name="currency"]').val();
 
-        var productName = ''; 
+        var productName = '';
         $('#wfpForm [name="productName"]').each(function() {
             productName += ';' + $(this).val();
         });
 
-        var productCount = ''; 
+        var productCount = '';
         $('#wfpForm [name="productCount"]').each(function() {
             productCount += ';' + $(this).val();
         });
 
-        var productPrice = ''; 
+        var productPrice = '';
         $('#wfpForm [name="productPrice"]').each(function() {
             productPrice += ';' + $(this).val();
         });
 
-        var baseString = 
-            merchantAccount + ';' + 
-            merchantDomainName + ';' + 
-            orderReference + ';' + 
-            orderDate + ';' + 
-            amount + ';' + 
+        var baseString =
+            merchantAccount + ';' +
+            merchantDomainName + ';' +
+            orderReference + ';' +
+            orderDate + ';' +
+            amount + ';' +
             currency +
             productName +
-            productCount + 
+            productCount +
             productPrice;
 
         return baseString;
     }
 
-    function payWFP (data) { 		
+    function payWFP (data) {
         wayforpay.run(
-            data, 			
+            data,
             function (response) {
-                // on approved		
+                // on approved
                 console.log('WFP approved', response);
-                saveWFPResponse(response);
-            }, 			
+                // saveWFPResponse(response);
+            },
             function (response) {
                 // on declined
                 console.log('WFP declined', response);
-                saveWFPResponse(response);	
-            }, 			
+                // saveWFPResponse(response);
+            },
             function (response) {
                 // on pending or in processing
                 console.log('WFP pending', response);
-                saveWFPResponse(response);
-            } 		
-        ); 	
+                // saveWFPResponse(response);
+            }
+        );
     }
 
     function saveWFPResponse (data) {

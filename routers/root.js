@@ -886,7 +886,22 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
-	router.post("/wayforpay/save_order", async (ctx) => {
+	// router.post("/wayforpay/save_order", async (ctx) => {
+	// 	const orderData = await WayForPay.processOrder(ctx.request.body);
+	//
+	// 	if (orderData.result) {
+	// 		ctx.body = {
+	// 			result: 1,
+	// 			order: orderData.order
+	// 		};
+	// 	} else {
+	// 		ctx.body = {
+	// 			result: 0
+	// 		};
+	// 	}
+	// });
+
+	router.post("/wayforpay/cb/process", async (ctx) => {
 		const orderData = await WayForPay.processOrder(ctx.request.body);
 
 		if (orderData.result) {
@@ -899,15 +914,6 @@ module.exports = function routes(app, passport) {
 				result: 0
 			};
 		}
-	});
-
-	router.post("/wayforpay/cb/process", async (ctx) => {
-		iLogger.info(`WFP request: ${JSON.stringify(ctx.request)}`);
-		iLogger.info(`WFP callback body: ${JSON.stringify(ctx.request.body)}`);
-
-		ctx.body = {
-			result: 1
-		};
 	});
 
 	router.get("/payment-success", async (ctx) => {
