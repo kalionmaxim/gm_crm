@@ -902,18 +902,7 @@ module.exports = function routes(app, passport) {
 	// });
 
 	router.post("/wayforpay/cb/process", async (ctx) => {
-		const orderData = await WayForPay.processOrder(ctx.request.body);
-
-		if (orderData.result) {
-			ctx.body = {
-				result: 1,
-				order: orderData.order
-			};
-		} else {
-			ctx.body = {
-				result: 0
-			};
-		}
+		ctx.body = await WayForPay.processOrder(ctx.request.body);
 	});
 
 	router.get("/payment-success", async (ctx) => {
