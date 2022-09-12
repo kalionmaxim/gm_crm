@@ -903,6 +903,7 @@ module.exports = function routes(app, passport) {
 
 	router.post("/wayforpay/cb/process", async (ctx) => {
 		console.log("request from WFP", ctx.request.body);
+		console.log("request from WFP raw", ctx.request.rawBody);
 		ctx.body = await WayForPay.processOrder(ctx.request.body);
 	});
 
