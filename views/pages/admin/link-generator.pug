@@ -85,8 +85,8 @@ block contents
 											label.col-md-4(style="margin-top: 10px;") Язык
 											.col-md-6
 												select#lang.form-control
-													option(value="ru" selected=true) Русский
-													option(value="ua") Украинский
+													option(value="ru") Русский
+													option(value="ua" selected=true) Украинский
 								.row
 									.col-md-6
 										.form-group
@@ -126,13 +126,6 @@ block contents
 												select#frisbeeHide.form-control
 													option(value="no") Нет
 													option(value="yes") Да
-									.col-md-6
-										.form-group
-											label.col-md-4(style="margin-top: 10px;") Скрыть оплату через Tinkoff
-											.col-md-6
-												select#tinkoffHide.form-control
-													option(value="no") Нет
-													option(value="yes") Да
 
 								.row
 									.col-md-6
@@ -145,7 +138,7 @@ block contents
 
 								.form-group.m-b-12
 									.col-md-12
-										button#generateBtn.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-12(type='button' style="width: 100%;") Получит ссылку
+										button#generateBtn.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-12(type='button' style="width: 100%;") Получить ссылку
 
 								.row
 									.form-group
@@ -176,7 +169,6 @@ block contents
 				var monoHide = $("#monoHide").val();
 				var privatHide = $("#privatHide").val();
 				var frisbeeHide = $("#frisbeeHide").val();
-				var tinkoffHide = $("#tinkoffHide").val();
 				var wayforpayHide = $("#wayforpayHide").val();
 
 				if (!productID) {
@@ -255,10 +247,6 @@ block contents
 
 				if (frisbeeHide === "yes") {
 					url += ("&frisbeeHide=true");
-				}
-
-				if (tinkoffHide === "yes") {
-					url += ("&tinkoffHide=true");
 				}
 
 				if (wayforpayHide === "yes") {
