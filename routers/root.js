@@ -904,7 +904,8 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/payment-success", async (ctx) => {
-		await ctx.render("pages/client/monobank-success");
+		await renderSuccess(ctx); 
+//		await ctx.render("pages/client/monobank-success");
 	});
 
 	router.get("/payment-failure", async (ctx) => {
