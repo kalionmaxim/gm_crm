@@ -1,3 +1,8 @@
+.page {
+  position: relative;
+  z-index: 10;
+}
+
 .success-layout {
   @include mobile {
     background: url(/img/client-new/common/main-bg.svg) no-repeat center top / 100% auto;
@@ -106,4 +111,11 @@
       margin-top: 22px;
     }
   }
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9!important;
 }
