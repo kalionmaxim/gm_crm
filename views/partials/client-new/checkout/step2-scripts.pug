@@ -1015,7 +1015,7 @@ script.
 
     var sum = parseFloat("#{productPrice}");
     var currency = "#{currency.toUpperCase()}";
-    var dealIDPay = getCookie("dealIDPay") || null;
+    var dealIDPay = getParameterByName("DealID") || null;
     var contactID = getCookie("contactID") || null;
     var salesOrderID = "#{salesOrderID || ''}";
     var now = new Date();
