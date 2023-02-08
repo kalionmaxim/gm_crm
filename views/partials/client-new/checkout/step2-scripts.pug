@@ -569,7 +569,7 @@ script.
                 });
             } else {
                 var dealIDPay = getCookie("dealIDPay") || null;
-                var contactID = getCookie("ContactID")|| null;
+                var contactID = getParameterByName("ContactID")|| null;
 
                 var data2 = {
                     "First_Name": "#{firstName}",
