@@ -677,7 +677,7 @@ script.
             "grUnpaid": getParameterByName("grUnpaid") || "",
             "productName": getParameterByName("productName") || "",
             "productID": getParameterByName("productID") || "",
-            "price": UAHPrice || ""
+            "price": getParameterByName("productPrice")
         };
 
         var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
@@ -697,8 +697,8 @@ script.
                     }
                 });
             } else {
-         //       var dealIDPay = getCookie("dealIDPay") || null;
-           //     var contactID = getCookie("ContactID") || null;
+                var dealIDPay = getCookie("dealIDPay") || null;
+                var contactID = getCookie("contactID") || null;
 
                 var data2 = {
                     "First_Name": "#{firstName}",
