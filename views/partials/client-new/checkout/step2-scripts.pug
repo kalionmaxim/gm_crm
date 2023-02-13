@@ -1015,10 +1015,18 @@ script.
 
     var sum = parseFloat("#{productPrice}");
     var currency = "#{currency.toUpperCase()}";
-    var dealIDPay = getParameterByName("DealID") || null;
-    var contactID = getParameterByName("ContactID") || null;
+    var dealIDPay = getCookie("dealIDPay") || null;
+    var contactID = getCookie("contactID") || null;
     var salesOrderID = "#{salesOrderID || ''}";
     var now = new Date();
+
+    if (!dealIDPay) {
+        dealIDPay = getParameterByName("DealID") || null;
+    }
+
+    if (!contactID) {
+        contactID = getParameterByName("ContactID") || null;
+    }
 
     $('#wfpForm [name="orderDate"]').val(now.getTime());
 
