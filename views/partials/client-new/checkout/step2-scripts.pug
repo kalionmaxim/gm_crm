@@ -668,6 +668,12 @@ script.
 
         $("#preloader").show();
 
+        var privatPrice = UAHPrice || ""
+        var currency = getParameterByName("currency");
+        if (currency && currency.toLowerCase() === "uah") {
+            privatPrice = getParameterByName("productPrice");
+        }
+
         var data = {
             "name": document.getElementById("privat_name").value,
             "email": document.getElementById("privat_email").value,
@@ -677,7 +683,7 @@ script.
             "grUnpaid": getParameterByName("grUnpaid") || "",
             "productName": getParameterByName("productName") || "",
             "productID": getParameterByName("productID") || "",
-            "price": UAHPrice || ""
+            "price": privatPrice
         };
 
         var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
