@@ -37,7 +37,7 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 				window.oRequestAnimationFrame ||
 				window.msRequestAnimationFrame ||
 				function (callback) {
-					return window.setTimeout(callback, 30.6666667);
+					return window.setTimeout(callback, 100.6666667);
 				};
 		})();
 		var canvas = document.getElementById("confetti-canvas");
