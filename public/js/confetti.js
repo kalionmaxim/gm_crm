@@ -1,5 +1,5 @@
 var maxParticleCount = 150; //set max confetti count
-var particleSpeed = 1; //set the particle animation speed
+var particleSpeed = 0.5; //set the particle animation speed
 var startConfetti; //call to start confetti animation
 var stopConfetti; //call to stop adding confetti
 var toggleConfetti; //call to start or stop the confetti animation depending on whether it's already running
@@ -72,7 +72,7 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 	}
 
 	function stopConfettiInner() {
-		streamingConfetti = true;
+		streamingConfetti = false;
 	}
 
 	function removeConfettiInner() {
@@ -80,11 +80,10 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 		particles = [];
 	}
 
+
 	function toggleConfettiInner() {
-		if (streamingConfetti)
-			stopConfettiInner();
-		else
-			startConfettiInner();
+	  	toggleConfetti();  
+  		setTimeout(toggleConfetti,3000);
 	}
 
 	function drawParticles(context) {
