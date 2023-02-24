@@ -72,12 +72,12 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 	}
 
 	function stopConfettiInner() {
-		stopConfetti();
 		streamingConfetti = false;
 	}
 
 	function removeConfettiInner() {
 		stopConfetti();
+	    setTimeout(stopConfetti,3000);
 		particles = [];
 	}
 
@@ -87,10 +87,6 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 			stopConfettiInner();
 		else
 			startConfettiInner();
-	}
-	function wrapperToggleConfetti(){
-  		toggleConfetti();  
- 		setTimeout(toggleConfetti,3000);
 	}
 
 	function drawParticles(context) {
