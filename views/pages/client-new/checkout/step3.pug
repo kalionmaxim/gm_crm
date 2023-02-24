@@ -38,4 +38,8 @@ block contents
         script.
             $(function() {
                 startConfetti();
+
+                setTimeout(function() {
+                    stopConfetti();
+                }, 4000)
             })
