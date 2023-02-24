@@ -70,10 +70,6 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 			})();
 		}
 	}
-	function stopConfetti(){
-		stopConfetti();
-	    setTimeout(stopConfetti,3000);
-	}
 
 	function stopConfettiInner() {
 		streamingConfetti = false;
@@ -81,7 +77,6 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 
 	function removeConfettiInner() {
 		stopConfetti();
-	    setTimeout(stopConfetti,3000);
 		particles = [];
 	}
 
