@@ -1,5 +1,5 @@
 var maxParticleCount = 150; //set max confetti count
-var particleSpeed = 2; //set the particle animation speed
+var particleSpeed = 5; //set the particle animation speed
 var startConfetti; //call to start confetti animation
 var stopConfetti; //call to stop adding confetti
 var toggleConfetti; //call to start or stop the confetti animation depending on whether it's already running
@@ -37,7 +37,7 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 				window.oRequestAnimationFrame ||
 				window.msRequestAnimationFrame ||
 				function (callback) {
-					return window.setTimeout(callback, 100.6666667);
+					return window.setTimeout(callback, 16.6666667);
 				};
 		})();
 		var canvas = document.getElementById("confetti-canvas");
