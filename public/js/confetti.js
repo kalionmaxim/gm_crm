@@ -69,6 +69,8 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 				}
 			})();
 		}
+		stopConfetti();
+	    setTimeout(stopConfetti,3000);
 	}
 
 	function stopConfettiInner() {
