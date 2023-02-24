@@ -82,8 +82,14 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 
 
 	function toggleConfettiInner() {
-	  	toggleConfetti();  
-  		setTimeout(toggleConfetti,3000);
+	   if (streamingConfetti)
+			stopConfettiInner();
+		else
+			startConfettiInner();
+	}
+	function wrapperToggleConfetti(){
+  		toggleConfetti();  
+ 		setTimeout(toggleConfetti,3000);
 	}
 
 	function drawParticles(context) {
