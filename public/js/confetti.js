@@ -72,6 +72,7 @@ var removeConfetti; //call to stop the confetti animation and remove all confett
 	}
 
 	function stopConfettiInner() {
+		stopConfetti();
 		streamingConfetti = false;
 	}
 
