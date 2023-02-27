@@ -548,8 +548,8 @@ script.
             "price"      : getParameterByName("productPrice") || ""
         };
 
-        var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
-        if (phoneRegexp.test(data.phone)) {
+        //- var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
+        //- if (phoneRegexp.test(data.phone)) {
             if ("#{salesOrderID}") {
                 data.salesOrderID = "#{salesOrderID}";
 
@@ -610,12 +610,12 @@ script.
                         });
                     });
             }
-        } else {
-            $("#preloader").hide();
-            $('#monobank_phone').removeAttr('disabled').focus();
-            $('#monobankUpdatePhoneBtn').css('opacity', 0);
-            alert("Формат телефона должен быть +380XXXXXXXXX");
-        }
+        //- } else {
+        //-     $("#preloader").hide();
+        //-     $('#monobank_phone').removeAttr('disabled').focus();
+        //-     $('#monobankUpdatePhoneBtn').css('opacity', 0);
+        //-     alert("Формат телефона должен быть +380XXXXXXXXX");
+        //- }
     });
 
 
@@ -686,8 +686,8 @@ script.
             "price": privatPrice
         };
 
-        var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
-        if (phoneRegexp.test(data.phone)) {
+        //- var phoneRegexp = new RegExp("\\+380\\d{9}\\b");
+        //- if (phoneRegexp.test(data.phone)) {
             if ("#{salesOrderID}") {
                 data.salesOrderID = "#{salesOrderID}";
 
@@ -742,12 +742,12 @@ script.
                         });
                     });
             }
-        } else {
-            $("#preloader").hide();
-            $('#privat_phone').removeAttr('disabled').focus();
-            $('#privatUpdatePhoneBtn').css('opacity', 0);
-            alert("Формат телефона должен быть +380XXXXXXXXX");
-        }
+        //- } else {
+        //-     $("#preloader").hide();
+        //-     $('#privat_phone').removeAttr('disabled').focus();
+        //-     $('#privatUpdatePhoneBtn').css('opacity', 0);
+        //-     alert("Формат телефона должен быть +380XXXXXXXXX");
+        //- }
     });
 
     function getParameterByName(name) {
