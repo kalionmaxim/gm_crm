@@ -1,6 +1,8 @@
 const mongoose = require("../lib/mongoose");
 const autoIncrement = require("../lib/mongoose").autoIncrement;
 
+const processingStatuses = ["not_processed", "processing", "processed"];
+
 const Schema = mongoose.Schema;
 
 const wayforpayOrderSchema = new Schema({
@@ -25,7 +27,8 @@ const wayforpayOrderSchema = new Schema({
 	reason: { type: String },
 	reasonCode: { type: Number },
 	recToken: { type: String },
-	transactionStatus: { type: String }
+	transactionStatus: { type: String },
+	processingStatus: { type: String, enum: processingStatuses, default: processingStatuses[0] }
 });
 
 wayforpayOrderSchema.plugin(autoIncrement.plugin, {
