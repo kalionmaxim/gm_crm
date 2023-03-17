@@ -657,9 +657,9 @@ script.
 
         var currency = getParameterByName("currency");
         if (currency.toUpperCase() === 'UAH') {
-            $('#privatPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / 12).toFixed(2));
+            $('#privatPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / 6).toFixed(2));
         } else {
-            $('#privatPartsPrice').text(parseFloat(UAHPrice / 12).toFixed(2));
+            $('#privatPartsPrice').text(parseFloat(UAHPrice / 6).toFixed(2));
         }
     });
 
