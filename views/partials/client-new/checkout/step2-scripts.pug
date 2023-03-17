@@ -525,9 +525,9 @@ script.
         }
 
         if (currency.toUpperCase() === 'UAH') {
-            $('#monobankPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / 12).toFixed(2));
+            $('#monobankPartsPrice').text(parseFloat(parseInt(mainPrice, 10) / 6).toFixed(2));
         } else {
-            $('#monobankPartsPrice').text(parseFloat(UAHPrice / 12).toFixed(2));
+            $('#monobankPartsPrice').text(parseFloat(UAHPrice / 6).toFixed(2));
         }
     });
 
