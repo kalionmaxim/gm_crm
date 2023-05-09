@@ -616,15 +616,24 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/monobank/process", async (ctx) => {
-		await ctx.render("pages/client/monobank-process");
+		const labels = lang[getLangZone(ctx)].step2;
+
+		await ctx.render("pages/client-new/monobank-process", {
+			labels
+		});
 	});
 
 	router.get("/monobank/success", async (ctx) => {
-		await ctx.render("pages/client/monobank-success");
+		// await ctx.render("pages/client/monobank-success");
+		await renderSuccess(ctx);
 	});
 
 	router.get("/monobank/failure", async (ctx) => {
-		await ctx.render("pages/client/monobank-failure");
+		const labels = lang[getLangZone(ctx)].step2;
+
+		await ctx.render("pages/client-new/monobank-failure", {
+			labels
+		});
 	});
 
 	router.post("/tinkoff/order", async (ctx) => {
@@ -904,8 +913,8 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/payment-success", async (ctx) => {
-		await renderSuccess(ctx); 
-//		await ctx.render("pages/client/monobank-success");
+		await renderSuccess(ctx);
+		// await ctx.render("pages/client/monobank-success");
 	});
 
 	router.get("/payment-failure", async (ctx) => {

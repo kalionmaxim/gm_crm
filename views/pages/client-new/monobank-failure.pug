@@ -1,0 +1,48 @@
+extends ../../layouts/main-client-new.pug
+
+block headTitle
+  if labels.title && productName
+    title!= labels.title + ' "' + productName + '"'
+  else
+    title Оплата участі
+
+block contents
+  .page
+    .main
+      include ../../partials/client-new/header.pug
+
+      .container
+        .steps-counter
+          .steps-counter-item.steps-counter-item--active
+            .steps-counter-item__line
+            .steps-counter-item__content
+              p.steps-counter-item__number 1
+              p.steps-counter-item__title #{labels.enterYourDataLbl || ""}
+          .steps-counter-item.steps-counter-item--active
+            .steps-counter-item__line
+            .steps-counter-item__content
+              p.steps-counter-item__number 2
+              p.steps-counter-item__title #{labels.selectPaymentMethodLbl || ""}
+          .steps-counter-item
+            .steps-counter-item__line
+            .steps-counter-item__content
+              p.steps-counter-item__number 3
+              p.steps-counter-item__title #{labels.failedPaymentLbl || ""}
+
+        .monobank
+          p.monobank__title #{labels.monoFailedTitle || ""}
+          p.monobank__subtitle #{labels.monoFailedSubtitle1 || ""}
+          p.monobank__subtitle #{labels.monoFailedSubtitle2 || ""}
+          a(href="#")#checkoutUrl.monobank__button #{labels.monoFailedButton || ""}
+          p.monobank__subtitle #{labels.monoFailedSubtitle3_1 || ""} <a target='_blank', href='mailto:info@genius.space'>info@genius.space</a>, #{labels.monoFailedSubtitle3_2 || ""} +38 044 237 13 18 
+
+
+    include ../../partials/client-new/footer.pug
+
+    script.
+      var checkoutURL = getCookie("monobankCheckoutLink") || "";
+      if (checkoutURL) {
+        $('#checkoutUrl').attr('href', checkoutURL);
+      } else {
+        $('#checkoutUrl').hide();
+      }

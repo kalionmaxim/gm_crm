@@ -35,6 +35,11 @@
 
   &__logo {
     text-align: center;
+
+    img {
+      max-width: 58px;
+      height: auto;
+    }
   }
 
   &__title {

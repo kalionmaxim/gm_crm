@@ -489,7 +489,8 @@ script.
 
     //-- monobank
     $('#showMonbankPopupBtn').click(function () {
-        $('#modal-monobank').fadeIn(200);
+        $('.steps-payways').hide();
+        $('#installmentModalMonobank').show();
     });
 
     $('#monobankUpdatePhoneBtn').click(function () {
@@ -500,11 +501,7 @@ script.
     $('#monobank_parts').on('change', function () {
         var parts = parseInt($(this).val());
 
-        if (parts > 4) {
-            $('#monobankPartsText').text(parts + " платежей");
-        } else {
-            $('#monobankPartsText').text(parts + " платежа");
-        }
+        $('#monobankPartsText').text(parts);
 
         var currency = getParameterByName("currency");
         if (currency.toUpperCase() === 'UAH') {

@@ -1,0 +1,74 @@
+extends ../../layouts/main-client-new.pug
+
+block headTitle
+    if labels.title && productName
+        title!= labels.title + ' "' + productName + '"'
+    else
+        title Оплата участі
+
+block contents
+    .page
+        .main
+            include ../../partials/client-new/header.pug
+
+            .container
+                .steps-counter
+                    .steps-counter-item.steps-counter-item--active
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 1
+                            p.steps-counter-item__title #{labels.enterYourDataLbl || ""}
+                    .steps-counter-item.steps-counter-item--active
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 2
+                            p.steps-counter-item__title #{labels.selectPaymentMethodLbl || ""}
+                    .steps-counter-item
+                        .steps-counter-item__line
+                        .steps-counter-item__content
+                            p.steps-counter-item__number 3
+                            p.steps-counter-item__title #{labels.processPaymentLbl || ""}
+
+                .monobank
+                    p.monobank__title #{labels.monoProcessTitle || ""}
+                    .monobank-process
+                        .monobank-process__col
+                            .monobank-process-item
+                                img(src="/img/monobank-app-logo.png" alt="monobank logo" width="120").monobank-process-item__img
+                                p.monobank-process-item__title #{labels.monoProcessStep1 || ""}
+                        .monobank-process__col
+                            .monobank-process-item
+                                img(src="/img/monobank-payment.png" alt="monobank payment" width="240").monobank-process-item__img
+                                p.monobank-process-item__title #{labels.monoProcessStep2 || ""}
+
+                    .monobank-process-status
+                        b Статус замовлення:&nbsp;
+                        p#statusText #{labels.monoProcessStatusNotPayed || ""}
+                        button#statusCheck(title="Перевірити статус" onclick="getOrderStatus(this)").monobank-process-status__btn
+
+
+
+        include ../../partials/client-new/footer.pug
+
+        script.
+            function getOrderStatus (element) {
+                $(element).addClass('monobank-process-status__btn--rotate');
+                setTimeout(function(){
+                    $(element).removeClass('monobank-process-status__btn--rotate');
+                }, 1000);
+                axios({
+                    method: "post",
+                    url: "/monobank/order_status",
+                    data: {
+                        order_id: getCookie("mono_order_id")
+                    }
+                }).then(function (response) {
+                    if (response && response.data.result) {
+                        if (response.data.status === "SUCCESS") {
+                            window.location = "/monobank/success";
+                        } else if (response.data.status === "FAIL") {
+                            window.location = "/monobank/failure";
+                        }
+                    }
+                });
+            }

@@ -73,7 +73,7 @@ block contents
                                                 img(src="/img/client-new/step/payway-visa.svg")
                                                 img(src="/img/client-new/step/payway-mc.svg")
 
-                            if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true")
+                            if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
                                 .steps-payways-installment
                                     p.steps-payways-installment__title #{labels.installment || ""}
                                     .steps-payways-installment-list
@@ -84,34 +84,36 @@ block contents
                                                     .steps-payways-item__images
                                                         img(src="/img/client-new/step/payway-privat.png")
 
-                                        if !(wayforpayHide && wayforpayHide === "true")
-                                            .steps-payways-item
-                                                form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
-                                                    input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
-                                                    input(type="hidden" name='merchantAuthType' value='SimpleSignature')
-                                                    input(type="hidden" name='merchantDomainName' value='pay.genius.space')
-                                                    input(type="hidden" name='merchantSignature' value='')
-                                                    input(type="hidden" name='orderReference' value=salesOrderID || '')
-                                                    input(type="hidden" name='orderDate' value='')
-                                                    input(type="hidden" name='amount' value=productPrice || '')
-                                                    input(type="hidden" name='currency' value=currency.toUpperCase() || '')
-                                                    input(type="hidden" name='productName' value=productName || '')
-                                                    input(type="hidden" name='productPrice' value=productPrice || '')
-                                                    input(type="hidden" name='productCount' value='1')
-                                                    input(type="hidden" name='defaultPaymentSystem' value='card')
-                                                    button(type="submit" style="display: none")
+                                        //- if !(wayforpayHide && wayforpayHide === "true")
+                                        //-     .steps-payways-item
+                                        //-         form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
+                                        //-             input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
+                                        //-             input(type="hidden" name='merchantAuthType' value='SimpleSignature')
+                                        //-             input(type="hidden" name='merchantDomainName' value='pay.genius.space')
+                                        //-             input(type="hidden" name='merchantSignature' value='')
+                                        //-             input(type="hidden" name='orderReference' value=salesOrderID || '')
+                                        //-             input(type="hidden" name='orderDate' value='')
+                                        //-             input(type="hidden" name='amount' value=productPrice || '')
+                                        //-             input(type="hidden" name='currency' value=currency.toUpperCase() || '')
+                                        //-             input(type="hidden" name='productName' value=productName || '')
+                                        //-             input(type="hidden" name='productPrice' value=productPrice || '')
+                                        //-             input(type="hidden" name='productCount' value='1')
+                                        //-             input(type="hidden" name='defaultPaymentSystem' value='card')
+                                        //-             button(type="submit" style="display: none")
 
-                                                button#wfpSubmit.steps-payways-item__inner(type="button")
-                                                    span.steps-payways-item__text Monobank
-                                                    span.steps-payways-item__images
-                                                        img(src="/img/client-new/step/payway-mono-parts.png")
-                                                        //- img(src="/img/client-new/step/payway-privat-parts.png")
+                                        //-         button#wfpSubmit.steps-payways-item__inner(type="button")
+                                        //-             span.steps-payways-item__text Monobank
+                                        //-             span.steps-payways-item__images
+                                        //-                 img(src="/img/client-new/step/payway-mono-parts.png")
+                                        //-                 //- img(src="/img/client-new/step/payway-privat-parts.png")
 
                                         //- if !(monoHide && monoHide === "true")
-                                        //-     .steps-payways-item#showMonbankPopupBtn.ua-block.hidden
-                                        //-         .steps-payways-item__text Monobank
-                                        //-         .steps-payways-item__images
-                                        //-             img(src="/img/icons/pay/monobank.svg")
+                                        if !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
+                                            .steps-payways-item#showMonbankPopupBtn
+                                                .steps-payways-item__inner
+                                                    .steps-payways-item__text Monobank
+                                                    .steps-payways-item__images
+                                                        img(src="/img/icons/pay/monobank.svg")
 
                                         //- if !(frisbeeHide && frisbeeHide === "true")
                                         //-     .steps-payways-item(onclick="payFrisbee()").ua-block
@@ -120,6 +122,7 @@ block contents
                                         //-             img(src="/img/client-new/step/payway-frisbee.png")
 
                         include ../../../partials/client-new/modals/installment-privat
+                        include ../../../partials/client-new/modals/installment-monobank
 
                     include ../../../partials/client-new/checkout/guarantees
 
