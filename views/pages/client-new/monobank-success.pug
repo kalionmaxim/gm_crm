@@ -1,0 +1,44 @@
+extends ../../layouts/main-client-new.pug
+
+block headTitle
+    if labels.title && productName
+        title!= labels.title + ' "' + productName + '"'
+    else
+        title Оплата участі
+
+block contents
+    .page
+        .main
+            include ../../partials/client-new/header.pug
+
+            .success-layout
+                .container
+                    .success
+                        img(src="/img/client-new/success/illustration.svg").success__image
+                        p.success__title #{labels.successTitle2 || ""}
+                        p.success__text 
+                            | #{labels.successText0 || ""}
+                        .success-contacts
+                            p.success-contacts__title #{labels.successText3 || ""}
+                            .success-contacts-list
+                                a(href="mailto:info@genius.space").success-contacts-item
+                                    img.success-contacts-item__icon(src="/img/client-new/common/email.svg")
+                                    .success-contacts-item__text info@genius.space
+                                a(href="https://t.me/genius_support_bot").success-contacts-item
+                                    //- img.success-contacts-item__icon(src="/img/client-new/common/phone.svg")
+                                    img.success-contacts-item__icon(src="/img/client-new/common/socials/tg-red.svg")
+                                    .success-contacts-item__text @genius_support_bot
+                        a(href="https://genius.space/nashi-programmy-obucheniya/").button.button--bordered.success__more #{labels.otherCourses || ""}
+
+        include ../../partials/client-new/footer.pug
+
+        script(src='/js/confetti.js')
+
+        script.
+            $(function() {
+                startConfetti();
+
+                setTimeout(function() {
+                    stopConfetti();
+                }, 4000)
+            })

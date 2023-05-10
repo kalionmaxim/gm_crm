@@ -624,8 +624,17 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/monobank/success", async (ctx) => {
-		// await ctx.render("pages/client/monobank-success");
-		await renderSuccess(ctx);
+		const labels = lang[getLangZone(ctx)].step3;
+
+		const successLink = ctx.request.query["successLink"] || "";
+
+		if (successLink) {
+			await ctx.redirect(successLink);
+		} else {
+			await ctx.render("pages/client-new/monobank-success", {
+				labels
+			});
+		}
 	});
 
 	router.get("/monobank/failure", async (ctx) => {
