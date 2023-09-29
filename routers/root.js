@@ -1534,19 +1534,19 @@ module.exports = function routes(app, passport) {
 
 	function getLangZone(ctx) {
 		let zone = "ua";
-		if (ctx && ctx.request && ctx.request.query["lang"]) {
-			switch (ctx.request.query["lang"]) {
-				case "ru":
-					zone = "ru";
-					break;
-				case "ua":
-					zone = "ua";
-					break;
-				default:
-					zone = "ru";
-					break;
-			}
-		}
+		// if (ctx && ctx.request && ctx.request.query["lang"]) {
+		// 	switch (ctx.request.query["lang"]) {
+		// 		case "ru":
+		// 			zone = "ru";
+		// 			break;
+		// 		case "ua":
+		// 			zone = "ua";
+		// 			break;
+		// 		default:
+		// 			zone = "ru";
+		// 			break;
+		// 	}
+		// }
 
 		return zone;
 	}
