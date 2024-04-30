@@ -57,22 +57,20 @@ block contents
                                             span.js_hrn_price
                                         span.rub_price
                                             span.js_rub_price
-                            if !(FondyHide && FondyHide === "true")
+                            if !(fondyHide && fondyHide === "true")
                                .steps-payways-card
-                                       .steps-payways-card-currency
-                                          .steps-payways-card-currency__title #{labels.cardCurrency || ""}
-                                            .steps-payways-card-currency-list
+                                    .steps-payways-card-currency
+                                        .steps-payways-card-currency__title #{labels.cardCurrency || ""}
+                                        .steps-payways-card-currency-list
                                             button(type="button" data-curr="uah").steps-payways-card-currency-list__item #{labels.UAH || ""}
                                             button(type="button" data-curr="usd").steps-payways-card-currency-list__item #{labels.USD || ""}
                                             button(type="button" data-curr="eur").steps-payways-card-currency-list__item #{labels.EUR || ""}
-                                            
-                                   .steps-payways-item(onclick="payFondy()")
+                                    .steps-payways-item(onclick="payFondy()")
                                         .steps-payways-item__inner
                                             .steps-payways-item__text #{labels.payCard || ""}
                                             .steps-payways-item__images
                                                 img(src="/img/client-new/step/payway-visa.svg")
                                                 img(src="/img/client-new/step/payway-mc.svg") 
-                          
                             
 
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
