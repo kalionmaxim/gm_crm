@@ -55,11 +55,10 @@ block contents
                                             span.currencySym.dollar
                                         span.hrn_price
                                             span.js_hrn_price
-                                        span.rub_price
+                                      //-  span.rub_price
                                             span.js_rub_price
-
-                            if !(fondyHide && fondyHide === "true")
-                                .steps-payways-card
+                            //-if !(fondyHide && fondyHide === "true")
+                               .steps-payways-card
                                     .steps-payways-card-currency
                                         .steps-payways-card-currency__title #{labels.cardCurrency || ""}
                                         .steps-payways-card-currency-list
@@ -71,7 +70,8 @@ block contents
                                             .steps-payways-item__text #{labels.payCard || ""}
                                             .steps-payways-item__images
                                                 img(src="/img/client-new/step/payway-visa.svg")
-                                                img(src="/img/client-new/step/payway-mc.svg")
+                                                img(src="/img/client-new/step/payway-mc.svg") 
+                            //-
 
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
                                 .steps-payways-installment
