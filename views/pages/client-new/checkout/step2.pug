@@ -57,15 +57,32 @@ block contents
                                             span.js_hrn_price
                                         span.rub_price
                                             span.js_rub_price
-                            if !(fondyHide && fondyHide === "true")
+                            if !(wayforpayHide && wayforpayHide === "true")
                                .steps-payways-card
-                                    .steps-payways-card-currency
-                                        .steps-payways-card-currency__title #{labels.cardCurrency || ""}
-                                        .steps-payways-card-currency-list
+                                                form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
+                                                    input(type="hidden" name='merchantAccount' value=wayforpayMerchant || '')
+                                                    input(type="hidden" name='merchantAuthType' value='SimpleSignature')
+                                                    input(type="hidden" name='merchantDomainName' value='pay.genius.space')
+                                                    input(type="hidden" name='merchantSignature' value='')
+                                                    input(type="hidden" name='orderReference' value=salesOrderID || '')
+                                                    input(type="hidden" name='orderDate' value='')
+                                                    input(type="hidden" name='amount' value=productPrice || '')
+                                                    input(type="hidden" name='currency' value=currency.toUpperCase() || '')
+                                                    input(type="hidden" name='productName' value=productName || '')
+                                                    input(type="hidden" name='productPrice' value=productPrice || '')
+                                                    input(type="hidden" name='productCount' value='1')
+                                                    input(type="hidden" name='defaultPaymentSystem' value='card')
+                                                    input(type="hidden" name='language' value='UA')
+                                                    button(type="submit" style="display: none")
+                                  //-  .steps-payways-card-currency
+                                      //-  .steps-payways-card-currency__title #{labels.cardCurrency || ""}
+                                        
+                                        //-.steps-payways-card-currency-list
                                             button(type="button" data-curr="uah").steps-payways-card-currency-list__item #{labels.UAH || ""}
                                             button(type="button" data-curr="usd").steps-payways-card-currency-list__item #{labels.USD || ""}
                                             button(type="button" data-curr="eur").steps-payways-card-currency-list__item #{labels.EUR || ""}
-                                    .steps-payways-item(onclick="payFondy()")
+                                            
+                                   //- .steps-payways-item(onclick="payFondy()")
                                         .steps-payways-item__inner
                                             .steps-payways-item__text #{labels.payCard || ""}
                                             .steps-payways-item__images
