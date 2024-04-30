@@ -65,7 +65,8 @@ block contents
                                             button(type="button" data-curr="uah").steps-payways-card-currency-list__item #{labels.UAH || ""}
                                             button(type="button" data-curr="usd").steps-payways-card-currency-list__item #{labels.USD || ""}
                                             button(type="button" data-curr="eur").steps-payways-card-currency-list__item #{labels.EUR || ""}
-                                    .steps-payways-item(onclick="payFondy()")
+                                    //- .steps-payways-item(onclick="payFondy()")
+                                    button#wfpSubmit2.steps-payways-item(type="button")
                                         .steps-payways-item__inner
                                             .steps-payways-item__text #{labels.payCard || ""}
                                             .steps-payways-item__images
