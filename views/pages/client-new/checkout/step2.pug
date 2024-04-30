@@ -88,6 +88,14 @@ block contents
                                             .steps-payways-item__images
                                                 img(src="/img/client-new/step/payway-visa.svg")
                                                 img(src="/img/client-new/step/payway-mc.svg") 
+                                    //- 
+                                                
+                                button#wfpSubmit.steps-payways-item__inner(type="button")
+                                        .steps-payways-item__inner
+                                            .steps-payways-item__text #{labels.payCard || ""}
+                                            .steps-payways-item__images
+                                                img(src="/img/client-new/step/payway-visa.svg")
+                                                img(src="/img/client-new/step/payway-mc.svg") 
                             
 
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
