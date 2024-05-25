@@ -13,6 +13,7 @@ const privatBank = require("../lib/privatBank");
 const tinkoff = require("../lib/tinkoff");
 const WayForPay = require("../lib/wayforpay");
 // const Yandex = require("../lib/yandexKassa");
+const Plata = require("../lib/plata");
 
 const config = require("../config/config");
 const merchantUSD = config.get("fondy:usd") || "";
@@ -1550,6 +1551,10 @@ module.exports = function routes(app, passport) {
 
 		return zone;
 	}
+
+	router.post("/plata/checkout", async (ctx) => {
+		ctx.body = await Plata.createPayment(ctx.request.body);
+	});
 
 	app.use(router.routes());
 };
