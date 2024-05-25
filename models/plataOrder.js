@@ -1,19 +1,36 @@
 const mongoose = require("../lib/mongoose");
 const autoIncrement = require("../lib/mongoose").autoIncrement;
 
-const statuses = ["processing", "failed", "success"];
-
 const Schema = mongoose.Schema;
 
 const plataOrderSchema = new Schema({
-	salesOrderID: { type: String, required: true },
 	invoiceId: { type: String },
-	status: { type: String, enum: statuses, default: statuses[0] },
 
+	// Info on checkout create
+	salesOrderID: { type: String, required: true },
 	email: { type: String, required: true },
 	productName: { type: String },
 	productPrice: { type: Number },
 	currency: { type: String },
+
+	// Info from plata callback
+	status: { type: String },
+	finalAmount: { type: Number },
+	payMethod: { type: String },
+	paymentInfo: {
+		rrn: { type: String },
+		approvalCode: { type: String },
+		tranId: { type: String },
+		terminal: { type: String },
+		bank: { type: String },
+		paymentSystem: { type: String },
+		country: { type: String },
+		fee: { type: Number },
+		paymentMethod: { type: String },
+		maskedPan: { type: String },
+	},
+	failureReason: { type: String },
+	errCode: { type: String },
 });
 
 plataOrderSchema.plugin(autoIncrement.plugin, {
