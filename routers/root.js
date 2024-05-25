@@ -1556,5 +1556,9 @@ module.exports = function routes(app, passport) {
 		ctx.body = await Plata.createPayment(ctx.request.body);
 	});
 
+	router.post("/plata/callback", async (ctx) => {
+		ctx.body = await Plata.processCallback(ctx.request.body);
+	});
+
 	app.use(router.routes());
 };
