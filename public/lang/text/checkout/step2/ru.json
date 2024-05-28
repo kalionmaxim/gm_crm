@@ -41,7 +41,8 @@
   "UAH": "Гривна",
   "USD": "Доллар",
   "EUR": "Евро",
-  "payCard": "Оплатить картой",
+  "payCard": "Сплатити через WayForPay",
+  "payPlata": "Сплатити через Mono",
   "installment": "Оплата частями:",
 
   "monthes": "месяцев",

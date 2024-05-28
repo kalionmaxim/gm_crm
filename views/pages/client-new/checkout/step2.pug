@@ -72,6 +72,12 @@ block contents
                                             .steps-payways-item__images
                                                 img(src="/img/client-new/step/payway-visa.svg")
                                                 img(src="/img/client-new/step/payway-mc.svg") 
+                                    button.steps-payways-item(type="button" onclick="payPlata()")
+                                        .steps-payways-item__inner
+                                            .steps-payways-item__text #{labels.payPlata || ""}
+                                            .steps-payways-item__images
+                                                img(src="/img/client-new/step/payway-visa.svg")
+                                                img(src="/img/client-new/step/payway-mc.svg") 
                             
 
                             if !(privatHide && privatHide === "true") || !(frisbeeHide && frisbeeHide === "true") || !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
@@ -108,12 +114,6 @@ block contents
                                                     span.steps-payways-item__images
                                                         img(src="/img/client-new/step/payway-mono-parts.png")
                                                         //- img(src="/img/client-new/step/payway-privat-parts.png")
-
-                                        .steps-payways-item(onclick="payPlata()" style="display: none")
-                                            .steps-payways-item__inner
-                                                .steps-payways-item__text Plata by mono
-                                                .steps-payways-item__images
-                                                    img(src="/img/icons/pay/monobank.svg")
                                         
                                         //- if !(monoHide && monoHide === "true")
                                         //- if !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")

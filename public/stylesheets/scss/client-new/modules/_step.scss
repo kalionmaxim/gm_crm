@@ -416,8 +416,11 @@
 		}
 
 		&__text {
-			@extend .text2;
 			flex: 1;
+			font-family: "Gotham Pro", sans-serif;
+			font-size: 14px;
+			line-height: 160%;
+			color: #322847;
 			margin-right: 12px;
 			transition: 0.4s;
 			@include mobile {
@@ -433,7 +436,7 @@
 			align-items: center;
 
 			> img {
-				max-height: 24px;
+				max-height: 20px;
 				margin-right: 10px;
 				@include mobile {
 					margin-right: 6px;
@@ -499,6 +502,10 @@
 					}
 				}
 			}
+		}
+
+		&-item {
+			width: 100%;
 		}
 	}
 
