@@ -504,8 +504,13 @@
 			}
 		}
 
-		&-item {
+		.steps-payways-item {
 			width: 100%;
+			margin-right: 0;
+
+			&__text {
+				text-align: left;
+			}
 		}
 	}
 
