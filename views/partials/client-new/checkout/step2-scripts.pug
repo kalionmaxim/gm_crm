@@ -1,3 +1,5 @@
+script#widget-wfp-script(language='javascript' type='text/javascript' src='https://secure.wayforpay.com/server/pay-widget.js')
+
 script.
     var step = '1';
 
@@ -873,6 +875,8 @@ script.
             }
 
             $('#wfpForm input[name=productPrice]').val(sumUpd);
+
+            generateSignature();
         }
     });
 
@@ -1193,9 +1197,8 @@ script.
     }
 
 
-// WayForPay logic
-script#widget-wfp-script(language='javascript' type='text/javascript' src='https://secure.wayforpay.com/server/pay-widget.js')
-script.
+    // WayForPay logic
+
     var wayforpay = new Wayforpay();
 
     var sum = parseFloat("#{productPrice}");
