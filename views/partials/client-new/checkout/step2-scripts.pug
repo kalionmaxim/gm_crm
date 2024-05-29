@@ -836,7 +836,7 @@ script.
             $(this).addClass('steps-payways-card-currency-list__item--active');
             curr = $(this).data('curr');
 
-            $('#wfpForm input[name=currency]').val(curr);
+            $('#wfpForm input[name=currency]').val(curr.toUpperCase());
 
             var sumDef = parseFloat("#{productPrice}");
             var sumUpd = parseFloat("#{productPrice}");
