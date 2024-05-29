@@ -838,47 +838,47 @@ script.
             $(this).addClass('steps-payways-card-currency-list__item--active');
             curr = $(this).data('curr');
 
-            $('#wfpForm input[name=currency]').val(curr.toUpperCase());
+            //- $('#wfpForm input[name=currency]').val(curr.toUpperCase());
 
-            var sumDef = parseFloat("#{productPrice}");
-            var sumUpd = parseFloat("#{productPrice}");
-            var currDef = "#{currency.toUpperCase()}";
+            //- var sumDef = parseFloat("#{productPrice}");
+            //- var sumUpd = parseFloat("#{productPrice}");
+            //- var currDef = "#{currency.toUpperCase()}";
 
-            switch (curr) {
-                case "usd":
-                    if (currDef === "USD") {
-                        sumUpd = sumDef;
-                    } else if (currDef === "EUR") {
-                        sumUpd = (sumDef * (1 / USDRateEUR)).toFixed(2);
-                    } else if (currDef === "UAH") {
-                        sumUpd = (sumDef * (1 / USDRateUAH)).toFixed(2);
-                    }
-                    break;
+            //- switch (curr) {
+            //-     case "usd":
+            //-         if (currDef === "USD") {
+            //-             sumUpd = sumDef;
+            //-         } else if (currDef === "EUR") {
+            //-             sumUpd = (sumDef * (1 / USDRateEUR)).toFixed(2);
+            //-         } else if (currDef === "UAH") {
+            //-             sumUpd = (sumDef * (1 / USDRateUAH)).toFixed(2);
+            //-         }
+            //-         break;
 
-                case "eur":
-                    if (currDef === "USD") {
-                        sumUpd = (sumDef * USDRateEUR).toFixed(2);
-                    } else if (currDef === "EUR") {
-                        sumUpd = sumDef;
-                    } else if (currDef === "UAH") {
-                        sumUpd = ((sumDef / USDRateUAH) * USDRateEUR).toFixed(2);
-                    }
-                    break;
+            //-     case "eur":
+            //-         if (currDef === "USD") {
+            //-             sumUpd = (sumDef * USDRateEUR).toFixed(2);
+            //-         } else if (currDef === "EUR") {
+            //-             sumUpd = sumDef;
+            //-         } else if (currDef === "UAH") {
+            //-             sumUpd = ((sumDef / USDRateUAH) * USDRateEUR).toFixed(2);
+            //-         }
+            //-         break;
 
-                case "uah":
-                    if (currDef === "USD") {
-                        sumUpd = (sumDef * USDRateUAH).toFixed(2);
-                    } else if (currDef === "EUR") {
-                        sumUpd = ((sumDef / USDRateEUR) * USDRateUAH).toFixed(2);
-                    } else if (currDef === "UAH") {
-                        sumUpd = sumDef;
-                    }
-                    break;
-            }
+            //-     case "uah":
+            //-         if (currDef === "USD") {
+            //-             sumUpd = (sumDef * USDRateUAH).toFixed(2);
+            //-         } else if (currDef === "EUR") {
+            //-             sumUpd = ((sumDef / USDRateEUR) * USDRateUAH).toFixed(2);
+            //-         } else if (currDef === "UAH") {
+            //-             sumUpd = sumDef;
+            //-         }
+            //-         break;
+            //- }
 
-            $('#wfpForm input[name=productPrice]').val(sumUpd);
+            //- $('#wfpForm input[name=productPrice]').val(sumUpd);
 
-            generateSignature();
+            //- generateSignature();
         }
     });
 
