@@ -1023,9 +1023,6 @@ script.
 
         switch (curr) {
             case "usd":
-                if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-                    merchant = "#{merchantUSD}";
-                }
                 if (currDef === "USD") {
                     currUpd = "USD";
                     sumUpd = sumDef;
@@ -1042,9 +1039,6 @@ script.
                 break;
 
             case "eur":
-                if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-                    merchant = "#{merchantEUR}";
-                }
                 if (currDef === "USD") {
                     currUpd = "EUR";
                     sumUpd = (sumDef * USDRateEUR).toFixed(2);
@@ -1061,9 +1055,6 @@ script.
                 break;
 
             case "uah":
-                if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-                    merchant = "#{merchantUAH}";
-                }
                 if (currDef === "USD") {
                     currUpd = "UAH";
                     sumUpd = (sumDef * USDRateUAH).toFixed(2);
@@ -1078,27 +1069,8 @@ script.
                     sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
                 }
                 break;
-
-            case "rub":
-                if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-                    merchant = "#{merchantRUB}";
-                }
-                if (currDef === "USD") {
-                    currUpd = "RUB";
-                    sumUpd = (sumDef * USDRateRUB).toFixed(2);
-                } else if (currDef === "EUR") {
-                    currUpd = "RUB";
-                    sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
-                } else if (currDef === "UAH") {
-                    currUpd = "RUB";
-                    sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
-                } else if (currDef === "RUB") {
-                    currUpd = "RUB";
-                    sumUpd = sumDef;
-                }
-                break;
         }
-        
+
         $("#preloader").show();
 
         if ("#{salesOrderID}") {
@@ -1106,8 +1078,8 @@ script.
                 email             : "#{email}",
                 salesOrderID      : "#{salesOrderID}",
                 productName       : "#{productName}",
-                productPrice      : parseFloat("#{productPrice}"),
-                currency          : "#{currency.toUpperCase()}",
+                productPrice      : sumUpd,
+                currency          : currUpd,
                 redirectURL       : "#{redirectURL}",
                 paymentDescription: "Оплата продукта \"#{productName}\"",
                 lang              : "#{lang}" || "ua"
@@ -1137,8 +1109,8 @@ script.
                 "Phone"       : "#{phone}",
                 "productName" : "#{productName}",
                 "productID"   : "#{productID}",
-                "productPrice": parseFloat("#{productPrice}"),
-                "currency"    : "#{currency.toUpperCase()}",
+                "productPrice": sumUpd,
+                "currency"    : currUpd,
                 "contactID"   : contactID,
                 "dealID"      : dealIDPay
             };
@@ -1155,8 +1127,8 @@ script.
                         email             : "#{email}",
                         salesOrderID      : salesOrderID || null,
                         productName       : "#{productName}",
-                        productPrice      : parseFloat("#{productPrice}"),
-                        currency          : "#{currency.toUpperCase()}",
+                        productPrice      : sumUpd,
+                        currency          : currUpd,
                         redirectURL       : "#{redirectURL}",
                         paymentDescription: "Оплата продукта \"#{productName}\"",
                         lang              : "#{lang}" || "ua"
