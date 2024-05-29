@@ -831,7 +831,7 @@ script.
     //- $('.steps-payways-card-currency-list__item[data-curr="uah"]').addClass('steps-payways-card-currency-list__item--active')
 
     $('.steps-payways-card-currency-list__item').trigger('click');
-    
+
     $('.steps-payways-card-currency-list__item').click(function() {
         if (!$(this).hasClass('steps-payways-card-currency-list__item--active')) {
             $('.steps-payways-card-currency-list__item--active').removeClass('steps-payways-card-currency-list__item--active');
@@ -1203,8 +1203,8 @@ script.
 
     var wayforpay = new Wayforpay();
 
-    var sum = parseFloat("#{productPrice}");
-    var currency = "#{currency.toUpperCase()}";
+    var sum = $('#wfpForm [name="productPrice"]').val();
+    var currency = $('#wfpForm [name="currency"]').val();
     var dealIDPay = getCookie("dealIDPay") || null;
     var contactID = getCookie("contactID") || null;
     var salesOrderID = "#{salesOrderID || ''}";
