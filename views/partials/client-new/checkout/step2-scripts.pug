@@ -816,21 +816,19 @@ script.
     var curr = "uah";
     //- var curr = getParameterByName("currency").toLowerCase() ;
 
-    switch (curr) {
-        case "usd":
-            $('.steps-payways-card-currency-list__item[data-curr="usd"]').addClass('steps-payways-card-currency-list__item--active')
-            break;
-        case "uah":
-            $('.steps-payways-card-currency-list__item[data-curr="uah"]').addClass('steps-payways-card-currency-list__item--active')
-            break;
-        case "eur":
-            $('.steps-payways-card-currency-list__item[data-curr="eur"]').addClass('steps-payways-card-currency-list__item--active')
-            break;
-    }
+    //- switch (curr) {
+    //-     case "usd":
+    //-         $('.steps-payways-card-currency-list__item[data-curr="usd"]').addClass('steps-payways-card-currency-list__item--active')
+    //-         break;
+    //-     case "uah":
+    //-         $('.steps-payways-card-currency-list__item[data-curr="uah"]').addClass('steps-payways-card-currency-list__item--active')
+    //-         break;
+    //-     case "eur":
+    //-         $('.steps-payways-card-currency-list__item[data-curr="eur"]').addClass('steps-payways-card-currency-list__item--active')
+    //-         break;
+    //- }
 
     //- $('.steps-payways-card-currency-list__item[data-curr="uah"]').addClass('steps-payways-card-currency-list__item--active')
-
-    $('.steps-payways-card-currency-list__item').trigger('click');
 
     $('.steps-payways-card-currency-list__item').click(function() {
         if (!$(this).hasClass('steps-payways-card-currency-list__item--active')) {
@@ -882,6 +880,8 @@ script.
             generateSignature(() => {});
         }
     });
+
+    $('.steps-payways-card-currency-list__item[data-curr="uah"]').trigger('click');
 
     function payFondy() {
         var merchant = "#{merchantID || ''}";
