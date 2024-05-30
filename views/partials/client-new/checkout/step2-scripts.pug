@@ -1315,6 +1315,9 @@ script.
     $('#wfpSubmit, #wfpSubmit2').on('click', function(e) {
         $("#preloader").show();
 
+        sum = $('#wfpForm [name="productPrice"]').val();
+        currency = $('#wfpForm [name="currency"]').val();
+
         var data = {
             "First_Name"  : "#{firstName}",
             "Email"       : "#{email}",
