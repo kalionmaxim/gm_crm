@@ -1201,8 +1201,6 @@ script.
 
 // WayForPay logic
 script.
-    var wayforpay = new Wayforpay();
-
     var sum = $('#wfpForm [name="productPrice"]').val();
     var currency = $('#wfpForm [name="currency"]').val();
     var dealIDPay = getCookie("dealIDPay") || null;
@@ -1277,7 +1275,8 @@ script.
     }
 
     function payWFP (data) {
-        console.log(data.productPrice);
+        var wayforpay = new Wayforpay();
+        
         wayforpay.run(
             data,
             function (response) {
