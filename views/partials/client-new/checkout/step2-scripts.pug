@@ -876,9 +876,10 @@ script.
                     break;
             }
 
-            $('#wfpForm input[name=productPrice]').val(Number(sumUpd));
+            $('#wfpForm input[name=amount]').val(sumUpd);
+            $('#wfpForm input[name=productPrice]').val(sumUpd);
 
-            //- generateSignature(() => {});
+            generateSignature(() => {});
         }
     });
 
@@ -1315,7 +1316,7 @@ script.
     $('#wfpSubmit, #wfpSubmit2').on('click', function(e) {
         $("#preloader").show();
 
-        sum = Number($('#wfpForm [name="productPrice"]').val());
+        sum = $('#wfpForm [name="productPrice"]').val();
         currency = $('#wfpForm [name="currency"]').val();
 
         var data = {
