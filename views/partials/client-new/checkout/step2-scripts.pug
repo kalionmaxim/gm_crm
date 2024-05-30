@@ -878,7 +878,7 @@ script.
 
             $('#wfpForm input[name=productPrice]').val(sumUpd);
 
-            generateSignature();
+            generateSignature(() => {});
         }
     });
 
@@ -1220,7 +1220,7 @@ script.
 
     $('#wfpForm [name="orderDate"]').val(now.getTime());
 
-    generateSignature();
+    generateSignature(() => {});
 
     function generateSignature(cb) {
         var baseString = getBaseString();
@@ -1277,7 +1277,7 @@ script.
     }
 
     function payWFP (data) {
-        console.log(data);
+        console.log(data.productPrice);
         wayforpay.run(
             data,
             function (response) {
