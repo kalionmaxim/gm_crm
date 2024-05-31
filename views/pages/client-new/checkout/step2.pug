@@ -66,12 +66,12 @@ block contents
                                             button(type="button" data-curr="usd").steps-payways-card-currency-list__item #{labels.USD || ""}
                                             button(type="button" data-curr="eur").steps-payways-card-currency-list__item #{labels.EUR || ""}
                                     //- .steps-payways-item(onclick="payFondy()")
-                                    button#wfpSubmit2.steps-payways-item(type="button")
-                                        .steps-payways-item__inner
-                                            .steps-payways-item__text #{labels.payCard || ""}
-                                            .steps-payways-item__images
-                                                img(src="/img/client-new/step/payway-visa.svg")
-                                                img(src="/img/client-new/step/payway-mc.svg") 
+                                    //- button#wfpSubmit2.steps-payways-item(type="button")
+                                    //-     .steps-payways-item__inner
+                                    //-         .steps-payways-item__text #{labels.payCard || ""}
+                                    //-         .steps-payways-item__images
+                                    //-             img(src="/img/client-new/step/payway-visa.svg")
+                                    //-             img(src="/img/client-new/step/payway-mc.svg") 
                                     button.steps-payways-item(type="button" onclick="payPlata()")
                                         .steps-payways-item__inner
                                             .steps-payways-item__text #{labels.payPlata || ""}
@@ -91,6 +91,13 @@ block contents
                                                     .steps-payways-item__images
                                                         img(src="/img/client-new/step/payway-privat.png")
 
+                                        if !(monoHide && monoHide === "true")
+                                            .steps-payways-item#showMonbankPopupBtn
+                                                .steps-payways-item__inner
+                                                    .steps-payways-item__text Monobank
+                                                    .steps-payways-item__images
+                                                        img(src="/img/icons/pay/monobank.svg")
+                                        
                                         if !(wayforpayHide && wayforpayHide === "true")
                                             .steps-payways-item
                                                 form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
@@ -110,19 +117,13 @@ block contents
                                                     button(type="submit" style="display: none")
 
                                                 button#wfpSubmit.steps-payways-item__inner(type="button")
-                                                    span.steps-payways-item__text Monobank
+                                                    span.steps-payways-item__text #{labels.otherBanks || "Інші банки"}
                                                     span.steps-payways-item__images
-                                                        img(src="/img/client-new/step/payway-mono-parts.png")
-                                                        //- img(src="/img/client-new/step/payway-privat-parts.png")
+                                                        img(style="margin-right: 0" src="/img/client-new/step/payPartsOschad.png")
+                                                        img(style="margin-right: 0" src="/img/client-new/step/OnusInstallment.png")
+                                                        img(style="margin-right: 0" src="/img/client-new/step/payPartsAbank.png")
+                                                        img(style="margin-right: 0" src="/img/client-new/step/instantAbank.png")
                                         
-                                        //- if !(monoHide && monoHide === "true")
-                                        //- if !(wayforpayHide && wayforpayHide === "true") || !(monoHide && monoHide === "true")
-                                        //-     .steps-payways-item#showMonbankPopupBtn
-                                        //-         .steps-payways-item__inner
-                                        //-             .steps-payways-item__text Monobank
-                                        //-             .steps-payways-item__images
-                                        //-                 img(src="/img/icons/pay/monobank.svg")
-
                                         //- if !(frisbeeHide && frisbeeHide === "true")
                                         //-     .steps-payways-item(onclick="payFrisbee()").ua-block
                                         //-         .steps-payways-item__text Frisbee

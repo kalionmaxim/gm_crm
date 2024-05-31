@@ -42,8 +42,9 @@
   "USD": "Доллар",
   "EUR": "Евро",
   "payCard": "Сплатити через WayForPay",
-  "payPlata": "Сплатити через Mono",
+  "payPlata": "Сплатити карткою",
   "installment": "Оплата частями:",
+  "otherBanks": "Інші банки",
 
   "monthes": "месяцев",
   "installmentTitle": "Оплата частями от",

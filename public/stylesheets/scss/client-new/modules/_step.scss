@@ -418,12 +418,13 @@
 		&__text {
 			flex: 1;
 			font-family: "Gotham Pro", sans-serif;
-			font-size: 14px;
+			font-size: 16px;
 			line-height: 160%;
 			color: #322847;
 			margin-right: 12px;
 			transition: 0.4s;
 			@include mobile {
+				font-size: 14px;
 				margin-right: 5px;
 			}
 			&:last-child {
