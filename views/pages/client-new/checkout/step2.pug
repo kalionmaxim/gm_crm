@@ -84,13 +84,6 @@ block contents
                                 .steps-payways-installment
                                     p.steps-payways-installment__title #{labels.installment || ""}
                                     .steps-payways-installment-list
-                                        if !(privatHide && privatHide === "true")
-                                            .steps-payways-item#showPrivatPopupBtn.ua-block
-                                                .steps-payways-item__inner
-                                                    .steps-payways-item__text ПриватБанк
-                                                    .steps-payways-item__images
-                                                        img(src="/img/client-new/step/payway-privat.png")
-
                                         if !(monoHide && monoHide === "true")
                                             .steps-payways-item#showMonbankPopupBtn
                                                 .steps-payways-item__inner
@@ -98,6 +91,13 @@ block contents
                                                     .steps-payways-item__images
                                                         img(src="/img/icons/pay/monobank.svg")
                                         
+                                        if !(privatHide && privatHide === "true")
+                                            .steps-payways-item#showPrivatPopupBtn.ua-block
+                                                .steps-payways-item__inner
+                                                    .steps-payways-item__text ПриватБанк
+                                                    .steps-payways-item__images
+                                                        img(src="/img/client-new/step/payway-privat.png")
+
                                         if !(wayforpayHide && wayforpayHide === "true")
                                             .steps-payways-item
                                                 form(method="post" action="https://secure.wayforpay.com/pay" accept-charset="utf-8")#wfpForm
