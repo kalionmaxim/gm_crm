@@ -23,11 +23,12 @@ block contents
 								.row
 									.col-md-12
 										each rate in usdrates
-											.form-group
-												label.col-md-1(style="margin-top: 10px;") 1 USD =
-												.col-md-2
-													input.form-control(name=rate.currency type="number" step=0.01 placeholder='Введите название продукта' required=true value=rate.price || 1)
-												label.col-md-1(style="margin-top: 10px;") #{rate.currency}
+											if rate.currency !== 'RUB'
+												.form-group
+													label.col-md-1(style="margin-top: 10px;") 1 USD =
+													.col-md-2
+														input.form-control(name=rate.currency type="number" step=0.01 placeholder='Введите название продукта' required=true value=rate.price || 1)
+													label.col-md-1(style="margin-top: 10px;") #{rate.currency}
 
 								.form-group.m-b-0
 									.col-md-offset-2.col-md-10
