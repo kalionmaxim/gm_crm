@@ -27,6 +27,9 @@ const Page = require("../models/page").Page;
 const MonoOrder = require("../models/monoOrder").MonoOrder;
 const USDRate = require("../models/usdRate").USDRate;
 const FondyMerchant = require("../models/fondyMerchant").FondyMerchant;
+const PlataOrder = require("../models/plataOrder").PlataOrder;
+const PrivatOrder = require("../models/privatOrder").PrivatOrder;
+const WayforpayOrder = require("../models/wayforpayOrder").WayforpayOrder;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/gr").addToCampaign;
@@ -35,7 +38,7 @@ const requestIp = require("request-ip");
 
 const lang = require("../lang");
 const { generateLink } = require("../lib/linkGen");
-const { iLogger } = require("../lib/logger");
+// const { iLogger } = require("../lib/logger");
 
 module.exports = function routes(app, passport) {
 	router.get("/checkout/1", async (ctx) => {
@@ -1314,6 +1317,10 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.get("/admin/orders", async (ctx) => {
+		await ctx.redirect("/admin/orders/mono");
+	});
+
+	router.get("/admin/orders/mono", async (ctx) => {
 		if (ctx.isAuthenticated()) {
 			await ctx.render("pages/admin/orders-list");
 		} else {
@@ -1428,6 +1435,176 @@ module.exports = function routes(app, passport) {
 		}
 
 		await ctx.redirect("/admin/orders");
+	});
+
+	router.get("/admin/orders/plata", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/orders-list-plata");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/orders/plata/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const data = ctx.query;
+				const queryOrder = {};
+
+				if (data["search[value]"]) {
+					queryOrder["$or"] = [
+						{ phone: new RegExp(".*" + data["search[value]"].replace(/(\W)/g, "\\$1") + ".*", "i") }
+					];
+				}
+
+				const orders = await PlataOrder.find(queryOrder)
+					.sort("-plata_order_id")
+					.skip(parseInt(data.start, 10))
+					.limit(parseInt(data.length, 10))
+					.lean();
+
+				list.recordsTotal = await PlataOrder.find().count();
+				list.recordsFiltered = await PlataOrder.find(queryOrder).count();
+
+				for (let i = 0; i < orders.length; i++) {
+					const order = orders[i];
+
+					list.data.push([
+						order.plata_order_id,
+						order.name ? order.name : order.email,
+						order.phone,
+						order.productName,
+						order.status || "created",
+						`${order.productPrice.toFixed(2) || 0} ${order.currency || "USD"}`,
+						null
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
+	});
+
+	router.get("/admin/orders/privat", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/orders-list-privat");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/orders/privat/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const data = ctx.query;
+				const queryOrder = {};
+
+				if (data["search[value]"]) {
+					queryOrder["$or"] = [
+						{ phone: new RegExp(".*" + data["search[value]"].replace(/(\W)/g, "\\$1") + ".*", "i") }
+					];
+				}
+
+				const orders = await PrivatOrder.find(queryOrder)
+					.sort("-privat_order_id")
+					.skip(parseInt(data.start, 10))
+					.limit(parseInt(data.length, 10))
+					.lean();
+
+				list.recordsTotal = await PrivatOrder.find().count();
+				list.recordsFiltered = await PrivatOrder.find(queryOrder).count();
+
+				for (let i = 0; i < orders.length; i++) {
+					const order = orders[i];
+
+					list.data.push([
+						order.privat_order_id,
+						order.name ? order.name : order.email,
+						order.phone,
+						order.product_name,
+						order.status || "created",
+						order.amount.toFixed(2) || 0
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
+	});
+
+	router.get("/admin/orders/wfp", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/orders-list-wfp");
+		} else {
+			await ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/orders/wfp/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const data = ctx.query;
+				const queryOrder = {};
+
+				if (data["search[value]"]) {
+					queryOrder["$or"] = [
+						{ phone: new RegExp(".*" + data["search[value]"].replace(/(\W)/g, "\\$1") + ".*", "i") }
+					];
+				}
+
+				const orders = await WayforpayOrder.find(queryOrder)
+					.sort("-wayforpay_order_id")
+					.skip(parseInt(data.start, 10))
+					.limit(parseInt(data.length, 10))
+					.lean();
+
+				list.recordsTotal = await WayforpayOrder.find().count();
+				list.recordsFiltered = await WayforpayOrder.find(queryOrder).count();
+
+				for (let i = 0; i < orders.length; i++) {
+					const order = orders[i];
+
+					list.data.push([
+						order.wayforpay_order_id,
+						order.email,
+						order.phone,
+						// null,
+						order.transactionStatus || "created",
+						order.paymentSystem || "unknown",
+						`${order.amount.toFixed(2) || 0} ${order.currency || "USD"}`
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
 	});
 
 	router.get("/admin/usdrates", async (ctx) => {

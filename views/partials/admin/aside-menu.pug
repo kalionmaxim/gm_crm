@@ -4,7 +4,7 @@
 		ul#side-menu.nav
 			li.sidebar-search.hidden-sm.hidden-md.hidden-lg
 				.input-group.custom-search-form
-					input.form-control(type='text', placeholder='Поиск...')
+					input.form-control(type='text' placeholder='Поиск...')
 					span.input-group-btn
 						button.btn.btn-default(type='button')
 							i.fa.fa-search
@@ -13,12 +13,23 @@
 			//- 		i.fa.fa-bank
 			//- 		span.hide-menu
 			//- 			| Страницы для оплаты
-
+			
 			li
 				a.waves-effect(href='/admin/orders')
 					i.fa.fa-money
 					span.hide-menu
-						| Платежи Monobank
+						| Логи оплат 
+						span.fa.arrow
+				ul.nav.nav-second-level
+					li
+						a(href='/admin/orders/plata') Plata by Mono
+					li
+						a(href='/admin/orders/mono') ПЧ Monobank
+					li
+						a(href='/admin/orders/privat') ПЧ ПриватБанк
+					li
+						a(href='/admin/orders/wfp') WFP
+
 
 			li
 				a.waves-effect(href='/admin/usdrates')
@@ -30,7 +41,7 @@
 				a.waves-effect(href='/admin/link_gen')
 					i.fa.fa-external-link
 					span.hide-menu
-						| Генератор ссылок
+						| Генератор посилань
 
 			//- li
 			//- 	a.waves-effect(href='/admin/merchants')

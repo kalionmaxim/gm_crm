@@ -9,6 +9,8 @@ const plataOrderSchema = new Schema({
 	// Info on checkout create
 	salesOrderID: { type: String, required: true },
 	email: { type: String, required: true },
+	name: { type: String },
+	phone: { type: String },
 	productName: { type: String },
 	productPrice: { type: Number },
 	currency: { type: String },
