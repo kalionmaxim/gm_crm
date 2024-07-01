@@ -7,6 +7,8 @@ const Schema = mongoose.Schema;
 
 const wayforpayOrderSchema = new Schema({
 	wayforpay_order_id: { type: Number, unique: true },
+	name: { type: String },
+	productName: { type: String },
 	amount: { type: Number },
 	authCode: { type: String },
 	cardPan: { type: String },

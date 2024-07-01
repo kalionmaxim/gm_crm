@@ -1207,6 +1207,8 @@ script.
 
 // WayForPay logic
 script.
+    var name = "#{firstName}" + " " + "#{lastName}";
+    var productName = "#{productName}";
     var sum = $('#wfpForm [name="productPrice"]').val();
     var currency = $('#wfpForm [name="currency"]').val();
     var dealIDPay = getCookie("dealIDPay") || null;
@@ -1288,17 +1290,17 @@ script.
             function (response) {
                 // on approved
                 console.log('WFP approved', response);
-                // saveWFPResponse(response);
+                saveWFPResponse(response);
             },
             function (response) {
                 // on declined
                 console.log('WFP declined', response);
-                // saveWFPResponse(response);
+                saveWFPResponse(response);
             },
             function (response) {
                 // on pending or in processing
                 console.log('WFP pending', response);
-                // saveWFPResponse(response);
+                saveWFPResponse(response);
             }
         );
     }
@@ -1307,7 +1309,7 @@ script.
         axios({
             method: "post",
             url   : "/wayforpay/save_order",
-            data  : data
+            data  : { ...data, name, productName },
         })
             .then(function (response) {
                 if (response.data && response.data.result) {

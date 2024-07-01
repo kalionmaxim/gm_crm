@@ -908,20 +908,20 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
-	// router.post("/wayforpay/save_order", async (ctx) => {
-	// 	const orderData = await WayForPay.processOrder(ctx.request.body);
-	//
-	// 	if (orderData.result) {
-	// 		ctx.body = {
-	// 			result: 1,
-	// 			order: orderData.order
-	// 		};
-	// 	} else {
-	// 		ctx.body = {
-	// 			result: 0
-	// 		};
-	// 	}
-	// });
+	router.post("/wayforpay/save_order", async (ctx) => {
+		const orderData = await WayForPay.processOrder(ctx.request.body);
+	
+		if (orderData.result) {
+			ctx.body = {
+				result: 1,
+				order: orderData.order
+			};
+		} else {
+			ctx.body = {
+				result: 0
+			};
+		}
+	});
 
 	router.post("/wayforpay/cb/process", async (ctx) => {
 		ctx.body = await WayForPay.processOrder(ctx.request.rawBody);
@@ -1021,7 +1021,7 @@ module.exports = function routes(app, passport) {
 
 	router.get("/admin", async (ctx) => {
 		if (ctx.isAuthenticated()) {
-			ctx.redirect("/admin/link_gen");
+			ctx.redirect("/admin/orders");
 		} else {
 			await ctx.render("pages/admin/login");
 		}
