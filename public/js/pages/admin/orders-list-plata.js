@@ -46,25 +46,25 @@ $(document).ready(function () {
 		],
 		order          : [0, "asc"],
 		select         : true,
-		// "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-		// 	nRow.setAttribute("id", aData[0]);
+		"fnRowCallback": function (nRow, aData, iDisplayIndex) {
+			nRow.setAttribute("id", aData[0]);
 
-		// 	nRow.lastChild.innerHTML = "";
+			nRow.lastChild.innerHTML = "";
 
-		// 	//Return btn
-		// 	var aTag = document.createElement("a");
-		// 	aTag.setAttribute("title", "Сделать возврат");
-		// 	aTag.setAttribute("style", "cursor:pointer; margin-right:5px");
-		// 	aTag.onclick = function () {
-		// 		returnItem(aData[0]);
-		// 	};
+			//Return btn
+			var aTag = document.createElement("a");
+			aTag.setAttribute("title", "Синхронізація з CRM");
+			aTag.setAttribute("style", "cursor:pointer; margin-right:5px");
+			aTag.onclick = function () {
+				crmSync(aData[0]);
+			};
 
-		// 	var iTag = document.createElement("i");
-		// 	iTag.setAttribute("class", "fa fa-history");
-		// 	aTag.appendChild(iTag);
+			var iTag = document.createElement("i");
+			iTag.setAttribute("class", "fa fa-history");
+			aTag.appendChild(iTag);
 
-		// 	nRow.lastChild.appendChild(aTag);
-		// },
+			nRow.lastChild.appendChild(aTag);
+		},
 		aLengthMenu    : [
 			[10, 25, 50, 100, 200],
 			[10, 25, 50, 100, 200]
@@ -72,11 +72,11 @@ $(document).ready(function () {
 		iDisplayLength : 50
 	});
 
-	// function returnItem(id) {
-	// 	Dialog("Сделать возврат?", function () {
-	// 		window.location = "/admin/orders/" + id + "/return";
-	// 	}, function () {
-	// 		return false;
-	// 	});
-	// }
+	function crmSync(id) {
+		Dialog("Зробити повторну відправку даних до CRM?", function () {
+			window.location = "/admin/orders/plata/" + id + "/crm-sync";
+		}, function () {
+			return false;
+		});
+	}
 });

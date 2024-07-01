@@ -1633,6 +1633,36 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
+	router.get("/admin/orders/plata/:plata_id/crm-sync", async (ctx) => {
+		try {
+			if (ctx.isAuthenticated()) {
+				const plataOrder = await PlataOrder.findOne({ plata_order_id: ctx.params.plata_id });
+
+				if (!plataOrder) {
+					// ctx.body = { result: 0, message: "Order not found" };
+					ctx.redirect("/admin/orders/plata");
+					return;
+				}
+
+				const zohoPayload = {
+					invoice: plataOrder.salesOrderID,
+					sposob_oplaty: "Plata",
+					total_sum: plataOrder.productPrice.toFixed(2),
+					Currency: plataOrder.currency,
+				};
+
+				await zoho.createPayment(zohoPayload);
+
+				// ctx.body = { result: 1, message: "Order successfully created" }
+				ctx.redirect("/admin/orders/plata");
+			}
+		} catch (error) {
+			eLogger.error(err);
+			// ctx.body = { result: 0, message: error.message };
+			ctx.redirect("/admin/orders/plata");
+		}
+	});
+
 	router.get("/admin/orders/privat", async (ctx) => {
 		if (ctx.isAuthenticated()) {
 			await ctx.render("pages/admin/orders-list-privat");
