@@ -1059,6 +1059,7 @@ script.
 
     // Plata logic
     function payPlata() {
+        var token = "#{plataToken || ''}";
         var sumDef = parseFloat("#{productPrice}");
         var sumUpd = parseFloat("#{productPrice}");
         var currDef = "#{currency.toUpperCase()}";
@@ -1131,7 +1132,8 @@ script.
                 currency          : currUpd,
                 redirectURL       : "#{redirectURL}",
                 paymentDescription: "Оплата продукта \"#{productName}\"",
-                lang              : "#{lang}" || "ua"
+                token             : token,
+                lang              : "#{lang}" || "ua",
             };
 
             axios({
@@ -1180,7 +1182,8 @@ script.
                         currency          : currUpd,
                         redirectURL       : "#{redirectURL}",
                         paymentDescription: "Оплата продукта \"#{productName}\"",
-                        lang              : "#{lang}" || "ua"
+                        token             : token,
+                        lang              : "#{lang}" || "ua",
                     };
 
                     axios({

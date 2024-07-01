@@ -30,6 +30,7 @@ const FondyMerchant = require("../models/fondyMerchant").FondyMerchant;
 const PlataOrder = require("../models/plataOrder").PlataOrder;
 const PrivatOrder = require("../models/privatOrder").PrivatOrder;
 const WayforpayOrder = require("../models/wayforpayOrder").WayforpayOrder;
+const PlataMerchant = require("../models/plataMerchant").PlataMerchant;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/gr").addToCampaign;
@@ -100,6 +101,7 @@ module.exports = function routes(app, passport) {
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
 				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
 				lang            : getLangZone(ctx),
+				plataToken      : ctx.request.query["plataToken"] || "",
 				labels,
 				wayforpayMerchant
 			});
@@ -1019,7 +1021,7 @@ module.exports = function routes(app, passport) {
 
 	router.get("/admin", async (ctx) => {
 		if (ctx.isAuthenticated()) {
-			await ctx.redirect("/admin/pages");
+			ctx.redirect("/admin/link_gen");
 		} else {
 			await ctx.render("pages/admin/login");
 		}
@@ -1299,6 +1301,128 @@ module.exports = function routes(app, passport) {
 		if (ctx.isAuthenticated()) {
 			try {
 				const merchant = await FondyMerchant.findOne({ fondy_merchant_id: ctx.params.fondy_merchant_id });
+
+				if (merchant) {
+					await merchant.remove();
+
+					ctx.body = { result: 1 };
+				} else {
+					ctx.body = { result: 0 };
+				}
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = { result: 0 };
+			}
+		} else {
+			ctx.body = { result: 0 };
+		}
+	});
+
+	router.get("/admin/plata-merchants", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/plata-merchants-list");
+		} else {
+			ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/plata-merchants/list", async (ctx) => {
+		const list = {
+			data: []
+		};
+
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchants = await PlataMerchant.find().lean();
+
+				for (let i = 0; i < merchants.length; i++) {
+					const merchant = merchants[i];
+
+					list.data.push([
+						merchant.ID,
+						merchant.token,
+						merchant.plata_merchant_id
+					]);
+				}
+
+				ctx.body = list;
+			} catch (err) {
+				eLogger.error(err);
+				ctx.body = list;
+			}
+		} else {
+			ctx.body = list;
+		}
+	});
+
+	router.get("/admin/plata-merchants/new", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			await ctx.render("pages/admin/plata-merchants-new");
+		} else {
+			ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/plata-merchants/new", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchantExists = await PlataMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
+
+				if (!merchantExists) {
+					await PlataMerchant.create({
+						ID      : ctx.request.body.ID.trim(),
+						token: ctx.request.body.token.trim()
+					});
+
+					ctx.redirect("/admin/plata-merchants");
+				} else {
+					await ctx.render("pages/error404");
+				}
+			} catch (err) {
+				eLogger.error(err);
+				await ctx.render("pages/error404");
+			}
+		} else {
+			ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/plata-merchants/:plata_merchant_id/edit", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			const merchant = await PlataMerchant.findOne({ plata_merchant_id: ctx.params.plata_merchant_id }).lean();
+
+			await ctx.render("pages/admin/plata-merchants-edit", {
+				merchant
+			});
+		} else {
+			ctx.redirect("/admin");
+		}
+	});
+
+	router.post("/admin/plata-merchants/:plata_merchant_id/edit", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			const merchant = await PlataMerchant.findOne({ plata_merchant_id: ctx.params.plata_merchant_id });
+
+			const merchantExists = await PlataMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
+			if (!merchantExists || (merchantExists && (merchant.plata_merchant_id === merchantExists.plata_merchant_id))) {
+				merchant.ID = ctx.request.body.ID.trim();
+				merchant.token = ctx.request.body.token.trim();
+
+				await merchant.save();
+
+				ctx.redirect("/admin/plata-merchants");
+			} else {
+				await ctx.render("pages/error404");
+			}
+		} else {
+			ctx.redirect("/admin");
+		}
+	});
+
+	router.get("/admin/plata-merchants/:plata_merchant_id/delete", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			try {
+				const merchant = await PlataMerchant.findOne({ plata_merchant_id: ctx.params.plata_merchant_id });
 
 				if (merchant) {
 					await merchant.remove();

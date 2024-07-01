@@ -1,0 +1,39 @@
+extends ../../layouts/main-admin
+
+block contents
+	// Preloader
+	.preloader
+		.cssload-speeding-wheel
+			link(rel='stylesheet', href='/stylesheets/css/jquery.clockpicker.css')
+
+	#wrapper
+		include ./../../partials/admin/header
+		include ./../../partials/admin/aside-menu
+
+		// Page Content
+		#page-wrapper
+			.container-fluid
+				.row.bg-title
+					.col-lg-12.col-md-12.col-sm-12.col-xs-12
+						h4.page-title Редактирование мерчанта
+				.row
+					.col-md-12
+						.white-box
+							form.form-horizontal(method='post', action='/admin/plata-merchants/' + merchant.plata_merchant_id + '/edit')
+								.row
+									.col-md-12
+										.form-group
+											label.col-md-2.control-label ID мерчанта:
+											.col-md-10
+												input.form-control(name='ID' placeholder='Введите ID мерчанта' value=merchant.ID required=true)
+										.form-group
+											label.col-md-2.control-label Токен:
+											.col-md-10
+												input.form-control(name='token' placeholder='Введите токен' value=merchant.token required=true)
+
+								.form-group.m-b-0
+									.col-md-offset-2.col-md-10
+										button.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-10(type='submit') Сохранить
+
+
+		include ./../../partials/admin/footer
