@@ -1209,6 +1209,8 @@ script.
 script.
     var name = "#{firstName}" + " " + "#{lastName}";
     var productName = "#{productName}";
+    var email = "#{email}";
+    var phone = "#{phone}";
     var sum = $('#wfpForm [name="productPrice"]').val();
     var currency = $('#wfpForm [name="currency"]').val();
     var dealIDPay = getCookie("dealIDPay") || null;
@@ -1290,17 +1292,17 @@ script.
             function (response) {
                 // on approved
                 console.log('WFP approved', response);
-                saveWFPResponse(response);
+                //- saveWFPResponse(response);
             },
             function (response) {
                 // on declined
                 console.log('WFP declined', response);
-                saveWFPResponse(response);
+                //- saveWFPResponse(response);
             },
             function (response) {
                 // on pending or in processing
                 console.log('WFP pending', response);
-                saveWFPResponse(response);
+                //- saveWFPResponse(response);
             }
         );
     }
@@ -1309,7 +1311,7 @@ script.
         axios({
             method: "post",
             url   : "/wayforpay/save_order",
-            data  : { ...data, name, productName },
+            data  : data,
         })
             .then(function (response) {
                 if (response.data && response.data.result) {
@@ -1359,13 +1361,35 @@ script.
             });
     });
 
-    $('#wfpForm').on('submit', function(e) {
+    $('#wfpForm').on('submit', async function(e) {
         e.preventDefault();
 
         var data = $(this).serializeArray().reduce(function(obj, item) {
             obj[item.name] = item.value;
             return obj;
         }, {});
+
+        await axios({
+            method: "post",
+            url   : "/wayforpay/create_order",
+            data  : { 
+                name, 
+                productName, 
+                email,
+                phone,
+                amount: sum,
+                currency,
+                orderReference: $('#wfpForm [name="orderReference"]').val(), 
+                transactionStatus: "Created", 
+            },
+        })
+            .then(function (response) {
+                if (response.data && response.data.result) {
+                    console.log("WFP order created.");
+                } else {
+                    console.log("Error with WFP order creating.");
+                }
+            });
 
         payWFP(data);
     });

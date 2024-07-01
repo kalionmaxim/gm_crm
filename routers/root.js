@@ -908,6 +908,21 @@ module.exports = function routes(app, passport) {
 		}
 	});
 
+	router.post("/wayforpay/create_order", async (ctx) => {
+		const orderData = await WayforpayOrder.create(ctx.request.body);
+	
+		if (orderData) {
+			ctx.body = {
+				result: 1,
+				order: orderData
+			};
+		} else {
+			ctx.body = {
+				result: 0
+			};
+		}
+	});
+
 	router.post("/wayforpay/save_order", async (ctx) => {
 		const orderData = await WayForPay.processOrder(ctx.request.body);
 	
@@ -1712,11 +1727,11 @@ module.exports = function routes(app, passport) {
 
 					list.data.push([
 						order.wayforpay_order_id,
-						order.email,
+						order.name || order.email,
 						order.phone,
-						// null,
-						order.transactionStatus || "created",
-						order.paymentSystem || "unknown",
+						order.productName,
+						order.transactionStatus || "Created",
+						order.paymentSystem || "",
 						`${order.amount.toFixed(2) || 0} ${order.currency || "USD"}`
 					]);
 				}
