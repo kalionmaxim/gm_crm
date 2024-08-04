@@ -23,17 +23,26 @@ block contents
 								.row
 									.col-md-12
 										.form-group
+											label.col-md-2.control-label
+											.col-md-10.checkbox.checkbox-success
+												input#active(name="isActive" type='checkbox' value=merchant.isActive)
+												label(for='active') Мерчант за замовчуванням
+										.form-group
+											label.col-md-2.control-label Назва мерчанта:
+											.col-md-10
+												input.form-control(name='name' placeholder='Введіть назву мерчанта' value=merchant.name required=true)
+										.form-group
 											label.col-md-2.control-label ID мерчанта:
 											.col-md-10
-												input.form-control(name='ID' placeholder='Введите ID мерчанта' value=merchant.ID required=true)
+												input.form-control(name='ID' placeholder='Введіть ID мерчанта' value=merchant.ID required=true)
 										.form-group
 											label.col-md-2.control-label Токен:
 											.col-md-10
-												input.form-control(name='token' placeholder='Введите токен' value=merchant.token required=true)
+												input.form-control(name='token' placeholder='Введіть токен' value=merchant.token required=true)
 
 								.form-group.m-b-0
 									.col-md-offset-2.col-md-10
-										button.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-10(type='submit') Сохранить
+										button.btn.btn-success.btn-lg.waves-effect.waves-light.m-t-10(type='submit') Зберегти
 
 
 		include ./../../partials/admin/footer

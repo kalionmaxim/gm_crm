@@ -20,6 +20,16 @@ $(document).ready(function () {
 				targets   : 2,
 				searchable: false,
 				orderable : false
+			},
+			{
+				targets   : 3,
+				searchable: false,
+				orderable : false
+			},
+			{
+				targets   : 4,
+				searchable: false,
+				orderable : false
 			}
 		],
 		order          : [0, "asc"],
@@ -34,7 +44,7 @@ $(document).ready(function () {
 			aTag.setAttribute("title", "Редактировать");
 			aTag.setAttribute("style", "cursor:pointer; margin-right:5px");
 			aTag.onclick = function () {
-				editItem(aData[2]);
+				editItem(aData[4]);
 			};
 
 			var iTag = document.createElement("i");
@@ -48,7 +58,7 @@ $(document).ready(function () {
 			aTag.setAttribute("title", "Удалить");
 			aTag.setAttribute("style", "cursor:pointer");
 			aTag.onclick = function () {
-				deleteItem(aData[2]);
+				deleteItem(aData[4]);
 			};
 
 			iTag = document.createElement("i");

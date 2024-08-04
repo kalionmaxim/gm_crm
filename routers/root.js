@@ -1354,8 +1354,10 @@ module.exports = function routes(app, passport) {
 					const merchant = merchants[i];
 
 					list.data.push([
+						merchant.name,
 						merchant.ID,
 						merchant.token,
+						merchant.isActive ? "Так" : "Ні",
 						merchant.plata_merchant_id
 					]);
 				}
@@ -1384,9 +1386,19 @@ module.exports = function routes(app, passport) {
 				const merchantExists = await PlataMerchant.findOne({ ID: ctx.request.body.ID.trim() }).lean();
 
 				if (!merchantExists) {
+					if (ctx.request.body.isActive) {
+						const activeMerchant = await PlataMerchant.findOne({ isActive: true }).select("isActive");
+						if (activeMerchant) {
+							activeMerchant.isActive = false;
+							await activeMerchant.save();
+						}
+					}
+
 					await PlataMerchant.create({
-						ID      : ctx.request.body.ID.trim(),
-						token: ctx.request.body.token.trim()
+						ID: ctx.request.body.ID.trim(),
+						token: ctx.request.body.token.trim(),
+						name: ctx.request.body.name.trim(),
+						isActive: !!ctx.request.body.isActive
 					});
 
 					ctx.redirect("/admin/plata-merchants");
@@ -1422,6 +1434,16 @@ module.exports = function routes(app, passport) {
 			if (!merchantExists || (merchantExists && (merchant.plata_merchant_id === merchantExists.plata_merchant_id))) {
 				merchant.ID = ctx.request.body.ID.trim();
 				merchant.token = ctx.request.body.token.trim();
+				merchant.name = ctx.request.body.name.trim();
+				merchant.isActive = !!ctx.request.body.isActive;
+
+				if (ctx.request.body.isActive) {
+					const activeMerchant = await PlataMerchant.findOne({ isActive: true }).select("isActive");
+					if (activeMerchant) {
+						activeMerchant.isActive = false;
+						await activeMerchant.save();
+					}
+				}
 
 				await merchant.save();
 
