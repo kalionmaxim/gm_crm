@@ -1547,6 +1547,7 @@ module.exports = function routes(app, passport) {
 						status,
 						order.total_sum.toFixed(2) || 0,
 						reversed,
+						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
 						null
 					]);
 				}
@@ -1641,6 +1642,8 @@ module.exports = function routes(app, passport) {
 						order.productName,
 						order.status || "created",
 						`${order.productPrice.toFixed(2) || 0} ${order.currency || "USD"}`,
+						order.paymentInfo && order.paymentInfo.bank && order.paymentInfo.paymentSystem ? `${order.paymentInfo.bank} ${order.paymentInfo.paymentSystem}` : null,
+						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
 						null
 					]);
 				}
@@ -1727,7 +1730,8 @@ module.exports = function routes(app, passport) {
 						order.phone,
 						order.product_name,
 						order.status || "created",
-						order.amount.toFixed(2) || 0
+						order.amount.toFixed(2) || 0,
+						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
 					]);
 				}
 
@@ -1784,7 +1788,8 @@ module.exports = function routes(app, passport) {
 						order.productName,
 						order.transactionStatus || "Created",
 						order.paymentSystem || "",
-						`${order.amount.toFixed(2) || 0} ${order.currency || "USD"}`
+						`${order.amount.toFixed(2) || 0} ${order.currency || "USD"}`,
+						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
 					]);
 				}
 

@@ -4,6 +4,7 @@ const autoIncrement = require("../lib/mongoose").autoIncrement;
 const Schema = mongoose.Schema;
 
 const plataOrderSchema = new Schema({
+	createdAt: { type: Date, default: Date.now() },
 	invoiceId: { type: String },
 
 	// Info on checkout create

@@ -6,6 +6,7 @@ const processingStatuses = ["not_processed", "processing", "processed"];
 const Schema = mongoose.Schema;
 
 const wayforpayOrderSchema = new Schema({
+	createdAt: { type: Date, default: Date.now() },
 	wayforpay_order_id: { type: Number, unique: true },
 	name: { type: String },
 	productName: { type: String },

@@ -42,6 +42,11 @@ $(document).ready(function () {
 				targets   : 6,
 				searchable: true,
 				orderable : false
+			},
+			{
+				targets   : 7,
+				searchable: true,
+				orderable : false
 			}
 		],
 		order          : [0, "asc"],
