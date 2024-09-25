@@ -542,7 +542,7 @@ script.
             "parts"      : document.getElementById("monobank_parts").value,
             "currency"   : getParameterByName("currency") || "",
             "grUnpaid"   : getParameterByName("grUnpaid") || "",
-            "productName": getParameterByName("productName") || "",
+            "productName": decodeURIComponent(getParameterByName("productName") || ""),
             "productID"  : getParameterByName("productID") || "",
             "price"      : getParameterByName("productPrice") || ""
         };
@@ -574,7 +574,7 @@ script.
                     "First_Name": "#{firstName}",
                     "Email": "#{email}",
                     "Phone": "#{phone}",
-                    "productName": "#{productName}",
+                    "productName": decodeURIComponent("#{productName}" || ""),
                     "productID": "#{productID}",
                     "productPrice": "#{productPrice}",
                     "currency": "#{currency.toUpperCase()}",
