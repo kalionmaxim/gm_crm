@@ -536,13 +536,13 @@ script.
         $("#preloader").show();
 
         var data = {
-            "name"       : document.getElementById("monobank_name").value,
-            "email"      : document.getElementById("monobank_email").value,
-            "phone"      : document.getElementById("monobank_phone").value.replace(/\s+/g, ''),
+            "name"       : decodeURIComponent(document.getElementById("monobank_name").value),
+            "email"      : decodeURIComponent(document.getElementById("monobank_email").value),
+            "phone"      : decodeURIComponent(document.getElementById("monobank_phone").value.replace(/\s+/g, '')),
             "parts"      : document.getElementById("monobank_parts").value,
             "currency"   : getParameterByName("currency") || "",
             "grUnpaid"   : getParameterByName("grUnpaid") || "",
-            "productName": getParameterByName("productName") || "",
+            "productName": decodeURIComponent(getParameterByName("productName") || ""),
             "productID"  : getParameterByName("productID") || "",
             "price"      : getParameterByName("productPrice") || ""
         };
@@ -571,10 +571,10 @@ script.
                 var contactID = getCookie("contactID") || null;
 
                 var data2 = {
-                    "First_Name": "#{firstName}",
-                    "Email": "#{email}",
-                    "Phone": "#{phone}",
-                    "productName": "#{productName}",
+                    "First_Name": decodeURIComponent("#{firstName}"),
+                    "Email": decodeURIComponent("#{email}"),
+                    "Phone": decodeURIComponent("#{phone}"),
+                    "productName": decodeURIComponent("#{productName}"),
                     "productID": "#{productID}",
                     "productPrice": "#{productPrice}",
                     "currency": "#{currency.toUpperCase()}",
@@ -674,13 +674,13 @@ script.
         }
 
         var data = {
-            "name": document.getElementById("privat_name").value,
-            "email": document.getElementById("privat_email").value,
-            "phone": document.getElementById("privat_phone").value.replace(/\s+/g, ''),
+            "name": decodeURIComponent(document.getElementById("privat_name").value),
+            "email": decodeURIComponent(document.getElementById("privat_email").value),
+            "phone": decodeURIComponent(document.getElementById("privat_phone").value.replace(/\s+/g, '')),
             "parts": document.getElementById("privat_parts").value,
             "currency": getParameterByName("currency") || "",
             "grUnpaid": getParameterByName("grUnpaid") || "",
-            "productName": getParameterByName("productName") || "",
+            "productName": decodeURIComponent(getParameterByName("productName") || ""),
             "productID": getParameterByName("productID") || "",
             "price": privatPrice
         };
@@ -706,10 +706,10 @@ script.
                 var contactID = getCookie("contactID") || null;
 
                 var data2 = {
-                    "First_Name": "#{firstName}",
-                    "Email": "#{email}",
-                    "Phone": "#{phone}",
-                    "productName": "#{productName}",
+                    "First_Name": decodeURIComponent("#{firstName}"),
+                    "Email": decodeURIComponent("#{email}"),
+                    "Phone": decodeURIComponent("#{phone}"),
+                    "productName": decodeURIComponent("#{productName}"),
                     "productID": "#{productID}",
                     "productPrice": "#{productPrice}",
                     "currency": "#{currency.toUpperCase()}",
@@ -976,13 +976,13 @@ script.
 
         if ("#{salesOrderID}") {
             var data = {
-                Email             : "#{email}",
+                Email             : decodeURIComponent("#{email}"),
                 salesOrderID      : "#{salesOrderID}",
-                productName       : "#{productName}",
+                productName       : decodeURIComponent("#{productName}"),
                 productPrice      : sumUpd,
                 currency          : currUpd,
                 redirectURL       : "#{redirectURL}",
-                paymentDescription: "Оплата продукта \"#{productName}\"",
+                paymentDescription: decodeURIComponent("Оплата продукта \"#{productName}\""),
                 merchantID        : merchant || null,
                 successLink       : "#{successLink}" || "",
                 lang              : "#{lang}" || "ua"
@@ -1027,13 +1027,13 @@ script.
                     var salesOrderID = response.data.salesOrderID.toString();
 
                     var data = {
-                        Email             : "#{email}",
+                        Email             : decodeURIComponent("#{email}"),
                         salesOrderID      : salesOrderID || null,
-                        productName       : "#{productName}",
+                        productName       : decodeURIComponent("#{productName}"),
                         productPrice      : sumUpd,
                         currency          : currUpd,
                         redirectURL       : "#{redirectURL}",
-                        paymentDescription: "Оплата продукта \"#{productName}\"",
+                        paymentDescription: decodeURIComponent("Оплата продукта \"#{productName}\""),
                         merchantID        : merchant || null,
                         successLink       : "#{successLink}" || "",
                         lang              : "#{lang}" || "ru"
@@ -1137,15 +1137,15 @@ script.
 
         if ("#{salesOrderID}") {
             var data = {
-                name              : "#{firstName}" + " " + "#{lastName}",
-                phone             : "#{phone}",
-                email             : "#{email}",
+                name              : decodeURIComponent("#{firstName}" + " " + "#{lastName}"),
+                phone             : decodeURIComponent("#{phone}"),
+                email             : decodeURIComponent("#{email}"),
                 salesOrderID      : "#{salesOrderID}",
                 productName       : decodeURIComponent("#{productName}"),
                 productPrice      : sumUpd,
                 currency          : currUpd,
                 redirectURL       : "#{redirectURL}",
-                paymentDescription: "Оплата продукта \"#{productName}\"",
+                paymentDescription: decodeURIComponent("Оплата продукта \"#{productName}\""),
                 token             : token,
                 lang              : "#{lang}" || "ua",
             };
@@ -1189,13 +1189,13 @@ script.
                     var salesOrderID = response.data.salesOrderID.toString();
 
                     var data = {
-                        email             : "#{email}",
+                        email             : decodeURIComponent("#{email}"),
                         salesOrderID      : salesOrderID || null,
                         productName       : decodeURIComponent("#{productName}"),
                         productPrice      : sumUpd,
                         currency          : currUpd,
                         redirectURL       : "#{redirectURL}",
-                        paymentDescription: "Оплата продукта \"#{productName}\"",
+                        paymentDescription: decodeURIComponent("Оплата продукта \"#{productName}\""),
                         token             : token,
                         lang              : "#{lang}" || "ua",
                     };
