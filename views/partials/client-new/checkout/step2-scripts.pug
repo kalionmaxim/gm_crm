@@ -542,7 +542,7 @@ script.
             "parts"      : document.getElementById("monobank_parts").value,
             "currency"   : getParameterByName("currency") || "",
             "grUnpaid"   : getParameterByName("grUnpaid") || "",
-            "productName": decodeURIComponent(getParameterByName("productName") || ""),
+            "productName": decodeURIComponent(getParameterByName("productName")) || "",
             "productID"  : getParameterByName("productID") || "",
             "price"      : getParameterByName("productPrice") || ""
         };
@@ -680,7 +680,7 @@ script.
             "parts": document.getElementById("privat_parts").value,
             "currency": getParameterByName("currency") || "",
             "grUnpaid": getParameterByName("grUnpaid") || "",
-            "productName": decodeURIComponent(getParameterByName("productName") || ""),
+            "productName": decodeURIComponent(getParameterByName("productName")) || "",
             "productID": getParameterByName("productID") || "",
             "price": privatPrice
         };
