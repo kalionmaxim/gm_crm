@@ -1135,11 +1135,13 @@ script.
 
         $("#preloader").show();
 
+        var name = "#{firstName}" + " " + "#{lastName}";
+
         if ("#{salesOrderID}") {
             var data = {
-                name              : "#{firstName}" + " " + "#{lastName}",
-                phone             : "#{phone}",
-                email             : "#{email}",
+                name              : decodeURIComponent(name),
+                phone             : decodeURIComponent("#{phone}"),
+                email             : decodeURIComponent("#{email}"),
                 salesOrderID      : "#{salesOrderID}",
                 productName       : decodeURIComponent("#{productName}"),
                 productPrice      : sumUpd,
@@ -1169,9 +1171,9 @@ script.
             var contactID = getCookie("contactID") || null;
 
             var data2 = {
-                "First_Name"  : "#{firstName}",
-                "Email"       : "#{email}",
-                "Phone"       : "#{phone}",
+                "First_Name"  : decodeURIComponent("#{firstName}"),
+                "Email"       : decodeURIComponent("#{email}"),
+                "Phone"       : decodeURIComponent("#{phone}"),
                 "productName" : decodeURIComponent("#{productName}"),
                 "productID"   : "#{productID}",
                 "productPrice": sumUpd,
@@ -1189,7 +1191,7 @@ script.
                     var salesOrderID = response.data.salesOrderID.toString();
 
                     var data = {
-                        email             : "#{email}",
+                        email             : decodeURIComponent("#{email}"),
                         salesOrderID      : salesOrderID || null,
                         productName       : decodeURIComponent("#{productName}"),
                         productPrice      : sumUpd,
