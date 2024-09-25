@@ -31,13 +31,13 @@ html(lang='ru-RU')
 		script.
 			if ("#{salesOrderID}") {
 				var data = {
-					Email             : decodeURIComponent("#{email}"),
+					Email             : "#{email}",
 					salesOrderID      : "#{salesOrderID}",
-					productName       : decodeURIComponent("#{productName}"),
+					productName       : "#{productName}",
 					productPrice      : "#{productPrice}",
 					currency          : "#{currency.toUpperCase()}",
 					redirectURL       : "#{redirectURL}",
-					paymentDescription: decodeURIComponent("Оплата продукта \"#{productName}\""),
+					paymentDescription: "Оплата продукта \"#{productName}\"",
 					merchantID        : "#{merchantID}" || null,
 					successLink       : "#{successLink}" || ""
 				};
@@ -79,13 +79,13 @@ html(lang='ru-RU')
 						var salesOrderID = response.data.salesOrderID.toString();
 
 						var data = {
-							Email             : decodeURIComponent("#{email}"),
+							Email             : "#{email}",
 							salesOrderID      : salesOrderID || null,
-							productName       : decodeURIComponent("#{productName}"),
+							productName       : "#{productName}",
 							productPrice      : "#{productPrice}",
 							currency          : "#{currency.toUpperCase()}",
 							redirectURL       : "#{redirectURL}",
-							paymentDescription: decodeURIComponent("Оплата продукта \"#{productName}\""),
+							paymentDescription: "Оплата продукта \"#{productName}\"",
 							merchantID        : "#{merchantID}" || null,
 							successLink       : "#{successLink}" || ""
 						};

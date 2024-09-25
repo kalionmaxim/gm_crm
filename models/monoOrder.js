@@ -4,6 +4,7 @@ const autoIncrement = require("../lib/mongoose").autoIncrement;
 const Schema = mongoose.Schema;
 
 const monoOrderSchema = new Schema({
+	createdAt: { type: Date, default: Date.now() },
 	mono_order_id     : { type: Number, unique: true },
 	external_order_id : { type: String, index: true },
 	client_phone      : { type: String },
@@ -41,7 +42,7 @@ const monoOrderSchema = new Schema({
 	page     : { type: Schema.Types.ObjectId, ref: "Page" },
 	returned : { type: Boolean, default: false },
 	rejected : { type: Boolean, default: false }
-}, { timestamps: true });
+});
 
 monoOrderSchema.plugin(autoIncrement.plugin, {
 	model      : "MonoOrder",
