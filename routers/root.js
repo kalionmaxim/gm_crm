@@ -1547,7 +1547,14 @@ module.exports = function routes(app, passport) {
 						status,
 						order.total_sum.toFixed(2) || 0,
 						reversed,
-						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
+						order.createdAt ?  new Date(order.createdAt).toLocaleString('pl-PL', {
+							day: '2-digit',
+							month: '2-digit',
+							year: 'numeric',
+							hour: '2-digit',
+							minute: '2-digit',
+							hour12: false,
+						  }) : null,
 						null
 					]);
 				}
@@ -1643,7 +1650,14 @@ module.exports = function routes(app, passport) {
 						order.status || "created",
 						`${order.productPrice.toFixed(2) || 0} ${order.currency || "USD"}`,
 						order.paymentInfo && order.paymentInfo.bank && order.paymentInfo.paymentSystem ? `${order.paymentInfo.bank} ${order.paymentInfo.paymentSystem}` : null,
-						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
+						order.createdAt ?  new Date(order.createdAt).toLocaleString('pl-PL', {
+							day: '2-digit',
+							month: '2-digit',
+							year: 'numeric',
+							hour: '2-digit',
+							minute: '2-digit',
+							hour12: false,
+						  }) : null,
 						null
 					]);
 				}
@@ -1731,7 +1745,14 @@ module.exports = function routes(app, passport) {
 						order.product_name,
 						order.status || "created",
 						order.amount.toFixed(2) || 0,
-						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
+						order.createdAt ?  new Date(order.createdAt).toLocaleString('pl-PL', {
+							day: '2-digit',
+							month: '2-digit',
+							year: 'numeric',
+							hour: '2-digit',
+							minute: '2-digit',
+							hour12: false,
+						  }) : null,
 					]);
 				}
 
@@ -1789,7 +1810,14 @@ module.exports = function routes(app, passport) {
 						order.transactionStatus || "Created",
 						order.paymentSystem || "",
 						`${order.amount.toFixed(2) || 0} ${order.currency || "USD"}`,
-						order.createdAt ? new Date(order.createdAt).toISOString().split(".")[0].split("T").join(" ") : null,
+						order.createdAt ?  new Date(order.createdAt).toLocaleString('pl-PL', {
+							day: '2-digit',
+							month: '2-digit',
+							year: 'numeric',
+							hour: '2-digit',
+							minute: '2-digit',
+							hour12: false,
+						  }) : null,
 					]);
 				}
 

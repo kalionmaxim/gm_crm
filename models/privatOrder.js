@@ -6,7 +6,6 @@ const processingStatuses = ["not_processed", "processing", "processed"];
 const Schema = mongoose.Schema;
 
 const privatOrderSchema = new Schema({
-	createdAt: { type: Date, default: Date.now() },
 	privat_order_id: { type: Number, unique: true },
 
 	internal_order_id: { type: String, unique: true },
@@ -38,7 +37,7 @@ const privatOrderSchema = new Schema({
 	token: { type: String },
 
 	requestCallbackDate: { type: Date }
-});
+}, { timestamps: true });
 
 privatOrderSchema.plugin(autoIncrement.plugin, {
 	model: "PrivatOrder",
