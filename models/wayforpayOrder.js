@@ -6,7 +6,6 @@ const processingStatuses = ["not_processed", "processing", "processed"];
 const Schema = mongoose.Schema;
 
 const wayforpayOrderSchema = new Schema({
-	createdAt: { type: Date, default: Date.now() },
 	wayforpay_order_id: { type: Number, unique: true },
 	name: { type: String },
 	productName: { type: String },
@@ -32,7 +31,7 @@ const wayforpayOrderSchema = new Schema({
 	recToken: { type: String },
 	transactionStatus: { type: String },
 	processingStatus: { type: String, enum: processingStatuses, default: processingStatuses[0] }
-});
+}, { timestamps: true });
 
 wayforpayOrderSchema.plugin(autoIncrement.plugin, {
 	model: "WayforpayOrder",
