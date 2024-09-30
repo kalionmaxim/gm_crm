@@ -47,7 +47,7 @@ module.exports = function routes(app, passport) {
 
 		if (ctx.request.query["productName"] && ctx.request.query["productID"] && ctx.request.query["productPrice"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client-new/checkout/step1", {
-				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
+				productName     : decodeURIComponent(ctx.request.query["productName"].replace(/\n/gi, "") || ""),
 				productID       : ctx.request.query["productID"] || "",
 				productPrice    : ctx.request.query["productPrice"] || "",
 				currency        : ctx.request.query["currency"] || "",
@@ -78,16 +78,16 @@ module.exports = function routes(app, passport) {
 
 		if (ctx.request.query["productName"] && ctx.request.query["email"] && ctx.request.query["firstName"] && ctx.request.query["phone"] && ctx.request.query["productPrice"] && ctx.request.query["productID"] && ctx.request.query["currency"] && ctx.request.query["merchantID"]) {
 			await ctx.render("pages/client-new/checkout/step2", {
-				productName     : ctx.request.query["productName"].replace(/\n/gi, "") || "",
+				productName     : decodeURIComponent(ctx.request.query["productName"].replace(/\n/gi, "") || ""),
 				productID       : ctx.request.query["productID"] || "",
-				email           : ctx.request.query["email"] || "",
-				phone           : ctx.request.query["phone"] || "",
+				email           : decodeURIComponent(ctx.request.query["email"] || ""),
+				phone           : decodeURIComponent(ctx.request.query["phone"] || ""),
 				productPrice    : ctx.request.query["productPrice"] || "",
 				currency        : ctx.request.query["currency"] || "",
 				merchantID      : ctx.request.query["merchantID"] || "",
 				salesOrderID    : ctx.request.query["salesOrderID"] || "",
-				firstName       : ctx.request.query["firstName"] || "",
-				lastName        : ctx.request.query["lastName"] || "",
+				firstName       : decodeURIComponent(ctx.request.query["firstName"] || ""),
+				lastName        : decodeURIComponent(ctx.request.query["lastName"] || ""),
 				landing         : ctx.request.query["landing"] || "",
 				convertationHide: ctx.request.query["convertationHide"] || "false",
 				successLink     : ctx.request.query["successLink"] || "",
