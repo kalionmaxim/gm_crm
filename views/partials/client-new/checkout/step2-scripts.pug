@@ -1342,10 +1342,20 @@ script.
     }
 
     $('#wfpSubmit, #wfpSubmit2').on('click', function(e) {
-        $("#preloader").show();
-
         sum = $('#wfpForm [name="productPrice"]').val();
         currency = $('#wfpForm [name="currency"]').val();
+
+        var USDRateUAH = parseFloat("#{USDRateUAH}");
+        var USDRateEUR = parseFloat("#{USDRateEUR}");
+        var USDRateRUB = parseFloat("#{USDRateRUB}");
+        const sumUah = currency.toUpperCase() === "USD" ? (sum * USDRateUAH).toFixed(2) : currency.toUpperCase() === "EUR" ?  ((sum / USDRateEUR) * USDRateUAH).toFixed(2) : sum;
+
+        if (sumUah >= 50000) {
+            $("#sumLimitPrevent").show();
+            return;
+        }
+
+        $("#preloader").show();
 
         var data = {
             "First_Name"  : "#{firstName}",
