@@ -14,7 +14,29 @@
     // overflow-y: auto;
   }
 
-  &__close {
+  &-layout {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    .installment-modal {
+      display: block;
+      position: relative;
+
+      &__inner {
+        max-width: 100%;
+      }
+    }
+  }
+
+  &__close,
+  &__close2 {
     width: 20px;
     height: 20px;
     background: url(/img/client-new/common/close.svg) no-repeat center / contain;
@@ -58,6 +80,15 @@
     margin-top: 7px;
     @include mobile {
       margin-top: 5px;
+    }
+  }
+
+  &__text {
+    @extend .text2;
+    text-align: center;
+    margin-top: 16px;
+    @include mobile {
+      margin-top: 12px;
     }
   }
 
@@ -105,6 +136,17 @@
     a {
       color: inherit;
       text-decoration: underline;
+    }
+  }
+
+  &--popup {
+    max-width: 600px;
+    height: auto;
+    padding: 35px;
+    margin: 0 auto;
+    @include mobile {
+      padding: 30px 20px;
+      overflow-y: auto;
     }
   }
 }

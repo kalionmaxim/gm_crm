@@ -8,6 +8,9 @@ $(function () {
     $(this).closest(".installment-modal").hide();
     $(".steps-payways").show();
   });
+  $(".installment-modal__close2").click(function () {
+    $(this).closest(".installment-modal-layout").hide();
+  });
 
   // change lang
   var currentLang = getParameterByName("lang").toLowerCase() || "ua";

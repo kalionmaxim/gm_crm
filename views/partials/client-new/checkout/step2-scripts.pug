@@ -1133,6 +1133,11 @@ script.
             sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
         }
 
+        if (sumUpd >= 50000) {
+            $("#sumLimitPrevent").show();
+            return;
+        }
+
         $("#preloader").show();
 
         if ("#{salesOrderID}") {
