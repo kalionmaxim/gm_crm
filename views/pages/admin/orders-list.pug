@@ -30,11 +30,25 @@ block contents
 											th Статус
 											th Сума, грн
 											th Скасовано/Зроблено повернення
+											th Сума повернення, грн
 											th Дата
 											th Дії
 
 
 		include ./../../partials/admin/footer
+
+		div#monoReturn.confirm-popup.popup-material__layout
+			div.popup-material
+				h2 Зробити повернення на суму 
+				
+				form#monoReturnForm
+					.form-group
+						input#monoReturnSum.form-control(name='return_sum' type="number" min="1" placeholder='Введіть суму поверненя' required=true)
+					input#monoReturnOrderId(name="id" type="hidden")
+					
+					div#confirmButtons
+						button(type="submit").button.button-yes Підтвердити
+						a.button.button-no Скасувати
 
 		script(src='/plugins/bower_components/datatables/jquery.dataTables.min.js')
 		script(src="/js/pages/admin/orders-list.js")

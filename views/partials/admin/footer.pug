@@ -5,12 +5,12 @@ footer.footer.text-center  2019 © GeniusMarketing
 	div.popup-alert-wrapper.edit-message-popup.info-popup.animated.shake
 		h2 Сообщение
 		div.form-messages
-	div.confirm-popup.popup-material__layout
+	div#confirmPopup.confirm-popup.popup-material__layout
 		div.popup-material
-			h2 Вопрос
+			h2 Питання
 			div#confirmButtons
-				a.button.button-yes Да
-				a.button.button-no Нет
+				a.button.button-yes Так
+				a.button.button-no Ні
 	script.
 
 		function setError(text) {
@@ -32,10 +32,10 @@ footer.footer.text-center  2019 © GeniusMarketing
 		}
 
 		function Dialog(message, yesCallback, noCallback) {
-			$('.confirm-popup h2').html(message);
-			var dialog = $('.confirm-popup').fadeIn(300);
+			$('#confirmPopup h2').html(message);
+			var dialog = $('#confirmPopup').fadeIn(300);
 
-			$('.button-yes').click(function () {
+			$('#confirmPopup .button-yes').click(function () {
 				dialog.fadeOut(300);
 				yesCallback();
 				noCallback = function () {
@@ -46,7 +46,7 @@ footer.footer.text-center  2019 © GeniusMarketing
 				}
 			});
 
-			$('.button-no').click(function () {
+			$('#confirmPopup .button-no').click(function () {
 				dialog.fadeOut(300);
 				noCallback();
 				yesCallback = function () {

@@ -1547,6 +1547,7 @@ module.exports = function routes(app, passport) {
 						status,
 						order.total_sum.toFixed(2) || 0,
 						reversed,
+						order.return_sum || '-',
 						order.createdAt ?  new Date(order.createdAt).toLocaleString('pl-PL', {
 							day: '2-digit',
 							month: '2-digit',
@@ -1586,6 +1587,46 @@ module.exports = function routes(app, passport) {
 								sum                 : order.total_sum
 							});
 
+							order.returned = true;
+
+							await order.save();
+						} else {
+							await Monobank.rejectOrder(order.external_order_id);
+
+							order.rejected = true;
+
+							await order.save();
+						}
+					}
+				}
+			}
+		} catch (err) {
+			eLogger.error(err);
+		}
+
+		await ctx.redirect("/admin/orders");
+	});
+
+	router.get("/admin/orders/:order_id/return/:return_sum", async (ctx) => {
+		try {
+			const returnSum = parseInt(ctx.params.return_sum, 10);
+
+			if (ctx.isAuthenticated() && returnSum > 0) {
+				const order = await MonoOrder.findOne({ mono_order_id: parseInt(ctx.params.order_id, 10) });
+
+				if (order) {
+					const stateData = await Monobank.stateOrder(order.external_order_id);
+					console.log("stateData", stateData);
+
+					if (stateData.result) {
+						if (stateData.data.state === "SUCCESS") {
+							await Monobank.returnOrder({
+								orderID             : order.external_order_id,
+								return_money_to_card: true,
+								sum                 : returnSum
+							});
+
+							order.return_sum = returnSum;
 							order.returned = true;
 
 							await order.save();
