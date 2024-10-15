@@ -109,8 +109,7 @@ $(document).ready(function () {
 		if (id && returnSum) {
 			axios({
 				method: "get",
-				url   : `/admin/orders/${id}/return/${returnSum}`,
-				data  : data
+				url   : `/admin/orders/${id}/return/${returnSum}`
 			}).then(function (response) {
 				console.log(response);
 				if (response && response.data && response.data.result && response.data.data) {
