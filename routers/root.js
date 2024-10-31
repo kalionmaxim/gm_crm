@@ -1541,6 +1541,7 @@ module.exports = function routes(app, passport) {
 
 					list.data.push([
 						order.mono_order_id,
+						order.external_order_id,
 						order.name,
 						order.client_phone,
 						productName,
@@ -1685,6 +1686,7 @@ module.exports = function routes(app, passport) {
 
 					list.data.push([
 						order.plata_order_id,
+						order.invoiceId,
 						order.name ? order.name : order.email,
 						order.phone,
 						order.productName,
