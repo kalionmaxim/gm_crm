@@ -34,6 +34,7 @@ const PlataMerchant = require("../models/plataMerchant").PlataMerchant;
 
 const addDealToCrm = require("../lib/crm").addDealToCrm;
 const addToCampaign = require("../lib/gr").addToCampaign;
+const fetchFromFields = require("../lib/gr").fetchFromFields;
 
 const requestIp = require("request-ip");
 
@@ -259,6 +260,12 @@ module.exports = function routes(app, passport) {
 				result: 0,
 				error : "Bad request. Body is undefined"
 			};
+		}
+	});
+
+	router.get("/getresponse/from-fields", async (ctx) => {
+		if (ctx.isAuthenticated()) {
+			ctx.body = await fetchFromFields();
 		}
 	});
 
