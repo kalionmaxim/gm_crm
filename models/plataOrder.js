@@ -33,6 +33,16 @@ const plataOrderSchema = new Schema({
 	},
 	failureReason: { type: String },
 	errCode: { type: String },
+
+	checks: [{
+		id: { type: String },
+		type: { type: String },
+		status: { type: String },
+		statusDescription: { type: String },
+		taxUrl: { type: String },
+		file: { type: String },
+		fiscalizationSource: { type: String },
+	}]
 }, { timestamps: true });
 
 plataOrderSchema.plugin(autoIncrement.plugin, {
