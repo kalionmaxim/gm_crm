@@ -42,7 +42,8 @@ const plataOrderSchema = new Schema({
 		taxUrl: { type: String },
 		file: { type: String },
 		fiscalizationSource: { type: String },
-	}]
+	}],
+	isZohoReceiptSent: { type: Boolean },
 }, { timestamps: true });
 
 plataOrderSchema.plugin(autoIncrement.plugin, {
