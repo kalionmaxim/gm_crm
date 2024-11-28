@@ -91,12 +91,12 @@ block contents
                                                     .steps-payways-item__images
                                                         img(src="/img/icons/pay/monobank.svg")
                                         
-                                        //- if !(privatHide && privatHide === "true")
-                                        //-     .steps-payways-item#showPrivatPopupBtn.ua-block
-                                        //-         .steps-payways-item__inner
-                                        //-             .steps-payways-item__text ПриватБанк
-                                        //-             .steps-payways-item__images
-                                        //-                 img(src="/img/client-new/step/payway-privat.png")
+                                        if !(privatHide && privatHide === "true")
+                                            .steps-payways-item#showPrivatPopupBtn.ua-block
+                                                .steps-payways-item__inner
+                                                    .steps-payways-item__text ПриватБанк
+                                                    .steps-payways-item__images
+                                                        img(src="/img/client-new/step/payway-privat.png")
 
                                         if !(wayforpayHide && wayforpayHide === "true")
                                             .steps-payways-item
