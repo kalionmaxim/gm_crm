@@ -130,6 +130,13 @@ block contents
                                         //-         .steps-payways-item__images
                                         //-             img(src="/img/client-new/step/payway-frisbee.png")
 
+                            .steps-agreement
+                                #agreement-checkbox.custom-checkbox
+                                    input(id="agreement" type="checkbox" checked='checked')
+                                    label(for="agreement")
+                                        | #{labels.iAgreeWithOffer1Lbl || ""} <a target='_blank', href='https://ua-policies.genius.space/policies'>#{labels.iAgreeWithOffer2Lbl || ""}</a>
+                                        .custom-checkbox__box
+
                         include ../../../partials/client-new/modals/installment-privat
                         include ../../../partials/client-new/modals/installment-monobank
 

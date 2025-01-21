@@ -1422,3 +1422,15 @@ script.
 
         payWFP(data);
     });
+
+script.
+    var $checkbox = $("#agreement-checkbox")
+    $checkbox.on("click", function () {
+        if ($("#agreement").prop("checked")) {
+            $checkbox.removeClass("active");
+            $(".steps-payways-item").removeClass("payway-disabled");   
+        } else {
+            $checkbox.addClass("active");
+            $(".steps-payways-item").addClass("payway-disabled");
+        }
+    });
