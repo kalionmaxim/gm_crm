@@ -14,6 +14,8 @@ const tinkoff = require("../lib/tinkoff");
 const WayForPay = require("../lib/wayforpay");
 // const Yandex = require("../lib/yandexKassa");
 const Plata = require("../lib/plata");
+const pumb = require("../lib/pumb");
+
 
 const config = require("../config/config");
 const merchantUSD = config.get("fondy:usd") || "";
@@ -2010,6 +2012,9 @@ module.exports = function routes(app, passport) {
 	router.post("/plata/callback", async (ctx) => {
 		ctx.body = await Plata.processCallback(ctx.request.body);
 	});
+
+	router.post("/callback/pumb", express.json(), pumb.handlePumbCallback);
+	router.post("/callback/pumb/test", express.json(), pumb.handlePumbCallback);
 
 	app.use(router.routes());
 };
