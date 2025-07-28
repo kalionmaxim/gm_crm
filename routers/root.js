@@ -2013,8 +2013,13 @@ module.exports = function routes(app, passport) {
 		ctx.body = await Plata.processCallback(ctx.request.body);
 	});
 
-	router.post("/callback/pumb", express.json(), pumb.handlePumbCallback);
- 	router.post("/callback/pumb/test", express.json(), pumb.handlePumbCallback);
+	router.post("/callback/pumb", async (ctx) => {
+  		ctx.body = await pumb.handlePumbCallback(ctx.request.body);
+	});
+
+	router.post("/callback/pumb/test", async (ctx) => {
+  		ctx.body = await pumb.handlePumbCallback(ctx.request.body);
+	});
 
 
 	app.use(router.routes());
