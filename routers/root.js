@@ -2015,15 +2015,19 @@ module.exports = function routes(app, passport) {
 
 	router.post("/callback/pumb", async (ctx) => {
 	  try {
+	    console.log("BODY", ctx.request.body);
+	    console.log("CALLBACK TYPE", typeof pumb?.handlePumbCallback);
+
 	    const result = await pumb.handlePumbCallback(ctx.request.body);
 	    ctx.status = 200;
 	    ctx.body = result;
 	  } catch (err) {
-	    console.error("PUMB callback error:", err);
+	    console.error("PUMB callback error:", err.message, err.stack);
 	    ctx.status = 500;
-	    ctx.body = { error: "Internal Server Error" };
+	    ctx.body = { error: err.message || "Internal Server Error" };
 	  }
 	});
+
 
 	router.post("/callback/pumb/test", async (ctx) => {
 	  try {
