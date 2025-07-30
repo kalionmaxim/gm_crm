@@ -2024,7 +2024,11 @@ module.exports = function routes(app, passport) {
 	  } catch (err) {
 	    console.error("PUMB callback error:", err.message, err.stack);
 	    ctx.status = 500;
-	    ctx.body = { error: err.message || "Internal Server Error" };
+	    ctx.body = {
+	      error: "Internal Server Error",
+	      message: err.message,
+	      stack: err.stack,
+	    };
 	  }
 	});
 
