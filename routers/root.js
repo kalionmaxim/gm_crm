@@ -2014,11 +2014,27 @@ module.exports = function routes(app, passport) {
 	});
 
 	router.post("/callback/pumb", async (ctx) => {
-  		ctx.body = await pumb.handlePumbCallback(ctx.request.body);
+	  try {
+	    const result = await pumb.handlePumbCallback(ctx.request.body);
+	    ctx.status = 200;
+	    ctx.body = result;
+	  } catch (err) {
+	    console.error("PUMB callback error:", err);
+	    ctx.status = 500;
+	    ctx.body = { error: "Internal Server Error" };
+	  }
 	});
 
 	router.post("/callback/pumb/test", async (ctx) => {
-  		ctx.body = await pumb.handlePumbCallback(ctx.request.body);
+	  try {
+	    const result = await pumb.handlePumbCallback(ctx.request.body, true); // Можна передати `isTest = true`
+	    ctx.status = 200;
+	    ctx.body = result;
+	  } catch (err) {
+	    console.error("PUMB test callback error:", err);
+	    ctx.status = 500;
+	    ctx.body = { error: "Internal Server Error" };
+	  }
 	});
 
 
