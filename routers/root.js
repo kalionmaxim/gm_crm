@@ -2013,39 +2013,6 @@ module.exports = function routes(app, passport) {
 		ctx.body = await Plata.processCallback(ctx.request.body);
 	});
 
-	router.post("/callback/pumb", async (ctx) => {
-	  try {
-	    console.log("BODY", ctx.request.body);
-	    console.log("CALLBACK TYPE", typeof pumb?.handlePumbCallback);
-
-	    const result = await pumb.handlePumbCallback(ctx.request.body);
-	    ctx.status = 200;
-	    ctx.body = result;
-	  } catch (err) {
-	    console.error("PUMB callback error:", err.message, err.stack);
-	    ctx.status = 500;
-	    ctx.body = {
-	      error: "Internal Server Error",
-	      message: err.message,
-	      stack: err.stack,
-	    };
-	  }
-	});
-
-
-	router.post("/callback/pumb/test", async (ctx) => {
-	  try {
-	    const result = await pumb.handlePumbCallback(ctx.request.body, true); // Можна передати `isTest = true`
-	    ctx.status = 200;
-	    ctx.body = result;
-	  } catch (err) {
-	    console.error("PUMB test callback error:", err);
-	    ctx.status = 500;
-	    ctx.body = { error: "Internal Server Error" };
-	  }
-	});
-
-
 	app.use(router.routes());
 
 };
