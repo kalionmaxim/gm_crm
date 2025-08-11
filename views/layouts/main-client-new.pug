@@ -34,6 +34,7 @@ html(lang='ru-RU')
                     text-align: center !important;
                 }
                 
+                /* First line: UAH only */
                 .step-header-prices .price-uah {
                     order: 1 !important;
                     display: block !important;
@@ -42,6 +43,7 @@ html(lang='ru-RU')
                     margin-bottom: 5px !important;
                 }
                 
+                /* Second line: USD and EUR together */
                 .step-header-prices .price-usd,
                 .step-header-prices .price-eur {
                     order: 2 !important;
@@ -51,11 +53,14 @@ html(lang='ru-RU')
                 
                 /* Ensure the container allows for proper stacking */
                 .step-header-prices span {
-                    display: block !important;
+                    display: inline-block !important;
                 }
                 
                 /* Additional mobile optimizations */
-                .step-header-prices .hrn_price,
+                .step-header-prices .hrn_price {
+                    display: block !important;
+                }
+                
                 .step-header-prices .dollar_price,
                 .step-header-prices .eur_price {
                     display: inline-block !important;
