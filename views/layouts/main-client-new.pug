@@ -40,16 +40,22 @@ html(lang='ru-RU')
                 white-space: nowrap !important;
             }
             
-            /* Mobile layout for currency display */
+            /* Mobile layout for currency display - Nuclear approach */
             @media (max-width: 768px) {
-                /* Simple block layout */
+                /* Reset everything */
                 .step-header-prices {
                     display: block !important;
                     text-align: center !important;
                     line-height: 1.4 !important;
                 }
                 
-                /* UAH takes full width on first line */
+                .step-header-prices * {
+                    float: none !important;
+                    clear: none !important;
+                    position: static !important;
+                }
+                
+                /* UAH on its own line */
                 .step-header-prices .hrn_price {
                     display: block !important;
                     width: 100% !important;
@@ -57,45 +63,70 @@ html(lang='ru-RU')
                     margin-bottom: 8px !important;
                 }
                 
-                /* Force USD and EUR to stay inline together */
-                .step-header-prices .dollar_price,
+                /* Create a virtual container for USD and EUR */
+                .step-header-prices .dollar_price {
+                    display: inline !important;
+                    white-space: nowrap !important;
+                    margin-right: 5px !important;
+                }
+                
                 .step-header-prices .eur_price {
                     display: inline !important;
                     white-space: nowrap !important;
-                    line-height: 1 !important;
+                    margin-left: 0 !important;
                 }
                 
-                /* Remove any line breaks or block behavior from USD/EUR containers */
-                .step-header-prices .dollar_price::after {
+                /* Hide all pseudo-elements that could add line breaks */
+                .step-header-prices .dollar_price::before,
+                .step-header-prices .dollar_price::after,
+                .step-header-prices .eur_price::before,
+                .step-header-prices .eur_price::after {
+                    display: none !important;
                     content: "" !important;
-                }
-                
-                .step-header-prices .eur_price::before {
-                    content: " / " !important;
-                    white-space: nowrap !important;
-                }
-                
-                /* Ensure all inner spans stay inline */
-                .step-header-prices .dollar_price span,
-                .step-header-prices .eur_price span,
-                .step-header-prices .dollar_price *,
-                .step-header-prices .eur_price * {
-                    display: inline !important;
-                    white-space: nowrap !important;
-                }
-                
-                /* Override any other CSS that might cause line breaks */
-                .step-header-prices .dollar_price,
-                .step-header-prices .eur_price,
-                .step-header-prices .dollar_price *,
-                .step-header-prices .eur_price * {
-                    float: none !important;
-                    clear: none !important;
-                    width: auto !important;
-                    height: auto !important;
                 }
             }
             
+        script.
+            // JavaScript solution for mobile currency layout
+            function fixMobileCurrencyLayout() {
+                if (window.innerWidth <= 768) {
+                    const pricesContainer = document.querySelector('.step-header-prices');
+                    if (pricesContainer) {
+                        const uah = pricesContainer.querySelector('.hrn_price, #hrn_price');
+                        const usd = pricesContainer.querySelector('.dollar_price, #dollar_price');
+                        const eur = pricesContainer.querySelector('.eur_price, #eur_price');
+                        
+                        if (uah && usd && eur) {
+                            // Force UAH on its own line
+                            uah.style.display = 'block';
+                            uah.style.width = '100%';
+                            uah.style.textAlign = 'center';
+                            uah.style.marginBottom = '8px';
+                            
+                            // Force USD and EUR inline on same line
+                            usd.style.display = 'inline';
+                            usd.style.marginRight = '5px';
+                            eur.style.display = 'inline';
+                            eur.style.marginLeft = '0';
+                            
+                            // Add separator
+                            if (!eur.querySelector('.js-separator')) {
+                                const separator = document.createElement('span');
+                                separator.className = 'js-separator';
+                                separator.textContent = ' / ';
+                                eur.insertBefore(separator, eur.firstChild);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Run on page load and resize
+            document.addEventListener('DOMContentLoaded', fixMobileCurrencyLayout);
+            window.addEventListener('resize', fixMobileCurrencyLayout);
+            setTimeout(fixMobileCurrencyLayout, 100); // Fallback
+        
+        style.
             /* Extra small mobile devices */
             @media (max-width: 480px) {
                 .step-header-prices .price-usd,
