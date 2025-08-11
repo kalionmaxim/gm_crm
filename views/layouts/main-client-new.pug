@@ -30,12 +30,12 @@ html(lang='ru-RU')
                     display: flex !important;
                     flex-direction: column !important;
                     align-items: center !important;
-                    gap: 8px !important;
+                    gap: 5px !important;
                     text-align: center !important;
                 }
                 
                 /* First line: UAH only */
-                .step-header-prices .price-uah {
+                .step-header-prices .hrn_price {
                     order: 1 !important;
                     display: block !important;
                     width: 100% !important;
@@ -43,25 +43,24 @@ html(lang='ru-RU')
                     margin-bottom: 5px !important;
                 }
                 
-                /* Second line: USD and EUR together - force them to be inline */
-                .step-header-prices .price-usd,
-                .step-header-prices .price-eur {
-                    order: 2 !important;
-                    display: inline !important;
-                    margin: 0 5px !important;
-                }
-                
-                /* Force USD and EUR to be on the same line */
+                /* Second line: USD and EUR together */
                 .step-header-prices .dollar_price,
                 .step-header-prices .eur_price {
-                    display: inline !important;
-                    white-space: nowrap !important;
+                    order: 2 !important;
+                    display: inline-block !important;
+                    margin: 0 3px !important;
                 }
                 
-                /* Ensure UAH is on its own line */
-                .step-header-prices .hrn_price {
-                    display: block !important;
-                    width: 100% !important;
+                /* Force the USD and EUR spans to be inline */
+                .step-header-prices .dollar_price span,
+                .step-header-prices .eur_price span {
+                    display: inline !important;
+                }
+                
+                /* Ensure proper spacing between USD and EUR */
+                .step-header-prices .dollar_price::after {
+                    content: " / " !important;
+                    margin-left: 3px !important;
                 }
             }
             
