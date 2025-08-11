@@ -47,45 +47,31 @@ html(lang='ru-RU')
                     text-align: center !important;
                 }
                 
-                /* Force USD and EUR to be on the same line */
-                .step-header-prices .dollar_price,
-                .step-header-prices .eur_price {
-                    display: inline !important;
-                    margin: 0 3px !important;
-                }
-                
-                /* Ensure UAH is on its own line */
+                /* UAH on its own line */
                 .step-header-prices .hrn_price {
                     display: block !important;
                     width: 100% !important;
                     text-align: center !important;
-                    margin-bottom: 5px !important;
+                    margin-bottom: 8px !important;
                 }
                 
-                /* Hide the slash before USD on mobile */
-                .step-header-prices .dollar_price::before {
-                    content: "" !important;
-                }
-                
-                /* Hide any slashes in the price display on mobile */
+                /* Create a container for USD and EUR on the same line */
                 .step-header-prices .dollar_price,
                 .step-header-prices .eur_price {
-                    position: relative !important;
+                    display: inline-block !important;
+                    margin: 0 5px !important;
+                    vertical-align: middle !important;
                 }
                 
-                .step-header-prices .dollar_price::before,
-                .step-header-prices .eur_price::before {
-                    content: "" !important;
-                }
-                
-                /* Hide slashes that might be in the text content */
+                /* Force the spans inside to be inline */
                 .step-header-prices .dollar_price span,
                 .step-header-prices .eur_price span {
-                    position: relative !important;
+                    display: inline !important;
                 }
                 
-                /* Target any text that starts with / */
-                .step-header-prices .dollar_price span:first-child::before {
+                /* Hide any leading slashes */
+                .step-header-prices .dollar_price::before,
+                .step-header-prices .eur_price::before {
                     content: "" !important;
                 }
             }
