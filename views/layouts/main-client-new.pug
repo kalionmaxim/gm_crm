@@ -59,12 +59,16 @@ html(lang='ru-RU')
                     text-align: center !important;
                 }
                 
-                /* Create a flex container for USD and EUR on second row */
-                .step-header-prices .dollar_price,
+                /* Create a wrapper for USD and EUR on second row */
+                .step-header-prices .dollar_price {
+                    order: 2 !important;
+                    display: inline !important;
+                    white-space: nowrap !important;
+                }
+                
                 .step-header-prices .eur_price {
                     order: 2 !important;
-                    display: inline-flex !important;
-                    align-items: center !important;
+                    display: inline !important;
                     white-space: nowrap !important;
                 }
                 
