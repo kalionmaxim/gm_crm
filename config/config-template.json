@@ -64,6 +64,12 @@
         "maxLogSize": "1024000",
         "filename": "logs/gr.log",
         "category": "getResponse-logger"
+      },
+      {
+        "type": "file",
+        "maxLogSize": "1024000",
+        "filename": "logs/pumb.log",
+        "category": "pumb-logger"
       }
     ]
   },
@@ -107,5 +113,8 @@
   },
   "plata": {
     "token": "************"
+  },
+  "pumb": {
+    "callbackApiKey": "3s8CgWcWuxGaDQkJd4MUwBdPpF7"
   }
 }
