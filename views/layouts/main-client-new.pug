@@ -24,6 +24,22 @@ html(lang='ru-RU')
                 font-size: 16px !important;
             }
             
+            /* Desktop layout - all currencies on one line */
+            .step-header-prices {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 10px !important;
+                flex-wrap: nowrap !important;
+            }
+            
+            .step-header-prices .hrn_price,
+            .step-header-prices .dollar_price,
+            .step-header-prices .eur_price {
+                display: inline-block !important;
+                white-space: nowrap !important;
+            }
+            
             /* Mobile layout for currency display */
             @media (max-width: 768px) {
                 .step-header-prices {
