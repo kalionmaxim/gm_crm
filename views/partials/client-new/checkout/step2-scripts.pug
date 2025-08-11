@@ -370,29 +370,27 @@ script.
     switch (currency.toLowerCase()) {
         case "usd":
             currencySym = " $";
-            subPrice1 = Math.ceil(mainPrice * USDRateEUR);
-            subPrice1Curr = "eur";
-            subPrice2 = Math.ceil(mainPrice * USDRateUAH);
-            subPrice2Curr = "uah";
+            subPrice1 = Math.ceil(mainPrice * USDRateUAH);
+            subPrice1Curr = "uah";
+            subPrice2 = Math.ceil(mainPrice * USDRateEUR);
+            subPrice2Curr = "eur";
             break;
 
         case "uah":
             currencySym = " грн";
-            subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
-            subPrice1Curr = "eur";
-            subPrice2 = Math.ceil(mainPrice / USDRateUAH);
-            subPrice2Curr = "usd";
+            subPrice1 = mainPrice;
+            subPrice1Curr = "uah";
+            subPrice2 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
+            subPrice2Curr = "eur";
             break;
 
         case "eur":
             currencySym = " €";
-            subPrice1 = Math.ceil(mainPrice / USDRateEUR);
-            subPrice1Curr = "usd";
-            subPrice2 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
-            subPrice2Curr = "uah";
+            subPrice1 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
+            subPrice1Curr = "uah";
+            subPrice2 = Math.ceil(mainPrice / USDRateEUR);
+            subPrice2Curr = "usd";
             break;
-
-
     }
 
     var tovar_id = 394979;
@@ -442,8 +440,13 @@ script.
                     break;
             }
         }
-
-
+        
+        // Always ensure UAH price is visible and first
+        if (subPrice1 && subPrice1Curr === "uah") {
+            $('.js_hrn_price').html(subPrice1 + " грн");
+            $('.js_hrn_price').addClass('ua-block');
+            UAHPrice = subPrice1;
+        }
     } else {
         $('.hrn_price').hide();
     }
