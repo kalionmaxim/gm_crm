@@ -23,6 +23,57 @@ html(lang='ru-RU')
             .price-usd, .price-eur {
                 font-size: 16px !important;
             }
+            
+            /* Mobile layout for currency display */
+            @media (max-width: 768px) {
+                .step-header-prices {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    align-items: center !important;
+                    gap: 8px !important;
+                    text-align: center !important;
+                }
+                
+                .step-header-prices .price-uah {
+                    order: 1 !important;
+                    display: block !important;
+                    width: 100% !important;
+                    text-align: center !important;
+                    margin-bottom: 5px !important;
+                }
+                
+                .step-header-prices .price-usd,
+                .step-header-prices .price-eur {
+                    order: 2 !important;
+                    display: inline-block !important;
+                    margin: 0 8px !important;
+                }
+                
+                /* Ensure the container allows for proper stacking */
+                .step-header-prices span {
+                    display: block !important;
+                }
+                
+                /* Additional mobile optimizations */
+                .step-header-prices .hrn_price,
+                .step-header-prices .dollar_price,
+                .step-header-prices .eur_price {
+                    display: inline-block !important;
+                }
+            }
+            
+            /* Extra small mobile devices */
+            @media (max-width: 480px) {
+                .step-header-prices .price-usd,
+                .step-header-prices .price-eur {
+                    margin: 0 5px !important;
+                    font-size: 14px !important;
+                }
+                
+                .step-header-prices .price-uah {
+                    font-size: 18px !important;
+                }
+            }
         // Google Tag Manager
         script.
             (function (w, d, s, l, i) {
