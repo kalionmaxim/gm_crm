@@ -45,6 +45,7 @@ html(lang='ru-RU')
                 .step-header-prices {
                     display: block !important;
                     text-align: center !important;
+                    line-height: 1.4 !important;
                 }
                 
                 /* UAH on its own line */
@@ -55,24 +56,18 @@ html(lang='ru-RU')
                     margin-bottom: 8px !important;
                 }
                 
-                /* Create a container for USD and EUR on the same line */
+                /* USD and EUR on the same line */
                 .step-header-prices .dollar_price,
                 .step-header-prices .eur_price {
-                    display: inline-block !important;
-                    margin: 0 5px !important;
-                    vertical-align: middle !important;
+                    display: inline !important;
+                    margin: 0 3px !important;
+                    white-space: nowrap !important;
                 }
                 
                 /* Force the spans inside to be inline */
                 .step-header-prices .dollar_price span,
                 .step-header-prices .eur_price span {
                     display: inline !important;
-                }
-                
-                /* Hide any leading slashes */
-                .step-header-prices .dollar_price::before,
-                .step-header-prices .eur_price::before {
-                    content: "" !important;
                 }
             }
             
