@@ -27,40 +27,23 @@ html(lang='ru-RU')
             /* Mobile layout for currency display */
             @media (max-width: 768px) {
                 .step-header-prices {
-                    display: flex !important;
-                    flex-direction: column !important;
-                    align-items: center !important;
-                    gap: 5px !important;
+                    display: block !important;
                     text-align: center !important;
                 }
                 
-                /* First line: UAH only */
+                /* Force USD and EUR to be on the same line */
+                .step-header-prices .dollar_price,
+                .step-header-prices .eur_price {
+                    display: inline !important;
+                    margin: 0 3px !important;
+                }
+                
+                /* Ensure UAH is on its own line */
                 .step-header-prices .hrn_price {
-                    order: 1 !important;
                     display: block !important;
                     width: 100% !important;
                     text-align: center !important;
                     margin-bottom: 5px !important;
-                }
-                
-                /* Second line: USD and EUR together */
-                .step-header-prices .dollar_price,
-                .step-header-prices .eur_price {
-                    order: 2 !important;
-                    display: inline-block !important;
-                    margin: 0 3px !important;
-                }
-                
-                /* Force the USD and EUR spans to be inline */
-                .step-header-prices .dollar_price span,
-                .step-header-prices .eur_price span {
-                    display: inline !important;
-                }
-                
-                /* Ensure proper spacing between USD and EUR */
-                .step-header-prices .dollar_price::after {
-                    content: " / " !important;
-                    margin-left: 3px !important;
                 }
             }
             
