@@ -42,13 +42,14 @@ html(lang='ru-RU')
             
             /* Mobile layout for currency display */
             @media (max-width: 768px) {
+                /* Override desktop flexbox */
                 .step-header-prices {
                     display: block !important;
                     text-align: center !important;
                     line-height: 1.4 !important;
                 }
                 
-                /* UAH on its own line */
+                /* UAH on its own line - force line break after it */
                 .step-header-prices .hrn_price {
                     display: block !important;
                     width: 100% !important;
@@ -56,15 +57,31 @@ html(lang='ru-RU')
                     margin-bottom: 8px !important;
                 }
                 
+                /* Add line break after UAH using CSS */
+                .step-header-prices .hrn_price::after {
+                    content: "" !important;
+                    display: block !important;
+                    width: 100% !important;
+                    height: 0 !important;
+                }
+                
                 /* USD and EUR on the same line */
                 .step-header-prices .dollar_price,
                 .step-header-prices .eur_price {
-                    display: inline !important;
-                    margin: 0 3px !important;
+                    display: inline-block !important;
+                    margin: 0 5px !important;
                     white-space: nowrap !important;
+                    vertical-align: middle !important;
                 }
                 
-                /* Force the spans inside to be inline */
+                /* Hide any auto-generated slashes from other CSS */
+                .step-header-prices .dollar_price::before,
+                .step-header-prices .eur_price::before {
+                    content: "" !important;
+                    display: none !important;
+                }
+                
+                /* Ensure spans inside behave properly */
                 .step-header-prices .dollar_price span,
                 .step-header-prices .eur_price span {
                     display: inline !important;
