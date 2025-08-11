@@ -46,39 +46,53 @@ html(lang='ru-RU')
                 .step-header-prices {
                     display: block !important;
                     text-align: center !important;
-                    line-height: 1.4 !important;
+                    line-height: 1.6 !important;
                 }
                 
-                /* UAH on its own line - force line break after it */
+                /* UAH on its own line - completely separate */
                 .step-header-prices .hrn_price {
                     display: block !important;
                     width: 100% !important;
                     text-align: center !important;
-                    margin-bottom: 8px !important;
+                    margin-bottom: 10px !important;
                 }
                 
-                /* Add line break after UAH using CSS */
+                /* Force line break after UAH */
                 .step-header-prices .hrn_price::after {
-                    content: "" !important;
+                    content: "\A" !important;
+                    white-space: pre !important;
                     display: block !important;
-                    width: 100% !important;
-                    height: 0 !important;
                 }
                 
-                /* USD and EUR on the same line */
-                .step-header-prices .dollar_price,
-                .step-header-prices .eur_price {
+                /* Create a container effect for USD and EUR on second line */
+                .step-header-prices .dollar_price {
                     display: inline-block !important;
-                    margin: 0 5px !important;
+                    margin-right: 8px !important;
                     white-space: nowrap !important;
                     vertical-align: middle !important;
                 }
                 
-                /* Hide any auto-generated slashes from other CSS */
+                .step-header-prices .eur_price {
+                    display: inline-block !important;
+                    margin-left: 0 !important;
+                    white-space: nowrap !important;
+                    vertical-align: middle !important;
+                }
+                
+                /* Hide all auto-generated slashes and separators */
                 .step-header-prices .dollar_price::before,
-                .step-header-prices .eur_price::before {
+                .step-header-prices .eur_price::before,
+                .step-header-prices .dollar_price::after,
+                .step-header-prices .eur_price::after {
                     content: "" !important;
                     display: none !important;
+                }
+                
+                /* Add custom separator between USD and EUR */
+                .step-header-prices .dollar_price::after {
+                    content: " / " !important;
+                    display: inline !important;
+                    margin: 0 3px !important;
                 }
                 
                 /* Ensure spans inside behave properly */
