@@ -76,13 +76,22 @@ html(lang='ru-RU')
                     margin-left: 0 !important;
                 }
                 
-                /* Hide all pseudo-elements that could add line breaks */
+                /* Hide ALL external slashes and separators */
                 .step-header-prices .dollar_price::before,
                 .step-header-prices .dollar_price::after,
                 .step-header-prices .eur_price::before,
-                .step-header-prices .eur_price::after {
+                .step-header-prices .eur_price::after,
+                .step-header-prices span::before,
+                .step-header-prices span::after {
                     display: none !important;
                     content: "" !important;
+                    visibility: hidden !important;
+                }
+                
+                /* Hide any text content that's just slashes */
+                .step-header-prices .dollar_price > *:not(.js_dollar_price):not(.currencySym),
+                .step-header-prices .eur_price > *:not(.js_eur_price) {
+                    display: none !important;
                 }
             }
             
@@ -109,13 +118,23 @@ html(lang='ru-RU')
                             eur.style.display = 'inline';
                             eur.style.marginLeft = '0';
                             
-                            // Add separator
-                            if (!eur.querySelector('.js-separator')) {
-                                const separator = document.createElement('span');
-                                separator.className = 'js-separator';
-                                separator.textContent = ' / ';
-                                eur.insertBefore(separator, eur.firstChild);
+                            // Clean up any existing separators and slashes
+                            const existingSeparator = eur.querySelector('.js-separator');
+                            if (existingSeparator) {
+                                existingSeparator.remove();
                             }
+                            
+                            // Remove any text nodes that contain only slashes
+                            const textNodes = Array.from(eur.childNodes).filter(node => 
+                                node.nodeType === Node.TEXT_NODE && node.textContent.trim().match(/^\/+$/)
+                            );
+                            textNodes.forEach(node => node.remove());
+                            
+                            // Add clean separator only if USD and EUR should be together
+                            const separator = document.createElement('span');
+                            separator.className = 'js-separator';
+                            separator.textContent = ' / ';
+                            eur.insertBefore(separator, eur.firstChild);
                         }
                     }
                 }
