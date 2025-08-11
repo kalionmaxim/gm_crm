@@ -42,64 +42,57 @@ html(lang='ru-RU')
             
             /* Mobile layout for currency display */
             @media (max-width: 768px) {
-                /* Use flexbox column layout */
+                /* Simple block layout */
                 .step-header-prices {
-                    display: flex !important;
-                    flex-direction: column !important;
-                    align-items: center !important;
-                    gap: 8px !important;
+                    display: block !important;
                     text-align: center !important;
+                    line-height: 1.4 !important;
                 }
                 
-                /* UAH on first row */
+                /* UAH takes full width on first line */
                 .step-header-prices .hrn_price {
-                    order: 1 !important;
                     display: block !important;
                     width: 100% !important;
                     text-align: center !important;
+                    margin-bottom: 8px !important;
                 }
                 
-                /* Create a wrapper for USD and EUR on second row */
-                .step-header-prices .dollar_price {
-                    order: 2 !important;
+                /* Force USD and EUR to stay inline together */
+                .step-header-prices .dollar_price,
+                .step-header-prices .eur_price {
                     display: inline !important;
                     white-space: nowrap !important;
+                    line-height: 1 !important;
                 }
                 
-                .step-header-prices .eur_price {
-                    order: 2 !important;
-                    display: inline !important;
-                    white-space: nowrap !important;
-                }
-                
-                /* Position USD and EUR together */
-                .step-header-prices .dollar_price {
-                    margin-right: 4px !important;
-                }
-                
-                .step-header-prices .eur_price {
-                    margin-left: 4px !important;
-                }
-                
-                /* Add separator between USD and EUR */
+                /* Remove any line breaks or block behavior from USD/EUR containers */
                 .step-header-prices .dollar_price::after {
-                    content: " /" !important;
-                    margin-left: 4px !important;
-                    display: inline !important;
-                }
-                
-                /* Hide other separators */
-                .step-header-prices .dollar_price::before,
-                .step-header-prices .eur_price::before,
-                .step-header-prices .eur_price::after {
                     content: "" !important;
-                    display: none !important;
                 }
                 
-                /* Ensure inner spans display correctly */
+                .step-header-prices .eur_price::before {
+                    content: " / " !important;
+                    white-space: nowrap !important;
+                }
+                
+                /* Ensure all inner spans stay inline */
                 .step-header-prices .dollar_price span,
-                .step-header-prices .eur_price span {
+                .step-header-prices .eur_price span,
+                .step-header-prices .dollar_price *,
+                .step-header-prices .eur_price * {
                     display: inline !important;
+                    white-space: nowrap !important;
+                }
+                
+                /* Override any other CSS that might cause line breaks */
+                .step-header-prices .dollar_price,
+                .step-header-prices .eur_price,
+                .step-header-prices .dollar_price *,
+                .step-header-prices .eur_price * {
+                    float: none !important;
+                    clear: none !important;
+                    width: auto !important;
+                    height: auto !important;
                 }
             }
             
