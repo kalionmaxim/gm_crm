@@ -50,6 +50,28 @@ html(lang='ru-RU')
                 .step-header-prices .dollar_price::before {
                     content: "" !important;
                 }
+                
+                /* Hide any slashes in the price display on mobile */
+                .step-header-prices .dollar_price,
+                .step-header-prices .eur_price {
+                    position: relative !important;
+                }
+                
+                .step-header-prices .dollar_price::before,
+                .step-header-prices .eur_price::before {
+                    content: "" !important;
+                }
+                
+                /* Hide slashes that might be in the text content */
+                .step-header-prices .dollar_price span,
+                .step-header-prices .eur_price span {
+                    position: relative !important;
+                }
+                
+                /* Target any text that starts with / */
+                .step-header-prices .dollar_price span:first-child::before {
+                    content: "" !important;
+                }
             }
             
             /* Extra small mobile devices */

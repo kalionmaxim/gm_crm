@@ -271,6 +271,13 @@ script.
         
         // EUR price
         $('.js_eur_price').html(eurPrice + " €");
+        
+        // Hide slash on mobile
+        if (window.innerWidth <= 768) {
+            $('.js_dollar_price').text(function(i, text) {
+                return text.replace(/^\//, '');
+            });
+        }
     } else {
         $('#hrn_price').hide();
         $('#eur_price').hide();
