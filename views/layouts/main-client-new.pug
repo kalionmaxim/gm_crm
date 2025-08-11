@@ -45,6 +45,11 @@ html(lang='ru-RU')
                     text-align: center !important;
                     margin-bottom: 5px !important;
                 }
+                
+                /* Hide the slash before USD on mobile */
+                .step-header-prices .dollar_price::before {
+                    content: "" !important;
+                }
             }
             
             /* Extra small mobile devices */
