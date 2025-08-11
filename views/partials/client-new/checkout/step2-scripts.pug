@@ -4,8 +4,6 @@ script.
     var step = '1';
 
 script.
-    // Курс рубля к доллару
-    var USDRateRUB = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
     // Курс гривны к доллару
     var USDRateUAH = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
     // Курс евро к доллару
@@ -22,22 +20,18 @@ script.
 
         var USDRateUAH = parseFloat("#{USDRateUAH}");
         var USDRateEUR = parseFloat("#{USDRateEUR}");
-        var USDRateRUB = parseFloat("#{USDRateRUB}");
 
         if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-            merchant = "#{merchantRUB}";
+            merchant = "#{merchantUAH}";
         }
         if (currDef === "USD") {
-            currUpd = "RUB";
-            sumUpd = (sumDef * USDRateRUB).toFixed(2);
+            currUpd = "UAH";
+            sumUpd = (sumDef * USDRateUAH).toFixed(2);
         } else if (currDef === "EUR") {
-            currUpd = "RUB";
-            sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
+            currUpd = "UAH";
+            sumUpd = ((sumDef / USDRateEUR) * USDRateUAH).toFixed(2);
         } else if (currDef === "UAH") {
-            currUpd = "RUB";
-            sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
-        } else if (currDef === "RUB") {
-            currUpd = "RUB";
+            currUpd = "UAH";
             sumUpd = sumDef;
         }
 
@@ -171,7 +165,6 @@ script.
 
         var USDRateUAH = parseFloat("#{USDRateUAH}");
         var USDRateEUR = parseFloat("#{USDRateEUR}");
-        var USDRateRUB = parseFloat("#{USDRateRUB}");
 
         if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
             merchant = "#{merchantUAH}";
@@ -185,9 +178,6 @@ script.
         } else if (currDef === "UAH") {
             currUpd = "UAH";
             sumUpd = sumDef;
-        } else if (currDef === "RUB") {
-            currUpd = "UAH";
-            sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
         }
 
         $("#preloader").show();
@@ -402,13 +392,7 @@ script.
             subPrice2Curr = "uah";
             break;
 
-        case "rub":
-            currencySym = " ₽";
-            subPrice1 = Math.ceil((mainPrice / USDRateRUB) * USDRateUAH);
-            subPrice1Curr = "uah";
-            subPrice2 = Math.ceil(mainPrice / USDRateRUB);
-            subPrice2Curr = "usd";
-            break;
+
     }
 
     var tovar_id = 394979;
@@ -459,31 +443,13 @@ script.
             }
         }
 
-        if (subPrice2 && subPrice2Curr) {
-            switch (subPrice2Curr) {
-                case "usd":
-                    $('.js_rub_price').html(subPrice2 + " $");
-                    break;
-                case "uah":
-                    $('.js_rub_price').html(subPrice2 + " грн");
-                    $('.js_rub_price').addClass('ua-block');
-                    UAHPrice = subPrice2;
-                    break;
-                case "eur":
-                    $('.js_rub_price').html(subPrice2 + " €");
-                    $('.js_rub_price').addClass('ru-block');
-                    break;
-            }
-        }
+
     } else {
         $('.hrn_price').hide();
-        $('.rub_price').hide();
     }
     //}
 
-    // if(rub_price > 15000){
-    //   $('.links1 .link3').fadeOut(0);
-    // }
+
     $('.js_tovar_id').val(tovar_id);
     $('.sec1').css('background-image', 'url(/img/' + header_image + ')');
 
@@ -519,7 +485,7 @@ script.
         $("#monobank_phone").val('+' + getParameterByName("phone").trim() || "");
 
         var currency = getParameterByName("currency");
-        if (currency.toUpperCase() === 'EUR' || currency.toUpperCase() === 'RUB') {
+        if (currency.toUpperCase() === 'EUR') {
             document.getElementsByClassName('monobank-pay-btn')[0].style.display = "none";
         }
 
@@ -892,7 +858,6 @@ script.
 
         var USDRateUAH = parseFloat("#{USDRateUAH}");
         var USDRateEUR = parseFloat("#{USDRateEUR}");
-        var USDRateRUB = parseFloat("#{USDRateRUB}");
 
         switch (curr) {
             case "usd":
@@ -908,9 +873,6 @@ script.
                 } else if (currDef === "UAH") {
                     currUpd = "USD";
                     sumUpd = (sumDef * (1 / USDRateUAH)).toFixed(2);
-                } else if (currDef === "RUB") {
-                    currUpd = "USD";
-                    sumUpd = (sumDef * (1 / USDRateRUB)).toFixed(2);
                 }
                 break;
 
@@ -927,9 +889,6 @@ script.
                 } else if (currDef === "UAH") {
                     currUpd = "EUR";
                     sumUpd = ((sumDef / USDRateUAH) * USDRateEUR).toFixed(2);
-                } else if (currDef === "RUB") {
-                    currUpd = "EUR";
-                    sumUpd = ((sumDef / USDRateRUB) * USDRateEUR).toFixed(2);
                 }
                 break;
 
@@ -945,28 +904,6 @@ script.
                     sumUpd = ((sumDef / USDRateEUR) * USDRateUAH).toFixed(2);
                 } else if (currDef === "UAH") {
                     currUpd = "UAH";
-                    sumUpd = sumDef;
-                } else if (currDef === "RUB") {
-                    currUpd = "UAH";
-                    sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
-                }
-                break;
-
-            case "rub":
-                if (!merchant || (merchant === "null") || (merchant === "undefined") || (merchant === "")) {
-                    merchant = "#{merchantRUB}";
-                }
-                if (currDef === "USD") {
-                    currUpd = "RUB";
-                    sumUpd = (sumDef * USDRateRUB).toFixed(2);
-                } else if (currDef === "EUR") {
-                    currUpd = "RUB";
-                    sumUpd = ((sumDef / USDRateEUR) * USDRateRUB).toFixed(2);
-                } else if (currDef === "UAH") {
-                    currUpd = "RUB";
-                    sumUpd = ((sumDef / USDRateUAH) * USDRateRUB).toFixed(2);
-                } else if (currDef === "RUB") {
-                    currUpd = "RUB";
                     sumUpd = sumDef;
                 }
                 break;
@@ -1067,7 +1004,6 @@ script.
 
         var USDRateUAH = parseFloat("#{USDRateUAH}");
         var USDRateEUR = parseFloat("#{USDRateEUR}");
-        var USDRateRUB = parseFloat("#{USDRateRUB}");
 
         //- switch (curr) {
         //-     case "usd":
@@ -1128,10 +1064,7 @@ script.
         } else if (currDef === "UAH") {
             currUpd = "UAH";
             sumUpd = sumDef;
-        } else if (currDef === "RUB") {
-            currUpd = "UAH";
-            sumUpd = ((sumDef / USDRateRUB) * USDRateUAH).toFixed(2);
-        }
+
 
         if (sumUpd >= 50000) {
             $("#sumLimitPrevent").show();
@@ -1347,7 +1280,6 @@ script.
 
         var USDRateUAH = parseFloat("#{USDRateUAH}");
         var USDRateEUR = parseFloat("#{USDRateEUR}");
-        var USDRateRUB = parseFloat("#{USDRateRUB}");
         const sumUah = currency.toUpperCase() === "USD" ? (sum * USDRateUAH).toFixed(2) : currency.toUpperCase() === "EUR" ?  ((sum / USDRateEUR) * USDRateUAH).toFixed(2) : sum;
 
         if (sumUah >= 50000) {

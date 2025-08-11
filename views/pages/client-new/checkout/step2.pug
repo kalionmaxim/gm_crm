@@ -15,13 +15,11 @@ block contents
                 .step-header
                     p.step-header__title.js_payment_title!= productName
                     p.step-header-prices
+                        span.hrn_price
+                            span.js_hrn_price
                         span.dollar_price.step-header-prices__current
                             span.js_dollar_price
                             span.currencySym.dollar
-                        span.hrn_price
-                            span.js_hrn_price
-                        span.rub_price
-                            span.js_rub_price
 
                 .steps-counter
                     .steps-counter-item.steps-counter-item--active
@@ -50,13 +48,11 @@ block contents
                                 .steps-payways-summary
                                     .steps-payways-summary__title #{labels.sumToPayLbl || ""}
                                     .steps-payways-summary__sum
+                                        span.hrn_price
+                                            span.js_hrn_price
                                         span.dollar_price.steps-payways-summary__sum-current
                                             span.js_dollar_price
                                             span.currencySym.dollar
-                                        span.hrn_price
-                                            span.js_hrn_price
-                                        span.rub_price
-                                            span.js_rub_price
                             if !(fondyHide && fondyHide === "true")
                                .steps-payways-card
                                     .steps-payways-card-currency

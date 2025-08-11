@@ -21,7 +21,7 @@ const config = require("../config/config");
 const merchantUSD = config.get("fondy:usd") || "";
 const merchantEUR = config.get("fondy:eur") || "";
 const merchantUAH = config.get("fondy:uah") || "";
-const merchantRUB = config.get("fondy:rub") || "";
+
 const wayforpayMerchant = config.get("wayforpay:merchantAccount") || "";
 const eLogger = require("../lib/logger").eLogger;
 
@@ -67,7 +67,6 @@ module.exports = function routes(app, passport) {
 				wayforpayHide   : ctx.request.query["wayforpayHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
 				lang            : getLangZone(ctx),
 				labels
 			});
@@ -102,7 +101,6 @@ module.exports = function routes(app, passport) {
 				wayforpayHide   : ctx.request.query["wayforpayHide"] || "",
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
 				lang            : getLangZone(ctx),
 				plataToken      : ctx.request.query["plataToken"] || "",
 				labels,
@@ -162,10 +160,8 @@ module.exports = function routes(app, passport) {
 				merchantUSD     : merchantUSD,
 				merchantEUR     : merchantEUR,
 				merchantUAH     : merchantUAH,
-				merchantRUB     : merchantRUB,
 				USDRateUAH      : (await USDRate.findOne({ currency: "UAH" }).lean().select("price")).price,
 				USDRateEUR      : (await USDRate.findOne({ currency: "EUR" }).lean().select("price")).price,
-				USDRateRUB      : (await USDRate.findOne({ currency: "RUB" }).lean().select("price")).price,
 				lang            : getLangZone(ctx),
 				labels
 			});
