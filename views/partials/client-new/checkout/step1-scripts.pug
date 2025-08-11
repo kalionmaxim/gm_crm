@@ -5,8 +5,6 @@ script.
     });;
 
 script.
-    // Курс рубля к доллару
-    var USDRateRUB = ("#{USDRateRUB}" && parseFloat("#{USDRateRUB}")) || 68;
     // Курс гривны к доллару
     var USDRateUAH = ("#{USDRateUAH}" && parseFloat("#{USDRateUAH}")) || 28;
     // Курс евро к доллару
@@ -203,44 +201,29 @@ script.
     var mainPrice = "#{productPrice}";
     var currencySym = "$";
     var currency = "#{currency}";
-    var subPrice1 = null;
-    var subPrice1Curr = null;
-    var subPrice2 = null;
-    var subPrice2Curr = null;
-
-    var UAHPrice;
-
+    // Calculate all three currencies regardless of selected currency
+    var uahPrice, usdPrice, eurPrice;
+    
     switch (currency.toLowerCase()) {
         case "usd":
             currencySym = " $";
-            subPrice1 = Math.ceil(mainPrice * USDRateEUR);
-            subPrice1Curr = "eur";
-            subPrice2 = Math.ceil(mainPrice * USDRateUAH);
-            subPrice2Curr = "uah";
+            uahPrice = Math.ceil(mainPrice * USDRateUAH);
+            usdPrice = mainPrice;
+            eurPrice = Math.ceil(mainPrice * USDRateEUR);
             break;
 
         case "uah":
             currencySym = " грн";
-            subPrice1 = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
-            subPrice1Curr = "eur";
-            subPrice2 = Math.ceil(mainPrice / USDRateUAH);
-            subPrice2Curr = "usd";
+            uahPrice = mainPrice;
+            usdPrice = Math.ceil(mainPrice / USDRateUAH);
+            eurPrice = Math.ceil((mainPrice / USDRateUAH) * USDRateEUR);
             break;
 
         case "eur":
             currencySym = " €";
-            subPrice1 = Math.ceil(mainPrice / USDRateEUR);
-            subPrice1Curr = "usd";
-            subPrice2 = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
-            subPrice2Curr = "uah";
-            break;
-
-        case "rub":
-            currencySym = " ₽";
-            subPrice1 = Math.ceil((mainPrice / USDRateRUB) * USDRateUAH);
-            subPrice1Curr = "uah";
-            subPrice2 = Math.ceil(mainPrice / USDRateRUB);
-            subPrice2Curr = "usd";
+            uahPrice = Math.ceil((mainPrice / USDRateEUR) * USDRateUAH);
+            usdPrice = Math.ceil(mainPrice / USDRateEUR);
+            eurPrice = mainPrice;
             break;
     }
 
@@ -277,47 +260,20 @@ script.
     //- $('.js_payment_title').html(payment_title);
     // $('.js_product_type').html(product_type);
 
-    //- $('.js_payment_title').html(payment_title);
-    $('.js_dollar_price').html(mainPrice);
-    $('.currencySym').html(currencySym);
-    //if ("#/{landing}" === "true") {
+    // Display all three currencies: UAH first, then USD, then EUR
     if ("#{convertationHide}" !== "true") {
-        if (subPrice1 && subPrice1Curr) {
-            switch (subPrice1Curr) {
-                case "usd":
-                    $('.js_hrn_price').html(subPrice1 + " $");
-                    break;
-                case "uah":
-                    $('.js_hrn_price').html(subPrice1 + " грн");
-                    $('.js_hrn_price').addClass('ua-block');
-                    UAHPrice = subPrice1;
-                    break;
-                case "eur":
-                    $('.js_hrn_price').html(subPrice1 + " €");
-                    $('.js_hrn_price').addClass('ru-block');
-                    break;
-            }
-        }
-
-        if (subPrice2 && subPrice2Curr) {
-            switch (subPrice2Curr) {
-                case "usd":
-                    $('.js_rub_price').html(subPrice2 + " $");
-                    break;
-                case "uah":
-                    $('.js_rub_price').html(subPrice2 + " грн");
-                    $('.js_rub_price').addClass('ua-block');
-                    UAHPrice = subPrice2;
-                    break;
-                case "eur":
-                    $('.js_rub_price').html(subPrice2 + " €");
-                    $('.js_rub_price').addClass('ru-block');
-                    break;
-            }
-        }
+        // UAH price (always first)
+        $('.js_hrn_price').html(uahPrice + " грн");
+        $('.js_hrn_price').addClass('ua-block');
+        
+        // USD price
+        $('.js_dollar_price').html(usdPrice + " $");
+        
+        // EUR price
+        $('.js_eur_price').html(eurPrice + " €");
     } else {
         $('#hrn_price').hide();
-        $('#rub_price').hide();
+        $('#eur_price').hide();
     }
 
     $('.js_tovar_id').val(tovar_id);
