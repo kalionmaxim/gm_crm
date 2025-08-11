@@ -43,27 +43,25 @@ html(lang='ru-RU')
                     margin-bottom: 5px !important;
                 }
                 
-                /* Second line: USD and EUR together */
+                /* Second line: USD and EUR together - force them to be inline */
                 .step-header-prices .price-usd,
                 .step-header-prices .price-eur {
                     order: 2 !important;
-                    display: inline-block !important;
-                    margin: 0 8px !important;
+                    display: inline !important;
+                    margin: 0 5px !important;
                 }
                 
-                /* Ensure the container allows for proper stacking */
-                .step-header-prices span {
-                    display: inline-block !important;
-                }
-                
-                /* Additional mobile optimizations */
-                .step-header-prices .hrn_price {
-                    display: block !important;
-                }
-                
+                /* Force USD and EUR to be on the same line */
                 .step-header-prices .dollar_price,
                 .step-header-prices .eur_price {
-                    display: inline-block !important;
+                    display: inline !important;
+                    white-space: nowrap !important;
+                }
+                
+                /* Ensure UAH is on its own line */
+                .step-header-prices .hrn_price {
+                    display: block !important;
+                    width: 100% !important;
                 }
             }
             
