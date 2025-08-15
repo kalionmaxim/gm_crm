@@ -15,6 +15,7 @@ const WayForPay = require("../lib/wayforpay");
 // const Yandex = require("../lib/yandexKassa");
 const Plata = require("../lib/plata");
 const pumb = require("../lib/pumb");
+const { fetchToken, createCredit } = require("../lib/pumbClient");
 
 
 const config = require("../config/config");
@@ -2015,6 +2016,53 @@ module.exports = function routes(app, passport) {
 	});
 	router.post("/callback/pumb/test", async (ctx) => {
 	    await pumb.handlePumbCallback(ctx, true);
+	});
+
+	// --- PUMB create credit route ---
+	router.post('/pumb/sf-credits', async (ctx) => {
+	  const env = ctx.query.env === 'prod' ? 'prod' : 'test';
+	  const flowId = ctx.query.flowId || 'gs-flow';
+	  
+	  // Debug log to confirm request reaches Koa
+	  console.log(`[PUMB DEBUG] POST /pumb/sf-credits hit. env=${env}, flowId=${flowId}`);
+
+	  try {
+	    // Get config based on environment
+	    const authUrl = env === 'prod' ? config.get('pumb:authUrlProd') : config.get('pumb:authUrlTest');
+	    const apiUrl = env === 'prod' ? config.get('pumb:apiUrlProd') : config.get('pumb:apiUrlTest');
+	    const username = env === 'prod' ? config.get('pumb:username_prod') : config.get('pumb:username_test');
+	    const password = env === 'prod' ? config.get('pumb:password_prod') : config.get('pumb:password_test');
+
+	    if (!authUrl || !apiUrl || !username || !password) {
+	      ctx.status = 500;
+	      ctx.body = { error: `Missing PUMB config for env="${env}"` };
+	      return;
+	    }
+
+	    // Step 1 — Fetch token
+	    const tokenData = await fetchToken({
+	      username: username,
+	      password: password,
+	      authUrl: authUrl
+	    });
+
+	    // Step 2 — Create credit at PUMB
+	    const baseUrl = apiUrl.replace(/\/sf-credits$/, '');
+	    const created = await createCredit({
+	      token: tokenData.access_token,
+	      flowId,
+	      baseUrl,
+	      payload: ctx.request.body || {}
+	    });
+
+	    ctx.status = 201;
+	    ctx.body = { env, id: created?.id, data: created };
+
+	  } catch (err) {
+	    console.error('PUMB create credit error:', err);
+	    ctx.status = err.status || 500;
+	    ctx.body = { error: err.message, details: err.details || null };
+	  }
 	});
 
 	app.use(router.routes());
