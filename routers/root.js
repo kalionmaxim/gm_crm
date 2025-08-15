@@ -2056,7 +2056,7 @@ module.exports = function routes(app, passport) {
 	    });
 
 	    ctx.status = 201;
-	    ctx.body = { env, id: created?.id, data: created };
+	    ctx.body = { env, id: created && created.id, data: created };
 
 	  } catch (err) {
 	    console.error('PUMB create credit error:', err);
